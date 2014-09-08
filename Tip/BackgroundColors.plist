@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>id</key>
+		<string>whiteColor</string>
+		<key>visibleName</key>
+		<string>White</string>
+		<key>hexColor</key>
+		<string>0xFFFFFF</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<string>whiteSmokeColor</string>
+		<key>visibleName</key>
+		<string>White Smoke</string>
+		<key>hexColor</key>
+		<string>0xf5f5f5</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<string>snow5Color</string>
+		<key>visibleName</key>
+		<string>Snow</string>
+		<key>hexColor</key>
+		<string>0xeff2f3</string>
+		<key>Note</key>
+		<string>Made up color that looked good to me.</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<string>gainsboroColor</string>
+		<key>visibleName</key>
+		<string>Gainsboro</string>
+		<key>hexColor</key>
+		<string>0xdcdcdc</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<string>snow3Color</string>
+		<key>visibleName</key>
+		<string>Light Gray</string>
+		<key>hexColor</key>
+		<string>0xcdc9c9</string>
+	</dict>
+	<dict>
+		<key>id</key>
+		<string>silverColor</string>
+		<key>visibleName</key>
+		<string>Silver</string>
+		<key>hexColor</key>
+		<string>0xc0c0c0</string>
+	</dict>
+</array>
+</plist>

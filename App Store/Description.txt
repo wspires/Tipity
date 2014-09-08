@@ -1,0 +1,12 @@
+Paper Towel Picker saves you money at the grocery store! We've all been there, faced with the insurmountable wall of paper towels: $18.79 for 12 giant rolls, $19.79 for 8 huge rolls, $19.99 for 12 mega rolls... but which one is the best price?! Paper Towel Picker compares them all and tells you the best deal!
+
+Paper Towel Picker does the math for you! Just enter the price and count for each product with the super simple interface, and Paper Towel Picker automatically calculates the price per item, compares them all, and highlights the best bargain.
+
+Paper Towel Picker works on more than paper towels. Toilet paper, cans of soup, drinks, packages of snacks, anything sold in bulk can be entered and compared. Paper Towel Picker even works on different item sizes--just enter the sheets per roll to see if this huge roll is a better deal than that mega roll.
+
+Stop the grocery games with Paper Towel Picker!
+
+* App development supported by one, single In-App Purchase that unlocks all of these features:
+• No Ads
+• Size Per Unit
+• Customize Color

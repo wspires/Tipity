@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6154.17" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.11"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MAUpgradeAlertViewController">
+            <connections>
+                <outlet property="descriptionLabel" destination="Gm6-YH-oiO" id="hqJ-t4-YoH"/>
+                <outlet property="tableView" destination="tHw-8I-5zq" id="Pml-Ix-jxN"/>
+                <outlet property="titleLabel" destination="vLm-Et-tR8" id="zf6-db-lgx"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="tHw-8I-5zq">
+                    <rect key="frame" x="0.0" y="78" width="480" height="402"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="c4S-kg-qRN"/>
+                        <outlet property="delegate" destination="-1" id="47V-b1-nqi"/>
+                    </connections>
+                </tableView>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vLm-Et-tR8">
+                    <rect key="frame" x="20" y="20" width="440" height="22"/>
+                    <attributedString key="attributedText">
+                        <fragment content="Upgrade Required">
+                            <attributes>
+                                <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <font key="NSFont" size="18" name="HelveticaNeue-Bold"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                            </attributes>
+                        </fragment>
+                    </attributedString>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gm6-YH-oiO">
+                    <rect key="frame" x="20" y="50" width="440" height="20"/>
+                    <attributedString key="attributedText">
+                        <fragment content="Upgrade to unlock all features.">
+                            <attributes>
+                                <color key="NSColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                            </attributes>
+                        </fragment>
+                    </attributedString>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Gm6-YH-oiO" secondAttribute="trailing" constant="20" id="0rW-mA-a9S"/>
+                <constraint firstAttribute="trailing" secondItem="vLm-Et-tR8" secondAttribute="trailing" constant="20" id="636-Fj-6Hj"/>
+                <constraint firstItem="vLm-Et-tR8" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="Bts-BY-fUi"/>
+                <constraint firstItem="Gm6-YH-oiO" firstAttribute="top" secondItem="vLm-Et-tR8" secondAttribute="bottom" constant="8" id="FSH-qP-UZm"/>
+                <constraint firstItem="tHw-8I-5zq" firstAttribute="top" secondItem="Gm6-YH-oiO" secondAttribute="bottom" constant="8" id="G0B-PJ-I4D"/>
+                <constraint firstAttribute="bottom" secondItem="tHw-8I-5zq" secondAttribute="bottom" id="NUR-Bq-y5A"/>
+                <constraint firstItem="Gm6-YH-oiO" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="NlG-6V-beF"/>
+                <constraint firstItem="vLm-Et-tR8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="PGv-ag-Z3N"/>
+                <constraint firstAttribute="trailing" secondItem="tHw-8I-5zq" secondAttribute="trailing" id="T9c-0E-VG1"/>
+                <constraint firstItem="tHw-8I-5zq" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="kpX-zv-CnY"/>
+            </constraints>
+            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="AbstractSizeClassScreen[default]"/>
+        </view>
+    </objects>
+</document>
