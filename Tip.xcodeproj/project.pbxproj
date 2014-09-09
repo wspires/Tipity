@@ -94,6 +94,9 @@
 		180976AD19BE70F00039F654 /* MOButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 1809769E19BE70F00039F654 /* MOButton.m */; };
 		180976AE19BE70F00039F654 /* MOGlassButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 180976A019BE70F00039F654 /* MOGlassButton.m */; };
 		180976B119BE71140039F654 /* Credits.html in Resources */ = {isa = PBXBuildFile; fileRef = 180976B019BE71140039F654 /* Credits.html */; };
+		180976B619BE96910039F654 /* MABill.m in Sources */ = {isa = PBXBuildFile; fileRef = 180976B519BE96910039F654 /* MABill.m */; };
+		180976BA19BF5D8C0039F654 /* MATextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 180976B819BF5D8C0039F654 /* MATextFieldCell.m */; };
+		180976BB19BF5D8C0039F654 /* MATextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180976B919BF5D8C0039F654 /* MATextFieldCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -345,6 +348,11 @@
 		1809769F19BE70F00039F654 /* MOGlassButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MOGlassButton.h; sourceTree = "<group>"; };
 		180976A019BE70F00039F654 /* MOGlassButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MOGlassButton.m; sourceTree = "<group>"; };
 		180976B019BE71140039F654 /* Credits.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Credits.html; sourceTree = "<group>"; };
+		180976B419BE96910039F654 /* MABill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MABill.h; sourceTree = "<group>"; };
+		180976B519BE96910039F654 /* MABill.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MABill.m; sourceTree = "<group>"; };
+		180976B719BF5D8C0039F654 /* MATextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MATextFieldCell.h; sourceTree = "<group>"; };
+		180976B819BF5D8C0039F654 /* MATextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MATextFieldCell.m; sourceTree = "<group>"; };
+		180976B919BF5D8C0039F654 /* MATextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MATextFieldCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -793,9 +801,14 @@
 				1809768219BE70A70039F654 /* MATipViewController.h */,
 				1809768319BE70A70039F654 /* MATipViewController.m */,
 				1809768419BE70A70039F654 /* MATipViewController.xib */,
+				180976B719BF5D8C0039F654 /* MATextFieldCell.h */,
+				180976B819BF5D8C0039F654 /* MATextFieldCell.m */,
+				180976B919BF5D8C0039F654 /* MATextFieldCell.xib */,
 				1809767F19BE70A70039F654 /* MAProductTableViewCell.h */,
 				1809768019BE70A70039F654 /* MAProductTableViewCell.m */,
 				1809768119BE70A70039F654 /* MAProductTableViewCell.xib */,
+				180976B419BE96910039F654 /* MABill.h */,
+				180976B519BE96910039F654 /* MABill.m */,
 				1809767D19BE70A70039F654 /* MAProduct.h */,
 				1809767E19BE70A70039F654 /* MAProduct.m */,
 			);
@@ -978,6 +991,7 @@
 				1809761419BE61010039F654 /* 1409697265_20-512.png in Resources */,
 				1809767B19BE70700039F654 /* MASettingsViewController.xib in Resources */,
 				180976AC19BE70F00039F654 /* MAUnitsSettingsCell.xib in Resources */,
+				180976BB19BF5D8C0039F654 /* MATextFieldCell.xib in Resources */,
 				1809761E19BE61010039F654 /* blank_square.png in Resources */,
 				1809761619BE61010039F654 /* 19-gear.png in Resources */,
 				180976B119BE71140039F654 /* Credits.html in Resources */,
@@ -1024,6 +1038,7 @@
 				1809764919BE61D20039F654 /* MAAccessoryView.m in Sources */,
 				1809767519BE70150039F654 /* MATipIAPHelper.m in Sources */,
 				1809764B19BE61D20039F654 /* MADateUtil.m in Sources */,
+				180976B619BE96910039F654 /* MABill.m in Sources */,
 				1809766E19BE6FE70039F654 /* MAUpgradeAlertViewController.m in Sources */,
 				180976A319BE70F00039F654 /* MAColorSelectionViewController.m in Sources */,
 				1809766C19BE6FE70039F654 /* CustomIOS7AlertView.m in Sources */,
@@ -1041,6 +1056,7 @@
 				1809764E19BE61D20039F654 /* MAUtil.m in Sources */,
 				1809765C19BE61FA0039F654 /* UIColor+ExtraColors.m in Sources */,
 				1809753B19BE5ED60039F654 /* main.m in Sources */,
+				180976BA19BF5D8C0039F654 /* MATextFieldCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

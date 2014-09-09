@@ -10,27 +10,37 @@
 
 #import "MAAppDelegate.h"
 #import "MAAppearance.h"
+#import "MABill.h"
 #import "MAFilePaths.h"
 #import "MAProductTableViewCell.h"
 #import "MAProduct.h"
+#import "MATextFieldCell.h"
 #import "MAUserUtil.h"
 #import "MAUtil.h"
 #import "MATipIAPHelper.h"
 
 #import <iAd/iAd.h>
 
-DECL_TABLE_IDX(NUM_SECTIONS, 2);
+DECL_TABLE_IDX(NUM_SECTIONS, 3);
 
-DECL_TABLE_IDX(PRODUCTS_SECTION, 0);
+DECL_TABLE_IDX(BILL_SECTION, 0);
+DECL_TABLE_IDX(BILL_ROW, 0);
+DECL_TABLE_IDX(BILL_SECTION_ROWS, 1);
 
-DECL_TABLE_IDX(CLEAR_SECTION, 1);
+DECL_TABLE_IDX(PRODUCTS_SECTION, 1);
+
+DECL_TABLE_IDX(CLEAR_SECTION, 2);
 DECL_TABLE_IDX(CLEAR_ROW, 0);
 DECL_TABLE_IDX(CLEAR_SECTION_ROWS, 1);
 
+static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIdentifier";
 
-@interface MATipViewController () <MAProductDelegate, MAProductCellDelegate, UIActionSheetDelegate, ADBannerViewDelegate>
+@interface MATipViewController () <MABillDelegate, MAProductDelegate, MAProductCellDelegate, UITextFieldDelegate, UIActionSheetDelegate, ADBannerViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) MABill *bill;
+@property (weak, nonatomic) UITextField *billTextField;
+
 @property (strong, nonatomic) NSMutableArray *products;
 @property (strong, nonatomic) NSMutableArray *cheapestProducts;
 @property (strong, nonatomic) UIActionSheet *deleteActionSheet;
@@ -45,6 +55,7 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
 
 @implementation MATipViewController
 @synthesize tableView = _tableView;
+@synthesize bill = _bill;
 @synthesize products = _products;
 @synthesize cheapestProducts = _cheapestProducts;
 @synthesize deleteActionSheet = _deleteActionSheet;
@@ -77,6 +88,7 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
     self.pricePerUnitFractionDigits = [MAProduct unitPriceFormatter].maximumFractionDigits;
     
     self.didInsertCell = NO;
+    [self loadBill];
     [self loadProducts];
     
     [self setupAdBanner];
@@ -121,8 +133,48 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
 {
     UINib *nib = nil;
     
+    nib = [UINib nibWithNibName:@"MATextFieldCell" bundle:nil];
+    [self.tableView registerNib:nib forCellReuseIdentifier:MATextFieldCellIdentifier];
+
     nib = [UINib nibWithNibName:@"MAProductTableViewCell" bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:MAProductTableViewCellIdentifier];
+}
+
+- (void)loadBill
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSData *encodedBill = [defaults objectForKey:@"bill"];
+    if (encodedBill)
+    {
+        MABill *bill = [NSKeyedUnarchiver unarchiveObjectWithData:encodedBill];
+        if (bill)
+        {
+            self.bill = bill;
+        }
+    }
+    else // First run.
+    {
+        self.bill = [[MABill alloc] init];
+    }
+    
+    self.bill.delegate = self;
+}
+
+- (void)saveBill
+{
+    if ( ! self.bill)
+    {
+        return;
+    }
+    
+    NSData *encodedBill = [NSKeyedArchiver archivedDataWithRootObject:self.bill];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:encodedBill forKey:@"bill"];
+    BOOL saved = [defaults synchronize];
+    if ( ! saved)
+    {
+        TLog(@"Failed to save bill");
+    }
 }
 
 - (void)loadProducts
@@ -273,7 +325,11 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if (section == PRODUCTS_SECTION)
+    if (section == BILL_SECTION)
+    {
+        //return Localize(@"Products");
+    }
+    else if (section == PRODUCTS_SECTION)
     {
         //return Localize(@"Products");
     }
@@ -287,7 +343,11 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == PRODUCTS_SECTION)
+    if (section == BILL_SECTION)
+    {
+        return BILL_SECTION_ROWS;
+    }
+    else if (section == PRODUCTS_SECTION)
     {
         return self.products.count + 1;
     }
@@ -300,7 +360,14 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == PRODUCTS_SECTION)
+    if (indexPath.section == BILL_SECTION)
+    {
+        if (indexPath.row == BILL_ROW)
+        {
+            return [self tableView:tableView billCellForRowAtIndexPath:indexPath];
+        }
+    }
+    else if (indexPath.section == PRODUCTS_SECTION)
     {
         if ([self isAddProductRow:indexPath.row])
         {
@@ -316,6 +383,39 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
         }
     }
     return nil;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView billCellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MATextFieldCell *cell = (MATextFieldCell *)[tableView dequeueReusableCellWithIdentifier:MATextFieldCellIdentifier];
+    if (cell == nil)
+    {
+        cell = [[MATextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MATextFieldCellIdentifier];
+    }
+    [cell setAppearanceInTable:tableView];
+    
+    NSString *unit = @""; //[self.settings objectForKey:WeightLogUnit];
+    cell.label.text = SFmt(@" %@", unit); // Insert a space char because the text field and label have 0 space separating them.
+    
+    cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
+    cell.textField.delegate = self;
+    self.billTextField = cell.textField; // Save reference to text field so it's easier to access.
+    
+    cell.textLabel.text = Localize(@"Bill");
+    
+    NSString *billStr = [self.bill formattedBill];
+    if (billStr && billStr.length != 0)
+    {
+        cell.textField.text = billStr;
+    }
+    else
+    {
+        billStr = Localize(@"-");
+    }
+    cell.textField.text = billStr;
+    
+    
+    return cell;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView addProductCellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -491,7 +591,14 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
         return;
     }
 
-    if (indexPath.section == PRODUCTS_SECTION)
+    if (indexPath.section == BILL_SECTION)
+    {
+        if (indexPath.row == BILL_ROW)
+        {
+            [self selectBillAtPath:indexPath];
+        }
+    }
+    else if (indexPath.section == PRODUCTS_SECTION)
     {
         if ([self isAddProductRow:indexPath.row])
         {
@@ -629,6 +736,11 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     [self saveProducts];
 
     [tableView reloadData];
+}
+
+- (void)selectBillAtPath:(NSIndexPath *)indexPath
+{
+    [self.billTextField becomeFirstResponder];
 }
 
 - (void)addProduct
@@ -1194,6 +1306,68 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     MAProductTableViewCell *activeProductCell = (MAProductTableViewCell *)[self.tableView cellForRowAtIndexPath:self.editingIndexPath];
     [activeProductCell dismissKeyboard];
     self.editingIndexPath = nil;
+}
+
+#pragma mark - MABillDelegate
+
+- (void)didUpdateBill:(MABill *)bill
+{
+    [self saveBill];
+    [self.tableView reloadData];
+}
+
+#pragma mark - Text field
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+//    self.savedWeightGoal = textField.text;
+    [self selectBillAtPath:nil];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    if (textField == self.billTextField)
+    {
+        NSNumber *number = [NSNumber numberWithDouble:[self.billTextField.text doubleValue]];
+        self.bill.bill = number;
+    }
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return NO;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (textField == self.billTextField)
+    {
+        BOOL const shouldChangeChars = [MAUtil numTextField:textField shouldChangeCharactersInRange:range replacementString:string];
+        return shouldChangeChars;
+    }
+    
+    return YES;
+}
+
+- (IBAction)dismissInput
+{
+    [self dismissKeyboard];
+//    [self dismissDatePicker];
+}
+
+- (IBAction)dismissKeyboard
+{
+    if ([self.billTextField isFirstResponder])
+    {
+        [self.billTextField resignFirstResponder];
+    }
 }
 
 @end
