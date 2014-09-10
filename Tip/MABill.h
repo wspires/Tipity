@@ -62,4 +62,5 @@
 @optional
 - (void)willUpdateBill:(MABill *)bill;
 - (void)didUpdateBill:(MABill *)bill;
+- (void)errorUpdatingBill:(MABill *)bill;
 @end

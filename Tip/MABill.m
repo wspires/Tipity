@@ -78,13 +78,21 @@ static double const DefaultSplitTotal = 120.;
     }
 }
 
+- (void)delegateErrorUpdatingBill
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(errorUpdatingBill:)])
+    {
+        [_delegate errorUpdatingBill:self];
+    }
+}
+
 #pragma mark Setters
 
 - (void)setBill:(NSNumber *)bill
 {
     if ( ! bill || bill.doubleValue == _bill.doubleValue)
     {
-//        return;
+        return;
     }
     
     [self delegateWillUpdateBill];
@@ -181,8 +189,14 @@ static double const DefaultSplitTotal = 120.;
         return;
     }
     
-    [self delegateWillUpdateBill];
+    if (split.doubleValue <= 0)
+    {
+        [self delegateErrorUpdatingBill];
+        return;
+    }
     
+    [self delegateWillUpdateBill];
+
     _split = [split copy];
     
     [self updateBill];

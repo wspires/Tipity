@@ -465,9 +465,19 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 
 #pragma mark - MABillDelegate
 
+- (void)willUpdateBill:(MABill *)bill
+{
+}
+
 - (void)didUpdateBill:(MABill *)bill
 {
     [self saveBill];
+    [self.tableView reloadData];
+}
+
+- (void)errorUpdatingBill:(MABill *)bill
+{
+    // For instance, 0 was enter in for the split count, so just reload the table to refresh the invalid text field value.
     [self.tableView reloadData];
 }
 
