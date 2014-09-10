@@ -47,11 +47,8 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 @interface MATipViewController () <MABillDelegate, UITextFieldDelegate, UIActionSheetDelegate, ADBannerViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) MABill *bill;
+@property (strong, nonatomic) NSIndexPath *activeIndexPath;
 @property (strong, nonatomic) UITextField *activeTextField;
-@property (strong, nonatomic) UITextField *billTextField;
-@property (strong, nonatomic) UITextField *tipPercentTextField;
-@property (strong, nonatomic) UITextField *tipTextField;
-@property (strong, nonatomic) UITextField *totalTextField;
 
 @property (strong, nonatomic) UIToolbar *keyboardAccessoryView;
 @property (strong, nonatomic) UIBarButtonItem *backBarButton;
@@ -69,11 +66,8 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 @implementation MATipViewController
 @synthesize tableView = _tableView;
 @synthesize bill = _bill;
+@synthesize activeIndexPath = _activeIndexPath;
 @synthesize activeTextField = _activeTextField;
-@synthesize billTextField = _billTextField;
-@synthesize tipPercentTextField = _tipPercentTextField;
-@synthesize tipTextField = _tipTextField;
-@synthesize totalTextField = _totalTextField;
 
 @synthesize keyboardAccessoryView = _keyboardAccessoryView;
 @synthesize backBarButton = _backBarButton;
@@ -326,15 +320,12 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     
     cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
     cell.textField.delegate = self;
-    self.billTextField = cell.textField; // Save reference to text field so it's easier to access.
     
     NSString *labelText = Localize(@"Bill");
     cell.textLabel.text = labelText;
 
     NSString *textFieldText = [self.bill formattedBill];
     cell.textField.text = textFieldText;
-
-    [cell.textField setInputAccessoryView:self.keyboardAccessoryView];
 
     return cell;
 }
@@ -360,18 +351,14 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     {
         labelText = Localize(@"Percent");
         textFieldText = [self.bill formattedTipPercent];
-        self.tipPercentTextField = cell.textField;
     }
     else if (indexPath.row == TIP_ROW)
     {
         labelText = Localize(@"Amount");
         textFieldText = [self.bill formattedTip];
-        self.tipTextField = cell.textField;
     }
     cell.textLabel.text = labelText;
     cell.textField.text = textFieldText;
-    
-    [cell.textField setInputAccessoryView:self.keyboardAccessoryView];
 
     return cell;
 }
@@ -390,15 +377,12 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     
     cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
     cell.textField.delegate = self;
-    self.totalTextField = cell.textField; // Save reference to text field so it's easier to access.
     
     NSString *labelText = Localize(@"Total");
     cell.textLabel.text = labelText;
     
     NSString *textFieldText = [self.bill formattedTotal];
     cell.textField.text = textFieldText;
-    
-    [cell.textField setInputAccessoryView:self.keyboardAccessoryView];
 
     return cell;
 }
@@ -424,25 +408,20 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     {
         labelText = Localize(@"People");
         textFieldText = [self.bill formattedSplit];
-//        self.tipPercentTextField = cell.textField;
     }
     else if (indexPath.row == SPLIT_TIP_ROW)
     {
         labelText = Localize(@"Tip Per Person");
         textFieldText = [self.bill formattedSplitTip];
-//        self.tipTextField = cell.textField;
     }
     else if (indexPath.row == SPLIT_TOTAL_ROW)
     {
         labelText = Localize(@"Total Per Person");
         textFieldText = [self.bill formattedSplitTotal];
-        //        self.tipTextField = cell.textField;
     }
     
     cell.textLabel.text = labelText;
     cell.textField.text = textFieldText;
-    
-    [cell.textField setInputAccessoryView:self.keyboardAccessoryView];
 
     return cell;
 }
@@ -580,71 +559,108 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    self.activeIndexPath = [self indexPathForTextField:textField];
     self.activeTextField = textField;
+    
     [textField setInputAccessoryView:self.keyboardAccessoryView];
+    [self checkAndSetEnabledBarButtons];
+}
+
+// List of index paths that contain text fields.
+- (NSArray *)textFieldIndexPaths
+{
+    static dispatch_once_t once;
+    static NSMutableArray *textFieldIndexPaths = nil;
+    dispatch_once(&once, ^{
+        textFieldIndexPaths = [[NSMutableArray alloc] init];
+        [textFieldIndexPaths addObject:[NSIndexPath indexPathForRow:BILL_ROW inSection:BILL_SECTION]];
+        [textFieldIndexPaths addObject:[NSIndexPath indexPathForRow:TIP_PERCENT_ROW inSection:TIP_SECTION]];
+        [textFieldIndexPaths addObject:[NSIndexPath indexPathForRow:TIP_ROW inSection:TIP_SECTION]];
+        [textFieldIndexPaths addObject:[NSIndexPath indexPathForRow:TOTAL_ROW inSection:TOTAL_SECTION]];
+        [textFieldIndexPaths addObject:[NSIndexPath indexPathForRow:SPLIT_COUNT_ROW inSection:SPLIT_SECTION]];
+        [textFieldIndexPaths addObject:[NSIndexPath indexPathForRow:SPLIT_TIP_ROW inSection:SPLIT_SECTION]];
+        [textFieldIndexPaths addObject:[NSIndexPath indexPathForRow:SPLIT_TOTAL_ROW inSection:SPLIT_SECTION]];
+    });
+    return textFieldIndexPaths;
+}
+
+- (NSString *)billKeyForIndexPath:(NSIndexPath *)indexPath
+{
+    static dispatch_once_t once;
+    static NSMutableDictionary *indexPathToBillKeyDict = nil;
+    dispatch_once(&once, ^{
+        indexPathToBillKeyDict = [[NSMutableDictionary alloc] init];
+        [indexPathToBillKeyDict setObject:@"bill" forKey:[NSIndexPath indexPathForRow:BILL_ROW inSection:BILL_SECTION]];
+        [indexPathToBillKeyDict setObject:@"tipPercent" forKey:[NSIndexPath indexPathForRow:TIP_PERCENT_ROW inSection:TIP_SECTION]];
+        [indexPathToBillKeyDict setObject:@"tip" forKey:[NSIndexPath indexPathForRow:TIP_ROW inSection:TIP_SECTION]];
+        [indexPathToBillKeyDict setObject:@"total" forKey:[NSIndexPath indexPathForRow:TOTAL_ROW inSection:TOTAL_SECTION]];
+        [indexPathToBillKeyDict setObject:@"split" forKey:[NSIndexPath indexPathForRow:SPLIT_COUNT_ROW inSection:SPLIT_SECTION]];
+        [indexPathToBillKeyDict setObject:@"splitTip" forKey:[NSIndexPath indexPathForRow:SPLIT_TIP_ROW inSection:SPLIT_SECTION]];
+        [indexPathToBillKeyDict setObject:@"splitTotal" forKey:[NSIndexPath indexPathForRow:SPLIT_TOTAL_ROW inSection:SPLIT_SECTION]];
+    });
+    
+    NSString *billKey = [indexPathToBillKeyDict objectForKey:indexPath];
+    return billKey;
+}
+
+- (UITextField *)textFieldForIndexPath:(NSIndexPath *)indexPath
+{
+    if ( ! indexPath)
+    {
+        return nil;
+    }
+    
+    MATextFieldCell *cell = (MATextFieldCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    if (cell)
+    {
+        return cell.textField;
+    }
+    
+    return nil;
+}
+
+- (NSIndexPath *)indexPathForTextField:(UITextField *)textField
+{
+    if ( ! textField)
+    {
+        return nil;
+    }
+
+    NSArray *textFieldIndexPaths = [self textFieldIndexPaths];
+    for (NSIndexPath *indexPath in textFieldIndexPaths)
+    {
+        UITextField *textFieldForIndexPath = [self textFieldForIndexPath:indexPath];
+        if (textFieldForIndexPath && textField == textFieldForIndexPath)
+        {
+            return indexPath;
+        }
+    }
+    
+    return nil;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    MATextFieldCell *cell = nil;
-    NSIndexPath *indexPath = nil;
-    
     if (textField.text.length == 0)
     {
         [self.tableView reloadData];
         return;
     }
     
-    NSNumber *number = [NSNumber numberWithDouble:[textField.text doubleValue]];
-    
-    indexPath = [NSIndexPath indexPathForRow:BILL_ROW inSection:BILL_SECTION];
-    cell = (MATextFieldCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-    if (cell && textField == cell.textField)
+    NSIndexPath *textFieldIndexPath = [self indexPathForTextField:textField];
+    if ( ! textFieldIndexPath)
     {
-        self.bill.bill = number;
+        return;
+    }
+    NSString *billKey = [self billKeyForIndexPath:textFieldIndexPath];
+    if ( ! billKey)
+    {
+        return;
     }
     
-    indexPath = [NSIndexPath indexPathForRow:TIP_PERCENT_ROW inSection:TIP_SECTION];
-    cell = (MATextFieldCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-    if (cell && textField == cell.textField)
-    {
-        self.bill.tipPercent = number;
-    }
-    
-    indexPath = [NSIndexPath indexPathForRow:TIP_ROW inSection:TIP_SECTION];
-    cell = (MATextFieldCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-    if (cell && textField == cell.textField)
-    {
-        self.bill.tip = number;
-    }
-    
-    indexPath = [NSIndexPath indexPathForRow:TOTAL_ROW inSection:TOTAL_SECTION];
-    cell = (MATextFieldCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-    if (cell && textField == cell.textField)
-    {
-        self.bill.total = number;
-    }
-    
-    indexPath = [NSIndexPath indexPathForRow:SPLIT_COUNT_ROW inSection:SPLIT_SECTION];
-    cell = (MATextFieldCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-    if (cell && textField == cell.textField)
-    {
-        self.bill.split = number;
-    }
+    NSNumber *billValue = [NSNumber numberWithDouble:[textField.text doubleValue]];
 
-    indexPath = [NSIndexPath indexPathForRow:SPLIT_TIP_ROW inSection:SPLIT_SECTION];
-    cell = (MATextFieldCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-    if (cell && textField == cell.textField)
-    {
-        self.bill.splitTip = number;
-    }
-
-    indexPath = [NSIndexPath indexPathForRow:SPLIT_TOTAL_ROW inSection:SPLIT_SECTION];
-    cell = (MATextFieldCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-    if (cell && textField == cell.textField)
-    {
-        self.bill.splitTotal = number;
-    }
+    [self.bill setValue:billValue forKey:billKey];
 
     [textField resignFirstResponder];
 }
@@ -657,7 +673,7 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
-    //    if (textField == self.billTextField)
+    // if (textField == self.someTextField)
     {
         BOOL const shouldChangeChars = [MAUtil numTextField:textField shouldChangeCharactersInRange:range replacementString:string];
         return shouldChangeChars;
@@ -771,92 +787,51 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 
 - (IBAction)backBarButtonTapped
 {
-    if ([self.tipPercentTextField isFirstResponder])
-    {
-        [self resetTextInTextView:self.tipPercentTextField];
-        [self.billTextField becomeFirstResponder];
-    }
-    else if ([self.tipTextField isFirstResponder])
-    {
-        [self resetTextInTextView:self.tipTextField];
-        [self.tipPercentTextField becomeFirstResponder];
-    }
+    static NSInteger const offset = -1;
+    [self activateTextFieldAtOffset:offset];
 }
 
 - (IBAction)forwardBarButtonTapped
 {
-    if ([self.billTextField isFirstResponder])
-    {
-        [self resetTextInTextView:self.billTextField];
-        [self.tipPercentTextField becomeFirstResponder];
-    }
-    else if ([self.tipPercentTextField isFirstResponder])
-    {
-        [self resetTextInTextView:self.tipPercentTextField];
-        [self.tipTextField becomeFirstResponder];
-    }
+    static NSInteger const offset = +1;
+    [self activateTextFieldAtOffset:offset];
 }
 
-- (void)resetTextInTextView:(UITextField *)textView
+- (void)activateTextFieldAtOffset:(NSInteger)offset
 {
-    // Replace text in the text view with its placeholder text if the text field is empty but the placeholder text is non-empty.
-    if ([textView isFirstResponder])
+    if ( ! [self.activeTextField isFirstResponder])
     {
-        if ( ! textView.text || textView.text.length == 0)
-        {
-            NSString *text = textView.placeholder;
-            double currentValue = [MAUtil parseDouble:text];
-            if (currentValue != 0)
-            {
-                textView.text = text;
-            }
-        }
+        return;
     }
+    
+    NSArray *textFieldIndexPaths = [self textFieldIndexPaths];
+    NSInteger index = [textFieldIndexPaths indexOfObject:self.activeIndexPath];
+    index += offset;
+    if (index < 0 || index >= textFieldIndexPaths.count)
+    {
+        return;
+    }
+    
+    NSIndexPath *indexPath = [textFieldIndexPaths objectAtIndex:index];
+    if ( ! indexPath)
+    {
+        return;
+    }
+    
+    [self dismissKeyboard];
+
+    [self tableView:self.tableView didSelectRowAtIndexPath:indexPath];
 }
 
 - (IBAction)doneBarButtonTapped
 {
-    if ([self.billTextField isFirstResponder])
-    {
-        [self resetTextInTextView:self.tipTextField];
-    }
-    else if ([self.tipPercentTextField isFirstResponder])
-    {
-        [self resetTextInTextView:self.tipPercentTextField];
-    }
-    else if ([self.tipTextField isFirstResponder])
-    {
-        [self resetTextInTextView:self.tipTextField];
-    }
-    else
-    {
-        // Note: this is expected behavior if this cell's text field has focus but the table is reloaded, which might cause this cell to be discarded.
-        //        NSLog(@"No first responder!");
-    }
-    
     [self dismissKeyboard];
 }
 
 - (IBAction)updateBarButtonTapped:(UIBarButtonItem *)button
 {
-    double updateAmount = 0;
-    UITextField *textField = nil;
-    
-    if ([self.billTextField isFirstResponder])
-    {
-        updateAmount = 1;
-        textField = self.billTextField;
-    }
-    else if ([self.tipPercentTextField isFirstResponder])
-    {
-        updateAmount = 1;
-        textField = self.tipPercentTextField;
-    }
-    else if ([self.tipTextField isFirstResponder])
-    {
-        updateAmount = 1;
-        textField = self.tipTextField;
-    }
+    double updateAmount = 1;
+    UITextField *textField = self.activeTextField;
     
     if (button == self.update2BarButton)
     {
@@ -893,23 +868,22 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     
     self.update1BarButton.enabled = YES;
     self.update2BarButton.enabled = YES;
+
+    self.update1BarButton.title = Localize(@"+1");
+    self.update2BarButton.title = Localize(@"-1");
+
+    NSArray *textFieldIndexPaths = [self textFieldIndexPaths];
+    NSUInteger index = [textFieldIndexPaths indexOfObject:self.activeIndexPath];
+    BOOL isFirstTextField = (index == 0);
+    BOOL isLastTextField = (index == (textFieldIndexPaths.count - 1));
     
-    if ([self.billTextField isFirstResponder])
+    if (isFirstTextField)
     {
         self.backBarButton.enabled = NO;
-        self.update1BarButton.title = Localize(@"+1");
-        self.update2BarButton.title = Localize(@"-1");
     }
-    else if ([self.tipPercentTextField isFirstResponder])
-    {
-        self.update1BarButton.title = Localize(@"+1");
-        self.update2BarButton.title = Localize(@"-1");
-    }
-    else if ([self.tipTextField isFirstResponder])
+    else if (isLastTextField)
     {
         self.forwardBarButton.enabled = NO;
-        self.update1BarButton.title = Localize(@"+1");
-        self.update2BarButton.title = Localize(@"-1");
     }
 }
 
