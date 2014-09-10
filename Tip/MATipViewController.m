@@ -443,95 +443,17 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
         return;
     }
 
-    if (indexPath.section == BILL_SECTION)
+    UITextField *textField = [self textFieldForIndexPath:indexPath];
+    if (textField)
     {
-        if (indexPath.row == BILL_ROW)
-        {
-            [self selectBillAtPath:indexPath];
-        }
-    }
-    else if (indexPath.section == TIP_SECTION)
-    {
-        if (indexPath.row == TIP_PERCENT_ROW)
-        {
-            [self selectTipPercentAtPath:indexPath];
-        }
-        else if (indexPath.row == TIP_ROW)
-        {
-            [self selectTipAtPath:indexPath];
-        }
-    }
-    else if (indexPath.section == TOTAL_SECTION)
-    {
-        if (indexPath.row == TOTAL_ROW)
-        {
-            [self selectTotalAtPath:indexPath];
-        }
-    }
-    else if (indexPath.section == SPLIT_SECTION)
-    {
-        if (indexPath.row == SPLIT_COUNT_ROW)
-        {
-            [self selectSplitAtPath:indexPath];
-        }
-        else if (indexPath.row == SPLIT_TIP_ROW)
-        {
-            [self selectSplitTipAtPath:indexPath];
-        }
-        else if (indexPath.row == SPLIT_TOTAL_ROW)
-        {
-            [self selectSplitTotalAtPath:indexPath];
-        }
+        [textField becomeFirstResponder];
+        return;
     }
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return NO;
-}
-
-- (void)selectBillAtPath:(NSIndexPath *)indexPath
-{
-    [self makeFirstResponderForTextFieldCellAtIndexPath:indexPath];
-}
-
-- (void)selectTipPercentAtPath:(NSIndexPath *)indexPath
-{
-    [self makeFirstResponderForTextFieldCellAtIndexPath:indexPath];
-}
-
-- (void)selectTipAtPath:(NSIndexPath *)indexPath
-{
-    [self makeFirstResponderForTextFieldCellAtIndexPath:indexPath];
-}
-
-- (void)selectTotalAtPath:(NSIndexPath *)indexPath
-{
-    [self makeFirstResponderForTextFieldCellAtIndexPath:indexPath];
-}
-
-- (void)selectSplitAtPath:(NSIndexPath *)indexPath
-{
-    [self makeFirstResponderForTextFieldCellAtIndexPath:indexPath];
-}
-
-- (void)selectSplitTipAtPath:(NSIndexPath *)indexPath
-{
-    [self makeFirstResponderForTextFieldCellAtIndexPath:indexPath];
-}
-
-- (void)selectSplitTotalAtPath:(NSIndexPath *)indexPath
-{
-    [self makeFirstResponderForTextFieldCellAtIndexPath:indexPath];
-}
-
-- (void)makeFirstResponderForTextFieldCellAtIndexPath:(NSIndexPath *)indexPath
-{
-    MATextFieldCell *cell = (MATextFieldCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-    if (cell)
-    {
-        [cell.textField becomeFirstResponder];
-    }
 }
 
 #pragma mark - Scroll view delegate
