@@ -25,7 +25,6 @@ static CGFloat const TrailingSidePadding = 8.;
 // Constraints for hiding or showing the size field.
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *quantityTrailingSpaceConstraint;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *priceEqualsQuantityWidthConstraint;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *priceEqualsSizeWidthConstraint;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *quantityEqualsSizeWidthConstraint;
 @end
 
@@ -55,7 +54,6 @@ static CGFloat const TrailingSidePadding = 8.;
 
 @synthesize quantityTrailingSpaceConstraint = _quantityTrailingSpaceConstraint;
 @synthesize priceEqualsQuantityWidthConstraint = _priceEqualsQuantityWidthConstraint;
-@synthesize priceEqualsSizeWidthConstraint = _priceEqualsSizeWidthConstraint;
 @synthesize quantityEqualsSizeWidthConstraint = _quantityEqualsSizeWidthConstraint;
 
 - (void)awakeFromNib
@@ -260,7 +258,6 @@ static CGFloat const TrailingSidePadding = 8.;
     // Remove constraints setup in IB that are in self.contentView not self.
     [self.contentView removeConstraint:self.quantityTrailingSpaceConstraint];
     [self.contentView removeConstraint:self.priceEqualsQuantityWidthConstraint];
-    [self.contentView removeConstraint:self.priceEqualsSizeWidthConstraint];
     [self.contentView removeConstraint:self.quantityEqualsSizeWidthConstraint];
 
     NSLayoutConstraint *constraint = nil;
@@ -294,7 +291,6 @@ static CGFloat const TrailingSidePadding = 8.;
     // Remove constraints setup in IB that are in self.contentView not self.
     [self.contentView removeConstraint:self.quantityTrailingSpaceConstraint];
     [self.contentView removeConstraint:self.priceEqualsQuantityWidthConstraint];
-    [self.contentView removeConstraint:self.priceEqualsSizeWidthConstraint];
     [self.contentView removeConstraint:self.quantityEqualsSizeWidthConstraint];
     
     NSLayoutConstraint *constraint = nil;
@@ -321,18 +317,7 @@ static CGFloat const TrailingSidePadding = 8.;
                   constant:0];
     self.priceEqualsQuantityWidthConstraint = constraint;
     [self.contentView addConstraint:constraint];
-    
-    constraint = [NSLayoutConstraint
-                  constraintWithItem:self.priceField
-                  attribute:NSLayoutAttributeWidth
-                  relatedBy:NSLayoutRelationEqual
-                  toItem:self.sizeField
-                  attribute:NSLayoutAttributeWidth
-                  multiplier:2.0 / 1.0 // Price is 2x the other field's size.
-                  constant:0];
-    self.priceEqualsSizeWidthConstraint = constraint;
-    [self.contentView addConstraint:constraint];
-    
+        
     constraint = [NSLayoutConstraint
                   constraintWithItem:self.quantityField
                   attribute:NSLayoutAttributeWidth

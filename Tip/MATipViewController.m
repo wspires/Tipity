@@ -21,50 +21,71 @@
 
 #import <iAd/iAd.h>
 
-DECL_TABLE_IDX(NUM_SECTIONS, 3);
+DECL_TABLE_IDX(NUM_SECTIONS, 4);
 
 DECL_TABLE_IDX(BILL_SECTION, 0);
 DECL_TABLE_IDX(BILL_ROW, 0);
 DECL_TABLE_IDX(BILL_SECTION_ROWS, 1);
 
-DECL_TABLE_IDX(PRODUCTS_SECTION, 1);
+DECL_TABLE_IDX(TIP_SECTION, 1);
+DECL_TABLE_IDX(TIP_PERCENT_ROW, 0);
+DECL_TABLE_IDX(TIP_ROW, 1);
+DECL_TABLE_IDX(TIP_SECTION_ROWS, 2);
 
-DECL_TABLE_IDX(CLEAR_SECTION, 2);
-DECL_TABLE_IDX(CLEAR_ROW, 0);
-DECL_TABLE_IDX(CLEAR_SECTION_ROWS, 1);
+DECL_TABLE_IDX(TOTAL_SECTION, 2);
+DECL_TABLE_IDX(TOTAL_ROW, 0);
+DECL_TABLE_IDX(TOTAL_SECTION_ROWS, 1);
+
+DECL_TABLE_IDX(SPLIT_SECTION, 3);
+DECL_TABLE_IDX(SPLIT_COUNT_ROW, 0);
+DECL_TABLE_IDX(SPLIT_TIP_ROW, 1);
+DECL_TABLE_IDX(SPLIT_TOTAL_ROW, 2);
+DECL_TABLE_IDX(SPLIT_SECTION_ROWS, 3);
 
 static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
-static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIdentifier";
 
-@interface MATipViewController () <MABillDelegate, MAProductDelegate, MAProductCellDelegate, UITextFieldDelegate, UIActionSheetDelegate, ADBannerViewDelegate>
+@interface MATipViewController () <MABillDelegate, UITextFieldDelegate, UIActionSheetDelegate, ADBannerViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) MABill *bill;
-@property (weak, nonatomic) UITextField *billTextField;
+@property (strong, nonatomic) UITextField *activeTextField;
+@property (strong, nonatomic) UITextField *billTextField;
+@property (strong, nonatomic) UITextField *tipPercentTextField;
+@property (strong, nonatomic) UITextField *tipTextField;
+@property (strong, nonatomic) UITextField *totalTextField;
 
-@property (strong, nonatomic) NSMutableArray *products;
-@property (strong, nonatomic) NSMutableArray *cheapestProducts;
-@property (strong, nonatomic) UIActionSheet *deleteActionSheet;
-@property (assign, nonatomic) BOOL didInsertCell;
+@property (strong, nonatomic) UIToolbar *keyboardAccessoryView;
+@property (strong, nonatomic) UIBarButtonItem *backBarButton;
+@property (strong, nonatomic) UIBarButtonItem *forwardBarButton;
+@property (strong, nonatomic) UIBarButtonItem *doneBarButton;
+@property (strong, nonatomic) UIBarButtonItem *update1BarButton;
+@property (strong, nonatomic) UIBarButtonItem *update2BarButton;
+
 @property (strong, nonatomic) ADBannerView *adBanner;
 @property (weak, nonatomic) NSLayoutConstraint *adBannerBottomSizeConstraint;
 @property (weak, nonatomic) NSLayoutConstraint *adBannerHeightConstraint;
 @property (assign, nonatomic) BOOL bannerIsVisible;
-@property (assign, nonatomic) NSUInteger pricePerUnitFractionDigits;
-@property (strong, nonatomic) NSIndexPath *editingIndexPath;
 @end
 
 @implementation MATipViewController
 @synthesize tableView = _tableView;
 @synthesize bill = _bill;
-@synthesize products = _products;
-@synthesize cheapestProducts = _cheapestProducts;
-@synthesize deleteActionSheet = _deleteActionSheet;
-@synthesize didInsertCell = _didInsertCell;
+@synthesize activeTextField = _activeTextField;
+@synthesize billTextField = _billTextField;
+@synthesize tipPercentTextField = _tipPercentTextField;
+@synthesize tipTextField = _tipTextField;
+@synthesize totalTextField = _totalTextField;
+
+@synthesize keyboardAccessoryView = _keyboardAccessoryView;
+@synthesize backBarButton = _backBarButton;
+@synthesize forwardBarButton = _forwardBarButton;
+@synthesize doneBarButton = _doneBarButton;
+@synthesize update1BarButton = _update1BarButton;
+@synthesize update2BarButton = _update2BarButton;
+
 @synthesize adBanner = _adBanner;
 @synthesize adBannerBottomSizeConstraint = _adBannerBottomSizeConstraint;
 @synthesize adBannerHeightConstraint = _adBannerHeightConstraint;
 @synthesize bannerIsVisible = _bannerIsVisible;
-@synthesize pricePerUnitFractionDigits = _pricePerUnitFractionDigits;
 
 - (void)viewDidLoad
 {
@@ -77,24 +98,10 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
     
     // Make the table background clear, so that this view's background shows.
     [MAAppearance clearBackgroundForTableView:self.tableView];
-    
-    UIBarButtonItem *editButton = [[UIBarButtonItem alloc]
-                                   initWithTitle:Localize(@"Edit")
-                                   style:UIBarButtonItemStylePlain
-                                   target:self
-                                   action:@selector(toggleEdit)];
-    self.navigationItem.rightBarButtonItem = editButton;
-    
-    self.pricePerUnitFractionDigits = [MAProduct unitPriceFormatter].maximumFractionDigits;
-    
-    self.didInsertCell = NO;
+
     [self loadBill];
-    [self loadProducts];
     
     [self setupAdBanner];
-
-    //self.tableView.estimatedRowHeight = 89;
-    //self.tableView.rowHeight = UITableViewAutomaticDimension;
 
     //[self hideUIToMakeLaunchImages];
 }
@@ -122,11 +129,17 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
     [center removeObserver:self];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self configureInputAccessoryView];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-    [self saveProducts];
+    [self saveBill];
 }
 
 - (void)registerNibs
@@ -135,9 +148,6 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
     
     nib = [UINib nibWithNibName:@"MATextFieldCell" bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:MATextFieldCellIdentifier];
-
-    nib = [UINib nibWithNibName:@"MAProductTableViewCell" bundle:nil];
-    [self.tableView registerNib:nib forCellReuseIdentifier:MAProductTableViewCellIdentifier];
 }
 
 - (void)loadBill
@@ -177,103 +187,6 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
     }
 }
 
-- (void)loadProducts
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSArray *encodedProducts = [defaults objectForKey:@"products"];
-    if (encodedProducts)
-    {
-        // Decode each product.
-        NSMutableArray *products = [[NSMutableArray alloc] init];
-        for (NSData *encodedProduct in encodedProducts)
-        {
-            MAProduct *product = [NSKeyedUnarchiver unarchiveObjectWithData:encodedProduct];
-            if (product)
-            {
-                [products addObject:product];
-            }
-        }
-        
-        self.products = products;
-    }
-    else // First run, no products yet.
-    {
-        self.products = [[NSMutableArray alloc] init];
-        
-        // Create initial set of products.
-        MAProduct *product = nil;
-        
-        product = [[MAProduct alloc] initWithPrice:[NSNumber numberWithDouble:18.99] quantity:[NSNumber numberWithDouble:12] size:[NSNumber numberWithDouble:1]];
-        [self.products addObject:product];
-
-        product = [[MAProduct alloc] initWithPrice:[NSNumber numberWithDouble:17.99] quantity:[NSNumber numberWithDouble:10] size:[NSNumber numberWithDouble:1]];
-        [self.products addObject:product];
-        
-        product = [[MAProduct alloc] initWithPrice:[NSNumber numberWithDouble:16.99] quantity:[NSNumber numberWithDouble:8] size:[NSNumber numberWithDouble:1]];
-        [self.products addObject:product];
-    }
-    
-    if ( ! self.cheapestProducts)
-    {
-        self.cheapestProducts = [[NSMutableArray alloc] init];
-    }
-    if (self.products.count != 0)
-    {
-        [self updateCheapestProducts];
-        [self updatePricePerUnitFractionDigits];
-    }
-}
-
-- (void)saveProducts
-{
-    if ( ! self.products)
-    {
-        return;
-    }
-    
-    // Encode each product before saving them.
-    NSMutableArray *encodedProducts = [[NSMutableArray alloc] init];
-    for (MAProduct *product in self.products)
-    {
-        NSData *encodedProduct = [NSKeyedArchiver archivedDataWithRootObject:product];
-        [encodedProducts addObject:encodedProduct];
-    }
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:encodedProducts forKey:@"products"];
-    BOOL saved = [defaults synchronize];
-    if ( ! saved)
-    {
-        TLog(@"Failed to save products");
-    }
-}
-
-- (IBAction)toggleEdit
-{
-    BOOL editing = ! self.tableView.editing;
-    [self.tableView setEditing:editing animated:YES];
-    
-    if (editing)
-    {
-        [self.navigationItem.rightBarButtonItem setTitle:Localize(@"Done")];
-        [self.navigationItem.rightBarButtonItem setStyle:UIBarButtonItemStyleDone];
-    }
-    else
-    {
-        [self.navigationItem.rightBarButtonItem setTitle:Localize(@"Edit")];
-        [self.navigationItem.rightBarButtonItem setStyle:UIBarButtonItemStylePlain];
-    }
-}
-
-- (BOOL)isProductRow:(NSUInteger)row
-{
-    return (row < self.products.count);
-}
-
-- (BOOL)isAddProductRow:(NSUInteger)row
-{
-    return (row == self.products.count);
-}
-
 - (void)hideUIToMakeLaunchImages
 {
     MAAppDelegate* myDelegate = (((MAAppDelegate*) [UIApplication sharedApplication].delegate));
@@ -303,11 +216,11 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
     CGRect keyboardFrame = [self.view convertRect:rawFrame fromView:nil];
     [self.tableView setContentInset:UIEdgeInsetsMake(0, 0, keyboardFrame.size.height, 0)];
     
-    if (self.editingIndexPath)
-    {
-        // Scroll cell to the top so that it's visible when entering input.
-        [self.tableView scrollToRowAtIndexPath:self.editingIndexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-    }
+//    if (self.editingIndexPath)
+//    {
+//        // Scroll cell to the top so that it's visible when entering input.
+//        [self.tableView scrollToRowAtIndexPath:self.editingIndexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+//    }
 }
 
 -(void)keyboardOffScreen:(NSNotification *)notification
@@ -327,17 +240,21 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
 {
     if (section == BILL_SECTION)
     {
-        //return Localize(@"Products");
+        //return Localize(@"Bill");
     }
-    else if (section == PRODUCTS_SECTION)
+    else if (section == TIP_SECTION)
     {
-        //return Localize(@"Products");
+        return Localize(@"Tip");
     }
-    else if (section == CLEAR_SECTION)
+    else if (section == TOTAL_SECTION)
     {
-        //return Localize(@"Clear");
+//        return Localize(@"Total");
     }
-    
+    else if (section == SPLIT_SECTION)
+    {
+        return Localize(@"Split");
+    }
+
     return @"";
 }
 
@@ -347,13 +264,17 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
     {
         return BILL_SECTION_ROWS;
     }
-    else if (section == PRODUCTS_SECTION)
+    else if (section == TIP_SECTION)
     {
-        return self.products.count + 1;
+        return TIP_SECTION_ROWS;
     }
-    else if (section == CLEAR_SECTION)
+    else if (section == TOTAL_SECTION)
     {
-        return CLEAR_SECTION_ROWS;
+        return TOTAL_SECTION_ROWS;
+    }
+    else if (section == SPLIT_SECTION)
+    {
+        return SPLIT_SECTION_ROWS;
     }
     return 0;
 }
@@ -367,19 +288,25 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
             return [self tableView:tableView billCellForRowAtIndexPath:indexPath];
         }
     }
-    else if (indexPath.section == PRODUCTS_SECTION)
+    else if (indexPath.section == TIP_SECTION)
     {
-        if ([self isAddProductRow:indexPath.row])
+//        if (indexPath.row == TIP_ROW)
         {
-            return [self tableView:tableView addProductCellForRowAtIndexPath:indexPath];
+            return [self tableView:tableView tipCellForRowAtIndexPath:indexPath];
         }
-        return [self tableView:tableView productCellForRowAtIndexPath:indexPath];
     }
-    else if (indexPath.section == CLEAR_SECTION)
+    else if (indexPath.section == TOTAL_SECTION)
     {
-        if (indexPath.row == CLEAR_ROW)
+        if (indexPath.row == TOTAL_ROW)
         {
-            return [self tableView:tableView clearCellForRowAtIndexPath:indexPath];            
+            return [self tableView:tableView totalCellForRowAtIndexPath:indexPath];
+        }
+    }
+    else if (indexPath.section == SPLIT_SECTION)
+    {
+//        if (indexPath.row == SPLIT_COUNT_ROW)
+        {
+            return [self tableView:tableView splitCellForRowAtIndexPath:indexPath];
         }
     }
     return nil;
@@ -394,188 +321,134 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
     }
     [cell setAppearanceInTable:tableView];
     
-    NSString *unit = @""; //[self.settings objectForKey:WeightLogUnit];
-    cell.label.text = SFmt(@" %@", unit); // Insert a space char because the text field and label have 0 space separating them.
+//    NSString *unit = @""; //[self.settings objectForKey:WeightLogUnit];
+    cell.label.text = @""; // SFmt(@" %@", unit); // Insert a space char because the text field and label have 0 space separating them.
     
     cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
     cell.textField.delegate = self;
     self.billTextField = cell.textField; // Save reference to text field so it's easier to access.
     
-    cell.textLabel.text = Localize(@"Bill");
-    
-    NSString *billStr = [self.bill formattedBill];
-    if (billStr && billStr.length != 0)
-    {
-        cell.textField.text = billStr;
-    }
-    else
-    {
-        billStr = Localize(@"-");
-    }
-    cell.textField.text = billStr;
-    
-    
+    NSString *labelText = Localize(@"Bill");
+    cell.textLabel.text = labelText;
+
+    NSString *textFieldText = [self.bill formattedBill];
+    cell.textField.text = textFieldText;
+
+    [cell.textField setInputAccessoryView:self.keyboardAccessoryView];
+
     return cell;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView addProductCellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView tipCellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"MAAddProductCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    MATextFieldCell *cell = (MATextFieldCell *)[tableView dequeueReusableCellWithIdentifier:MATextFieldCellIdentifier];
     if (cell == nil)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+        cell = [[MATextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MATextFieldCellIdentifier];
     }
-
-    [MAAppearance setAppearanceForCell:cell tableStyle:tableView.style];
-    cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+    [cell setAppearanceInTable:tableView];
     
-    UIImage *image = [MAFilePaths circlePlusImage];
-    NSInteger tag = [MAUtil toTag:indexPath];
-    [MAUtil setImage:image forCell:cell withTag:tag];
-
-    cell.textLabel.text = Localize(@"Add Item");
-    cell.accessoryType = UITableViewCellAccessoryNone;
+    NSString *unit = @""; //[self.settings objectForKey:WeightLogUnit];
+    cell.label.text = SFmt(@" %@", unit); // Insert a space char because the text field and label have 0 space separating them.
     
+    cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
+    cell.textField.delegate = self;
+    
+    NSString *labelText = @"";
+    NSString *textFieldText = @"";
+    if (indexPath.row == TIP_PERCENT_ROW)
+    {
+        labelText = Localize(@"Percent");
+        textFieldText = [self.bill formattedTipPercent];
+        self.tipPercentTextField = cell.textField;
+    }
+    else if (indexPath.row == TIP_ROW)
+    {
+        labelText = Localize(@"Amount");
+        textFieldText = [self.bill formattedTip];
+        self.tipTextField = cell.textField;
+    }
+    cell.textLabel.text = labelText;
+    cell.textField.text = textFieldText;
+    
+    [cell.textField setInputAccessoryView:self.keyboardAccessoryView];
+
     return cell;
 }
 
-- (MAProductTableViewCell *)tableView:(UITableView *)tableView productCellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView totalCellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MAProductTableViewCell *cell = (MAProductTableViewCell *)[tableView dequeueReusableCellWithIdentifier:MAProductTableViewCellIdentifier];
+    MATextFieldCell *cell = (MATextFieldCell *)[tableView dequeueReusableCellWithIdentifier:MATextFieldCellIdentifier];
     if (cell == nil)
     {
-        cell = [[MAProductTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MAProductTableViewCellIdentifier];
+        cell = [[MATextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MATextFieldCellIdentifier];
     }
-    [MAAppearance setAppearanceForCell:cell tableStyle:tableView.style];
-    [self configureProductCell:cell atIndexPath:indexPath];
+    [cell setAppearanceInTable:tableView];
     
-    // When a new cell is inserted, immediately bring up the keyboard with focus on the first text field so that the user can quickly enter in a value.
-    if (self.didInsertCell && indexPath.row == (self.products.count - 1))
-    {
-        self.didInsertCell = NO;
-        [self showKeyboardForCell:cell];
-    }
+    //    NSString *unit = @""; //[self.settings objectForKey:WeightLogUnit];
+    cell.label.text = @""; // SFmt(@" %@", unit); // Insert a space char because the text field and label have 0 space separating them.
+    
+    cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
+    cell.textField.delegate = self;
+    self.totalTextField = cell.textField; // Save reference to text field so it's easier to access.
+    
+    NSString *labelText = Localize(@"Total");
+    cell.textLabel.text = labelText;
+    
+    NSString *textFieldText = [self.bill formattedTotal];
+    cell.textField.text = textFieldText;
+    
+    [cell.textField setInputAccessoryView:self.keyboardAccessoryView];
 
     return cell;
 }
 
-- (void)configureProductCell:(MAProductTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView splitCellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.accessoryType = UITableViewCellAccessoryNone;
-    cell.textLabel.text = @"";
-
-    cell.pricePerUnitFractionDigits = self.pricePerUnitFractionDigits;
-    
-    MAProduct *product = [self.products objectAtIndex:indexPath.row];
-    [cell configureWithProduct:product];
-    cell.delegate = self;
-    
-    UIImage *image = nil;
-    if ([self.cheapestProducts containsObject:product])
-    {
-        image = [MAFilePaths starFilledImage];
-    }
-    NSInteger tag = [MAUtil toTag:indexPath];
-    [MAUtil setImage:image forCell:cell withTag:tag];
-    
-    BOOL enableSizeField = [[MAUserUtil sharedInstance] enableSizeField];
-    BOOL const hideSizeField = ! enableSizeField;
-    cell.hideSizeField = hideSizeField;
-    
-    BOOL enableDesc = [[MAUserUtil sharedInstance] enableDescription];
-    BOOL const hideDesc = ! enableDesc;
-    cell.hideDescription = hideDesc;
-}
-
-- (void)showKeyboardForCell:(MAProductTableViewCell *)cell
-{
-    // Default to editing price.
-    [self showKeyboardForCell:cell tag:PriceTag];
-}
-
-- (void)showKeyboardForCell:(MAProductTableViewCell *)cell tag:(NSInteger)tag
-{
-    // Note that a small time delay is required before calling becomeFirstResponder to give the current first responder time to resign.
-    // Also, use the main queue since an UI control is being accessed, so a background queue should not be used.
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_SEC / 4), dispatch_get_main_queue(), ^{
-        if (cell)
-        {
-            UITextField *textField = [cell textFieldForTag:tag];
-            if (textField && [textField canBecomeFirstResponder])
-            {
-                BOOL accepted = [textField becomeFirstResponder];
-                if ( ! accepted)
-                {
-                    // Had some issues before with the textField returning NO and not becoming the first responder, so log it if it happens again.
-                    TLog(@"[textField becomeFirstResponder]: %d (tag=%d)", accepted, (int)tag);
-                }
-            }
-        }
-    });
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView clearCellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"MAClearCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    MATextFieldCell *cell = (MATextFieldCell *)[tableView dequeueReusableCellWithIdentifier:MATextFieldCellIdentifier];
     if (cell == nil)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+        cell = [[MATextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MATextFieldCellIdentifier];
     }
-    [MAAppearance setAppearanceForCell:cell tableStyle:tableView.style];
+    [cell setAppearanceInTable:tableView];
     
-    cell.textLabel.text = Localize(@"Clear");
-    cell.textLabel.textColor = [MAAppearance foregroundColor];
+    NSString *unit = @""; //[self.settings objectForKey:WeightLogUnit];
+    cell.label.text = SFmt(@" %@", unit); // Insert a space char because the text field and label have 0 space separating them.
     
-    UIImage *image = [MAFilePaths redCircleCrossImage];
-    NSInteger tag = [MAUtil toTag:indexPath];
-    [MAUtil setImage:image forCell:cell withTag:tag];
+    cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
+    cell.textField.delegate = self;
+    
+    NSString *labelText = @"";
+    NSString *textFieldText = @"";
+    if (indexPath.row == SPLIT_COUNT_ROW)
+    {
+        labelText = Localize(@"People");
+        textFieldText = [self.bill formattedSplit];
+//        self.tipPercentTextField = cell.textField;
+    }
+    else if (indexPath.row == SPLIT_TIP_ROW)
+    {
+        labelText = Localize(@"Tip Per Person");
+        textFieldText = [self.bill formattedSplitTip];
+//        self.tipTextField = cell.textField;
+    }
+    else if (indexPath.row == SPLIT_TOTAL_ROW)
+    {
+        labelText = Localize(@"Total Per Person");
+        textFieldText = [self.bill formattedSplitTotal];
+        //        self.tipTextField = cell.textField;
+    }
+    
+    cell.textLabel.text = labelText;
+    cell.textField.text = textFieldText;
+    
+    [cell.textField setInputAccessoryView:self.keyboardAccessoryView];
 
-    cell.accessoryType = UITableViewCellAccessoryNone;
-    
-    if (self.products.count == 0)
-    {
-        cell.textLabel.enabled = NO;
-    }
-    else
-    {
-        cell.textLabel.enabled = YES;
-    }
-    
     return cell;
-}
-
-- (void)reloadClearRow
-{
-    NSArray *indexPaths = [NSArray arrayWithObjects:[NSIndexPath indexPathForRow:CLEAR_ROW inSection:CLEAR_SECTION], nil];
-    [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-}
-
-- (MAProductTableViewCell *)sizingCell
-{
-    static MAProductTableViewCell *sizingCell = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        sizingCell = [self.tableView dequeueReusableCellWithIdentifier:MAProductTableViewCellIdentifier];
-    });
-    
-    return sizingCell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == PRODUCTS_SECTION)
-    {
-        if ([self isProductRow:indexPath.row])
-        {
-            MAProductTableViewCell *sizingCell = [self sizingCell];
-            [self configureProductCell:sizingCell atIndexPath:indexPath];
-            CGFloat rowHeight = sizingCell.rowHeight;
-            return rowHeight;
-        }
-    }
     CGFloat rowHeight = [MAUtil rowHeightForTableView:tableView];
     return rowHeight;
 }
@@ -598,540 +471,445 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
             [self selectBillAtPath:indexPath];
         }
     }
-    else if (indexPath.section == PRODUCTS_SECTION)
+    else if (indexPath.section == TIP_SECTION)
     {
-        if ([self isAddProductRow:indexPath.row])
+        if (indexPath.row == TIP_PERCENT_ROW)
         {
-            [self addProduct];
+            [self selectTipPercentAtPath:indexPath];
+        }
+        else if (indexPath.row == TIP_ROW)
+        {
+            [self selectTipAtPath:indexPath];
         }
     }
-    else if (indexPath.section == CLEAR_SECTION)
+    else if (indexPath.section == TOTAL_SECTION)
     {
-        if (indexPath.row == CLEAR_ROW)
+        if (indexPath.row == TOTAL_ROW)
         {
-            if (self.products.count == 0)
-            {
-                return;
-            }
-            [self showDeleteActionSheet];
+            [self selectTotalAtPath:indexPath];
+        }
+    }
+    else if (indexPath.section == SPLIT_SECTION)
+    {
+        if (indexPath.row == SPLIT_COUNT_ROW)
+        {
+            [self selectSplitAtPath:indexPath];
+        }
+        else if (indexPath.row == SPLIT_TIP_ROW)
+        {
+            [self selectSplitTipAtPath:indexPath];
+        }
+        else if (indexPath.row == SPLIT_TOTAL_ROW)
+        {
+            [self selectSplitTotalAtPath:indexPath];
         }
     }
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView != self.tableView)
-    {
-        return NO;
-    }
-
-    if (indexPath.section == PRODUCTS_SECTION)
-    {
-        if ([self isProductRow:indexPath.row])
-        {
-            return YES;
-        }
-    }
-    else if (indexPath.section == CLEAR_SECTION)
-    {
-        return NO;
-    }
     return NO;
-}
-
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Disable swipe to delete unless in edit mode.
-    if (tableView.editing)
-    {
-        return UITableViewCellEditingStyleDelete;
-    }
-    return UITableViewCellEditingStyleNone;
-}
-
-- (void)tableView:(UITableView *)tableView
-commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
-forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete)
-    {
-        MAProduct *product = [self.products objectAtIndex:indexPath.row];
-        [self.products removeObjectAtIndex:indexPath.row];
-        [self saveProducts];
-        
-        // Delete from the tableview, possibly sliding in an insert row cell.
-        [self.tableView beginUpdates];
-        [self.tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-                              withRowAnimation:UITableViewRowAnimationAutomatic];
-        [self.tableView endUpdates];
-        
-        if ([self.cheapestProducts containsObject:product])
-        {
-            [self.cheapestProducts removeObject:product];
-            if (self.cheapestProducts.count == 0)
-            {
-                [self updateCheapestProducts];
-                [self updatePricePerUnitFractionDigits];
-                [self reloadClearRow];
-            }
-        }
-    }
-    else if (editingStyle == UITableViewCellEditingStyleInsert)
-    {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }
-}
-
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (tableView != self.tableView)
-    {
-        return NO;
-    }
-
-    if (indexPath.section == PRODUCTS_SECTION)
-    {
-        if ([self isProductRow:indexPath.row])
-        {
-            return YES;
-        }
-    }
-    return NO;
-}
-
-- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
-{
-    // Prevent moving custom user cell over the default user cell.
-    if (proposedDestinationIndexPath.section == PRODUCTS_SECTION)
-    {
-        if ([self isProductRow:proposedDestinationIndexPath.row])
-        {
-            return proposedDestinationIndexPath;
-        }
-    }
-    return sourceIndexPath;
-}
-
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-    if (toIndexPath.section != PRODUCTS_SECTION)
-    {
-        return;
-    }
-    else if ( ! [self isProductRow:toIndexPath.row])
-    {
-        return;
-    }
-    
-    NSUInteger fromRow = [fromIndexPath row];
-    NSUInteger toRow = [toIndexPath row];
-    if (fromRow == toRow)
-    {
-        return;
-    }
-    
-    id object = [self.products objectAtIndex:fromRow];
-    [self.products removeObjectAtIndex:fromRow];
-    [self.products insertObject:object atIndex:toRow];
-    [self saveProducts];
-
-    [tableView reloadData];
 }
 
 - (void)selectBillAtPath:(NSIndexPath *)indexPath
 {
-    [self.billTextField becomeFirstResponder];
+    [self makeFirstResponderForTextFieldCellAtIndexPath:indexPath];
 }
 
-- (void)addProduct
+- (void)selectTipPercentAtPath:(NSIndexPath *)indexPath
 {
-    if (Unlimited_Items_Iap && [MATipIAPHelper checkAndAlertForIAPWithProductCount:self.products.count])
+    [self makeFirstResponderForTextFieldCellAtIndexPath:indexPath];
+}
+
+- (void)selectTipAtPath:(NSIndexPath *)indexPath
+{
+    [self makeFirstResponderForTextFieldCellAtIndexPath:indexPath];
+}
+
+- (void)selectTotalAtPath:(NSIndexPath *)indexPath
+{
+    [self makeFirstResponderForTextFieldCellAtIndexPath:indexPath];
+}
+
+- (void)selectSplitAtPath:(NSIndexPath *)indexPath
+{
+    [self makeFirstResponderForTextFieldCellAtIndexPath:indexPath];
+}
+
+- (void)selectSplitTipAtPath:(NSIndexPath *)indexPath
+{
+    [self makeFirstResponderForTextFieldCellAtIndexPath:indexPath];
+}
+
+- (void)selectSplitTotalAtPath:(NSIndexPath *)indexPath
+{
+    [self makeFirstResponderForTextFieldCellAtIndexPath:indexPath];
+}
+
+- (void)makeFirstResponderForTextFieldCellAtIndexPath:(NSIndexPath *)indexPath
+{
+    MATextFieldCell *cell = (MATextFieldCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    if (cell)
     {
+        [cell.textField becomeFirstResponder];
+    }
+}
+
+#pragma mark - Scroll view delegate
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)sender
+{
+    [self dismissInput];
+}
+
+#pragma mark - MABillDelegate
+
+- (void)didUpdateBill:(MABill *)bill
+{
+    [self saveBill];
+    [self.tableView reloadData];
+}
+
+#pragma mark - Text field
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    textField.placeholder = textField.text;
+    return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    self.activeTextField = textField;
+    [textField setInputAccessoryView:self.keyboardAccessoryView];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    MATextFieldCell *cell = nil;
+    NSIndexPath *indexPath = nil;
+    
+    if (textField.text.length == 0)
+    {
+        [self.tableView reloadData];
         return;
     }
     
-    // Update the model by copying the last product (if exists) to use as the initial new product.
-    MAProduct *product = nil;
-    if (self.products.count == 0)
+    NSNumber *number = [NSNumber numberWithDouble:[textField.text doubleValue]];
+    
+    indexPath = [NSIndexPath indexPathForRow:BILL_ROW inSection:BILL_SECTION];
+    cell = (MATextFieldCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    if (cell && textField == cell.textField)
     {
-        product = [[MAProduct alloc] init];
-        [self.cheapestProducts addObject:product];
+        self.bill.bill = number;
+    }
+    
+    indexPath = [NSIndexPath indexPathForRow:TIP_PERCENT_ROW inSection:TIP_SECTION];
+    cell = (MATextFieldCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    if (cell && textField == cell.textField)
+    {
+        self.bill.tipPercent = number;
+    }
+    
+    indexPath = [NSIndexPath indexPathForRow:TIP_ROW inSection:TIP_SECTION];
+    cell = (MATextFieldCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    if (cell && textField == cell.textField)
+    {
+        self.bill.tip = number;
+    }
+    
+    indexPath = [NSIndexPath indexPathForRow:TOTAL_ROW inSection:TOTAL_SECTION];
+    cell = (MATextFieldCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    if (cell && textField == cell.textField)
+    {
+        self.bill.total = number;
+    }
+    
+    indexPath = [NSIndexPath indexPathForRow:SPLIT_COUNT_ROW inSection:SPLIT_SECTION];
+    cell = (MATextFieldCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    if (cell && textField == cell.textField)
+    {
+        self.bill.split = number;
+    }
+
+    indexPath = [NSIndexPath indexPathForRow:SPLIT_TIP_ROW inSection:SPLIT_SECTION];
+    cell = (MATextFieldCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    if (cell && textField == cell.textField)
+    {
+        self.bill.splitTip = number;
+    }
+
+    indexPath = [NSIndexPath indexPathForRow:SPLIT_TOTAL_ROW inSection:SPLIT_SECTION];
+    cell = (MATextFieldCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+    if (cell && textField == cell.textField)
+    {
+        self.bill.splitTotal = number;
+    }
+
+    [textField resignFirstResponder];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return NO;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    //    if (textField == self.billTextField)
+    {
+        BOOL const shouldChangeChars = [MAUtil numTextField:textField shouldChangeCharactersInRange:range replacementString:string];
+        return shouldChangeChars;
+    }
+    
+    return YES;
+}
+
+- (IBAction)dismissInput
+{
+    [self dismissKeyboard];
+}
+
+- (IBAction)dismissKeyboard
+{
+    if (self.activeTextField && [self.activeTextField isFirstResponder])
+    {
+        [self.activeTextField resignFirstResponder];
+        self.activeTextField = nil;
+    }
+}
+
+#pragma mark - Input accessory view
+
+- (UIToolbar *)makeInputAccessoryView
+{
+    UIToolbar *toolbar = [[UIToolbar alloc] init];
+    toolbar.frame = CGRectMake(0, 0, self.view.frame.size.width, 44);
+    
+    NSMutableArray *items = [[NSMutableArray alloc] init];
+    
+    self.backBarButton = [[UIBarButtonItem alloc] initWithTitle:@"❮" style:UIBarButtonItemStylePlain target:self action:@selector(backBarButtonTapped)];
+    [items addObject:self.backBarButton];
+    
+    UIBarButtonItem *fixedItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:self action:nil];
+    fixedItem.width = 42;
+    [items addObject:fixedItem];
+    
+    self.forwardBarButton = [[UIBarButtonItem alloc] initWithTitle:@"❯" style:UIBarButtonItemStylePlain target:self action:@selector(forwardBarButtonTapped)];
+    [items addObject:self.forwardBarButton];
+    
+    fixedItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:self action:nil];
+    fixedItem.width = 42;
+    [items addObject:fixedItem];
+    
+    self.update1BarButton = [[UIBarButtonItem alloc] initWithTitle:@"+1" style:UIBarButtonItemStylePlain target:self action:@selector(updateBarButtonTapped:)];
+    [items addObject:self.update1BarButton];
+    
+    fixedItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:self action:nil];
+    fixedItem.width = 21;
+    [items addObject:fixedItem];
+    
+    self.update2BarButton = [[UIBarButtonItem alloc] initWithTitle:@"-1" style:UIBarButtonItemStylePlain target:self action:@selector(updateBarButtonTapped:)];
+    [items addObject:self.update2BarButton];
+    
+    UIBarButtonItem *flexibleItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    [items addObject:flexibleItem];
+    
+    self.doneBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneBarButtonTapped)];
+    [items addObject:self.doneBarButton];
+    
+    [toolbar setItems:items animated:NO];
+    
+    return toolbar;
+}
+
+- (void)configureInputAccessoryView
+{
+    self.keyboardAccessoryView = [self makeInputAccessoryView];
+    
+    // http://unicode-search.net/unicode-namesearch.pl?term=angle
+    self.backBarButton.title = @"❮";
+    self.forwardBarButton.title = @"❯";
+}
+
+- (void)updateInputAccessoryView
+{
+    // Button text defaults to blue, so set to black to match the regular keyboard button title colors.
+    UIColor *barButtonColor = [UIColor blackColor];
+    DLog(@"updateInputAccessoryView - 1a");
+    self.backBarButton.tintColor = barButtonColor;
+    self.forwardBarButton.tintColor = barButtonColor;
+    self.doneBarButton.tintColor = barButtonColor;
+    self.update1BarButton.tintColor = barButtonColor;
+    self.update2BarButton.tintColor = barButtonColor;
+    DLog(@"updateInputAccessoryView - 1b");
+    
+    // Or, set to foreground color.
+    //self.backBarButton.tintColor = [MAAppearance foregroundColor];
+    //self.forwardBarButton.tintColor = [MAAppearance foregroundColor];
+    //self.doneBarButton.tintColor = [MAAppearance foregroundColor];
+    
+    // Set font for backBarButton and forwardBarButton to make arrows larger and also to support dynamic text.
+    if (ABOVE_IOS7)
+    {
+        NSString *textStyle = UIFontTextStyleBody;
+        UIFont *font = [UIFont preferredFontForTextStyle:textStyle];
+        NSDictionary *textAttr = [NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, nil];
+        DLog(@"updateInputAccessoryView - 2a");
+        [self.backBarButton setTitleTextAttributes:textAttr forState:UIControlStateNormal];
+        [self.backBarButton setTitleTextAttributes:textAttr forState:UIControlStateDisabled];
+        [self.forwardBarButton setTitleTextAttributes:textAttr forState:UIControlStateNormal];
+        [self.forwardBarButton setTitleTextAttributes:textAttr forState:UIControlStateDisabled];
+        [self.update1BarButton setTitleTextAttributes:textAttr forState:UIControlStateNormal];
+        [self.update1BarButton setTitleTextAttributes:textAttr forState:UIControlStateDisabled];
+        [self.update2BarButton setTitleTextAttributes:textAttr forState:UIControlStateNormal];
+        [self.update2BarButton setTitleTextAttributes:textAttr forState:UIControlStateDisabled];
+        DLog(@"updateInputAccessoryView - 2b");
+    }
+}
+
+- (IBAction)backBarButtonTapped
+{
+    if ([self.tipPercentTextField isFirstResponder])
+    {
+        [self resetTextInTextView:self.tipPercentTextField];
+        [self.billTextField becomeFirstResponder];
+    }
+    else if ([self.tipTextField isFirstResponder])
+    {
+        [self resetTextInTextView:self.tipTextField];
+        [self.tipPercentTextField becomeFirstResponder];
+    }
+}
+
+- (IBAction)forwardBarButtonTapped
+{
+    if ([self.billTextField isFirstResponder])
+    {
+        [self resetTextInTextView:self.billTextField];
+        [self.tipPercentTextField becomeFirstResponder];
+    }
+    else if ([self.tipPercentTextField isFirstResponder])
+    {
+        [self resetTextInTextView:self.tipPercentTextField];
+        [self.tipTextField becomeFirstResponder];
+    }
+}
+
+- (void)resetTextInTextView:(UITextField *)textView
+{
+    // Replace text in the text view with its placeholder text if the text field is empty but the placeholder text is non-empty.
+    if ([textView isFirstResponder])
+    {
+        if ( ! textView.text || textView.text.length == 0)
+        {
+            NSString *text = textView.placeholder;
+            double currentValue = [MAUtil parseDouble:text];
+            if (currentValue != 0)
+            {
+                textView.text = text;
+            }
+        }
+    }
+}
+
+- (IBAction)doneBarButtonTapped
+{
+    if ([self.billTextField isFirstResponder])
+    {
+        [self resetTextInTextView:self.tipTextField];
+    }
+    else if ([self.tipPercentTextField isFirstResponder])
+    {
+        [self resetTextInTextView:self.tipPercentTextField];
+    }
+    else if ([self.tipTextField isFirstResponder])
+    {
+        [self resetTextInTextView:self.tipTextField];
     }
     else
     {
-        MAProduct *lastProduct = [self.products lastObject];
-        product = [lastProduct copy];
-        if ([self.cheapestProducts containsObject:lastProduct])
-        {
-            [self.cheapestProducts addObject:product];
-        }
+        // Note: this is expected behavior if this cell's text field has focus but the table is reloaded, which might cause this cell to be discarded.
+        //        NSLog(@"No first responder!");
     }
-    product.delegate = self;
-    [self.products addObject:product];
-    [self saveProducts];
-
-    // Update table view.
-    self.didInsertCell = YES; // Set flag so that text field starts accepting user input.
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(self.products.count - 1) inSection:PRODUCTS_SECTION];
-    [self.tableView beginUpdates];
-    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationAutomatic];
-    if (self.products.count == 1)
-    {
-        // Enable the clear row since have a product now.
-        [self reloadClearRow];
-    }
-    [self.tableView endUpdates];
+    
+    [self dismissKeyboard];
 }
 
-#pragma mark - MAProductDelegate
-
-- (void)didEndEditing:(MAProduct *)product
+- (IBAction)updateBarButtonTapped:(UIBarButtonItem *)button
 {
-    //TLog(@"%@ / %@ = %@", product.price, product.quantity, [product pricePerUnit]);
-    //[self updateCheapestProducts];
-}
-
-#pragma mark - MAProductCellDelegate
-
-- (void)didBeginEditingCell:(MAProductTableViewCell *)productCell
-{
-    // Do not call scrollToRowAtIndexPath here. It gets called in keyboardOnScreen with self.editingIndexPath because didBeginEditingCell gets called before gets called. Otherwise, the tableview scrolls up again if you switch from one text field to another, which looks weird.
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:productCell];
-    if ( ! indexPath)
+    double updateAmount = 0;
+    UITextField *textField = nil;
+    
+    if ([self.billTextField isFirstResponder])
     {
-        return;
+        updateAmount = 1;
+        textField = self.billTextField;
+    }
+    else if ([self.tipPercentTextField isFirstResponder])
+    {
+        updateAmount = 1;
+        textField = self.tipPercentTextField;
+    }
+    else if ([self.tipTextField isFirstResponder])
+    {
+        updateAmount = 1;
+        textField = self.tipTextField;
     }
     
-    if ( ! self.editingIndexPath)
+    if (button == self.update2BarButton)
     {
-        // No previous index path, so just assign it.
-        self.editingIndexPath = indexPath;
-        return;
-    }
-
-    if (indexPath.section == self.editingIndexPath.section && indexPath.row == self.editingIndexPath.row)
-    {
-        // Still editing in the same row (just a different text field in the same row), so nothing extra to do.
-        return;
+        updateAmount = -updateAmount;
     }
     
-    // Switched from editing a text field in one row to editing in a different row.
-    self.editingIndexPath = indexPath;
-    
-    // Update the other cells as the cheapest product, etc. might have changed. This may cause a reloading of cells in the table view which could then cause this productCell to no longer be actually visible with a no longer valid text field and first responder. So, save the path and text field info prior to updating the table so that we can make the corresponding text field in the new cell the first responder.
-    NSInteger tagForFirstResponder = [productCell tagForFirstResponder];
-    UITextField *textField = [productCell textFieldForTag:tagForFirstResponder];
-    if (textField)
+    double currentValue = 0;
+    NSString *text = textField.text;
+    if (text && text.length != 0)
     {
-        [textField resignFirstResponder];
-    }
-    UIToolbar *keyboardAccessoryView = productCell.keyboardAccessoryView;
-
-    [self saveProducts];
-    [self updateCheapestProducts];
-    [self updatePricePerUnitFractionDigits];
-    
-    MAProductTableViewCell *activeProductCell = (MAProductTableViewCell *)[self.tableView cellForRowAtIndexPath:self.editingIndexPath];
-    textField = [activeProductCell textFieldForTag:tagForFirstResponder];
-    if (textField)
-    {
-        [textField becomeFirstResponder];
-    }
-    productCell.keyboardAccessoryView = keyboardAccessoryView;
-}
-
-- (void)didEndEditingCell:(MAProductTableViewCell *)productCell
-{
-    //TLog(@"%@ / %@ = %@", product.price, product.quantity, [product pricePerUnit]);
-    [self saveProducts];
-    [self updateCheapestProducts];
-    [self updatePricePerUnitFractionDigits];
-    
-    // Get the current active cell and dismiss the keyboard since productCell might have been invalidated.
-    MAProductTableViewCell *activeProductCell = (MAProductTableViewCell *)[self.tableView cellForRowAtIndexPath:self.editingIndexPath];
-    [activeProductCell dismissKeyboard];
-
-    self.editingIndexPath = nil;
-}
-
-#pragma mark - Fraction digits
-
-- (void)updatePricePerUnitFractionDigits
-{
-    NSUInteger pricePerUnitFractionDigits = [self calculatePricePerUnitFractionDigits];
-    if (pricePerUnitFractionDigits != self.pricePerUnitFractionDigits)
-    {
-        self.pricePerUnitFractionDigits = pricePerUnitFractionDigits;
-        
-        for (NSUInteger row = 0; row != self.products.count; ++row)
-        {
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:PRODUCTS_SECTION];
-            MAProductTableViewCell *cell = (MAProductTableViewCell *)[self tableView:self.tableView cellForRowAtIndexPath:indexPath];
-            cell.pricePerUnitFractionDigits = self.pricePerUnitFractionDigits;
-        }
-//        [self.tableView reloadData];
-    }
-}
-
-- (NSUInteger)calculatePricePerUnitFractionDigits
-{
-    // Create a list of all the prices per unit.
-    NSMutableArray *pricesPerUnit = [[NSMutableArray alloc] init];
-    for (MAProduct *product in self.products)
-    {
-        NSNumber *unitPrice = [product pricePerUnit];
-        [pricesPerUnit addObject:unitPrice];
-    }
-    
-    NSInteger pricePerUnitFractionDigits = [self calculateFractionDigitsForPrices:pricesPerUnit];
-    return pricePerUnitFractionDigits;
-}
-
-- (NSUInteger)calculateFractionDigitsForPrices:(NSArray *)prices
-{
-    // Create our own price formatter since MAProduct's formatter where actually generate the formatted label with its maximumFractionDigits property changed according to the return value of this function.
-    static dispatch_once_t once;
-    static NSNumberFormatter *priceFormatter = nil;
-    dispatch_once(&once, ^{
-        priceFormatter = [[NSNumberFormatter alloc] init];
-        [priceFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
-        [priceFormatter setLocale:[NSLocale autoupdatingCurrentLocale]];
-        
-        // Ensure have a substantial length of fraction digits.
-        [priceFormatter setMaximumFractionDigits:20];
-        [priceFormatter setMinimumFractionDigits:2];
-        
-        [priceFormatter setAlwaysShowsDecimalSeparator:YES];
-    });
-    NSString *decimalSymbol = [priceFormatter decimalSeparator];
-    
-    // Create a list of all the prices per unit with only the decimal digit portions of the formatted strings.
-    NSMutableArray *decimalDigitsForPrices = [[NSMutableArray alloc] init];
-    for (NSNumber *price in prices)
-    {
-        NSString *formattedPrice = [priceFormatter stringFromNumber:price];
-        
-        NSArray *priceComponents = [formattedPrice componentsSeparatedByString:decimalSymbol];
-        assert(priceComponents.count >= 2); // formatter should set minimum fraction digits.
-        NSString *decimalDigits = [priceComponents lastObject];
-//        NSLog(@"%@ -> %@", formattedPrice, decimalDigits);
-        [decimalDigitsForPrices addObject:decimalDigits];
-    }
-
-    // Minimum digits to show in the fraction. Use 2 for cents.
-    static NSInteger const minFractionDigits = 2;
-    
-    // Calculate the maximum number of leading 0s to appear in a string. For example:
-    // '0123'
-    // '0001' -> Max of 3 since 3 leading 0s.
-    // '1230'
-    NSInteger maxLeadingZeroDigits = -1;
-    for (NSUInteger i = 0; i != decimalDigitsForPrices.count; ++i)
-    {
-        NSString *digits = [decimalDigitsForPrices objectAtIndex:i];
-        for (NSInteger k = 0; k != digits.length; ++k)
-        {
-            unichar ch = [digits characterAtIndex:k];
-            if (ch != '0')
-            {
-//                NSLog(@"%@: %d -> %c", digits, k, ch);
-                maxLeadingZeroDigits = MAX(k, maxLeadingZeroDigits);
-                break;
-            }
-        }
-    }
-//    NSLog(@"maxLeadingZeroDigits: %d", maxLeadingZeroDigits);
-    
-    // Calculate the maximum number of digits that are the same and differ by at least one character. For example:
-    // '78902'
-    // '78912' -> Max of 3 since 78902 and 78912 have first 3 digits the same and differ at digit 4.
-    // '1230'
-    // '1230' -> Not the max since 1230 and 1230 have no different digits (we don't really care how these get formatted as long as leading 0s appear).
-    NSInteger maxDigitDifference = -1;
-    for (NSUInteger i = 0; i != decimalDigitsForPrices.count; ++i)
-    {
-        NSString *firstDigits = [decimalDigitsForPrices objectAtIndex:i];
-        if (firstDigits.length <= minFractionDigits)
-        {
-            continue;
-        }
-        
-        for (NSUInteger j = i + 1; j != decimalDigitsForPrices.count; ++j)
-        {
-            NSString *secondDigits = [decimalDigitsForPrices objectAtIndex:j];
-            if (secondDigits.length <= minFractionDigits)
-            {
-                continue;
-            }
-            
-            NSInteger digitDifference = -1;
-            NSUInteger const minLength = MIN(firstDigits.length, secondDigits.length);
-            for (NSUInteger k = 0; k != minLength; ++k)
-            {
-                unichar firstChar = [firstDigits characterAtIndex:k];
-                unichar secondChar = [secondDigits characterAtIndex:k];
-                if (firstChar != secondChar)
-                {
-                    digitDifference = k;
-                    break;
-                }
-            }
-            
-            if (digitDifference >= 0)
-            {
-                maxDigitDifference = MAX(digitDifference, maxDigitDifference);
-            }
-        }
-    }
-//    NSLog(@"maxDigitDifference: %d", maxDigitDifference);
-    
-    // Calculate how many fraction digits to show.
-    // Note: add 1 to maxLeadingZeroDigits and maxDigitDifference since they are 0-based, and we need a count of how many digits to show.
-    NSInteger priceFractionDigits = MAX(minFractionDigits, MAX(maxLeadingZeroDigits + 1, maxDigitDifference + 1));
-//    NSLog(@"priceFractionDigits: %d", priceFractionDigits);
-    
-//    for (NSUInteger i = 0; i != prices.count; ++i)
-//    {
-//        NSString *digits = [prices objectAtIndex:i];
-//        
-//        NSInteger loc = 0;
-//        NSInteger len = MIN(digits.length, pricePerUnitFractionDigits);
-//        NSRange digitRange = NSMakeRange(loc, len);
-//        NSString *truncatedDigits = [digits substringWithRange:digitRange];
-//        NSLog(@"%@ -> %@", digits, truncatedDigits);
-//    }
-
-    return priceFractionDigits;
-}
-
-#pragma mark - Cheapest products
-
-- (NSArray *)updateCheapestProducts
-{
-    if (self.products.count == 0)
-    {
-        return nil;
-    }
-    
-    // Determine the lowest price per unit.
-    NSMutableArray *pricesPerUnit = [[NSMutableArray alloc] init];
-    for (MAProduct *product in self.products)
-    {
-        [pricesPerUnit addObject:[product pricePerUnit]];
-    }
-    NSSortDescriptor *lowestToHighest = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
-    [pricesPerUnit sortUsingDescriptors:[NSArray arrayWithObject:lowestToHighest]];
-    NSNumber *lowestPricePerUnitNumber = [pricesPerUnit objectAtIndex:0];
-    double const lowestPricePerUnit = lowestPricePerUnitNumber.doubleValue;
-    
-    // Generate a list of the cheapest products.
-    // Also, generate a list of the index paths in the table that changed: either a product that is now the cheapest or a product that is no longer the cheapest.
-    NSMutableArray *cheapestProducts = [[NSMutableArray alloc] init];
-    NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
-    for (NSUInteger i = 0; i != self.products.count; ++i)
-    {
-        MAProduct *product = [self.products objectAtIndex:i];
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:PRODUCTS_SECTION];
-
-        double const pricePerUnit = [product pricePerUnit].doubleValue;
-        BOOL const wasCheapestProduct = [self.cheapestProducts containsObject:product];
-        BOOL const isCheapestProduct = pricePerUnit <= lowestPricePerUnit;
-
-        if (isCheapestProduct)
-        {
-            [cheapestProducts addObject:product];
-            
-            if ( ! wasCheapestProduct)
-            {
-                [indexPaths addObject:indexPath];
-            }
-        }
-        else // ! isNewCheapestProduct
-        {
-            if (wasCheapestProduct)
-            {
-                [indexPaths addObject:indexPath];
-            }
-        }
-    }
-
-    // Update the model and view.
-    self.cheapestProducts = cheapestProducts;
-    [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-    return indexPaths;
-    
-//    for (NSUInteger row = 0; row != self.products.count; ++row)
-//    {
-//        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:PRODUCTS_SECTION];
-//        MAProductTableViewCell *cell = (MAProductTableViewCell *)[self tableView:self.tableView cellForRowAtIndexPath:indexPath];
-//        [self configureProductCell:cell atIndexPath:indexPath];
-////        cell.pricePerUnitFractionDigits = self.pricePerUnitFractionDigits;
-//    }
-}
-
-#pragma mark - Action sheet
-
-- (void)showDeleteActionSheet
-{
-    NSString *buttonTitle = nil;
-    if (self.products.count == 1)
-    {
-        buttonTitle = [NSString stringWithFormat:Localize(@"Delete Item")];
+        currentValue = [MAUtil parseDouble:text];
     }
     else
     {
-        buttonTitle = [NSString stringWithFormat:Localize(@"Delete Items")];
+        // Use the placeholder text.
+        // Note: if textField.placeholder is not set or is a string like "Weight", then 0 will be returned.
+        text = textField.placeholder;
+        currentValue = [MAUtil parseDouble:text];
     }
     
-    if (self.deleteActionSheet && self.deleteActionSheet.visible)
+    double newValue = currentValue + updateAmount;
+    if (newValue < 0)
     {
-        [self.deleteActionSheet dismissWithClickedButtonIndex:[self.deleteActionSheet cancelButtonIndex] animated:NO];
+        newValue = 0;
     }
-    
-    self.deleteActionSheet = [[UIActionSheet alloc]
-                              initWithTitle:nil
-                              delegate:self
-                              cancelButtonTitle:Localize(@"No")
-                              destructiveButtonTitle:buttonTitle
-                              otherButtonTitles:nil
-                              ];
-    [self.deleteActionSheet showInView:self.view];
+    NSString *newValueStr = [MAUtil formatDouble:newValue];
+    textField.text = newValueStr;
 }
 
-- (void)actionSheet:(UIActionSheet *)sheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+- (void)checkAndSetEnabledBarButtons
 {
-    if (buttonIndex == [sheet cancelButtonIndex])
-    {
-        return;
-    }
+    self.backBarButton.enabled = YES;
+    self.forwardBarButton.enabled = YES;
     
-    if (sheet == self.deleteActionSheet)
-    {
-        [self clearAllProducts];
-    }
-}
-
-- (void)clearAllProducts
-{
-    NSUInteger const rows = self.products.count;
-    self.products = [[NSMutableArray alloc] init];
-    [self saveProducts];
-
-    self.cheapestProducts = [[NSMutableArray alloc] init];
+    self.update1BarButton.enabled = YES;
+    self.update2BarButton.enabled = YES;
     
-    NSMutableArray *indexPaths = [[NSMutableArray alloc] init];
-    for (NSUInteger row = 0; row != rows; ++row)
+    if ([self.billTextField isFirstResponder])
     {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:PRODUCTS_SECTION];
-        [indexPaths addObject:indexPath];
+        self.backBarButton.enabled = NO;
+        self.update1BarButton.title = Localize(@"+1");
+        self.update2BarButton.title = Localize(@"-1");
     }
-    
-    if (indexPaths.count != 0)
+    else if ([self.tipPercentTextField isFirstResponder])
     {
-        [self.tableView beginUpdates];
-        [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationAutomatic];
-        [self reloadClearRow];
-        [self.tableView endUpdates];
+        self.update1BarButton.title = Localize(@"+1");
+        self.update2BarButton.title = Localize(@"-1");
+    }
+    else if ([self.tipTextField isFirstResponder])
+    {
+        self.forwardBarButton.enabled = NO;
+        self.update1BarButton.title = Localize(@"+1");
+        self.update2BarButton.title = Localize(@"-1");
     }
 }
 
@@ -1286,88 +1064,6 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     // Resume stopped processes.
     // [video resume];
     // [audio resume];
-}
-
-#pragma mark - Scroll view delegate
-
-- (void)scrollViewWillBeginDragging:(UIScrollView *)sender
-{
-    if ( ! self.editingIndexPath)
-    {
-        return;
-    }
-    
-    // Update with new product value.
-    [self saveProducts];
-    [self updateCheapestProducts];
-    [self updatePricePerUnitFractionDigits];
-
-    // Stop editing when user starts scrolling.
-    MAProductTableViewCell *activeProductCell = (MAProductTableViewCell *)[self.tableView cellForRowAtIndexPath:self.editingIndexPath];
-    [activeProductCell dismissKeyboard];
-    self.editingIndexPath = nil;
-}
-
-#pragma mark - MABillDelegate
-
-- (void)didUpdateBill:(MABill *)bill
-{
-    [self saveBill];
-    [self.tableView reloadData];
-}
-
-#pragma mark - Text field
-
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    return YES;
-}
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
-//    self.savedWeightGoal = textField.text;
-    [self selectBillAtPath:nil];
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    if (textField == self.billTextField)
-    {
-        NSNumber *number = [NSNumber numberWithDouble:[self.billTextField.text doubleValue]];
-        self.bill.bill = number;
-    }
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return NO;
-}
-
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-    if (textField == self.billTextField)
-    {
-        BOOL const shouldChangeChars = [MAUtil numTextField:textField shouldChangeCharactersInRange:range replacementString:string];
-        return shouldChangeChars;
-    }
-    
-    return YES;
-}
-
-- (IBAction)dismissInput
-{
-    [self dismissKeyboard];
-//    [self dismissDatePicker];
-}
-
-- (IBAction)dismissKeyboard
-{
-    if ([self.billTextField isFirstResponder])
-    {
-        [self.billTextField resignFirstResponder];
-    }
 }
 
 @end

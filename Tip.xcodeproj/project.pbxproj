@@ -353,6 +353,7 @@
 		180976B719BF5D8C0039F654 /* MATextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MATextFieldCell.h; sourceTree = "<group>"; };
 		180976B819BF5D8C0039F654 /* MATextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MATextFieldCell.m; sourceTree = "<group>"; };
 		180976B919BF5D8C0039F654 /* MATextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MATextFieldCell.xib; sourceTree = "<group>"; };
+		184914AA19BFA507003D9B1F /* AppIcon_180x180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon_180x180.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -478,6 +479,7 @@
 		1809756219BE5FF40039F654 /* App Icons */ = {
 			isa = PBXGroup;
 			children = (
+				184914AA19BFA507003D9B1F /* AppIcon_180x180.png */,
 				1809756319BE5FF40039F654 /* AppIcon_100x100.png */,
 				1809756419BE5FF40039F654 /* AppIcon_114x114.png */,
 				1809756519BE5FF40039F654 /* AppIcon_120x120.png */,
@@ -908,6 +910,7 @@
 				TargetAttributes = {
 					1809753419BE5ED60039F654 = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = 88U9Z8P8D5;
 					};
 					1809754D19BE5ED60039F654 = {
 						CreatedOnToolsVersion = 6.0;
@@ -1162,7 +1165,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1198,7 +1201,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1289,6 +1292,7 @@
 				1809755A19BE5ED60039F654 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1809755B19BE5ED60039F654 /* Build configuration list for PBXNativeTarget "TipTests" */ = {
 			isa = XCConfigurationList;
@@ -1297,6 +1301,7 @@
 				1809755D19BE5ED60039F654 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

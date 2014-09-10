@@ -32,6 +32,7 @@ resize_img 72
 resize_img 144
 resize_img 76
 resize_img 152
+resize_img 180
 
 # Spotlight
 resize_img 29

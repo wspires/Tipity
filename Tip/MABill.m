@@ -16,7 +16,7 @@ static double const DefaultTax = 0.;
 static double const DefaultTotal = 120.;
 static double const DefaultSplit = 1.;
 static double const DefaultSplitTip = 20.;
-static double const DefaultSplitBill = 120.;
+static double const DefaultSplitTotal = 120.;
 
 @implementation MABill
 @synthesize bill = _bill;
@@ -27,7 +27,7 @@ static double const DefaultSplitBill = 120.;
 @synthesize total = _total;
 @synthesize split = _split;
 @synthesize splitTip = _splitTip;
-@synthesize splitBill = _splitBill;
+@synthesize splitTotal = _splitTotal;
 
 @synthesize delegate = _delegate;
 
@@ -54,7 +54,7 @@ static double const DefaultSplitBill = 120.;
         _tax = [NSNumber numberWithDouble:DefaultTax];
         _split = [NSNumber numberWithDouble:DefaultSplit];
         _splitTip = [NSNumber numberWithDouble:DefaultSplitTip];
-        _splitBill = [NSNumber numberWithDouble:DefaultSplitBill];
+        _splitTotal = [NSNumber numberWithDouble:DefaultSplitTotal];
         
         // Re-calculates any properties given above as needed.
         [self updateBill];
@@ -84,7 +84,7 @@ static double const DefaultSplitBill = 120.;
 {
     if ( ! bill || bill.doubleValue == _bill.doubleValue)
     {
-        return;
+//        return;
     }
     
     [self delegateWillUpdateBill];
@@ -206,17 +206,17 @@ static double const DefaultSplitBill = 120.;
     [self delegateDidUpdateBill];
 }
 
-- (void)setSplitBill:(NSNumber *)splitBill
+- (void)setSplitTotal:(NSNumber *)splitTotal
 {
-    if ( ! splitBill || splitBill.doubleValue == _splitBill.doubleValue)
+    if ( ! splitTotal || splitTotal.doubleValue == _splitTotal.doubleValue)
     {
         return;
     }
     
     [self delegateWillUpdateBill];
 
-    _splitBill = [splitBill copy];
-    _total = [NSNumber numberWithDouble:(_splitBill.doubleValue * _split.doubleValue)];
+    _splitTotal = [splitTotal copy];
+    _total = [NSNumber numberWithDouble:(_splitTotal.doubleValue * _split.doubleValue)];
     _tip = [NSNumber numberWithDouble:(_total.doubleValue - _bill.doubleValue)];
     _tipPercent = [MABill percentFromNumber:_bill percentageOfNumber:_tip];
     
@@ -234,7 +234,7 @@ static double const DefaultSplitBill = 120.;
     _total = [NSNumber numberWithDouble:(_bill.doubleValue + _tip.doubleValue)];
     
     _splitTip = [NSNumber numberWithDouble:(_tip.doubleValue / _split.doubleValue)];
-    _splitBill = [NSNumber numberWithDouble:(_total.doubleValue / _split.doubleValue)];
+    _splitTotal = [NSNumber numberWithDouble:(_total.doubleValue / _split.doubleValue)];
 }
 
 + (NSNumber *)percentageOfNumber:(NSNumber *)number percent:(NSNumber *)percent
@@ -309,7 +309,7 @@ static double const DefaultSplitBill = 120.;
         return NO;
     }
     
-    if ( ! [self.splitBill isEqual:aBill.splitBill])
+    if ( ! [self.splitTotal isEqual:aBill.splitTotal])
     {
         return NO;
     }
@@ -327,7 +327,7 @@ static double const DefaultSplitBill = 120.;
     ^ [self.total hash]
     ^ [self.split hash]
     ^ [self.splitTip hash]
-    ^ [self.splitBill hash]
+    ^ [self.splitTotal hash]
     ;
 }
 
@@ -344,7 +344,7 @@ static double const DefaultSplitBill = 120.;
     copy.total = [self.total copy];
     copy.split = [self.split copy];
     copy.splitTip = [self.splitTip copy];
-    copy.splitBill = [self.splitBill copy];
+    copy.splitTotal = [self.splitTotal copy];
     return copy;
 }
 
@@ -360,7 +360,7 @@ static double const DefaultSplitBill = 120.;
     [aCoder encodeObject:self.total forKey:@"total"];
     [aCoder encodeObject:self.split forKey:@"split"];
     [aCoder encodeObject:self.splitTip forKey:@"splitTip"];
-    [aCoder encodeObject:self.splitBill forKey:@"splitBill"];
+    [aCoder encodeObject:self.splitTotal forKey:@"splitTotal"];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -416,10 +416,10 @@ static double const DefaultSplitBill = 120.;
             _splitTip = [NSNumber numberWithDouble:DefaultSplitTip];
         }
         
-        _splitBill = [aDecoder decodeObjectForKey:@"splitBill"];
-        if ( ! _splitBill)
+        _splitTotal = [aDecoder decodeObjectForKey:@"splitTotal"];
+        if ( ! _splitTotal)
         {
-            _splitBill = [NSNumber numberWithDouble:DefaultSplitBill];
+            _splitTotal = [NSNumber numberWithDouble:DefaultSplitTotal];
         }
     }
     return self;
@@ -430,9 +430,34 @@ static double const DefaultSplitBill = 120.;
     return [MABill formatBill:self.bill];
 }
 
+- (NSString *)formattedTipPercent
+{
+    return [MABill formatTipPercent:self.tipPercent];
+}
+
+- (NSString *)formattedTip
+{
+    return [MABill formatTip:self.tip];
+}
+
+- (NSString *)formattedTotal
+{
+    return [MABill formatTotal:self.total];
+}
+
 - (NSString *)formattedSplit
 {
     return [MABill formatSplit:self.split];
+}
+
+- (NSString *)formattedSplitTip
+{
+    return [MABill formatSplitTip:self.splitTip];
+}
+
+- (NSString *)formattedSplitTotal
+{
+    return [MABill formatSplitTotal:self.splitTotal];
 }
 
 + (NSString *)formatBill:(NSNumber *)bill
@@ -440,9 +465,34 @@ static double const DefaultSplitBill = 120.;
     return [MABill formatPrice:bill];
 }
 
++ (NSString *)formatTipPercent:(NSNumber *)tipPercent
+{
+    return [MABill formatPercent:tipPercent];
+}
+
++ (NSString *)formatTip:(NSNumber *)tip
+{
+    return [MABill formatPrice:tip];
+}
+
++ (NSString *)formatTotal:(NSNumber *)total
+{
+    return [MABill formatPrice:total];
+}
+
 + (NSString *)formatSplit:(NSNumber *)split
 {
     return [MABill formatCount:split];
+}
+
++ (NSString *)formatSplitTip:(NSNumber *)splitTip
+{
+    return [MABill formatPrice:splitTip];
+}
+
++ (NSString *)formatSplitTotal:(NSNumber *)splitTotal
+{
+    return [MABill formatPrice:splitTotal];
 }
 
 + (NSString *)formatPrice:(NSNumber *)price
@@ -465,6 +515,12 @@ static double const DefaultSplitBill = 120.;
     NSNumberFormatter *formatter = [MABill countFormatter];
     NSString *str = [formatter stringFromNumber:[NSNumber numberWithDouble:value]];
     return str;
+}
+
++ (NSString *)formatPercent:(NSNumber *)percent
+{
+    NSNumberFormatter *formatter = [MABill percentFormatter];
+    return [formatter stringFromNumber:percent];
 }
 
 + (NSNumberFormatter *)priceFormatter
@@ -495,6 +551,25 @@ static double const DefaultSplitBill = 120.;
         [nf setLocale:[NSLocale autoupdatingCurrentLocale]];
         [nf setMaximumFractionDigits:2];
         [nf setRoundingMode:NSNumberFormatterRoundHalfUp];
+    });
+    return nf;
+}
+
++ (NSNumberFormatter *)percentFormatter
+{
+    static dispatch_once_t once;
+    static NSNumberFormatter *nf = nil;
+    dispatch_once(&once, ^{
+        nf = [[NSNumberFormatter alloc] init];
+        [nf setNumberStyle:NSNumberFormatterPercentStyle];
+        [nf setPaddingCharacter:@" "];
+        [nf setUsesGroupingSeparator:NO];
+        [nf setLocale:[NSLocale autoupdatingCurrentLocale]];
+        [nf setMaximumFractionDigits:2];
+        [nf setRoundingMode:NSNumberFormatterRoundHalfUp];
+        
+        [nf setMaximumFractionDigits:0];
+        [nf setMultiplier:@1];
     });
     return nf;
 }

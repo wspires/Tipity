@@ -21,7 +21,7 @@
 @property (strong, nonatomic) NSNumber *total;
 @property (strong, nonatomic) NSNumber *split;
 @property (strong, nonatomic) NSNumber *splitTip;
-@property (strong, nonatomic) NSNumber *splitBill;
+@property (strong, nonatomic) NSNumber *splitTotal;
 
 @property (weak, nonatomic) id <MABillDelegate> delegate;
 
@@ -33,16 +33,28 @@
 - (BOOL)isEqualToProduct:(MABill *)aBill;
 
 - (NSString *)formattedBill;
+- (NSString *)formattedTipPercent;
+- (NSString *)formattedTip;
+- (NSString *)formattedTotal;
 - (NSString *)formattedSplit;
+- (NSString *)formattedSplitTip;
+- (NSString *)formattedSplitTotal;
 
 + (NSString *)formatBill:(NSNumber *)bill;
++ (NSString *)formatTipPercent:(NSNumber *)tipPercent;
++ (NSString *)formatTip:(NSNumber *)tip;
++ (NSString *)formatTotal:(NSNumber *)total;
 + (NSString *)formatSplit:(NSNumber *)split;
++ (NSString *)formatSplitTip:(NSNumber *)splitTip;
++ (NSString *)formatSplitTotal:(NSNumber *)splitTotal;
 
 + (NSString *)formatPrice:(NSNumber *)price;
 + (NSString *)formatCount:(NSNumber *)count;
++ (NSString *)formatPercent:(NSNumber *)percent;
 
 + (NSNumberFormatter *)priceFormatter;
 + (NSNumberFormatter *)countFormatter;
++ (NSNumberFormatter *)percentFormatter;
 
 @end
 
