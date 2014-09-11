@@ -158,6 +158,23 @@ static NSString *PerExerciseSettings = @"perExerciseSettings";
     return newSettings;
 }
 
+- (BOOL)enableSplit
+{
+    NSString *enableStr = [self objectForKey:EnableSplit];
+    BOOL const enable = [MAUtil isStringOn:enableStr];
+    return enable;
+}
+
+- (void)setEnableSplit:(BOOL)enable
+{
+    NSString *value = @"off";
+    if (enable)
+    {
+        value = @"on";
+    }
+    [self saveSetting:value forKey:EnableSplit];
+}
+
 - (BOOL)enableSizeField
 {
     NSString *enableSizeFieldStr = [self objectForKey:EnableSizeField];
@@ -669,6 +686,8 @@ static NSString *PerExerciseSettings = @"perExerciseSettings";
     // Turn off some settings by default for the free version.
 //    NSString *paidVersusFreeBoolValue = @"off";
     
+    CHECK_SETTING_OFF(EnableSplit)
+
     // Size should be off by default because it's an advanced setting.
     CHECK_SETTING_OFF(EnableSizeField)
     

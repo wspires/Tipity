@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1808CDEB19C13B7900E972E1 /* Unit Price - Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1808CDEA19C13B7900E972E1 /* Unit Price - Icon.png */; };
 		1809753B19BE5ED60039F654 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1809753A19BE5ED60039F654 /* main.m */; };
 		1809753E19BE5ED60039F654 /* MAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1809753D19BE5ED60039F654 /* MAAppDelegate.m */; };
 		1809754919BE5ED60039F654 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1809754819BE5ED60039F654 /* Images.xcassets */; };
@@ -110,6 +111,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1808CDEA19C13B7900E972E1 /* Unit Price - Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Unit Price - Icon.png"; sourceTree = "<group>"; };
 		1809753519BE5ED60039F654 /* Tip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1809753919BE5ED60039F654 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1809753A19BE5ED60039F654 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -664,6 +666,7 @@
 		180975F619BE61010039F654 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				1808CDEA19C13B7900E972E1 /* Unit Price - Icon.png */,
 				180975F719BE61010039F654 /* 1398674928_pencil_and_paper.png */,
 				180975F819BE61010039F654 /* 1402304374_bg_color.png */,
 				180975F919BE61010039F654 /* 1402390544_icon-arrow-up-a.png */,
@@ -711,18 +714,18 @@
 		1809765019BE61D80039F654 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				1809763B19BE61D20039F654 /* MAAccessoryView.h */,
-				1809763C19BE61D20039F654 /* MAAccessoryView.m */,
-				1809763D19BE61D20039F654 /* MAAppearance.h */,
-				1809763E19BE61D20039F654 /* MAAppearance.m */,
+				1809764519BE61D20039F654 /* MAUtil.h */,
+				1809764619BE61D20039F654 /* MAUtil.m */,
 				1809763F19BE61D20039F654 /* MADateUtil.h */,
 				1809764019BE61D20039F654 /* MADateUtil.m */,
 				1809764119BE61D20039F654 /* MAFilePaths.h */,
 				1809764219BE61D20039F654 /* MAFilePaths.m */,
 				1809764319BE61D20039F654 /* MAUserUtil.h */,
 				1809764419BE61D20039F654 /* MAUserUtil.m */,
-				1809764519BE61D20039F654 /* MAUtil.h */,
-				1809764619BE61D20039F654 /* MAUtil.m */,
+				1809763B19BE61D20039F654 /* MAAccessoryView.h */,
+				1809763C19BE61D20039F654 /* MAAccessoryView.m */,
+				1809763D19BE61D20039F654 /* MAAppearance.h */,
+				1809763E19BE61D20039F654 /* MAAppearance.m */,
 				1809764719BE61D20039F654 /* MAViewUtil.h */,
 				1809764819BE61D20039F654 /* MAViewUtil.m */,
 				1809766019BE62000039F654 /* Color */,
@@ -1006,6 +1009,7 @@
 				180975F419BE60A90039F654 /* AppiraterLocalizable.strings in Resources */,
 				1809761319BE61010039F654 /* 1409632591_Block-512.png in Resources */,
 				1809754919BE5ED60039F654 /* Images.xcassets in Resources */,
+				1808CDEB19C13B7900E972E1 /* Unit Price - Icon.png in Resources */,
 				180976A419BE70F00039F654 /* MAColorSelectionViewController.xib in Resources */,
 				180976A219BE70F00039F654 /* MAAppearanceSelectionViewController.xib in Resources */,
 			);

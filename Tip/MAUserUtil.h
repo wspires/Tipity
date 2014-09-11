@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+static NSString *EnableSplit = @"enableSplit";
+
 static NSString *EnableSizeField = @"enableSizeField";
 static NSString *EnableDescription = @"enableDescription";
 
@@ -45,6 +47,8 @@ static NSString *TableTextColor = @"tableTextColor";
 - (NSDictionary *)saveSetting:(id)setting forKey:(NSString *)key;
 
 #pragma mark BOOL settings
+- (BOOL)enableSplit;
+- (void)setEnableSplit:(BOOL)enable;
 - (BOOL)enableSizeField;
 - (void)setEnableSizeField:(BOOL)enableSizeField;
 - (BOOL)enableDescription;

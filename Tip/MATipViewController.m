@@ -47,6 +47,7 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 @interface MATipViewController () <MABillDelegate, UITextFieldDelegate, UIActionSheetDelegate, ADBannerViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) MABill *bill;
+@property (strong, nonatomic) NSArray *textFieldIndexPaths;
 @property (strong, nonatomic) NSIndexPath *activeIndexPath;
 @property (strong, nonatomic) UITextField *activeTextField;
 
@@ -66,6 +67,7 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 @implementation MATipViewController
 @synthesize tableView = _tableView;
 @synthesize bill = _bill;
+@synthesize textFieldIndexPaths = _textFieldIndexPaths;
 @synthesize activeIndexPath = _activeIndexPath;
 @synthesize activeTextField = _activeTextField;
 
@@ -113,6 +115,7 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardWillShowNotification object:nil];
     [center addObserver:self selector:@selector(keyboardOffScreen:) name:UIKeyboardWillHideNotification object:nil];
 
+    [self makeTextFieldIndexPaths];
     [self.tableView reloadData];
 }
 
@@ -181,6 +184,27 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     }
 }
 
+// List of index paths that contain text fields.
+- (void)makeTextFieldIndexPaths
+{
+    NSMutableArray *textFieldIndexPaths = [[NSMutableArray alloc] init];
+    
+    [textFieldIndexPaths addObject:[NSIndexPath indexPathForRow:BILL_ROW inSection:BILL_SECTION]];
+    [textFieldIndexPaths addObject:[NSIndexPath indexPathForRow:TIP_PERCENT_ROW inSection:TIP_SECTION]];
+    [textFieldIndexPaths addObject:[NSIndexPath indexPathForRow:TIP_ROW inSection:TIP_SECTION]];
+    [textFieldIndexPaths addObject:[NSIndexPath indexPathForRow:TOTAL_ROW inSection:TOTAL_SECTION]];
+    
+    BOOL enableSplit = [[MAUserUtil sharedInstance] enableSplit];
+    if (enableSplit)
+    {
+        [textFieldIndexPaths addObject:[NSIndexPath indexPathForRow:SPLIT_COUNT_ROW inSection:SPLIT_SECTION]];
+        [textFieldIndexPaths addObject:[NSIndexPath indexPathForRow:SPLIT_TIP_ROW inSection:SPLIT_SECTION]];
+        [textFieldIndexPaths addObject:[NSIndexPath indexPathForRow:SPLIT_TOTAL_ROW inSection:SPLIT_SECTION]];
+    }
+    
+    self.textFieldIndexPaths = textFieldIndexPaths;
+}
+
 - (void)hideUIToMakeLaunchImages
 {
     MAAppDelegate* myDelegate = (((MAAppDelegate*) [UIApplication sharedApplication].delegate));
@@ -227,7 +251,12 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return NUM_SECTIONS;
+    BOOL enableSplit = [[MAUserUtil sharedInstance] enableSplit];
+    if (enableSplit)
+    {
+        return NUM_SECTIONS;
+    }
+    return NUM_SECTIONS - 1;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -498,24 +527,6 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     [self checkAndSetEnabledBarButtons];
 }
 
-// List of index paths that contain text fields.
-- (NSArray *)textFieldIndexPaths
-{
-    static dispatch_once_t once;
-    static NSMutableArray *textFieldIndexPaths = nil;
-    dispatch_once(&once, ^{
-        textFieldIndexPaths = [[NSMutableArray alloc] init];
-        [textFieldIndexPaths addObject:[NSIndexPath indexPathForRow:BILL_ROW inSection:BILL_SECTION]];
-        [textFieldIndexPaths addObject:[NSIndexPath indexPathForRow:TIP_PERCENT_ROW inSection:TIP_SECTION]];
-        [textFieldIndexPaths addObject:[NSIndexPath indexPathForRow:TIP_ROW inSection:TIP_SECTION]];
-        [textFieldIndexPaths addObject:[NSIndexPath indexPathForRow:TOTAL_ROW inSection:TOTAL_SECTION]];
-        [textFieldIndexPaths addObject:[NSIndexPath indexPathForRow:SPLIT_COUNT_ROW inSection:SPLIT_SECTION]];
-        [textFieldIndexPaths addObject:[NSIndexPath indexPathForRow:SPLIT_TIP_ROW inSection:SPLIT_SECTION]];
-        [textFieldIndexPaths addObject:[NSIndexPath indexPathForRow:SPLIT_TOTAL_ROW inSection:SPLIT_SECTION]];
-    });
-    return textFieldIndexPaths;
-}
-
 - (NSString *)billKeyForIndexPath:(NSIndexPath *)indexPath
 {
     static dispatch_once_t once;
@@ -558,8 +569,7 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
         return nil;
     }
 
-    NSArray *textFieldIndexPaths = [self textFieldIndexPaths];
-    for (NSIndexPath *indexPath in textFieldIndexPaths)
+    for (NSIndexPath *indexPath in self.textFieldIndexPaths)
     {
         UITextField *textFieldForIndexPath = [self textFieldForIndexPath:indexPath];
         if (textFieldForIndexPath && textField == textFieldForIndexPath)
@@ -736,15 +746,14 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
         return;
     }
     
-    NSArray *textFieldIndexPaths = [self textFieldIndexPaths];
-    NSInteger index = [textFieldIndexPaths indexOfObject:self.activeIndexPath];
+    NSInteger index = [self.textFieldIndexPaths indexOfObject:self.activeIndexPath];
     index += offset;
-    if (index < 0 || index >= textFieldIndexPaths.count)
+    if (index < 0 || index >= self.textFieldIndexPaths.count)
     {
         return;
     }
     
-    NSIndexPath *indexPath = [textFieldIndexPaths objectAtIndex:index];
+    NSIndexPath *indexPath = [self.textFieldIndexPaths objectAtIndex:index];
     if ( ! indexPath)
     {
         return;
@@ -804,10 +813,9 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     self.update1BarButton.title = Localize(@"+1");
     self.update2BarButton.title = Localize(@"-1");
 
-    NSArray *textFieldIndexPaths = [self textFieldIndexPaths];
-    NSUInteger index = [textFieldIndexPaths indexOfObject:self.activeIndexPath];
+    NSUInteger index = [self.textFieldIndexPaths indexOfObject:self.activeIndexPath];
     BOOL isFirstTextField = (index == 0);
-    BOOL isLastTextField = (index == (textFieldIndexPaths.count - 1));
+    BOOL isLastTextField = (index == (self.textFieldIndexPaths.count - 1));
     
     if (isFirstTextField)
     {

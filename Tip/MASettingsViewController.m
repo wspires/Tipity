@@ -23,31 +23,32 @@
 #import <QuartzCore/QuartzCore.h>
 #import <StoreKit/StoreKit.h>
 
-DECL_TABLE_IDX(NUM_SECTIONS, 5);
+DECL_TABLE_IDX(NUM_SECTIONS, 3);
 
-DECL_TABLE_IDX(DESC_SECTION, 0);
-DECL_TABLE_IDX(NO_DESC_ROW, 0);
-DECL_TABLE_IDX(USE_DESC_ROW, 1);
-DECL_TABLE_IDX(DESC_SECTION_ROWS, 2);
+DECL_TABLE_IDX(GEN_SECTION, 0);
+DECL_TABLE_IDX(ENABLE_SPLIT_TIP_ROW, 0);
+DECL_TABLE_IDX(APPEARANCE_ROW, 1);
+DECL_TABLE_IDX(GEN_SECTION_ROWS, 2);
 
-DECL_TABLE_IDX(SIZE_SECTION, 1);
-DECL_TABLE_IDX(NO_SIZE_ROW, 0);
-DECL_TABLE_IDX(USE_SIZE_ROW, 1);
-DECL_TABLE_IDX(SIZE_SECTION_ROWS, 2);
+DECL_TABLE_IDX(APPS_SECTION, 1);
 
-DECL_TABLE_IDX(GEN_SECTION, 2);
-DECL_TABLE_IDX(APPEARANCE_ROW, 0);
-DECL_TABLE_IDX(GEN_SECTION_ROWS, 1);
-
-DECL_TABLE_IDX(APPS_SECTION, 3);
-
-DECL_TABLE_IDX(INFO_SECTION, 4);
+DECL_TABLE_IDX(INFO_SECTION, 2);
 DECL_TABLE_IDX(TELL_FRIEND_ROW, 0);
 DECL_TABLE_IDX(SUPPORT_ROW, 1);
 DECL_TABLE_IDX(REVIEW_ROW, 2);
 DECL_TABLE_IDX(CREDITS_ROW, 3);
 DECL_TABLE_IDX(VERSION_ROW, 4);
 DECL_TABLE_IDX(INFO_SECTION_ROWS, 5);
+
+DECL_TABLE_IDX(DESC_SECTION, 98);
+DECL_TABLE_IDX(NO_DESC_ROW, 0);
+DECL_TABLE_IDX(USE_DESC_ROW, 1);
+DECL_TABLE_IDX(DESC_SECTION_ROWS, 2);
+
+DECL_TABLE_IDX(SIZE_SECTION, 99);
+DECL_TABLE_IDX(NO_SIZE_ROW, 0);
+DECL_TABLE_IDX(USE_SIZE_ROW, 1);
+DECL_TABLE_IDX(SIZE_SECTION_ROWS, 2);
 
 static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
 static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIdentifier";
@@ -134,6 +135,13 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
     [appList addObject:appInfo];
 
     appInfo = [[NSMutableDictionary alloc] init];
+    [appInfo setObject:Localize(@"Paper Towel Picker") forKey:@"name"];
+    [appInfo setObject:Localize(@"Compare Grocery Prices") forKey:@"description"];
+    [appInfo setObject:[UIImage imageNamed:@"Unit Price - Icon.png"] forKey:@"image"];
+    [appInfo setObject:SFmt(@"%@%@", baseUrl, @"914223424") forKey:@"link"];
+    [appList addObject:appInfo];
+
+    appInfo = [[NSMutableDictionary alloc] init];
     [appInfo setObject:Localize(@"Mat Calc") forKey:@"name"];
     [appInfo setObject:Localize(@"Matrix Math Calculator") forKey:@"description"];
     [appInfo setObject:[UIImage imageNamed:@"Mat Calc - Icon.png"] forKey:@"image"];
@@ -159,7 +167,7 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
     [super viewDidAppear:animated];
 }
 
-- (void)loadCustomizeColorController
+- (void)loadCustomizeColorController:(NSIndexPath *)indexPath
 {
     if (self.customizeColorController == nil)
     {
@@ -227,7 +235,7 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
     }
     else if (section == GEN_SECTION)
     {
-        return Localize(@"Appearance");
+        return Localize(@"General");
     }
     else if (section == APPS_SECTION)
     {
@@ -307,6 +315,10 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
         if (indexPath.row == APPEARANCE_ROW)
         {
             return [self tableView:tableView appearanceCellForRowAtIndexPath:indexPath];
+        }
+        else if (indexPath.row == ENABLE_SPLIT_TIP_ROW)
+        {
+            return [self tableView:tableView splitTipCellForRowAtIndexPath:indexPath];
         }
     }
     else if (indexPath.section == APPS_SECTION)
@@ -492,6 +504,51 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
     return cell;
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView splitTipCellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MASwitchCell *cell = (MASwitchCell *)[tableView dequeueReusableCellWithIdentifier:MASwitchCellIdentifier];
+    if (cell == nil)
+    {
+        cell = [[MASwitchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MASwitchCellIdentifier];
+    }
+    //[MAAppearance setAppearanceForCell:cell tableStyle:tableView.style];
+    [cell setAppearanceInTable:tableView];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    cell.label.backgroundColor = [UIColor clearColor];
+    NSString *text = Localize(@"Split Tip");
+    [cell.label setText:text];
+    //[MAAppearance setFontForCellLabel:cell.label];
+    [MAAppearance setFontForCell:cell tableStyle:tableView.style];
+    
+    [MATipIAPHelper disableLabelIfNotPurchased:cell.label];
+    
+    cell.label.adjustsFontSizeToFitWidth = YES;
+    
+    BOOL enable = [[MAUserUtil sharedInstance] enableSplit];
+    cell.swtch.on = enable;
+    
+    [cell.swtch removeTarget:nil action:NULL forControlEvents:UIControlEventValueChanged];
+    [cell.swtch addTarget:self action:@selector(splitSwitchChanged:) forControlEvents:UIControlEventValueChanged];
+    
+    [MAAppearance setColorForSwitch:cell.swtch];
+    
+    return cell;
+}
+
+- (IBAction)splitSwitchChanged:(id)sender
+{
+    UISwitch *swtch = (UISwitch *)sender;
+    
+    if ([MATipIAPHelper checkAndAlertForIAP])
+    {
+        swtch.on = NO;
+        return;
+    }
+    
+    [[MAUserUtil sharedInstance] setEnableSplit:swtch.isOn];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView appsCellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString * const CellIdentifier = @"MAAppsCell";
@@ -560,7 +617,7 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
             {
                 return;
             }
-            [self loadCustomizeColorController];
+            [self loadCustomizeColorController:indexPath];
         }
     }
     else if (indexPath.section == APPS_SECTION)
@@ -586,6 +643,8 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
             [self loadCreditsController];
         }
     }
+    
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)selectSetSizeRow:(NSIndexPath *)indexPath

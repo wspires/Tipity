@@ -321,6 +321,14 @@ static NSUInteger const ProductCountThreshold = 3;
             [feature setObject:[MAFilePaths logSetImage] forKey:Feature_Image_Key];
             [features addObject:feature];
         }
+        if (Split_Tip_Iap)
+        {
+            feature = [NSMutableDictionary dictionary];
+            [feature setObject:Localize(@"Split Tip") forKey:Feature_Title_Key];
+            [feature setObject:Localize(@"Split the tip among multiple people") forKey:Feature_Description_Key];
+            [feature setObject:[MAFilePaths perUnitSizeImage] forKey:Feature_Image_Key];
+            [features addObject:feature];
+        }
         if (Size_Per_Unit_Iap)
         {
             feature = [NSMutableDictionary dictionary];
