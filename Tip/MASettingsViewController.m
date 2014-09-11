@@ -536,6 +536,11 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
     
     [MAAppearance setColorForSwitch:cell.swtch];
     
+//    UIImage *image = [MAFilePaths applyEffectsToImagePath:@"1079-fork-path.png"];
+    UIImage *image = [MAFilePaths applyEffectsToImagePath:@"895-user-group.png"];
+    cell.imageView.image = image;
+    cell.leadingSpaceConstraint.constant = 58; // cell.imageView.frame.size.width;
+
     return cell;
 }
 

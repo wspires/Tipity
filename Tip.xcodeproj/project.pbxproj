@@ -34,6 +34,18 @@
 		1808CE1D19C14D4800E972E1 /* 952-shopping-cart-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1808CE1919C14D4800E972E1 /* 952-shopping-cart-selected@2x.png */; };
 		1808CE1E19C14D4800E972E1 /* 952-shopping-cart.png in Resources */ = {isa = PBXBuildFile; fileRef = 1808CE1A19C14D4800E972E1 /* 952-shopping-cart.png */; };
 		1808CE1F19C14D4800E972E1 /* 952-shopping-cart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1808CE1B19C14D4800E972E1 /* 952-shopping-cart@2x.png */; };
+		1808CE3519C1543200E972E1 /* 1079-fork-path.png in Resources */ = {isa = PBXBuildFile; fileRef = 1808CE3319C1543200E972E1 /* 1079-fork-path.png */; };
+		1808CE3619C1543200E972E1 /* 1079-fork-path@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1808CE3419C1543200E972E1 /* 1079-fork-path@2x.png */; };
+		1808CE3919C156BF00E972E1 /* 1041-count.png in Resources */ = {isa = PBXBuildFile; fileRef = 1808CE3719C156BF00E972E1 /* 1041-count.png */; };
+		1808CE3A19C156BF00E972E1 /* 1041-count@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1808CE3819C156BF00E972E1 /* 1041-count@2x.png */; };
+		1808CE3D19C1572900E972E1 /* 895-user-group.png in Resources */ = {isa = PBXBuildFile; fileRef = 1808CE3B19C1572900E972E1 /* 895-user-group.png */; };
+		1808CE3E19C1572900E972E1 /* 895-user-group@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1808CE3C19C1572900E972E1 /* 895-user-group@2x.png */; };
+		1808CE4019C159A800E972E1 /* 973-user-total@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1808CE3F19C159A800E972E1 /* 973-user-total@2x.png */; };
+		1808CE4219C15AC600E972E1 /* percent.png in Resources */ = {isa = PBXBuildFile; fileRef = 1808CE4119C15AC600E972E1 /* percent.png */; };
+		1808CE4419C15CB000E972E1 /* percent@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1808CE4319C15CB000E972E1 /* percent@2x.png */; };
+		1808CE4819C1655900E972E1 /* 973-user-tip.png in Resources */ = {isa = PBXBuildFile; fileRef = 1808CE4519C1655900E972E1 /* 973-user-tip.png */; };
+		1808CE4919C1655900E972E1 /* 973-user-tip@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1808CE4619C1655900E972E1 /* 973-user-tip@2x.png */; };
+		1808CE4A19C1655900E972E1 /* 973-user-total.png in Resources */ = {isa = PBXBuildFile; fileRef = 1808CE4719C1655900E972E1 /* 973-user-total.png */; };
 		1809753B19BE5ED60039F654 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1809753A19BE5ED60039F654 /* main.m */; };
 		1809753E19BE5ED60039F654 /* MAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1809753D19BE5ED60039F654 /* MAAppDelegate.m */; };
 		1809754919BE5ED60039F654 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1809754819BE5ED60039F654 /* Images.xcassets */; };
@@ -176,6 +188,18 @@
 		1808CE3019C1532600E972E1 /* Default-Landscape_ios7~ipad.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Default-Landscape_ios7~ipad.pxm"; sourceTree = "<group>"; };
 		1808CE3119C1532600E972E1 /* Default-Portrait_ios7@2x~ipad.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Default-Portrait_ios7@2x~ipad.pxm"; sourceTree = "<group>"; };
 		1808CE3219C1532600E972E1 /* Default-Portrait_ios7~ipad.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Default-Portrait_ios7~ipad.pxm"; sourceTree = "<group>"; };
+		1808CE3319C1543200E972E1 /* 1079-fork-path.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1079-fork-path.png"; sourceTree = "<group>"; };
+		1808CE3419C1543200E972E1 /* 1079-fork-path@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1079-fork-path@2x.png"; sourceTree = "<group>"; };
+		1808CE3719C156BF00E972E1 /* 1041-count.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1041-count.png"; sourceTree = "<group>"; };
+		1808CE3819C156BF00E972E1 /* 1041-count@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1041-count@2x.png"; sourceTree = "<group>"; };
+		1808CE3B19C1572900E972E1 /* 895-user-group.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "895-user-group.png"; sourceTree = "<group>"; };
+		1808CE3C19C1572900E972E1 /* 895-user-group@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "895-user-group@2x.png"; sourceTree = "<group>"; };
+		1808CE3F19C159A800E972E1 /* 973-user-total@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "973-user-total@2x.png"; sourceTree = "<group>"; };
+		1808CE4119C15AC600E972E1 /* percent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = percent.png; sourceTree = "<group>"; };
+		1808CE4319C15CB000E972E1 /* percent@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "percent@2x.png"; sourceTree = "<group>"; };
+		1808CE4519C1655900E972E1 /* 973-user-tip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "973-user-tip.png"; sourceTree = "<group>"; };
+		1808CE4619C1655900E972E1 /* 973-user-tip@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "973-user-tip@2x.png"; sourceTree = "<group>"; };
+		1808CE4719C1655900E972E1 /* 973-user-total.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "973-user-total.png"; sourceTree = "<group>"; };
 		1809753519BE5ED60039F654 /* Tip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1809753919BE5ED60039F654 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1809753A19BE5ED60039F654 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -700,6 +724,18 @@
 		180975F619BE61010039F654 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				1808CE4519C1655900E972E1 /* 973-user-tip.png */,
+				1808CE4619C1655900E972E1 /* 973-user-tip@2x.png */,
+				1808CE4719C1655900E972E1 /* 973-user-total.png */,
+				1808CE4319C15CB000E972E1 /* percent@2x.png */,
+				1808CE4119C15AC600E972E1 /* percent.png */,
+				1808CE3F19C159A800E972E1 /* 973-user-total@2x.png */,
+				1808CE3B19C1572900E972E1 /* 895-user-group.png */,
+				1808CE3C19C1572900E972E1 /* 895-user-group@2x.png */,
+				1808CE3719C156BF00E972E1 /* 1041-count.png */,
+				1808CE3819C156BF00E972E1 /* 1041-count@2x.png */,
+				1808CE3319C1543200E972E1 /* 1079-fork-path.png */,
+				1808CE3419C1543200E972E1 /* 1079-fork-path@2x.png */,
 				1808CE1819C14D4800E972E1 /* 952-shopping-cart-selected.png */,
 				1808CE1919C14D4800E972E1 /* 952-shopping-cart-selected@2x.png */,
 				1808CE1A19C14D4800E972E1 /* 952-shopping-cart.png */,
@@ -1031,6 +1067,7 @@
 				1808CE1619C14CF900E972E1 /* 740-gear.png in Resources */,
 				1808CE0419C14A1C00E972E1 /* 1011-notepad.png in Resources */,
 				1809763419BE61120039F654 /* FDTake.strings in Resources */,
+				1808CE4A19C1655900E972E1 /* 973-user-total.png in Resources */,
 				1809761C19BE61010039F654 /* add_new_plus-512.png in Resources */,
 				1809763919BE61600039F654 /* BackgroundColors.plist in Resources */,
 				1809761B19BE61010039F654 /* 80-shopping-cart@2x.png in Resources */,
@@ -1038,6 +1075,7 @@
 				1809768719BE70A70039F654 /* MAProductTableViewCell.xib in Resources */,
 				1809761819BE61010039F654 /* 216-compose.png in Resources */,
 				1808CDF019C1412800E972E1 /* 826-money-1.png in Resources */,
+				1808CE3919C156BF00E972E1 /* 1041-count.png in Resources */,
 				1809761D19BE61010039F654 /* blank.png in Resources */,
 				1809762519BE61010039F654 /* tableview_placeholder.png in Resources */,
 				1808CE0119C14A1C00E972E1 /* 657-paint-bucket@2x.png in Resources */,
@@ -1049,6 +1087,7 @@
 				1809762119BE61010039F654 /* red_circle_cross-512.png in Resources */,
 				1809762019BE61010039F654 /* Mat Calc - Icon.png in Resources */,
 				1808CE1519C14CF900E972E1 /* 740-gear-selected@2x.png in Resources */,
+				1808CE3519C1543200E972E1 /* 1079-fork-path.png in Resources */,
 				1809761119BE61010039F654 /* 1402390544_icon-arrow-up-a.png in Resources */,
 				1809762319BE61010039F654 /* star@2x.png in Resources */,
 				1809761519BE61010039F654 /* 1409738405_internt_web_technology-09-512.png in Resources */,
@@ -1056,6 +1095,7 @@
 				1809761719BE61010039F654 /* 19-gear@2x.png in Resources */,
 				1809761A19BE61010039F654 /* 80-shopping-cart.png in Resources */,
 				1809762219BE61010039F654 /* star.png in Resources */,
+				1808CE3A19C156BF00E972E1 /* 1041-count@2x.png in Resources */,
 				1809761219BE61010039F654 /* 1409123580_star-512_filled.png in Resources */,
 				1809768919BE70A70039F654 /* MATipViewController.xib in Resources */,
 				180975D619BE60940039F654 /* HockeySDKResources.bundle in Resources */,
@@ -1069,10 +1109,13 @@
 				1809767B19BE70700039F654 /* MASettingsViewController.xib in Resources */,
 				1808CE1F19C14D4800E972E1 /* 952-shopping-cart@2x.png in Resources */,
 				1808CDF619C142EE00E972E1 /* 887-notepad.png in Resources */,
+				1808CE4819C1655900E972E1 /* 973-user-tip.png in Resources */,
 				180976AC19BE70F00039F654 /* MAUnitsSettingsCell.xib in Resources */,
 				1808CDF119C1412800E972E1 /* 826-money-1@2x.png in Resources */,
 				180976BB19BF5D8C0039F654 /* MATextFieldCell.xib in Resources */,
+				1808CE4219C15AC600E972E1 /* percent.png in Resources */,
 				1809761E19BE61010039F654 /* blank_square.png in Resources */,
+				1808CE4919C1655900E972E1 /* 973-user-tip@2x.png in Resources */,
 				1808CE1E19C14D4800E972E1 /* 952-shopping-cart.png in Resources */,
 				1809761619BE61010039F654 /* 19-gear.png in Resources */,
 				1808CDF719C142EE00E972E1 /* 887-notepad@2x.png in Resources */,
@@ -1087,14 +1130,19 @@
 				180975F419BE60A90039F654 /* AppiraterLocalizable.strings in Resources */,
 				1808CE0E19C14C0E00E972E1 /* 704-compose.png in Resources */,
 				1808CE0F19C14C0E00E972E1 /* 704-compose@2x.png in Resources */,
+				1808CE3E19C1572900E972E1 /* 895-user-group@2x.png in Resources */,
 				1809761319BE61010039F654 /* 1409632591_Block-512.png in Resources */,
+				1808CE4019C159A800E972E1 /* 973-user-total@2x.png in Resources */,
 				1809754919BE5ED60039F654 /* Images.xcassets in Resources */,
 				1808CE0719C14A1C00E972E1 /* 1017-paint-roller@2x.png in Resources */,
 				1808CE0519C14A1C00E972E1 /* 1011-notepad@2x.png in Resources */,
 				1808CDEB19C13B7900E972E1 /* Unit Price - Icon.png in Resources */,
+				1808CE3D19C1572900E972E1 /* 895-user-group.png in Resources */,
+				1808CE4419C15CB000E972E1 /* percent@2x.png in Resources */,
 				1808CE0319C14A1C00E972E1 /* 949-paint-brush@2x.png in Resources */,
 				1808CE1719C14CF900E972E1 /* 740-gear@2x.png in Resources */,
 				1808CE0D19C14C0E00E972E1 /* 704-compose-selected@2x.png in Resources */,
+				1808CE3619C1543200E972E1 /* 1079-fork-path@2x.png in Resources */,
 				180976A419BE70F00039F654 /* MAColorSelectionViewController.xib in Resources */,
 				1808CE0C19C14C0E00E972E1 /* 704-compose-selected.png in Resources */,
 				180976A219BE70F00039F654 /* MAAppearanceSelectionViewController.xib in Resources */,

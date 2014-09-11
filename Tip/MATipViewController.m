@@ -388,6 +388,7 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     {
         labelText = Localize(@"Percent");
         textFieldText = [self.bill formattedTipPercent];
+        image = [MAFilePaths applyEffectsToImagePath:@"percent.png"];
     }
     else if (indexPath.row == TIP_ROW)
     {
@@ -448,24 +449,29 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     
     NSString *labelText = @"";
     NSString *textFieldText = @"";
+    UIImage *image = nil;
     if (indexPath.row == SPLIT_COUNT_ROW)
     {
         labelText = Localize(@"People");
         textFieldText = [self.bill formattedSplit];
+        image = [MAFilePaths applyEffectsToImagePath:@"895-user-group.png"];
     }
     else if (indexPath.row == SPLIT_TIP_ROW)
     {
         labelText = Localize(@"Tip Per Person");
         textFieldText = [self.bill formattedSplitTip];
+        image = [MAFilePaths applyEffectsToImagePath:@"973-user-tip@2x.png"];
     }
     else if (indexPath.row == SPLIT_TOTAL_ROW)
     {
         labelText = Localize(@"Total Per Person");
+        image = [MAFilePaths applyEffectsToImagePath:@"973-user-total@2x.png"];
         textFieldText = [self.bill formattedSplitTotal];
     }
     
     cell.textLabel.text = labelText;
     cell.textField.text = textFieldText;
+    cell.imageView.image = image;
 
     return cell;
 }
