@@ -99,7 +99,7 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     
     [self setupAdBanner];
 
-    [self hideUIToMakeLaunchImages];
+//    [self hideUIToMakeLaunchImages];
 }
 
 - (void)viewWillAppear:(BOOL)animated

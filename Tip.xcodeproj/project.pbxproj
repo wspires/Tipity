@@ -164,6 +164,18 @@
 		1808CE1919C14D4800E972E1 /* 952-shopping-cart-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "952-shopping-cart-selected@2x.png"; sourceTree = "<group>"; };
 		1808CE1A19C14D4800E972E1 /* 952-shopping-cart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "952-shopping-cart.png"; sourceTree = "<group>"; };
 		1808CE1B19C14D4800E972E1 /* 952-shopping-cart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "952-shopping-cart@2x.png"; sourceTree = "<group>"; };
+		1808CE2019C14FF400E972E1 /* Default_ios7-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default_ios7-568h@2x.png"; sourceTree = "<group>"; };
+		1808CE2119C14FF400E972E1 /* Default_ios7-568h@2x.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Default_ios7-568h@2x.pxm"; sourceTree = "<group>"; };
+		1808CE2219C14FF400E972E1 /* Default_ios7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default_ios7@2x.png"; sourceTree = "<group>"; };
+		1808CE2319C14FF400E972E1 /* Default-Landscape_ios7@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape_ios7@2x~ipad.png"; sourceTree = "<group>"; };
+		1808CE2419C14FF500E972E1 /* Default-Landscape_ios7~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape_ios7~ipad.png"; sourceTree = "<group>"; };
+		1808CE2519C14FF500E972E1 /* Default-Portrait_ios7@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait_ios7@2x~ipad.png"; sourceTree = "<group>"; };
+		1808CE2619C14FF500E972E1 /* Default-Portrait_ios7~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait_ios7~ipad.png"; sourceTree = "<group>"; };
+		1808CE2E19C1532600E972E1 /* Default_ios7@2x.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Default_ios7@2x.pxm"; sourceTree = "<group>"; };
+		1808CE2F19C1532600E972E1 /* Default-Landscape_ios7@2x~ipad.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Default-Landscape_ios7@2x~ipad.pxm"; sourceTree = "<group>"; };
+		1808CE3019C1532600E972E1 /* Default-Landscape_ios7~ipad.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Default-Landscape_ios7~ipad.pxm"; sourceTree = "<group>"; };
+		1808CE3119C1532600E972E1 /* Default-Portrait_ios7@2x~ipad.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Default-Portrait_ios7@2x~ipad.pxm"; sourceTree = "<group>"; };
+		1808CE3219C1532600E972E1 /* Default-Portrait_ios7~ipad.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Default-Portrait_ios7~ipad.pxm"; sourceTree = "<group>"; };
 		1809753519BE5ED60039F654 /* Tip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1809753919BE5ED60039F654 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1809753A19BE5ED60039F654 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -542,6 +554,18 @@
 		1809757419BE5FF40039F654 /* Launch Images */ = {
 			isa = PBXGroup;
 			children = (
+				1808CE2119C14FF400E972E1 /* Default_ios7-568h@2x.pxm */,
+				1808CE2E19C1532600E972E1 /* Default_ios7@2x.pxm */,
+				1808CE2F19C1532600E972E1 /* Default-Landscape_ios7@2x~ipad.pxm */,
+				1808CE3019C1532600E972E1 /* Default-Landscape_ios7~ipad.pxm */,
+				1808CE3119C1532600E972E1 /* Default-Portrait_ios7@2x~ipad.pxm */,
+				1808CE3219C1532600E972E1 /* Default-Portrait_ios7~ipad.pxm */,
+				1808CE2019C14FF400E972E1 /* Default_ios7-568h@2x.png */,
+				1808CE2219C14FF400E972E1 /* Default_ios7@2x.png */,
+				1808CE2319C14FF400E972E1 /* Default-Landscape_ios7@2x~ipad.png */,
+				1808CE2419C14FF500E972E1 /* Default-Landscape_ios7~ipad.png */,
+				1808CE2519C14FF500E972E1 /* Default-Portrait_ios7@2x~ipad.png */,
+				1808CE2619C14FF500E972E1 /* Default-Portrait_ios7~ipad.png */,
 			);
 			path = "Launch Images";
 			sourceTree = "<group>";
