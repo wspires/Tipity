@@ -99,7 +99,7 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     
     [self setupAdBanner];
 
-    //[self hideUIToMakeLaunchImages];
+    [self hideUIToMakeLaunchImages];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -356,6 +356,13 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     NSString *textFieldText = [self.bill formattedBill];
     cell.textField.text = textFieldText;
 
+//    UIImage *image = [UIImage imageNamed:@"887-notepad.png"];
+    UIImage *image = [MAFilePaths applyEffectsToImagePath:@"887-notepad.png"];
+    cell.imageView.image = image;
+//    UIImage *image = [MAFilePaths appearanceImage];
+//    NSInteger tag = [MAUtil toTag:indexPath];
+//    [MAUtil setImage:image forCell:cell withTag:tag];
+
     return cell;
 }
 
@@ -376,6 +383,7 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     
     NSString *labelText = @"";
     NSString *textFieldText = @"";
+    UIImage *image = nil;
     if (indexPath.row == TIP_PERCENT_ROW)
     {
         labelText = Localize(@"Percent");
@@ -385,9 +393,12 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     {
         labelText = Localize(@"Amount");
         textFieldText = [self.bill formattedTip];
+//        image = [UIImage imageNamed:@"826-money-1.png"];
+        image = [MAFilePaths applyEffectsToImagePath:@"826-money-1.png"];
     }
     cell.textLabel.text = labelText;
     cell.textField.text = textFieldText;
+    cell.imageView.image = image;
 
     return cell;
 }
@@ -412,6 +423,10 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     
     NSString *textFieldText = [self.bill formattedTotal];
     cell.textField.text = textFieldText;
+
+//    UIImage *image = [UIImage imageNamed:@"827-money-2.png"];
+    UIImage *image = [MAFilePaths applyEffectsToImagePath:@"827-money-2.png"];
+    cell.imageView.image = image;
 
     return cell;
 }

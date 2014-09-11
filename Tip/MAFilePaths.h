@@ -161,5 +161,7 @@
 
 + (UIImage *)imageFromFilePath:(NSString *)filePath;
 + (BOOL)saveImage:(UIImage *)image withFilePath:(NSString *)filePath;
++ (UIImage *)applyEffectsToImagePath:(NSString *)path;
++ (UIImage *)applyEffectsToImage:(UIImage *)image;
 
 @end

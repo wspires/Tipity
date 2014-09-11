@@ -157,7 +157,8 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
     [MAUtil updateNavItem:self.navigationItem withTitle:self.title];
 
     // Not reloading the table each time it appears to make it snappier since it should not have changed between views changing.
-//    [self.tableView reloadData];
+    // BUT: We need to reload the app colors for the icons!
+    [self.tableView reloadData];
     
     [super viewWillAppear:animated];
 }
@@ -494,9 +495,11 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
         [MATipIAPHelper disableLabelIfNotPurchased:cell.textLabel];
     }
 
-    UIImage *image = [MAFilePaths appearanceImage];
-    NSInteger tag = [MAUtil toTag:indexPath];
-    [MAUtil setImage:image forCell:cell withTag:tag];
+    UIImage *image = [MAFilePaths applyEffectsToImagePath:[MAFilePaths appearanceImageFilename]];
+    cell.imageView.image = image;
+//    UIImage *image = [MAFilePaths appearanceImage];
+//    NSInteger tag = [MAUtil toTag:indexPath];
+//    [MAUtil setImage:image forCell:cell withTag:tag];
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.accessoryView = [MAAccessoryView grayAccessoryViewForCell:cell];

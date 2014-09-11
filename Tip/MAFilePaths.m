@@ -649,7 +649,10 @@ static NSString * const ExerciseFilterName = @"ExerciseFilterName";
 
 + (NSString *)appearanceImageFilename
 {
-    return @"1402304374_bg_color.png";
+//    return @"1402304374_bg_color.png";
+    return @"949-paint-brush.png";
+//    return @"657-paint-bucket.png";
+//    return @"1017-paint-roller.png";
 }
 + (UIImage *)appearanceImage
 {
