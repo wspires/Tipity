@@ -46,6 +46,8 @@
 		1808CE4819C1655900E972E1 /* 973-user-tip.png in Resources */ = {isa = PBXBuildFile; fileRef = 1808CE4519C1655900E972E1 /* 973-user-tip.png */; };
 		1808CE4919C1655900E972E1 /* 973-user-tip@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1808CE4619C1655900E972E1 /* 973-user-tip@2x.png */; };
 		1808CE4A19C1655900E972E1 /* 973-user-total.png in Resources */ = {isa = PBXBuildFile; fileRef = 1808CE4719C1655900E972E1 /* 973-user-total.png */; };
+		1808CE4F19C1D8F700E972E1 /* people.png in Resources */ = {isa = PBXBuildFile; fileRef = 1808CE4D19C1D8F700E972E1 /* people.png */; };
+		1808CE5019C1D8F700E972E1 /* people@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1808CE4E19C1D8F700E972E1 /* people@2x.png */; };
 		1809753B19BE5ED60039F654 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1809753A19BE5ED60039F654 /* main.m */; };
 		1809753E19BE5ED60039F654 /* MAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1809753D19BE5ED60039F654 /* MAAppDelegate.m */; };
 		1809754919BE5ED60039F654 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1809754819BE5ED60039F654 /* Images.xcassets */; };
@@ -200,6 +202,11 @@
 		1808CE4519C1655900E972E1 /* 973-user-tip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "973-user-tip.png"; sourceTree = "<group>"; };
 		1808CE4619C1655900E972E1 /* 973-user-tip@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "973-user-tip@2x.png"; sourceTree = "<group>"; };
 		1808CE4719C1655900E972E1 /* 973-user-total.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "973-user-total.png"; sourceTree = "<group>"; };
+		1808CE4B19C1D49100E972E1 /* 973-user-total@2x.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "973-user-total@2x.pxm"; sourceTree = "<group>"; };
+		1808CE4C19C1D49100E972E1 /* percent@2x.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "percent@2x.pxm"; sourceTree = "<group>"; };
+		1808CE4D19C1D8F700E972E1 /* people.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = people.png; sourceTree = "<group>"; };
+		1808CE4E19C1D8F700E972E1 /* people@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "people@2x.png"; sourceTree = "<group>"; };
+		1808CE5119C1D90200E972E1 /* people@2x.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "people@2x.pxm"; sourceTree = "<group>"; };
 		1809753519BE5ED60039F654 /* Tip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1809753919BE5ED60039F654 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1809753A19BE5ED60039F654 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -724,6 +731,11 @@
 		180975F619BE61010039F654 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				1808CE5119C1D90200E972E1 /* people@2x.pxm */,
+				1808CE4D19C1D8F700E972E1 /* people.png */,
+				1808CE4E19C1D8F700E972E1 /* people@2x.png */,
+				1808CE4B19C1D49100E972E1 /* 973-user-total@2x.pxm */,
+				1808CE4C19C1D49100E972E1 /* percent@2x.pxm */,
 				1808CE4519C1655900E972E1 /* 973-user-tip.png */,
 				1808CE4619C1655900E972E1 /* 973-user-tip@2x.png */,
 				1808CE4719C1655900E972E1 /* 973-user-total.png */,
@@ -1068,6 +1080,7 @@
 				1808CE0419C14A1C00E972E1 /* 1011-notepad.png in Resources */,
 				1809763419BE61120039F654 /* FDTake.strings in Resources */,
 				1808CE4A19C1655900E972E1 /* 973-user-total.png in Resources */,
+				1808CE4F19C1D8F700E972E1 /* people.png in Resources */,
 				1809761C19BE61010039F654 /* add_new_plus-512.png in Resources */,
 				1809763919BE61600039F654 /* BackgroundColors.plist in Resources */,
 				1809761B19BE61010039F654 /* 80-shopping-cart@2x.png in Resources */,
@@ -1086,6 +1099,7 @@
 				1809767119BE6FE70039F654 /* MAUpgradeViewController.xib in Resources */,
 				1809762119BE61010039F654 /* red_circle_cross-512.png in Resources */,
 				1809762019BE61010039F654 /* Mat Calc - Icon.png in Resources */,
+				1808CE5019C1D8F700E972E1 /* people@2x.png in Resources */,
 				1808CE1519C14CF900E972E1 /* 740-gear-selected@2x.png in Resources */,
 				1808CE3519C1543200E972E1 /* 1079-fork-path.png in Resources */,
 				1809761119BE61010039F654 /* 1402390544_icon-arrow-up-a.png in Resources */,

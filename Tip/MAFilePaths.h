@@ -46,6 +46,25 @@
 + (NSMutableDictionary *)defaultExerciseFilter;
 + (BOOL)saveFilter:(NSDictionary *)filter;
 
++ (NSString *)appearanceImageFilename;
++ (UIImage *)appearanceImage;
+
+// Tip icons.
++ (NSString *)billImageFilename;
++ (UIImage *)billImage;
++ (NSString *)tipPercentImageFilename;
++ (UIImage *)tipPercentImage;
++ (NSString *)tipAmountImageFilename;
++ (UIImage *)tipAmountImage;
++ (NSString *)totalImageFilename;
++ (UIImage *)totalImage;
++ (NSString *)peopleImageFilename;
++ (UIImage *)peopleImage;
++ (NSString *)splitTipFilename;
++ (UIImage *)splitTipImage;
++ (NSString *)splitTotalFilename;
++ (UIImage *)splitTotalImage;
+
 + (NSString *)historyImageFilename;
 + (UIImage *)historyImage;
 + (NSString *)statsImageFilename;
@@ -86,9 +105,6 @@
 + (UIImage *)rulerImage;
 + (NSString *)goalImageFilename;
 + (UIImage *)goalImage;
-
-+ (NSString *)appearanceImageFilename;
-+ (UIImage *)appearanceImage;
 
 + (NSString *)informationImageFilename;
 + (UIImage *)informationImage;

@@ -536,10 +536,9 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
     
     [MAAppearance setColorForSwitch:cell.swtch];
     
-//    UIImage *image = [MAFilePaths applyEffectsToImagePath:@"1079-fork-path.png"];
-    UIImage *image = [MAFilePaths applyEffectsToImagePath:@"895-user-group.png"];
+    UIImage *image = [MAFilePaths peopleImage];
     cell.imageView.image = image;
-    cell.leadingSpaceConstraint.constant = 58; // cell.imageView.frame.size.width;
+    cell.leadingSpaceConstraint.constant = 58; // TODO: Figure out the image width programmatically (imageView frame does not work).
 
     return cell;
 }

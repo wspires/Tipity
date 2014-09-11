@@ -356,8 +356,7 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     NSString *textFieldText = [self.bill formattedBill];
     cell.textField.text = textFieldText;
 
-//    UIImage *image = [UIImage imageNamed:@"887-notepad.png"];
-    UIImage *image = [MAFilePaths applyEffectsToImagePath:@"887-notepad.png"];
+    UIImage *image = [MAFilePaths billImage];
     cell.imageView.image = image;
 //    UIImage *image = [MAFilePaths appearanceImage];
 //    NSInteger tag = [MAUtil toTag:indexPath];
@@ -388,14 +387,13 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     {
         labelText = Localize(@"Percent");
         textFieldText = [self.bill formattedTipPercent];
-        image = [MAFilePaths applyEffectsToImagePath:@"percent.png"];
+        image = [MAFilePaths tipPercentImage];
     }
     else if (indexPath.row == TIP_ROW)
     {
         labelText = Localize(@"Amount");
         textFieldText = [self.bill formattedTip];
-//        image = [UIImage imageNamed:@"826-money-1.png"];
-        image = [MAFilePaths applyEffectsToImagePath:@"826-money-1.png"];
+        image = [MAFilePaths tipAmountImage];
     }
     cell.textLabel.text = labelText;
     cell.textField.text = textFieldText;
@@ -425,8 +423,7 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     NSString *textFieldText = [self.bill formattedTotal];
     cell.textField.text = textFieldText;
 
-//    UIImage *image = [UIImage imageNamed:@"827-money-2.png"];
-    UIImage *image = [MAFilePaths applyEffectsToImagePath:@"827-money-2.png"];
+    UIImage *image = [MAFilePaths totalImage];
     cell.imageView.image = image;
 
     return cell;
@@ -454,18 +451,18 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     {
         labelText = Localize(@"People");
         textFieldText = [self.bill formattedSplit];
-        image = [MAFilePaths applyEffectsToImagePath:@"895-user-group.png"];
+        image = [MAFilePaths peopleImage];
     }
     else if (indexPath.row == SPLIT_TIP_ROW)
     {
         labelText = Localize(@"Tip Per Person");
         textFieldText = [self.bill formattedSplitTip];
-        image = [MAFilePaths applyEffectsToImagePath:@"973-user-tip@2x.png"];
+        image = [MAFilePaths splitTipImage];
     }
     else if (indexPath.row == SPLIT_TOTAL_ROW)
     {
         labelText = Localize(@"Total Per Person");
-        image = [MAFilePaths applyEffectsToImagePath:@"973-user-total@2x.png"];
+        image = [MAFilePaths splitTotalImage];
         textFieldText = [self.bill formattedSplitTotal];
     }
     

@@ -391,6 +391,84 @@ static NSString * const ExerciseFilterName = @"ExerciseFilterName";
     return image;
 }
 
++ (NSString *)appearanceImageFilename
+{
+    //    return @"1402304374_bg_color.png";
+    return @"949-paint-brush.png";
+    //    return @"657-paint-bucket.png";
+    //    return @"1017-paint-roller.png";
+}
++ (UIImage *)appearanceImage
+{
+    return [MAFilePaths applyEffectsToImagePath:[MAFilePaths appearanceImageFilename]];
+}
+
+#pragma mark - Tip icons
+
++ (NSString *)billImageFilename
+{
+    return @"887-notepad.png";
+}
++ (UIImage *)billImage
+{
+    return [MAFilePaths applyEffectsToImagePath:[MAFilePaths billImageFilename]];
+}
+
++ (NSString *)tipPercentImageFilename
+{
+    return @"percent.png";
+}
++ (UIImage *)tipPercentImage
+{
+    return [MAFilePaths applyEffectsToImagePath:[MAFilePaths tipPercentImageFilename]];
+}
+
++ (NSString *)tipAmountImageFilename
+{
+    return @"826-money-1.png";
+}
++ (UIImage *)tipAmountImage
+{
+    return [MAFilePaths applyEffectsToImagePath:[MAFilePaths tipAmountImageFilename]];
+}
+
++ (NSString *)totalImageFilename
+{
+    return @"827-money-2.png";
+}
++ (UIImage *)totalImage
+{
+    return [MAFilePaths applyEffectsToImagePath:[MAFilePaths totalImageFilename]];
+}
+
++ (NSString *)peopleImageFilename
+{
+    return @"people.png";
+//    return @"895-user-group.png";
+}
++ (UIImage *)peopleImage
+{
+    return [MAFilePaths applyEffectsToImagePath:[MAFilePaths peopleImageFilename]];
+}
+
++ (NSString *)splitTipFilename
+{
+    return @"973-user-tip.png";
+}
++ (UIImage *)splitTipImage
+{
+    return [MAFilePaths applyEffectsToImagePath:[MAFilePaths splitTipFilename]];
+}
+
++ (NSString *)splitTotalFilename
+{
+    return @"973-user-total.png";
+}
++ (UIImage *)splitTotalImage
+{
+    return [MAFilePaths applyEffectsToImagePath:[MAFilePaths splitTotalFilename]];
+}
+
 + (NSString *)historyImageFilename
 {
     return @"item_list.png";
@@ -645,18 +723,6 @@ static NSString * const ExerciseFilterName = @"ExerciseFilterName";
 + (UIImage *)goalImage
 {
     return [MAFilePaths applyEffectsToImagePath:[MAFilePaths goalImageFilename]];
-}
-
-+ (NSString *)appearanceImageFilename
-{
-//    return @"1402304374_bg_color.png";
-    return @"949-paint-brush.png";
-//    return @"657-paint-bucket.png";
-//    return @"1017-paint-roller.png";
-}
-+ (UIImage *)appearanceImage
-{
-    return [MAFilePaths applyEffectsToImagePath:[MAFilePaths appearanceImageFilename]];
 }
 
 + (NSString *)informationImageFilename
