@@ -799,6 +799,24 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
         currentValue = [MAUtil parseDouble:text];
     }
     
+    // If rounding is enabled and, say, +1 is pressed, then convert 15.25 to 16, then 17, 18, etc. If -1 is pressed, then convert 15.25 to 15, then 14, 13, etc. So, the button rounds the first time and then adds/subtracts 1 each subsequent time. This keeps the rounding intuitive and work the way the user likely wants when rounding to the nearest $1, while also keeping the UI clean by not having to add an extra button.
+    static BOOL const enableRounding = YES;
+    if (enableRounding)
+    {
+        double fraction = fabs((int)currentValue - currentValue);
+        if (fraction > 0)
+        {
+            if (updateAmount == -1)
+            {
+                updateAmount = -fraction;
+            }
+            else if (updateAmount == 1)
+            {
+                updateAmount = 1 - fraction;
+            }
+        }
+    }
+    
     double newValue = currentValue + updateAmount;
     if (newValue < 0)
     {
