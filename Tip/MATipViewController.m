@@ -344,9 +344,6 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     }
     [cell setAppearanceInTable:tableView];
     
-//    NSString *unit = @""; //[self.settings objectForKey:WeightLogUnit];
-    cell.label.text = @""; // SFmt(@" %@", unit); // Insert a space char because the text field and label have 0 space separating them.
-    
     cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
     cell.textField.delegate = self;
     
@@ -373,9 +370,6 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
         cell = [[MATextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MATextFieldCellIdentifier];
     }
     [cell setAppearanceInTable:tableView];
-    
-    NSString *unit = @""; //[self.settings objectForKey:WeightLogUnit];
-    cell.label.text = SFmt(@" %@", unit); // Insert a space char because the text field and label have 0 space separating them.
     
     cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
     cell.textField.delegate = self;
@@ -411,9 +405,6 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     }
     [cell setAppearanceInTable:tableView];
     
-    //    NSString *unit = @""; //[self.settings objectForKey:WeightLogUnit];
-    cell.label.text = @""; // SFmt(@" %@", unit); // Insert a space char because the text field and label have 0 space separating them.
-    
     cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
     cell.textField.delegate = self;
     
@@ -437,10 +428,7 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
         cell = [[MATextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MATextFieldCellIdentifier];
     }
     [cell setAppearanceInTable:tableView];
-    
-    NSString *unit = @""; //[self.settings objectForKey:WeightLogUnit];
-    cell.label.text = SFmt(@" %@", unit); // Insert a space char because the text field and label have 0 space separating them.
-    
+        
     cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
     cell.textField.delegate = self;
     

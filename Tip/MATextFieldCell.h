@@ -11,8 +11,6 @@
 @interface MATextFieldCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UITextField *textField;
-@property (weak, nonatomic) IBOutlet UILabel *label;
-@property (nonatomic, weak) IBOutlet NSLayoutConstraint *trailingSpaceConstraint;
 
 - (void)setAppearanceInTable:(UITableView *)tableView;
 
