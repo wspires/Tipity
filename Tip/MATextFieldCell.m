@@ -59,7 +59,7 @@
     self.textField.backgroundColor = [UIColor clearColor];
     self.textField.textAlignment = NSTextAlignmentRight;
     self.textField.placeholder = nil;
-    self.textField.font = [[UILabel alloc] init].font;
+    self.textField.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
     
     self.textField.textColor = [MAAppearance detailLabelTextColor];
 }
