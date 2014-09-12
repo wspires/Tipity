@@ -469,6 +469,53 @@ static NSString * const ExerciseFilterName = @"ExerciseFilterName";
     return [MAFilePaths applyEffectsToImagePath:[MAFilePaths splitTotalFilename]];
 }
 
+#pragma mark - Feedback icons
+
++ (NSString *)tellFriendImageFilename
+{
+    return @"702-share.png";
+}
++ (UIImage *)tellFriendImage
+{
+    return [MAFilePaths applyEffectsToImagePath:[MAFilePaths tellFriendImageFilename]];
+}
+
++ (NSString *)sendFeedbackImageFilename
+{
+    return @"712-reply.png";
+}
++ (UIImage *)sendFeedbackImage
+{
+    return [MAFilePaths applyEffectsToImagePath:[MAFilePaths sendFeedbackImageFilename]];
+}
+
++ (NSString *)writeReviewImageFilename
+{
+    return @"726-star.png";
+}
++ (UIImage *)writeReviewImage
+{
+    return [MAFilePaths applyEffectsToImagePath:[MAFilePaths writeReviewImageFilename]];
+}
+
++ (NSString *)creditsImageFilename
+{
+    return @"777-thumbs-up.png";
+}
++ (UIImage *)creditsImage
+{
+    return [MAFilePaths applyEffectsToImagePath:[MAFilePaths creditsImageFilename]];
+}
+
++ (NSString *)versionImageFilename
+{
+    return @"724-info.png";
+}
++ (UIImage *)versionImage
+{
+    return [MAFilePaths applyEffectsToImagePath:[MAFilePaths versionImageFilename]];
+}
+
 + (NSString *)historyImageFilename
 {
     return @"item_list.png";

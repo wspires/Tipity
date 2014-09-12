@@ -40,18 +40,7 @@ DECL_TABLE_IDX(CREDITS_ROW, 3);
 DECL_TABLE_IDX(VERSION_ROW, 4);
 DECL_TABLE_IDX(INFO_SECTION_ROWS, 5);
 
-DECL_TABLE_IDX(DESC_SECTION, 98);
-DECL_TABLE_IDX(NO_DESC_ROW, 0);
-DECL_TABLE_IDX(USE_DESC_ROW, 1);
-DECL_TABLE_IDX(DESC_SECTION_ROWS, 2);
-
-DECL_TABLE_IDX(SIZE_SECTION, 99);
-DECL_TABLE_IDX(NO_SIZE_ROW, 0);
-DECL_TABLE_IDX(USE_SIZE_ROW, 1);
-DECL_TABLE_IDX(SIZE_SECTION_ROWS, 2);
-
 static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
-static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIdentifier";
 
 @interface MASettingsViewController ()
 @property (strong, nonatomic) MAAppearanceSelectionViewController *customizeColorController;
@@ -108,9 +97,6 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
     
     nib = [UINib nibWithNibName:@"MASwitchCell" bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:MASwitchCellIdentifier];
-    
-    nib = [UINib nibWithNibName:@"MAProductTableViewCell" bundle:nil];
-    [self.tableView registerNib:nib forCellReuseIdentifier:MAProductTableViewCellIdentifier];
 }
 
 - (NSArray *)makeAppList
@@ -177,6 +163,8 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
     
     self.customizeColorController.title = Localize(@"Color");
     [self.navigationController pushViewController:self.customizeColorController animated:YES];
+    
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (void)handleApp:(NSIndexPath *)indexPath
@@ -225,16 +213,7 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if (section == SIZE_SECTION)
-    {
-//        return Localize(@"Item Format");
-        return Localize(@"Size Per Unit");
-    }
-    else if (section == DESC_SECTION)
-    {
-        return Localize(@"Price Per Unit");
-    }
-    else if (section == GEN_SECTION)
+    if (section == GEN_SECTION)
     {
         return Localize(@"General");
     }
@@ -251,32 +230,17 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-    if (section == SIZE_SECTION)
-    {
-//        return Localize(@"Enable size to enter size per unit, such as sheets per roll.");
-//        return Localize(@"Disable or enable entering size per unit, such as sheets per roll.");
-//        return Localize(@"Hide or enable entering size per unit, such as sheets per roll.");
-        return Localize(@"Hide or show size per unit, such as sheets per roll.");
-    }
-    else if (section == DESC_SECTION)
-    {
-        return Localize(@"Hide or show price per unit.");
-    }
+//    else if (section == DESC_SECTION)
+//    {
+//        return Localize(@"Hide or show price per unit.");
+//    }
     return @"";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    if (section == SIZE_SECTION)
-    {
-        return SIZE_SECTION_ROWS;
-    }
-    else if (section == DESC_SECTION)
-    {
-        return DESC_SECTION_ROWS;
-    }
-    else if (section == GEN_SECTION)
+    if (section == GEN_SECTION)
     {
         return GEN_SECTION_ROWS;
     }
@@ -303,15 +267,7 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == SIZE_SECTION)
-    {
-        return [self tableView:tableView setSizeCellForRowAtIndexPath:indexPath];
-    }
-    else if (indexPath.section == DESC_SECTION)
-    {
-        return [self tableView:tableView setDescriptionCellForRowAtIndexPath:indexPath];
-    }
-    else if (indexPath.section == GEN_SECTION)
+    if (indexPath.section == GEN_SECTION)
     {
         if (indexPath.row == APPEARANCE_ROW)
         {
@@ -340,32 +296,40 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
         cell.textLabel.text = @"";
         cell.detailTextLabel.text = @"";
         cell.imageView.image = nil;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
 
+        UIImage *image = nil;
         if (indexPath.row == SUPPORT_ROW)
         {
             cell.textLabel.text = Localize(@"Send Feedback");
+            image = [MAFilePaths sendFeedbackImage];
         }
         else if (indexPath.row == TELL_FRIEND_ROW)
         {
             cell.textLabel.text = Localize(@"Tell a Friend");
+            image = [MAFilePaths tellFriendImage];
         }
         else if (indexPath.row == REVIEW_ROW)
         {
             //cell.textLabel.text = SFmt(Localize(@"Love %@? Rate us!"), APP_NAME);
             cell.textLabel.text = Localize(@"Write a Review");
             cell.textLabel.adjustsFontSizeToFitWidth = YES;
+            image = [MAFilePaths writeReviewImage];
         }
         else if (indexPath.row == CREDITS_ROW)
         {
             cell.textLabel.text = Localize(@"Credits");
+            image = [MAFilePaths creditsImage];
         }
         else if (indexPath.row == VERSION_ROW)
         {
             NSString *version = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey];
             cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", Localize(@"Version"), version];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            image = [MAFilePaths versionImage];
         }
+
+        cell.imageView.image = image;
 
         if (indexPath.row != VERSION_ROW)
         {
@@ -377,105 +341,6 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
 
     DLog(@"Error: Not returning a cell!");
     return nil;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView setSizeCellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    MAProductTableViewCell *cell = (MAProductTableViewCell *)[tableView dequeueReusableCellWithIdentifier:MAProductTableViewCellIdentifier];
-    if (cell == nil)
-    {
-        cell = [[MAProductTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MAProductTableViewCellIdentifier];
-    }
-    [MAAppearance setAppearanceForCell:cell tableStyle:tableView.style];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-    cell.userInteractionEnabled = NO;
-    cell.hideIconView = YES;
-    cell.hideDescription = YES;
-    [cell configureWithProduct:nil];
-
-    BOOL enableSizeField = [[MAUserUtil sharedInstance] enableSizeField];
-    
-    if (indexPath.row == NO_SIZE_ROW)
-    {
-        cell.hideSizeField = YES;
-        
-        if ( ! enableSizeField)
-        {
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        }
-        else
-        {
-            cell.accessoryType = UITableViewCellAccessoryNone;
-        }
-    }
-    else if (indexPath.row == USE_SIZE_ROW)
-    {
-        cell.hideSizeField = NO;
-        
-        if (enableSizeField)
-        {
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        }
-        else
-        {
-            cell.accessoryType = UITableViewCellAccessoryNone;
-        }
-    }
-    
-    return cell;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView setDescriptionCellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    MAProductTableViewCell *cell = (MAProductTableViewCell *)[tableView dequeueReusableCellWithIdentifier:MAProductTableViewCellIdentifier];
-    if (cell == nil)
-    {
-        cell = [[MAProductTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MAProductTableViewCellIdentifier];
-    }
-    [MAAppearance setAppearanceForCell:cell tableStyle:tableView.style];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    cell.userInteractionEnabled = NO;
-    cell.hideIconView = YES;
-    
-    MAProduct *product = [[MAProduct alloc] init];
-    [cell configureWithProduct:product];
-
-    BOOL enableSizeField = [[MAUserUtil sharedInstance] enableSizeField];
-    BOOL const hideSizeField = ! enableSizeField;
-    cell.hideSizeField = hideSizeField;
-
-    BOOL enableDesc = [[MAUserUtil sharedInstance] enableDescription];
-    
-    if (indexPath.row == NO_DESC_ROW)
-    {
-        cell.hideDescription = YES;
-        
-        if ( ! enableDesc)
-        {
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        }
-        else
-        {
-            cell.accessoryType = UITableViewCellAccessoryNone;
-        }
-    }
-    else if (indexPath.row == USE_SIZE_ROW)
-    {
-        cell.hideDescription = NO;
-        
-        if (enableDesc)
-        {
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        }
-        else
-        {
-            cell.accessoryType = UITableViewCellAccessoryNone;
-        }
-    }
-    
-    return cell;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView appearanceCellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -586,12 +451,6 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == DESC_SECTION)
-    {
-        MAProductTableViewCell *cell = (MAProductTableViewCell *)[self tableView:self.tableView setDescriptionCellForRowAtIndexPath:indexPath];
-        return cell.rowHeight;
-    }
-    
     CGFloat rowHeight = [MAUtil rowHeightForTableView:tableView];
     return rowHeight;
 }
@@ -600,23 +459,7 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == SIZE_SECTION)
-    {
-        if (Size_Per_Unit_Iap && [MATipIAPHelper checkAndAlertForIAP])
-        {
-            return;
-        }
-        [self selectSetSizeRow:indexPath];
-    }
-    else if (indexPath.section == DESC_SECTION)
-    {
-        if (Price_Per_Unit_Iap && [MATipIAPHelper checkAndAlertForIAP])
-        {
-            return;
-        }
-        [self selectSetDescRow:indexPath];
-    }
-    else if (indexPath.section == GEN_SECTION)
+    if (indexPath.section == GEN_SECTION)
     {
         if (indexPath.row == APPEARANCE_ROW)
         {
@@ -650,61 +493,6 @@ static NSString *MAProductTableViewCellIdentifier = @"MAProductTableViewCellIden
             [self loadCreditsController];
         }
     }
-    
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
-
-- (void)selectSetSizeRow:(NSIndexPath *)indexPath
-{
-    BOOL enableSizeField = [[MAUserUtil sharedInstance] enableSizeField];
-    
-    // Check if setting did not actually change.
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.row == NO_SIZE_ROW)
-    {
-        if ( ! enableSizeField)
-        {
-            return;
-        }
-    }
-    else if (indexPath.row == USE_SIZE_ROW)
-    {
-        if (enableSizeField)
-        {
-            return;
-        }
-    }
-    
-    // Toggle and save new setting.
-    [[MAUserUtil sharedInstance] setEnableSizeField: ! enableSizeField];
-    [self.tableView reloadData];
-}
-
-
-- (void)selectSetDescRow:(NSIndexPath *)indexPath
-{
-    BOOL enableDesc = [[MAUserUtil sharedInstance] enableDescription];
-    
-    // Check if setting did not actually change.
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    if (indexPath.row == NO_DESC_ROW)
-    {
-        if ( ! enableDesc)
-        {
-            return;
-        }
-    }
-    else if (indexPath.row == USE_DESC_ROW)
-    {
-        if (enableDesc)
-        {
-            return;
-        }
-    }
-    
-    // Toggle and save new setting.
-    [[MAUserUtil sharedInstance] setEnableDescription: ! enableDesc];
-    [self.tableView reloadData];
 }
 
 #pragma mark - Email

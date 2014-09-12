@@ -65,6 +65,18 @@
 + (NSString *)splitTotalFilename;
 + (UIImage *)splitTotalImage;
 
+// Feedback icons.
++ (NSString *)tellFriendImageFilename;
++ (UIImage *)tellFriendImage;
++ (NSString *)sendFeedbackImageFilename;
++ (UIImage *)sendFeedbackImage;
++ (NSString *)writeReviewImageFilename;
++ (UIImage *)writeReviewImage;
++ (NSString *)creditsImageFilename;
++ (UIImage *)creditsImage;
++ (NSString *)versionImageFilename;
++ (UIImage *)versionImage;
+
 + (NSString *)historyImageFilename;
 + (UIImage *)historyImage;
 + (NSString *)statsImageFilename;
