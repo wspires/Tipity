@@ -194,6 +194,8 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     }
 }
 
+// Update the number and position of the table sections.
+DECL_TABLE_IDX(INVALID_SECTION, 9999);
 - (void)configureTableSections
 {
     NUM_SECTIONS = 3;
@@ -202,15 +204,17 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     TIP_SECTION = BILL_SECTION + 1;
     TOTAL_SECTION = TIP_SECTION + 1;
 
+    TAX_SECTION = INVALID_SECTION;
     if ([[MAUserUtil sharedInstance] enableTax])
     {
         ++NUM_SECTIONS;
         
         TAX_SECTION = BILL_SECTION + 1;
         TIP_SECTION = TAX_SECTION + 1;
-        TOTAL_SECTION = TAX_SECTION + 1;
+        TOTAL_SECTION = TIP_SECTION + 1;
     }
 
+    SPLIT_SECTION = INVALID_SECTION;
     if ([[MAUserUtil sharedInstance] enableSplit])
     {
         ++NUM_SECTIONS;
