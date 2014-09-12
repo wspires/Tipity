@@ -21,26 +21,34 @@
 
 #import <iAd/iAd.h>
 
-DECL_TABLE_IDX(NUM_SECTIONS, 4);
+// Macro for declaring table index paths. Must be non-const, so they can be re-assigned depending on the settings.
+#define DECL_TABLE_IDX_VAR(name, value) static NSUInteger (name) = (value)
 
-DECL_TABLE_IDX(BILL_SECTION, 0);
+DECL_TABLE_IDX_VAR(NUM_SECTIONS, 3);
+
+DECL_TABLE_IDX_VAR(BILL_SECTION, 0);
 DECL_TABLE_IDX(BILL_ROW, 0);
 DECL_TABLE_IDX(BILL_SECTION_ROWS, 1);
 
-DECL_TABLE_IDX(TIP_SECTION, 1);
+DECL_TABLE_IDX_VAR(TIP_SECTION, 1);
 DECL_TABLE_IDX(TIP_PERCENT_ROW, 0);
 DECL_TABLE_IDX(TIP_ROW, 1);
 DECL_TABLE_IDX(TIP_SECTION_ROWS, 2);
 
-DECL_TABLE_IDX(TOTAL_SECTION, 2);
+DECL_TABLE_IDX_VAR(TOTAL_SECTION, 2);
 DECL_TABLE_IDX(TOTAL_ROW, 0);
 DECL_TABLE_IDX(TOTAL_SECTION_ROWS, 1);
 
-DECL_TABLE_IDX(SPLIT_SECTION, 3);
+DECL_TABLE_IDX_VAR(SPLIT_SECTION, 3);
 DECL_TABLE_IDX(SPLIT_COUNT_ROW, 0);
 DECL_TABLE_IDX(SPLIT_TIP_ROW, 1);
 DECL_TABLE_IDX(SPLIT_TOTAL_ROW, 2);
 DECL_TABLE_IDX(SPLIT_SECTION_ROWS, 3);
+
+DECL_TABLE_IDX_VAR(TAX_SECTION, 4);
+DECL_TABLE_IDX(TAX_PERCENT_ROW, 0);
+DECL_TABLE_IDX(TAX_ROW, 1);
+DECL_TABLE_IDX(TAX_SECTION_ROWS, 2);
 
 static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 
@@ -48,6 +56,7 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) MABill *bill;
 @property (strong, nonatomic) NSArray *textFieldIndexPaths;
+@property (strong, nonatomic) NSDictionary *indexPathToBillKeyDict;
 @property (strong, nonatomic) NSIndexPath *activeIndexPath;
 @property (strong, nonatomic) UITextField *activeTextField;
 
@@ -68,6 +77,7 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 @synthesize tableView = _tableView;
 @synthesize bill = _bill;
 @synthesize textFieldIndexPaths = _textFieldIndexPaths;
+@synthesize indexPathToBillKeyDict = _indexPathToBillKeyDict;
 @synthesize activeIndexPath = _activeIndexPath;
 @synthesize activeTextField = _activeTextField;
 
@@ -115,7 +125,7 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardWillShowNotification object:nil];
     [center addObserver:self selector:@selector(keyboardOffScreen:) name:UIKeyboardWillHideNotification object:nil];
 
-    [self makeTextFieldIndexPaths];
+    [self configureTableSections];
     [self.tableView reloadData];
 }
 
@@ -184,6 +194,34 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     }
 }
 
+- (void)configureTableSections
+{
+    NUM_SECTIONS = 3;
+
+    BILL_SECTION = 0;
+    TIP_SECTION = BILL_SECTION + 1;
+    TOTAL_SECTION = TIP_SECTION + 1;
+
+    if ([[MAUserUtil sharedInstance] enableTax])
+    {
+        ++NUM_SECTIONS;
+        
+        TAX_SECTION = BILL_SECTION + 1;
+        TIP_SECTION = TAX_SECTION + 1;
+        TOTAL_SECTION = TAX_SECTION + 1;
+    }
+
+    if ([[MAUserUtil sharedInstance] enableSplit])
+    {
+        ++NUM_SECTIONS;
+        
+        SPLIT_SECTION = TOTAL_SECTION + 1;
+    }
+    
+    [self makeTextFieldIndexPaths];
+    [self makeIndexPathToBillKeyDict];
+}
+
 // List of index paths that contain text fields.
 - (void)makeTextFieldIndexPaths
 {
@@ -193,9 +231,14 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     [textFieldIndexPaths addObject:[NSIndexPath indexPathForRow:TIP_PERCENT_ROW inSection:TIP_SECTION]];
     [textFieldIndexPaths addObject:[NSIndexPath indexPathForRow:TIP_ROW inSection:TIP_SECTION]];
     [textFieldIndexPaths addObject:[NSIndexPath indexPathForRow:TOTAL_ROW inSection:TOTAL_SECTION]];
-    
-    BOOL enableSplit = [[MAUserUtil sharedInstance] enableSplit];
-    if (enableSplit)
+
+    if ([[MAUserUtil sharedInstance] enableTax])
+    {
+        [textFieldIndexPaths addObject:[NSIndexPath indexPathForRow:TAX_PERCENT_ROW inSection:TAX_SECTION]];
+        [textFieldIndexPaths addObject:[NSIndexPath indexPathForRow:TAX_ROW inSection:TAX_SECTION]];
+    }
+
+    if ([[MAUserUtil sharedInstance] enableSplit])
     {
         [textFieldIndexPaths addObject:[NSIndexPath indexPathForRow:SPLIT_COUNT_ROW inSection:SPLIT_SECTION]];
         [textFieldIndexPaths addObject:[NSIndexPath indexPathForRow:SPLIT_TIP_ROW inSection:SPLIT_SECTION]];
@@ -203,6 +246,22 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     }
     
     self.textFieldIndexPaths = textFieldIndexPaths;
+}
+
+- (void)makeIndexPathToBillKeyDict
+{
+    NSMutableDictionary *indexPathToBillKeyDict = [[NSMutableDictionary alloc] init];
+    [indexPathToBillKeyDict setObject:@"bill" forKey:[NSIndexPath indexPathForRow:BILL_ROW inSection:BILL_SECTION]];
+    [indexPathToBillKeyDict setObject:@"tipPercent" forKey:[NSIndexPath indexPathForRow:TIP_PERCENT_ROW inSection:TIP_SECTION]];
+    [indexPathToBillKeyDict setObject:@"tip" forKey:[NSIndexPath indexPathForRow:TIP_ROW inSection:TIP_SECTION]];
+    [indexPathToBillKeyDict setObject:@"total" forKey:[NSIndexPath indexPathForRow:TOTAL_ROW inSection:TOTAL_SECTION]];
+    [indexPathToBillKeyDict setObject:@"taxPercent" forKey:[NSIndexPath indexPathForRow:TAX_PERCENT_ROW inSection:TAX_SECTION]];
+    [indexPathToBillKeyDict setObject:@"tax" forKey:[NSIndexPath indexPathForRow:TAX_ROW inSection:TAX_SECTION]];
+    [indexPathToBillKeyDict setObject:@"split" forKey:[NSIndexPath indexPathForRow:SPLIT_COUNT_ROW inSection:SPLIT_SECTION]];
+    [indexPathToBillKeyDict setObject:@"splitTip" forKey:[NSIndexPath indexPathForRow:SPLIT_TIP_ROW inSection:SPLIT_SECTION]];
+    [indexPathToBillKeyDict setObject:@"splitTotal" forKey:[NSIndexPath indexPathForRow:SPLIT_TOTAL_ROW inSection:SPLIT_SECTION]];
+    
+    self.indexPathToBillKeyDict = indexPathToBillKeyDict;
 }
 
 - (void)hideUIToMakeLaunchImages
@@ -251,12 +310,7 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    BOOL enableSplit = [[MAUserUtil sharedInstance] enableSplit];
-    if (enableSplit)
-    {
-        return NUM_SECTIONS;
-    }
-    return NUM_SECTIONS - 1;
+    return NUM_SECTIONS;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -272,6 +326,10 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     else if (section == TOTAL_SECTION)
     {
 //        return Localize(@"Total");
+    }
+    else if (section == TAX_SECTION)
+    {
+        return Localize(@"Tax");
     }
     else if (section == SPLIT_SECTION)
     {
@@ -295,6 +353,10 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     {
         return TOTAL_SECTION_ROWS;
     }
+    else if (section == TAX_SECTION)
+    {
+        return TAX_SECTION_ROWS;
+    }
     else if (section == SPLIT_SECTION)
     {
         return SPLIT_SECTION_ROWS;
@@ -313,10 +375,7 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     }
     else if (indexPath.section == TIP_SECTION)
     {
-//        if (indexPath.row == TIP_ROW)
-        {
-            return [self tableView:tableView tipCellForRowAtIndexPath:indexPath];
-        }
+        return [self tableView:tableView tipCellForRowAtIndexPath:indexPath];
     }
     else if (indexPath.section == TOTAL_SECTION)
     {
@@ -325,12 +384,13 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
             return [self tableView:tableView totalCellForRowAtIndexPath:indexPath];
         }
     }
+    else if (indexPath.section == TAX_SECTION)
+    {
+        return [self tableView:tableView taxCellForRowAtIndexPath:indexPath];
+    }
     else if (indexPath.section == SPLIT_SECTION)
     {
-//        if (indexPath.row == SPLIT_COUNT_ROW)
-        {
-            return [self tableView:tableView splitCellForRowAtIndexPath:indexPath];
-        }
+        return [self tableView:tableView splitCellForRowAtIndexPath:indexPath];
     }
     return nil;
 }
@@ -417,6 +477,40 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     UIImage *image = [MAFilePaths totalImage];
     cell.imageView.image = image;
 
+    return cell;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView taxCellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MATextFieldCell *cell = (MATextFieldCell *)[tableView dequeueReusableCellWithIdentifier:MATextFieldCellIdentifier];
+    if (cell == nil)
+    {
+        cell = [[MATextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MATextFieldCellIdentifier];
+    }
+    [cell setAppearanceInTable:tableView];
+    
+    cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
+    cell.textField.delegate = self;
+    
+    NSString *labelText = @"";
+    NSString *textFieldText = @"";
+    UIImage *image = nil;
+    if (indexPath.row == TAX_PERCENT_ROW)
+    {
+        labelText = Localize(@"Percent");
+        textFieldText = [self.bill formattedTaxPercent];
+        image = [MAFilePaths taxPercentImage];
+    }
+    else if (indexPath.row == TAX_ROW)
+    {
+        labelText = Localize(@"Amount");
+        textFieldText = [self.bill formattedTax];
+        image = [MAFilePaths taxAmountImage];
+    }
+    cell.textLabel.text = labelText;
+    cell.textField.text = textFieldText;
+    cell.imageView.image = image;
+    
     return cell;
 }
 
@@ -533,25 +627,6 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     [self checkAndSetEnabledBarButtons];
 }
 
-- (NSString *)billKeyForIndexPath:(NSIndexPath *)indexPath
-{
-    static dispatch_once_t once;
-    static NSMutableDictionary *indexPathToBillKeyDict = nil;
-    dispatch_once(&once, ^{
-        indexPathToBillKeyDict = [[NSMutableDictionary alloc] init];
-        [indexPathToBillKeyDict setObject:@"bill" forKey:[NSIndexPath indexPathForRow:BILL_ROW inSection:BILL_SECTION]];
-        [indexPathToBillKeyDict setObject:@"tipPercent" forKey:[NSIndexPath indexPathForRow:TIP_PERCENT_ROW inSection:TIP_SECTION]];
-        [indexPathToBillKeyDict setObject:@"tip" forKey:[NSIndexPath indexPathForRow:TIP_ROW inSection:TIP_SECTION]];
-        [indexPathToBillKeyDict setObject:@"total" forKey:[NSIndexPath indexPathForRow:TOTAL_ROW inSection:TOTAL_SECTION]];
-        [indexPathToBillKeyDict setObject:@"split" forKey:[NSIndexPath indexPathForRow:SPLIT_COUNT_ROW inSection:SPLIT_SECTION]];
-        [indexPathToBillKeyDict setObject:@"splitTip" forKey:[NSIndexPath indexPathForRow:SPLIT_TIP_ROW inSection:SPLIT_SECTION]];
-        [indexPathToBillKeyDict setObject:@"splitTotal" forKey:[NSIndexPath indexPathForRow:SPLIT_TOTAL_ROW inSection:SPLIT_SECTION]];
-    });
-    
-    NSString *billKey = [indexPathToBillKeyDict objectForKey:indexPath];
-    return billKey;
-}
-
 - (UITextField *)textFieldForIndexPath:(NSIndexPath *)indexPath
 {
     if ( ! indexPath)
@@ -600,7 +675,7 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     {
         return;
     }
-    NSString *billKey = [self billKeyForIndexPath:textFieldIndexPath];
+    NSString *billKey = [self.indexPathToBillKeyDict objectForKey:textFieldIndexPath];
     if ( ! billKey)
     {
         return;

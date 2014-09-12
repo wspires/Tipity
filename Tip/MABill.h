@@ -35,6 +35,8 @@
 - (NSString *)formattedBill;
 - (NSString *)formattedTipPercent;
 - (NSString *)formattedTip;
+- (NSString *)formattedTaxPercent;
+- (NSString *)formattedTax;
 - (NSString *)formattedTotal;
 - (NSString *)formattedSplit;
 - (NSString *)formattedSplitTip;
@@ -43,6 +45,8 @@
 + (NSString *)formatBill:(NSNumber *)bill;
 + (NSString *)formatTipPercent:(NSNumber *)tipPercent;
 + (NSString *)formatTip:(NSNumber *)tip;
++ (NSString *)formatTaxPercent:(NSNumber *)taxPercent;
++ (NSString *)formatTax:(NSNumber *)tip;
 + (NSString *)formatTotal:(NSNumber *)total;
 + (NSString *)formatSplit:(NSNumber *)split;
 + (NSString *)formatSplitTip:(NSNumber *)splitTip;

@@ -454,6 +454,16 @@ static double const DefaultSplitTotal = 120.;
     return [MABill formatTip:self.tip];
 }
 
+- (NSString *)formattedTaxPercent
+{
+    return [MABill formatTaxPercent:self.taxPercent];
+}
+
+- (NSString *)formattedTax
+{
+    return [MABill formatTax:self.tax];
+}
+
 - (NSString *)formattedTotal
 {
     return [MABill formatTotal:self.total];
@@ -487,6 +497,16 @@ static double const DefaultSplitTotal = 120.;
 + (NSString *)formatTip:(NSNumber *)tip
 {
     return [MABill formatPrice:tip];
+}
+
++ (NSString *)formatTaxPercent:(NSNumber *)taxPercent
+{
+    return [MABill formatPercent:taxPercent];
+}
+
++ (NSString *)formatTax:(NSNumber *)tax
+{
+    return [MABill formatPrice:tax];
 }
 
 + (NSString *)formatTotal:(NSNumber *)total

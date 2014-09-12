@@ -26,8 +26,8 @@
 DECL_TABLE_IDX(NUM_SECTIONS, 3);
 
 DECL_TABLE_IDX(GEN_SECTION, 0);
-DECL_TABLE_IDX(ENABLE_SPLIT_TIP_ROW, 0);
-DECL_TABLE_IDX(ENABLE_TAX_ROW, 1);
+DECL_TABLE_IDX(ENABLE_TAX_ROW, 0);
+DECL_TABLE_IDX(ENABLE_SPLIT_TIP_ROW, 1);
 DECL_TABLE_IDX(APPEARANCE_ROW, 2);
 DECL_TABLE_IDX(GEN_SECTION_ROWS, 3);
 
@@ -128,12 +128,12 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
     [appInfo setObject:SFmt(@"%@%@", baseUrl, @"914223424") forKey:@"link"];
     [appList addObject:appInfo];
 
-    appInfo = [[NSMutableDictionary alloc] init];
-    [appInfo setObject:Localize(@"Mat Calc") forKey:@"name"];
-    [appInfo setObject:Localize(@"Matrix Math Calculator") forKey:@"description"];
-    [appInfo setObject:[UIImage imageNamed:@"Mat Calc - Icon.png"] forKey:@"image"];
-    [appInfo setObject:SFmt(@"%@%@", baseUrl, @"531168194") forKey:@"link"];
-    [appList addObject:appInfo];
+//    appInfo = [[NSMutableDictionary alloc] init];
+//    [appInfo setObject:Localize(@"Mat Calc") forKey:@"name"];
+//    [appInfo setObject:Localize(@"Matrix Math Calculator") forKey:@"description"];
+//    [appInfo setObject:[UIImage imageNamed:@"Mat Calc - Icon.png"] forKey:@"image"];
+//    [appInfo setObject:SFmt(@"%@%@", baseUrl, @"531168194") forKey:@"link"];
+//    [appList addObject:appInfo];
 
     return appList;
 }
@@ -224,7 +224,8 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
     }
     else if (section == INFO_SECTION)
     {
-        return Localize(@"Information");
+//        return Localize(@"Information");
+        return Localize(@"Share");
     }
     return @"";
 }
