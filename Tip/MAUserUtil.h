@@ -10,9 +10,7 @@
 #import <UIKit/UIKit.h>
 
 static NSString *EnableSplit = @"enableSplit";
-
-static NSString *EnableSizeField = @"enableSizeField";
-static NSString *EnableDescription = @"enableDescription";
+static NSString *EnableTax = @"enableTax";
 
 static NSString *BackgroundColorId = @"backgroundColorId";
 static NSString *ForegroundColorId = @"foregroundColorId";
@@ -49,10 +47,8 @@ static NSString *TableTextColor = @"tableTextColor";
 #pragma mark BOOL settings
 - (BOOL)enableSplit;
 - (void)setEnableSplit:(BOOL)enable;
-- (BOOL)enableSizeField;
-- (void)setEnableSizeField:(BOOL)enableSizeField;
-- (BOOL)enableDescription;
-- (void)setEnableDescription:(BOOL)enableDescription;
+- (BOOL)enableTax;
+- (void)setEnableTax:(BOOL)enable;
 
 #pragma mark Current user
 + (NSString *)defaultUserName;

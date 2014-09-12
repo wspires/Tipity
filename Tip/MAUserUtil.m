@@ -164,7 +164,6 @@ static NSString *PerExerciseSettings = @"perExerciseSettings";
     BOOL const enable = [MAUtil isStringOn:enableStr];
     return enable;
 }
-
 - (void)setEnableSplit:(BOOL)enable
 {
     NSString *value = @"off";
@@ -175,38 +174,20 @@ static NSString *PerExerciseSettings = @"perExerciseSettings";
     [self saveSetting:value forKey:EnableSplit];
 }
 
-- (BOOL)enableSizeField
+- (BOOL)enableTax
 {
-    NSString *enableSizeFieldStr = [self objectForKey:EnableSizeField];
-    BOOL const enableSizeField = [MAUtil isStringOn:enableSizeFieldStr];
-    return enableSizeField;
+    NSString *enableStr = [self objectForKey:EnableTax];
+    BOOL const enable = [MAUtil isStringOn:enableStr];
+    return enable;
 }
-
-- (void)setEnableSizeField:(BOOL)enableSizeField
+- (void)setEnableTax:(BOOL)enable
 {
     NSString *value = @"off";
-    if (enableSizeField)
+    if (enable)
     {
         value = @"on";
     }
-    [self saveSetting:value forKey:EnableSizeField];
-}
-
-- (BOOL)enableDescription
-{
-    NSString *enableDescStr = [[MAUserUtil sharedInstance] objectForKey:EnableDescription];
-    BOOL const enableDesc = [MAUtil isStringOn:enableDescStr];
-    return enableDesc;
-}
-
-- (void)setEnableDescription:(BOOL)enableDescription
-{
-    NSString *value = @"off";
-    if (enableDescription)
-    {
-        value = @"on";
-    }
-    [self saveSetting:value forKey:EnableDescription];
+    [self saveSetting:value forKey:EnableTax];
 }
 
 - (NSDictionary *)saveSetting:(id)setting forKey:(NSString *)key perDictSettingsKey:(NSString *)perDictSettingsKey nameKey:(NSString *)nameKey
@@ -687,19 +668,7 @@ static NSString *PerExerciseSettings = @"perExerciseSettings";
 //    NSString *paidVersusFreeBoolValue = @"off";
     
     CHECK_SETTING_OFF(EnableSplit)
-
-    // Size should be off by default because it's an advanced setting.
-    CHECK_SETTING_OFF(EnableSizeField)
-    
-    if (Price_Per_Unit_Iap)
-    {
-        CHECK_SETTING_OFF(EnableDescription)
-    }
-    else
-    {
-        // Default price/unit to on if it's not part of an IAP.
-        CHECK_SETTING_ON(EnableDescription)
-    }
+    CHECK_SETTING_OFF(EnableTax)
     
     // Appearance settings.
     CHECK_SETTING(BackgroundColorId, [MAUserUtil defaultBackgroundColorId])
@@ -727,8 +696,8 @@ static NSString *PerExerciseSettings = @"perExerciseSettings";
     BOOL updatedSettings = NO;
     NSString *key = nil;
     NSString *value = @"on"; // Value to turn on given option.
-    
-    key = EnableSizeField;
+
+    key = EnableSplit;
     value = [settings objectForKey:key];
     if (![value isEqualToString:@"on"] && ![value isEqualToString:@"off"])
     {
@@ -738,7 +707,7 @@ static NSString *PerExerciseSettings = @"perExerciseSettings";
         updatedSettings = YES;
     }
 
-    key = EnableDescription;
+    key = EnableTax;
     value = [settings objectForKey:key];
     if (![value isEqualToString:@"on"] && ![value isEqualToString:@"off"])
     {

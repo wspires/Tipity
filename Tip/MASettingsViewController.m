@@ -27,8 +27,9 @@ DECL_TABLE_IDX(NUM_SECTIONS, 3);
 
 DECL_TABLE_IDX(GEN_SECTION, 0);
 DECL_TABLE_IDX(ENABLE_SPLIT_TIP_ROW, 0);
-DECL_TABLE_IDX(APPEARANCE_ROW, 1);
-DECL_TABLE_IDX(GEN_SECTION_ROWS, 2);
+DECL_TABLE_IDX(ENABLE_TAX_ROW, 1);
+DECL_TABLE_IDX(APPEARANCE_ROW, 2);
+DECL_TABLE_IDX(GEN_SECTION_ROWS, 3);
 
 DECL_TABLE_IDX(APPS_SECTION, 1);
 
@@ -277,6 +278,10 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
         {
             return [self tableView:tableView splitTipCellForRowAtIndexPath:indexPath];
         }
+        else if (indexPath.row == ENABLE_TAX_ROW)
+        {
+            return [self tableView:tableView taxCellForRowAtIndexPath:indexPath];
+        }
     }
     else if (indexPath.section == APPS_SECTION)
     {
@@ -419,6 +424,55 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
     }
     
     [[MAUserUtil sharedInstance] setEnableSplit:swtch.isOn];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView taxCellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MASwitchCell *cell = (MASwitchCell *)[tableView dequeueReusableCellWithIdentifier:MASwitchCellIdentifier];
+    if (cell == nil)
+    {
+        cell = [[MASwitchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MASwitchCellIdentifier];
+    }
+    //[MAAppearance setAppearanceForCell:cell tableStyle:tableView.style];
+    [cell setAppearanceInTable:tableView];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    cell.label.backgroundColor = [UIColor clearColor];
+    NSString *text = Localize(@"Deduct Tax");
+    [cell.label setText:text];
+    //[MAAppearance setFontForCellLabel:cell.label];
+    [MAAppearance setFontForCell:cell tableStyle:tableView.style];
+    
+    [MATipIAPHelper disableLabelIfNotPurchased:cell.label];
+    
+    cell.label.adjustsFontSizeToFitWidth = YES;
+    
+    BOOL enable = [[MAUserUtil sharedInstance] enableTax];
+    cell.swtch.on = enable;
+    
+    [cell.swtch removeTarget:nil action:NULL forControlEvents:UIControlEventValueChanged];
+    [cell.swtch addTarget:self action:@selector(deductTaxChanged:) forControlEvents:UIControlEventValueChanged];
+    
+    [MAAppearance setColorForSwitch:cell.swtch];
+    
+    UIImage *image = [MAFilePaths taxAmountImage];
+    cell.imageView.image = image;
+    cell.leadingSpaceConstraint.constant = 58; // TODO: Figure out the image width programmatically (imageView frame does not work).
+    
+    return cell;
+}
+
+- (IBAction)deductTaxChanged:(id)sender
+{
+    UISwitch *swtch = (UISwitch *)sender;
+    
+    if ([MATipIAPHelper checkAndAlertForIAP])
+    {
+        swtch.on = NO;
+        return;
+    }
+    
+    [[MAUserUtil sharedInstance] setEnableTax:swtch.isOn];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView appsCellForRowAtIndexPath:(NSIndexPath *)indexPath

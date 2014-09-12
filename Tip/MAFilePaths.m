@@ -469,6 +469,27 @@ static NSString * const ExerciseFilterName = @"ExerciseFilterName";
     return [MAFilePaths applyEffectsToImagePath:[MAFilePaths splitTotalFilename]];
 }
 
++ (NSString *)taxPercentImageFilename
+{
+    return @"percent.png";
+}
++ (UIImage *)taxPercentImage
+{
+    return [MAFilePaths applyEffectsToImagePath:[MAFilePaths taxPercentImageFilename]];
+}
+
++ (NSString *)taxAmountImageFilename
+{
+//    return @"826-money-1.png";
+//    return @"Postage_Stamp.png";
+//    return @"561-stamp.png";
+    return @"govt_bldg.png";
+}
++ (UIImage *)taxAmountImage
+{
+    return [MAFilePaths applyEffectsToImagePath:[MAFilePaths taxAmountImageFilename]];
+}
+
 #pragma mark - Feedback icons
 
 + (NSString *)tellFriendImageFilename

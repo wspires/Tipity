@@ -313,14 +313,6 @@ static NSUInteger const ProductCountThreshold = 3;
             [feature setObject:[MAFilePaths noAdImage] forKey:Feature_Image_Key];
             [features addObject:feature];
         }
-        if (Unlimited_Items_Iap)
-        {
-            feature = [NSMutableDictionary dictionary];
-            [feature setObject:Localize(@"Unlimited Items") forKey:Feature_Title_Key];
-            [feature setObject:SFmt(Localize(@"Compare more than %d items at once"), ProductCountThreshold) forKey:Feature_Description_Key];
-            [feature setObject:[MAFilePaths logSetImage] forKey:Feature_Image_Key];
-            [features addObject:feature];
-        }
         if (Split_Tip_Iap)
         {
             feature = [NSMutableDictionary dictionary];
@@ -329,20 +321,12 @@ static NSUInteger const ProductCountThreshold = 3;
             [feature setObject:[MAFilePaths perUnitSizeImage] forKey:Feature_Image_Key];
             [features addObject:feature];
         }
-        if (Size_Per_Unit_Iap)
+        if (Tax_Iap)
         {
             feature = [NSMutableDictionary dictionary];
-            [feature setObject:Localize(@"Size Per Unit") forKey:Feature_Title_Key];
-            [feature setObject:Localize(@"Enter size per unit, such as sheets per roll") forKey:Feature_Description_Key];
+            [feature setObject:Localize(@"Exclude Tax") forKey:Feature_Title_Key];
+            [feature setObject:Localize(@"Exclude taxes when calculating tip") forKey:Feature_Description_Key];
             [feature setObject:[MAFilePaths perUnitSizeImage] forKey:Feature_Image_Key];
-            [features addObject:feature];
-        }
-        if (Price_Per_Unit_Iap)
-        {
-            feature = [NSMutableDictionary dictionary];
-            [feature setObject:Localize(@"Price Per Unit") forKey:Feature_Title_Key];
-            [feature setObject:Localize(@"Show calculated price per unit") forKey:Feature_Description_Key];
-            [feature setObject:[MAFilePaths perUnitPriceImage] forKey:Feature_Image_Key];
             [features addObject:feature];
         }
         if (Customize_Color_Iap)

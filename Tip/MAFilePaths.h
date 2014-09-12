@@ -64,6 +64,10 @@
 + (UIImage *)splitTipImage;
 + (NSString *)splitTotalFilename;
 + (UIImage *)splitTotalImage;
++ (NSString *)taxPercentImageFilename;
++ (UIImage *)taxPercentImage;
++ (NSString *)taxAmountImageFilename;
++ (UIImage *)taxAmountImage;
 
 // Feedback icons.
 + (NSString *)tellFriendImageFilename;
