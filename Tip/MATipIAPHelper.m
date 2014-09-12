@@ -16,7 +16,7 @@
 
 // Uncomment to unlock all IAP.
 // Comment before deploying or else all IAP will be unlocked for free!
-#define UNLOCK_ALL_IAP
+//#define UNLOCK_ALL_IAP
 
 static NSUInteger const ProductCountThreshold = 3;
 
@@ -318,7 +318,7 @@ static NSUInteger const ProductCountThreshold = 3;
             feature = [NSMutableDictionary dictionary];
             [feature setObject:Localize(@"Split Tip") forKey:Feature_Title_Key];
             [feature setObject:Localize(@"Split the tip among multiple people") forKey:Feature_Description_Key];
-            [feature setObject:[MAFilePaths perUnitSizeImage] forKey:Feature_Image_Key];
+            [feature setObject:[MAFilePaths peopleImage] forKey:Feature_Image_Key];
             [features addObject:feature];
         }
         if (Tax_Iap)
@@ -326,7 +326,7 @@ static NSUInteger const ProductCountThreshold = 3;
             feature = [NSMutableDictionary dictionary];
             [feature setObject:Localize(@"Exclude Tax") forKey:Feature_Title_Key];
             [feature setObject:Localize(@"Exclude taxes when calculating tip") forKey:Feature_Description_Key];
-            [feature setObject:[MAFilePaths perUnitSizeImage] forKey:Feature_Image_Key];
+            [feature setObject:[MAFilePaths taxAmountImage] forKey:Feature_Image_Key];
             [features addObject:feature];
         }
         if (Customize_Color_Iap)

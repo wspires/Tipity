@@ -1024,7 +1024,8 @@ static NSString * const ExerciseFilterName = @"ExerciseFilterName";
 
 + (NSString *)noAdFilename
 {
-    return @"1409632591_Block-512.png";
+    return @"724-no-ad.png";
+//    return @"1409632591_Block-512.png";
 }
 + (UIImage *)noAdImage
 {

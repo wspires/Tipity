@@ -228,8 +228,7 @@ DECL_TABLE_IDX(IAP_LIST_SECTION, 0);
     
     if ((NSNull *)image != [NSNull null])
     {
-        NSInteger tag = [MAUtil toTag:indexPath];
-        [MAUtil setImage:image forCell:cell withTag:tag];
+        cell.imageView.image = image;
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

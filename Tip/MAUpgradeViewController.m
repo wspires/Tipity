@@ -207,8 +207,7 @@ DECL_TABLE_IDX(BUY_SECTION_ROWS, 1);
     
     if ((NSNull *)image != [NSNull null])
     {
-        NSInteger tag = [MAUtil toTag:indexPath];
-        [MAUtil setImage:image forCell:cell withTag:tag];
+        cell.imageView.image = image;
     }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

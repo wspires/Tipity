@@ -154,6 +154,8 @@
 		1893F07419C2B12A00F1485A /* 561-stamp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1893F07219C2B12A00F1485A /* 561-stamp@2x.png */; };
 		1893F07719C2B4BB00F1485A /* govt_bldg.png in Resources */ = {isa = PBXBuildFile; fileRef = 1893F07519C2B4BB00F1485A /* govt_bldg.png */; };
 		1893F07819C2B4BB00F1485A /* govt_bldg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1893F07619C2B4BB00F1485A /* govt_bldg@2x.png */; };
+		1893F07B19C339BF00F1485A /* 724-no-ad.png in Resources */ = {isa = PBXBuildFile; fileRef = 1893F07919C339BF00F1485A /* 724-no-ad.png */; };
+		1893F07C19C339BF00F1485A /* 724-no-ad@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1893F07A19C339BF00F1485A /* 724-no-ad@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -470,6 +472,8 @@
 		1893F07219C2B12A00F1485A /* 561-stamp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "561-stamp@2x.png"; sourceTree = "<group>"; };
 		1893F07519C2B4BB00F1485A /* govt_bldg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = govt_bldg.png; sourceTree = "<group>"; };
 		1893F07619C2B4BB00F1485A /* govt_bldg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "govt_bldg@2x.png"; sourceTree = "<group>"; };
+		1893F07919C339BF00F1485A /* 724-no-ad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "724-no-ad.png"; sourceTree = "<group>"; };
+		1893F07A19C339BF00F1485A /* 724-no-ad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "724-no-ad@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -763,6 +767,8 @@
 		180975F619BE61010039F654 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				1893F07919C339BF00F1485A /* 724-no-ad.png */,
+				1893F07A19C339BF00F1485A /* 724-no-ad@2x.png */,
 				1893F07519C2B4BB00F1485A /* govt_bldg.png */,
 				1893F07619C2B4BB00F1485A /* govt_bldg@2x.png */,
 				1893F07119C2B12A00F1485A /* 561-stamp.png */,
@@ -1168,6 +1174,7 @@
 				1809768919BE70A70039F654 /* MATipViewController.xib in Resources */,
 				1893F07019C2B08C00F1485A /* Postage_Stamp@2x.png in Resources */,
 				180975D619BE60940039F654 /* HockeySDKResources.bundle in Resources */,
+				1893F07C19C339BF00F1485A /* 724-no-ad@2x.png in Resources */,
 				1809761019BE61010039F654 /* 1402304374_bg_color.png in Resources */,
 				1893F07719C2B4BB00F1485A /* govt_bldg.png in Resources */,
 				1809762419BE61010039F654 /* Weight Log+ - Icon.png in Resources */,
@@ -1202,6 +1209,7 @@
 				1809761F19BE61010039F654 /* Gym Log+ - Icon.png in Resources */,
 				180976A619BE70F00039F654 /* MACreditsViewController.xib in Resources */,
 				1809766F19BE6FE70039F654 /* MAUpgradeAlertViewController.xib in Resources */,
+				1893F07B19C339BF00F1485A /* 724-no-ad.png in Resources */,
 				180975F419BE60A90039F654 /* AppiraterLocalizable.strings in Resources */,
 				1808CE0E19C14C0E00E972E1 /* 704-compose.png in Resources */,
 				1808CE0F19C14C0E00E972E1 /* 704-compose@2x.png in Resources */,
