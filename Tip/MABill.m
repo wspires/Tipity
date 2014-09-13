@@ -13,6 +13,7 @@ static double const DefaultTipPercent = 20.;
 static double const DefaultTip = 20.;
 static double const DefaultTaxPercent = 0.;
 static double const DefaultTax = 0.;
+static double const DefaultBillBeforeTax = DefaultBill - DefaultTax;
 static double const DefaultTotal = 120.;
 static double const DefaultSplit = 1.;
 static double const DefaultSplitTip = 20.;
@@ -24,6 +25,7 @@ static double const DefaultSplitTotal = 120.;
 @synthesize tip = _tip;
 @synthesize taxPercent = _taxPercent;
 @synthesize tax = _tax;
+@synthesize billBeforeTax = _billBeforeTax;
 @synthesize total = _total;
 @synthesize split = _split;
 @synthesize splitTip = _splitTip;
@@ -52,6 +54,7 @@ static double const DefaultSplitTotal = 120.;
         _tip = [NSNumber numberWithDouble:DefaultTip];
         _taxPercent = [NSNumber numberWithDouble:DefaultTaxPercent];
         _tax = [NSNumber numberWithDouble:DefaultTax];
+        _billBeforeTax = [NSNumber numberWithDouble:DefaultBillBeforeTax];
         _split = [NSNumber numberWithDouble:DefaultSplit];
         _splitTip = [NSNumber numberWithDouble:DefaultSplitTip];
         _splitTotal = [NSNumber numberWithDouble:DefaultSplitTotal];
@@ -61,6 +64,15 @@ static double const DefaultSplitTotal = 120.;
     }
     return self;
 }
+
+- (void)clearTax
+{
+    _taxPercent = [NSNumber numberWithDouble:0];
+    _tax = [NSNumber numberWithDouble:0];
+    _billBeforeTax = [self.bill copy];
+}
+
+#pragma mark Delegate calls
 
 - (void)delegateWillUpdateBill
 {
@@ -98,7 +110,8 @@ static double const DefaultSplitTotal = 120.;
     [self delegateWillUpdateBill];
 
     _bill = [bill copy];
-    
+    _billBeforeTax = [MABill numberFromPercentagePlusNumber:_bill percent:_taxPercent];
+
     [self updateBill];
     [self delegateDidUpdateBill];
 }
@@ -128,7 +141,7 @@ static double const DefaultSplitTotal = 120.;
     [self delegateWillUpdateBill];
     
     _tip = [tip copy];
-    _tipPercent = [MABill percentFromNumber:_bill percentageOfNumber:_tip];
+    _tipPercent = [MABill percentFromNumber:_billBeforeTax percentageOfNumber:_tip];
     
     [self updateBill];
     [self delegateDidUpdateBill];
@@ -141,9 +154,17 @@ static double const DefaultSplitTotal = 120.;
         return;
     }
     
+    // Tax cannot exceed the bill amount.
+    if (taxPercent.doubleValue > 100)
+    {
+        [self delegateErrorUpdatingBill];
+        return;
+    }
+
     [self delegateWillUpdateBill];
     
     _taxPercent = [taxPercent copy];
+    _billBeforeTax = [MABill numberFromPercentagePlusNumber:_bill percent:_taxPercent];
     
     [self updateBill];
     [self delegateDidUpdateBill];
@@ -156,10 +177,42 @@ static double const DefaultSplitTotal = 120.;
         return;
     }
     
+    // Tax cannot exceed the bill amount.
+    if (_bill.doubleValue < tax.doubleValue)
+    {
+        [self delegateErrorUpdatingBill];
+        return;
+    }
+
     [self delegateWillUpdateBill];
     
     _tax = [tax copy];
+    _billBeforeTax = [NSNumber numberWithDouble:(_bill.doubleValue - tax.doubleValue)];
     _taxPercent = [MABill percentFromNumber:_bill percentageOfNumber:_tax];
+    
+    [self updateBill];
+    [self delegateDidUpdateBill];
+}
+
+- (void)setBillBeforeTax:(NSNumber *)billBeforeTax
+{
+    if ( ! billBeforeTax || billBeforeTax.doubleValue == _billBeforeTax.doubleValue)
+    {
+        return;
+    }
+    
+    // Tax cannot exceed the bill amount.
+    if (_bill.doubleValue < billBeforeTax.doubleValue)
+    {
+        [self delegateErrorUpdatingBill];
+        return;
+    }
+
+    [self delegateWillUpdateBill];
+    
+    _billBeforeTax = [billBeforeTax copy];
+    _tax = [NSNumber numberWithDouble:(_bill.doubleValue - _billBeforeTax.doubleValue)];
+    _taxPercent = [MABill percentFromNumber:_billBeforeTax percentageOfNumber:_tax];
     
     [self updateBill];
     [self delegateDidUpdateBill];
@@ -175,8 +228,8 @@ static double const DefaultSplitTotal = 120.;
     [self delegateWillUpdateBill];
     
     _total = [total copy];
-    _tip = [NSNumber numberWithDouble:(_total.doubleValue - _bill.doubleValue)];
-    _tipPercent = [MABill percentFromNumber:_bill percentageOfNumber:_tip];
+    _tip = [NSNumber numberWithDouble:(_total.doubleValue - _billBeforeTax.doubleValue)];
+    _tipPercent = [MABill percentFromNumber:_billBeforeTax percentageOfNumber:_tip];
     
     [self updateBill];
     [self delegateDidUpdateBill];
@@ -214,7 +267,7 @@ static double const DefaultSplitTotal = 120.;
 
     _splitTip = [splitTip copy];
     _tip = [NSNumber numberWithDouble:(_split.doubleValue * _splitTip.doubleValue)];
-    _tipPercent = [MABill percentFromNumber:_bill percentageOfNumber:_tip];
+    _tipPercent = [MABill percentFromNumber:_billBeforeTax percentageOfNumber:_tip];
 
     [self updateBill];
     [self delegateDidUpdateBill];
@@ -231,8 +284,8 @@ static double const DefaultSplitTotal = 120.;
 
     _splitTotal = [splitTotal copy];
     _total = [NSNumber numberWithDouble:(_splitTotal.doubleValue * _split.doubleValue)];
-    _tip = [NSNumber numberWithDouble:(_total.doubleValue - _bill.doubleValue)];
-    _tipPercent = [MABill percentFromNumber:_bill percentageOfNumber:_tip];
+    _tip = [NSNumber numberWithDouble:(_total.doubleValue - _billBeforeTax.doubleValue)];
+    _tipPercent = [MABill percentFromNumber:_billBeforeTax percentageOfNumber:_tip];
     
     [self updateBill];
     [self delegateDidUpdateBill];
@@ -241,26 +294,40 @@ static double const DefaultSplitTotal = 120.;
 // Update bill. Members bill, tipPercent, taxPercent, and split are assumed to be set already.
 - (void)updateBill
 {
-    _tip = [MABill percentageOfNumber:_bill percent:_tipPercent];
-    _tax = [MABill percentageOfNumber:_bill percent:_taxPercent];
+    // Calculate tip on the bill before being taxed.
+    _tip = [MABill percentageOfNumber:_billBeforeTax percent:_tipPercent];
     
-    // TODO: Add flag on whether the tax is included or tacked on and whether the tax should be factored into the tip or not.
+    _tax = [MABill percentageOfNumber:_billBeforeTax percent:_taxPercent];
+
+    // Calculate the total by adding the bill to the tip since the bill already has the tax factored in.
     _total = [NSNumber numberWithDouble:(_bill.doubleValue + _tip.doubleValue)];
     
     _splitTip = [NSNumber numberWithDouble:(_tip.doubleValue / _split.doubleValue)];
     _splitTotal = [NSNumber numberWithDouble:(_total.doubleValue / _split.doubleValue)];
 }
 
+// Calculate the percentage value of the number.
+// For example, if number = 200 and percent = 10, then return 20 since 10% of 200 is 20.
 + (NSNumber *)percentageOfNumber:(NSNumber *)number percent:(NSNumber *)percent
 {
     double const percentageOfNumber = number.doubleValue * (percent.doubleValue / 100.);
     return [NSNumber numberWithDouble:percentageOfNumber];
 }
 
+// Calculate the percentage such that taking the percentage of number yields percentageOfNumber.
+// For example, if number = 200 and percentageOfNumber = 20, then return 10 since 10% of 200 is 20.
 + (NSNumber *)percentFromNumber:(NSNumber *)number percentageOfNumber:(NSNumber *)percentageOfNumber
 {
     double const percent = 100. * (percentageOfNumber.doubleValue / number.doubleValue);
     return [NSNumber numberWithDouble:percent];
+}
+
+// Calculate the number such that number + percent gives percentagePlusNumber.
+// For example, if percentagePlusNumber = 200 and percent = 10, then return 181.81818 since 181.81818 + (10% of 181.81818) is 200.
++ (NSNumber *)numberFromPercentagePlusNumber:(NSNumber *)percentagePlusNumber percent:(NSNumber *)percent
+{
+    double const number = percentagePlusNumber.doubleValue / (1. + (percent.doubleValue / 100.));
+    return [NSNumber numberWithDouble:number];
 }
 
 - (BOOL)isEqual:(id)other
@@ -307,7 +374,12 @@ static double const DefaultSplitTotal = 120.;
     {
         return NO;
     }
-    
+
+    if ( ! [self.billBeforeTax isEqual:aBill.billBeforeTax])
+    {
+        return NO;
+    }
+
     if ( ! [self.total isEqual:aBill.total])
     {
         return NO;
@@ -338,6 +410,7 @@ static double const DefaultSplitTotal = 120.;
     ^ [self.tip hash]
     ^ [self.taxPercent hash]
     ^ [self.tax hash]
+    ^ [self.billBeforeTax hash]
     ^ [self.total hash]
     ^ [self.split hash]
     ^ [self.splitTip hash]
@@ -355,6 +428,7 @@ static double const DefaultSplitTotal = 120.;
     copy.tip = [self.tip copy];
     copy.taxPercent = [self.taxPercent copy];
     copy.tax = [self.tax copy];
+    copy.billBeforeTax = [self.billBeforeTax copy];
     copy.total = [self.total copy];
     copy.split = [self.split copy];
     copy.splitTip = [self.splitTip copy];
@@ -371,6 +445,7 @@ static double const DefaultSplitTotal = 120.;
     [aCoder encodeObject:self.tip forKey:@"tip"];
     [aCoder encodeObject:self.taxPercent forKey:@"taxPercent"];
     [aCoder encodeObject:self.tax forKey:@"tax"];
+    [aCoder encodeObject:self.billBeforeTax forKey:@"billBeforeTax"];
     [aCoder encodeObject:self.total forKey:@"total"];
     [aCoder encodeObject:self.split forKey:@"split"];
     [aCoder encodeObject:self.splitTip forKey:@"splitTip"];
@@ -412,6 +487,12 @@ static double const DefaultSplitTotal = 120.;
             _tax = [NSNumber numberWithDouble:DefaultTax];
         }
         
+        _billBeforeTax = [aDecoder decodeObjectForKey:@"billBeforeTax"];
+        if ( ! _billBeforeTax)
+        {
+            _billBeforeTax = [NSNumber numberWithDouble:DefaultBillBeforeTax];
+        }
+
         _total = [aDecoder decodeObjectForKey:@"total"];
         if ( ! _total)
         {
@@ -439,46 +520,44 @@ static double const DefaultSplitTotal = 120.;
     return self;
 }
 
+#pragma mark Formatters
+
 - (NSString *)formattedBill
 {
     return [MABill formatBill:self.bill];
 }
-
 - (NSString *)formattedTipPercent
 {
     return [MABill formatTipPercent:self.tipPercent];
 }
-
 - (NSString *)formattedTip
 {
     return [MABill formatTip:self.tip];
 }
-
 - (NSString *)formattedTaxPercent
 {
     return [MABill formatTaxPercent:self.taxPercent];
 }
-
 - (NSString *)formattedTax
 {
     return [MABill formatTax:self.tax];
 }
-
+- (NSString *)formattedBillBeforeTax
+{
+    return [MABill formatBillBeforeTax:self.billBeforeTax];
+}
 - (NSString *)formattedTotal
 {
     return [MABill formatTotal:self.total];
 }
-
 - (NSString *)formattedSplit
 {
     return [MABill formatSplit:self.split];
 }
-
 - (NSString *)formattedSplitTip
 {
     return [MABill formatSplitTip:self.splitTip];
 }
-
 - (NSString *)formattedSplitTotal
 {
     return [MABill formatSplitTotal:self.splitTotal];
@@ -488,47 +567,42 @@ static double const DefaultSplitTotal = 120.;
 {
     return [MABill formatPrice:bill];
 }
-
 + (NSString *)formatTipPercent:(NSNumber *)tipPercent
 {
     return [MABill formatPercent:tipPercent];
 }
-
 + (NSString *)formatTip:(NSNumber *)tip
 {
     return [MABill formatPrice:tip];
 }
-
 + (NSString *)formatTaxPercent:(NSNumber *)taxPercent
 {
     return [MABill formatPercent:taxPercent];
 }
-
 + (NSString *)formatTax:(NSNumber *)tax
 {
     return [MABill formatPrice:tax];
 }
-
++ (NSString *)formatBillBeforeTax:(NSNumber *)billBeforeTax
+{
+    return [MABill formatPrice:billBeforeTax];
+}
 + (NSString *)formatTotal:(NSNumber *)total
 {
     return [MABill formatPrice:total];
 }
-
 + (NSString *)formatSplit:(NSNumber *)split
 {
     return [MABill formatCount:split];
 }
-
 + (NSString *)formatSplitTip:(NSNumber *)splitTip
 {
     return [MABill formatPrice:splitTip];
 }
-
 + (NSString *)formatSplitTotal:(NSNumber *)splitTotal
 {
     return [MABill formatPrice:splitTotal];
 }
-
 + (NSString *)formatPrice:(NSNumber *)price
 {
     NSNumberFormatter *formatter = [MABill priceFormatter];

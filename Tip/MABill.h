@@ -13,14 +13,34 @@
 @interface MABill : NSObject
 <NSCoding, NSCopying>
 
+// Bill after tax.
 @property (strong, nonatomic) NSNumber *bill;
+
+// Tip % to leave.
 @property (strong, nonatomic) NSNumber *tipPercent;
+
+// Tip amount to leave.
 @property (strong, nonatomic) NSNumber *tip;
+
+// Tax % on the bill.
 @property (strong, nonatomic) NSNumber *taxPercent;
+
+// Tax amount on the bill.
 @property (strong, nonatomic) NSNumber *tax;
+
+// Bill before tax applied.
+@property (strong, nonatomic) NSNumber *billBeforeTax;
+
+// Total bill after tip and tax.
 @property (strong, nonatomic) NSNumber *total;
+
+// Number of people to split the bill between.
 @property (strong, nonatomic) NSNumber *split;
+
+// Tip amount per person.
 @property (strong, nonatomic) NSNumber *splitTip;
+
+// Each person's portion of the bill after tip and tax.
 @property (strong, nonatomic) NSNumber *splitTotal;
 
 @property (weak, nonatomic) id <MABillDelegate> delegate;
@@ -28,6 +48,9 @@
 - (id)init;
 - (id)initWithBill:(NSNumber *)bill;
 - (id)initWithBill:(NSNumber *)bill tipPercent:(NSNumber *)tipPercent;
+
+// Sets tax to 0 without invoking delegate update methods.
+- (void)clearTax;
 
 - (BOOL)isEqual:(id)other;
 - (BOOL)isEqualToProduct:(MABill *)aBill;
@@ -37,6 +60,7 @@
 - (NSString *)formattedTip;
 - (NSString *)formattedTaxPercent;
 - (NSString *)formattedTax;
+- (NSString *)formattedBillBeforeTax;
 - (NSString *)formattedTotal;
 - (NSString *)formattedSplit;
 - (NSString *)formattedSplitTip;
@@ -46,7 +70,8 @@
 + (NSString *)formatTipPercent:(NSNumber *)tipPercent;
 + (NSString *)formatTip:(NSNumber *)tip;
 + (NSString *)formatTaxPercent:(NSNumber *)taxPercent;
-+ (NSString *)formatTax:(NSNumber *)tip;
++ (NSString *)formatTax:(NSNumber *)tax;
++ (NSString *)formatBillBeforeTax:(NSNumber *)billBeforeTax;
 + (NSString *)formatTotal:(NSNumber *)total;
 + (NSString *)formatSplit:(NSNumber *)split;
 + (NSString *)formatSplitTip:(NSNumber *)splitTip;

@@ -24,6 +24,9 @@
 // Macro for declaring table index paths. Must be non-const, so they can be re-assigned depending on the settings.
 #define DECL_TABLE_IDX_VAR(name, value) static NSUInteger (name) = (value)
 
+DECL_TABLE_IDX(DISABLED_SECTION, 9999);
+DECL_TABLE_IDX(DISABLED_ROW, 9999);
+
 DECL_TABLE_IDX_VAR(NUM_SECTIONS, 3);
 
 DECL_TABLE_IDX_VAR(BILL_SECTION, 0);
@@ -48,6 +51,7 @@ DECL_TABLE_IDX(SPLIT_SECTION_ROWS, 3);
 DECL_TABLE_IDX_VAR(TAX_SECTION, 4);
 DECL_TABLE_IDX(TAX_PERCENT_ROW, 0);
 DECL_TABLE_IDX(TAX_ROW, 1);
+DECL_TABLE_IDX(BILL_BEFORE_TAX_ROW, DISABLED_ROW);
 DECL_TABLE_IDX(TAX_SECTION_ROWS, 2);
 
 static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
@@ -125,6 +129,11 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardWillShowNotification object:nil];
     [center addObserver:self selector:@selector(keyboardOffScreen:) name:UIKeyboardWillHideNotification object:nil];
 
+    if ( ! [[MAUserUtil sharedInstance] enableTax])
+    {
+        [self.bill clearTax];
+    }
+
     [self configureTableSections];
     [self.tableView reloadData];
 }
@@ -195,7 +204,6 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 }
 
 // Update the number and position of the table sections.
-DECL_TABLE_IDX(INVALID_SECTION, 9999);
 - (void)configureTableSections
 {
     NUM_SECTIONS = 3;
@@ -204,7 +212,7 @@ DECL_TABLE_IDX(INVALID_SECTION, 9999);
     TIP_SECTION = BILL_SECTION + 1;
     TOTAL_SECTION = TIP_SECTION + 1;
 
-    TAX_SECTION = INVALID_SECTION;
+    TAX_SECTION = DISABLED_SECTION;
     if ([[MAUserUtil sharedInstance] enableTax])
     {
         ++NUM_SECTIONS;
@@ -214,7 +222,7 @@ DECL_TABLE_IDX(INVALID_SECTION, 9999);
         TOTAL_SECTION = TIP_SECTION + 1;
     }
 
-    SPLIT_SECTION = INVALID_SECTION;
+    SPLIT_SECTION = DISABLED_SECTION;
     if ([[MAUserUtil sharedInstance] enableSplit])
     {
         ++NUM_SECTIONS;
@@ -240,6 +248,7 @@ DECL_TABLE_IDX(INVALID_SECTION, 9999);
     {
         [textFieldIndexPaths addObject:[NSIndexPath indexPathForRow:TAX_PERCENT_ROW inSection:TAX_SECTION]];
         [textFieldIndexPaths addObject:[NSIndexPath indexPathForRow:TAX_ROW inSection:TAX_SECTION]];
+        [textFieldIndexPaths addObject:[NSIndexPath indexPathForRow:BILL_BEFORE_TAX_ROW inSection:TAX_SECTION]];
     }
 
     if ([[MAUserUtil sharedInstance] enableSplit])
@@ -261,6 +270,7 @@ DECL_TABLE_IDX(INVALID_SECTION, 9999);
     [indexPathToBillKeyDict setObject:@"total" forKey:[NSIndexPath indexPathForRow:TOTAL_ROW inSection:TOTAL_SECTION]];
     [indexPathToBillKeyDict setObject:@"taxPercent" forKey:[NSIndexPath indexPathForRow:TAX_PERCENT_ROW inSection:TAX_SECTION]];
     [indexPathToBillKeyDict setObject:@"tax" forKey:[NSIndexPath indexPathForRow:TAX_ROW inSection:TAX_SECTION]];
+    [indexPathToBillKeyDict setObject:@"billBeforeTax" forKey:[NSIndexPath indexPathForRow:BILL_BEFORE_TAX_ROW inSection:TAX_SECTION]];
     [indexPathToBillKeyDict setObject:@"split" forKey:[NSIndexPath indexPathForRow:SPLIT_COUNT_ROW inSection:SPLIT_SECTION]];
     [indexPathToBillKeyDict setObject:@"splitTip" forKey:[NSIndexPath indexPathForRow:SPLIT_TIP_ROW inSection:SPLIT_SECTION]];
     [indexPathToBillKeyDict setObject:@"splitTotal" forKey:[NSIndexPath indexPathForRow:SPLIT_TOTAL_ROW inSection:SPLIT_SECTION]];
@@ -412,6 +422,10 @@ DECL_TABLE_IDX(INVALID_SECTION, 9999);
     cell.textField.delegate = self;
     
     NSString *labelText = Localize(@"Bill");
+    if ([[MAUserUtil sharedInstance] enableTax])
+    {
+        labelText = Localize(@"Bill After Tax");
+    }
     cell.textLabel.text = labelText;
 
     NSString *textFieldText = [self.bill formattedBill];
@@ -510,6 +524,12 @@ DECL_TABLE_IDX(INVALID_SECTION, 9999);
         labelText = Localize(@"Amount");
         textFieldText = [self.bill formattedTax];
         image = [MAFilePaths taxAmountImage];
+    }
+    else if (indexPath.row == BILL_BEFORE_TAX_ROW)
+    {
+        labelText = Localize(@"Bill Before Tax");
+        textFieldText = [self.bill formattedBillBeforeTax];
+        image = [MAFilePaths billImage];
     }
     cell.textLabel.text = labelText;
     cell.textField.text = textFieldText;
