@@ -70,6 +70,7 @@ static double const DefaultSplitTotal = 120.;
     _taxPercent = [NSNumber numberWithDouble:0];
     _tax = [NSNumber numberWithDouble:0];
     _billBeforeTax = [self.bill copy];
+    [self updateBill];
 }
 
 #pragma mark Delegate calls
