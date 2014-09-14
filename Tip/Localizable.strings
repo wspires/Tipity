@@ -11,12 +11,14 @@
 
 /* Check tab. */
 "Check" = "Check";
+"Bill" = "Check";
 "Check After Tax" = "Check After Tax";
 "Check Before Tax" = "Check Before Tax";
 "Tax" = "Tax";
 "Percent" = "Percent";
 "Amount" = "Amount";
 "Gratuity" = "Gratuity";
+"Tip" = "Gratuity";
 "Total" = "Total";
 "Split" = "Split";
 "People" = "People";

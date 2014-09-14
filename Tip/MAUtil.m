@@ -29,18 +29,6 @@ NSUInteger DeviceSystemMajorVersion()
 
 @implementation MAUtil
 
-+ (NSString *)tipName
-{
-//    return Localize(@"Tip");
-    return Localize(@"Gratuity");
-}
-
-+ (NSString *)billName
-{
-//    return Localize(@"Bill");
-    return Localize(@"Check");
-}
-
 + (BOOL)iPad
 {
     return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;

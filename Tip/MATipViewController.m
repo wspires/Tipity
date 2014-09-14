@@ -143,8 +143,8 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     [fmtr setNumberStyle:NSNumberFormatterCurrencyStyle];
     [fmtr setLocale:lcl];
     
-    NSLog( @"%@", [lcl displayNameForKey:NSLocaleCurrencySymbol value:@"AUD"] );
-    NSLog( @"%@", [fmtr currencySymbol] );
+//    NSLog( @"%@", [lcl displayNameForKey:NSLocaleCurrencySymbol value:@"AUD"] );
+//    NSLog( @"%@", [fmtr currencySymbol] );
 
 }
 
@@ -341,11 +341,11 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 {
     if (section == BILL_SECTION)
     {
-//        return [MAUtil billName];
+//        return Localize(@"Check");
     }
     else if (section == TIP_SECTION)
     {
-        return [MAUtil tipName];
+        return Localize(@"Gratuity");
     }
     else if (section == TOTAL_SECTION)
     {
@@ -431,10 +431,10 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
     cell.textField.delegate = self;
     
-    NSString *labelText = [MAUtil billName];
+    NSString *labelText = Localize(@"Check");
     if ([[MAUserUtil sharedInstance] enableTax])
     {
-        labelText = SFmt(Localize(@"%@ After Tax"), [MAUtil billName]);
+        labelText = Localize(@"Check After Tax");
     }
     cell.textLabel.text = labelText;
 
@@ -537,7 +537,7 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     }
     else if (indexPath.row == BILL_BEFORE_TAX_ROW)
     {
-        labelText = SFmt(Localize(@"%@ Before Tax"), [MAUtil billName]);
+        labelText = Localize(@"Check Before Tax");
         textFieldText = [self.bill formattedBillBeforeTax];
         image = [MAFilePaths billImage];
     }
@@ -571,7 +571,7 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     }
     else if (indexPath.row == SPLIT_TIP_ROW)
     {
-        labelText = SFmt(Localize(@"%@ Per Person"), [MAUtil tipName]);
+        labelText = Localize(@"Gratuity Per Person");
         textFieldText = [self.bill formattedSplitTip];
         image = [MAFilePaths splitTipImage];
     }
