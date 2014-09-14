@@ -4,6 +4,8 @@ Paper Towel Picker saves you money at the grocery store! We've all been there, f
 • Supports Dynamic Text
 • All fields editable
 
+• International support. Great for dining in USA where 15% - 20% gratuities to servers is customary.
+
 
 
 Paper Towel Picker does the math for you! Just enter the price and count for each product with the super simple interface, and Paper Towel Picker automatically calculates the price per item, compares them all, and highlights the best bargain.

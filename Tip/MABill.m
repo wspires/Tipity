@@ -189,7 +189,7 @@ static double const DefaultSplitTotal = 120.;
     
     _tax = [tax copy];
     _billBeforeTax = [NSNumber numberWithDouble:(_bill.doubleValue - tax.doubleValue)];
-    _taxPercent = [MABill percentFromNumber:_bill percentageOfNumber:_tax];
+    _taxPercent = [MABill percentFromNumber:_billBeforeTax percentageOfNumber:_tax];
     
     [self updateBill];
     [self delegateDidUpdateBill];
@@ -674,10 +674,10 @@ static double const DefaultSplitTotal = 120.;
         [nf setPaddingCharacter:@" "];
         [nf setUsesGroupingSeparator:NO];
         [nf setLocale:[NSLocale autoupdatingCurrentLocale]];
-        [nf setMaximumFractionDigits:2];
-        [nf setRoundingMode:NSNumberFormatterRoundHalfUp];
+//        [nf setRoundingMode:NSNumberFormatterRoundHalfUp];
+//        [nf setRoundingMode:NSNumberFormatterRoundCeiling];
         
-        [nf setMaximumFractionDigits:0];
+        [nf setMaximumFractionDigits:1];
         [nf setMultiplier:@1];
     });
     return nf;

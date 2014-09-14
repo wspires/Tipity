@@ -331,11 +331,11 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 {
     if (section == BILL_SECTION)
     {
-        //return Localize(@"Bill");
+//        return [MAUtil billName];
     }
     else if (section == TIP_SECTION)
     {
-        return Localize(@"Tip");
+        return [MAUtil tipName];
     }
     else if (section == TOTAL_SECTION)
     {
@@ -421,10 +421,10 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
     cell.textField.delegate = self;
     
-    NSString *labelText = Localize(@"Bill");
+    NSString *labelText = [MAUtil billName];
     if ([[MAUserUtil sharedInstance] enableTax])
     {
-        labelText = Localize(@"Bill After Tax");
+        labelText = SFmt(Localize(@"%@ After Tax"), [MAUtil billName]);
     }
     cell.textLabel.text = labelText;
 
@@ -527,7 +527,7 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     }
     else if (indexPath.row == BILL_BEFORE_TAX_ROW)
     {
-        labelText = Localize(@"Bill Before Tax");
+        labelText = SFmt(Localize(@"%@ Before Tax"), [MAUtil billName]);
         textFieldText = [self.bill formattedBillBeforeTax];
         image = [MAFilePaths billImage];
     }
@@ -561,7 +561,7 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     }
     else if (indexPath.row == SPLIT_TIP_ROW)
     {
-        labelText = Localize(@"Tip Per Person");
+        labelText = SFmt(Localize(@"%@ Per Person"), [MAUtil tipName]);
         textFieldText = [self.bill formattedSplitTip];
         image = [MAFilePaths splitTipImage];
     }

@@ -59,6 +59,9 @@ NSUInteger DeviceSystemMajorVersion();
 #define ABOVE_IOS8 ( ! BELOW_IOS8)
 
 @interface MAUtil : NSObject
++ (NSString *)tipName;
++ (NSString *)billName;
+
 + (BOOL)iPad;
 + (NSString *)version;
 + (NSString *)frameToString:(CGRect)frame;
