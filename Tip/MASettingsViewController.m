@@ -390,7 +390,7 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     cell.label.backgroundColor = [UIColor clearColor];
-    NSString *text = Localize(@"Split Bill");
+    NSString *text = SFmt(Localize(@"Split %@"), [MAUtil billName]);
     [cell.label setText:text];
     //[MAAppearance setFontForCellLabel:cell.label];
     [MAAppearance setFontForCell:cell tableStyle:tableView.style];
