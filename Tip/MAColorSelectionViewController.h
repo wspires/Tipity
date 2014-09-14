@@ -22,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *blueLabel;
 @property (weak, nonatomic) IBOutlet UILabel *noteLabel;
 
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *topSpaceConstraint;
+
 - (IBAction) sliderValueChanged:(id)sender;
 
 @end

@@ -24,13 +24,22 @@
 #import "MAUnitsSettingsCell.h"
 #import "MAColorUtil.h"
 
+#define DISABLE_TEST_BUTTON
+
 DECL_TABLE_IDX(NUM_SECTIONS, 6);
 
+#ifdef DISABLE_TEST_BUTTON
+DECL_TABLE_IDX(OTHER_COLOR_SECTION, 0);
+DECL_TABLE_IDX(TABLE_TEXT_FONT, 0);
+DECL_TABLE_IDX(TABBAR_COLOR_ROW, 1);
+DECL_TABLE_IDX(OTHER_COLOR_ROWS, 2);
+#else
 DECL_TABLE_IDX(OTHER_COLOR_SECTION, 0);
 DECL_TABLE_IDX(TABLE_TEXT_FONT, 0);
 DECL_TABLE_IDX(BUTTON_TEXT_COLOR, 1);
 DECL_TABLE_IDX(TABBAR_COLOR_ROW, 2);
 DECL_TABLE_IDX(OTHER_COLOR_ROWS, 3);
+#endif
 
 DECL_TABLE_IDX(BACKGROUND_SECTION, 1);
 
@@ -107,6 +116,22 @@ static NSString *MAUnitsCellIdentifier = @"MAUnitsCellIdentifier";
         // Otherwise, tab bar covers last row of table view.
         //self.edgesForExtendedLayout = UIRectEdgeNone;
     }
+    
+#ifdef DISABLE_TEST_BUTTON
+    // Hide button and add new constraint.
+    self.testBtn.hidden = YES;
+    [self.view removeConstraint:self.tableViewTopSpaceConstraint];
+    NSLayoutConstraint *constraint = [NSLayoutConstraint
+                                      constraintWithItem:self.view
+                                      attribute:NSLayoutAttributeTop
+                                      relatedBy:NSLayoutRelationEqual
+                                      toItem:self.tableView
+                                      attribute:NSLayoutAttributeTop
+                                      multiplier:1
+                                      constant:0];
+    self.tableViewTopSpaceConstraint = constraint;
+    [self.view addConstraint:constraint];
+#endif
 }
 
 - (void)registerNibs
@@ -261,10 +286,12 @@ static NSString *MAUnitsCellIdentifier = @"MAUnitsCellIdentifier";
         {
             return [self tableView:tableView tabBarColorCellForRowAtIndexPath:indexPath];
         }
+#ifndef DISABLE_TEST_BUTTON
         else if (indexPath.row == BUTTON_TEXT_COLOR)
         {
             return [self tableView:tableView buttonTextColorCellForRowAtIndexPath:indexPath];
         }
+#endif
         else if (indexPath.row == TABLE_TEXT_FONT)
         {
             return [self tableView:tableView tableTextFontCellForRowAtIndexPath:indexPath];

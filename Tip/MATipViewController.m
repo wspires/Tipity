@@ -136,6 +136,16 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 
     [self configureTableSections];
     [self.tableView reloadData];
+    
+    
+    NSLocale *lcl = [[NSLocale alloc] initWithLocaleIdentifier:@"en_AU"];
+    NSNumberFormatter *fmtr = [[NSNumberFormatter alloc] init];
+    [fmtr setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [fmtr setLocale:lcl];
+    
+    NSLog( @"%@", [lcl displayNameForKey:NSLocaleCurrencySymbol value:@"AUD"] );
+    NSLog( @"%@", [fmtr currencySymbol] );
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated

@@ -17,6 +17,8 @@
 
 #import "UIColor+ExtraColors.h"
 
+#define DISABLE_TEST_BUTTON
+
 @interface MAColorSelectionViewController ()
 @property (strong, nonatomic) NSDictionary *settings;
 @property (strong, nonatomic) NSArray *backgroundColors;
@@ -96,6 +98,22 @@
         self.blueSlider.value = blue * 255;
     }
     [self logSliderValues];
+    
+#ifdef DISABLE_TEST_BUTTON
+    // Hide button and add new constraint.
+    self.testBtn.hidden = YES;
+    [self.view removeConstraint:self.topSpaceConstraint];
+    NSLayoutConstraint *constraint = [NSLayoutConstraint
+                                      constraintWithItem:self.view
+                                      attribute:NSLayoutAttributeTop
+                                      relatedBy:NSLayoutRelationEqual
+                                      toItem:self.redLabel
+                                      attribute:NSLayoutAttributeTop
+                                      multiplier:1
+                                      constant:0];
+    self.topSpaceConstraint = constraint;
+    [self.view addConstraint:constraint];
+#endif
 }
 
 - (void)logSliderValues

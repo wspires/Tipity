@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1803AC4D19C63E9E006C7EFF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1803AC4C19C63E9E006C7EFF /* Localizable.strings */; };
 		1808CDEB19C13B7900E972E1 /* Unit Price - Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1808CDEA19C13B7900E972E1 /* Unit Price - Icon.png */; };
 		1808CDF019C1412800E972E1 /* 826-money-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1808CDEC19C1412800E972E1 /* 826-money-1.png */; };
 		1808CDF119C1412800E972E1 /* 826-money-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1808CDED19C1412800E972E1 /* 826-money-1@2x.png */; };
@@ -169,6 +170,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1803AC4C19C63E9E006C7EFF /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		1808CDEA19C13B7900E972E1 /* Unit Price - Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Unit Price - Icon.png"; sourceTree = "<group>"; };
 		1808CDEC19C1412800E972E1 /* 826-money-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "826-money-1.png"; sourceTree = "<group>"; };
 		1808CDED19C1412800E972E1 /* 826-money-1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "826-money-1@2x.png"; sourceTree = "<group>"; };
@@ -550,6 +552,7 @@
 				1809753919BE5ED60039F654 /* Info.plist */,
 				1809763819BE61600039F654 /* PrefixHeader.pch */,
 				1809753A19BE5ED60039F654 /* main.m */,
+				1803AC4C19C63E9E006C7EFF /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1198,6 +1201,7 @@
 				1808CE4919C1655900E972E1 /* 973-user-tip@2x.png in Resources */,
 				1808CE1E19C14D4800E972E1 /* 952-shopping-cart.png in Resources */,
 				18698A3319C29CB2005F2E32 /* 724-info.png in Resources */,
+				1803AC4D19C63E9E006C7EFF /* Localizable.strings in Resources */,
 				1809761619BE61010039F654 /* 19-gear.png in Resources */,
 				1808CDF719C142EE00E972E1 /* 887-notepad@2x.png in Resources */,
 				180976B119BE71140039F654 /* Credits.html in Resources */,
