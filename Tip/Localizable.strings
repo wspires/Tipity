@@ -49,6 +49,18 @@
 
 /* Upgrade tab. */
 "Upgrade" = "Upgrade";
+"Restore" = "Restore";
+"No Ads" = "No Ads";
+"No advertisements" = "No advertisements";
+"Split Tip" = "Split Tip";
+"Split the tip among multiple people" = "Split the tip among multiple people";
+"Exclude Tax" = "Exclude Tax";
+"Exclude taxes when calculating tip" = "Exclude taxes when calculating tip";
+"Customize Color" = "Customize Color";
+"Change background and foreground colors, or set your own wallpaper" = "Change background and foreground colors, or set your own wallpaper";
+"Features" = "Features";
+"Purchased" = "Purchased";
+"Loading..." = "Loading...";
 
 /* Color velection */
 "Text" = "Text";
