@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1803AC4D19C63E9E006C7EFF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1803AC4C19C63E9E006C7EFF /* Localizable.strings */; };
+		1803AC4E19C6967A006C7EFF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1803AC5019C6967A006C7EFF /* Localizable.strings */; };
 		1808CDEB19C13B7900E972E1 /* Unit Price - Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1808CDEA19C13B7900E972E1 /* Unit Price - Icon.png */; };
 		1808CDF019C1412800E972E1 /* 826-money-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1808CDEC19C1412800E972E1 /* 826-money-1.png */; };
 		1808CDF119C1412800E972E1 /* 826-money-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1808CDED19C1412800E972E1 /* 826-money-1@2x.png */; };
@@ -170,7 +170,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1803AC4C19C63E9E006C7EFF /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
+		1803AC4F19C6967A006C7EFF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1808CDEA19C13B7900E972E1 /* Unit Price - Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Unit Price - Icon.png"; sourceTree = "<group>"; };
 		1808CDEC19C1412800E972E1 /* 826-money-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "826-money-1.png"; sourceTree = "<group>"; };
 		1808CDED19C1412800E972E1 /* 826-money-1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "826-money-1@2x.png"; sourceTree = "<group>"; };
@@ -228,7 +228,6 @@
 		1808CE4E19C1D8F700E972E1 /* people@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "people@2x.png"; sourceTree = "<group>"; };
 		1808CE5119C1D90200E972E1 /* people@2x.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "people@2x.pxm"; sourceTree = "<group>"; };
 		1809753519BE5ED60039F654 /* Tip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tip.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		1809753919BE5ED60039F654 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1809753A19BE5ED60039F654 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1809753C19BE5ED60039F654 /* MAAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MAAppDelegate.h; sourceTree = "<group>"; };
 		1809753D19BE5ED60039F654 /* MAAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MAAppDelegate.m; sourceTree = "<group>"; };
@@ -549,8 +548,7 @@
 				1809763619BE61600039F654 /* BackgroundColors.plist */,
 				1809763719BE61600039F654 /* ForegroundColors.plist */,
 				1809760D19BE61010039F654 /* Images */,
-				1809753919BE5ED60039F654 /* Info.plist */,
-				1803AC4C19C63E9E006C7EFF /* Localizable.strings */,
+				1803AC5019C6967A006C7EFF /* Localizable.strings */,
 				1809763819BE61600039F654 /* PrefixHeader.pch */,
 				1809753A19BE5ED60039F654 /* main.m */,
 			);
@@ -1201,7 +1199,7 @@
 				1808CE4919C1655900E972E1 /* 973-user-tip@2x.png in Resources */,
 				1808CE1E19C14D4800E972E1 /* 952-shopping-cart.png in Resources */,
 				18698A3319C29CB2005F2E32 /* 724-info.png in Resources */,
-				1803AC4D19C63E9E006C7EFF /* Localizable.strings in Resources */,
+				1803AC4E19C6967A006C7EFF /* Localizable.strings in Resources */,
 				1809761619BE61010039F654 /* 19-gear.png in Resources */,
 				1808CDF719C142EE00E972E1 /* 887-notepad@2x.png in Resources */,
 				180976B119BE71140039F654 /* Credits.html in Resources */,
@@ -1310,6 +1308,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		1803AC5019C6967A006C7EFF /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1803AC4F19C6967A006C7EFF /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		180975DB19BE60A90039F654 /* AppiraterLocalizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (

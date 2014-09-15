@@ -1,0 +1,76 @@
+/* 
+  Localizable.strings
+  Tip
+
+  Created by Wade Spires on 9/14/14.
+  Copyright (c) 2014 Minds Aspire LLC. All rights reserved.
+*/
+
+/* "key" = "value"; */
+/* "%@ percent" = "%@ ciento"; */
+
+/* Check tab. */
+"Check" = "Check";
+"Bill" = "Check";
+"Total" = "Total";
+"Total After Tax" = "Total + Tax";
+"Total Before Tax" = "Total - Tax";
+"Tax" = "Tax";
+"Percent" = "Percent";
+"Amount" = "Amount";
+"Gratuity" = "Gratuity";
+"Tip" = "Gratuity";
+"Grand Total" = "Grand Total";
+"Split" = "Split";
+"People" = "People";
+"Gratuity Per Person" = "Gratuity / Person";
+"Total Per Person" = "Total / Person";
+
+/* Settings tab. */
+"Settings" = "Settings";
+"General" = "General";
+"Deduct Tax" = "Deduct Tax";
+"Split Check" = "Split Check";
+"Color" = "Color";
+
+"More Apps" = "More Apps";
+"Gym Log+" = "Gym Log+";
+"Workout and Fitness Log" = "Workout and Fitness Log";
+"Weight Log+" = "Weight Log+";
+"Body Weight Tracker" = "Body Weight Tracker";
+"Paper Towel Picker" = "Paper Towel Picker";
+"Compare Grocery Prices" = "Compare Grocery Prices";
+
+"Share" = "Share";
+"Send Feedback" = "Send Feedback";
+"Tell a Friend" = "Tell a Friend";
+"Write a Review" = "Write a Review";
+"Credits" = "Credits";
+"Version" = "Version";
+
+/* Upgrade tab. */
+"Upgrade" = "Upgrade";
+"Restore" = "Restore";
+"No Ads" = "No Ads";
+"No advertisements" = "No advertisements";
+"Split Tip" = "Split Tip";
+"Split the tip among multiple people" = "Split the tip among multiple people";
+"Exclude Tax" = "Exclude Tax";
+"Exclude taxes when calculating tip" = "Exclude taxes when calculating tip";
+"Customize Color" = "Customize Color";
+"Change background and foreground colors, or set your own wallpaper" = "Change background and foreground colors, or set your own wallpaper";
+"Features" = "Features";
+"Purchased" = "Purchased";
+"Loading..." = "Loading...";
+
+/* Color velection */
+"Text" = "Text";
+"Row" = "Row";
+"Border" = "Border";
+"Background" = "Background";
+"Use Custom Color" = "Use Custom Color";
+"Select Custom Color" = "Select Custom Color";
+"Use Custom Photo" = "Use Custom Photo";
+"Select Custom Photo" = "Select Custom Photo";
+"Foreground" = "Foreground";
+"Change text brightness on previous page" = "Change text brightness on previous page";

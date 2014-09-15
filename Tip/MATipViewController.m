@@ -138,11 +138,19 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     [self.tableView reloadData];
     
     
+    
+    
+    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [nf setLocale:[NSLocale autoupdatingCurrentLocale]];
+    NSLog( @"%@", [nf currencySymbol]);
+
+
     NSLocale *lcl = [[NSLocale alloc] initWithLocaleIdentifier:@"en_AU"];
     NSNumberFormatter *fmtr = [[NSNumberFormatter alloc] init];
     [fmtr setNumberStyle:NSNumberFormatterCurrencyStyle];
     [fmtr setLocale:lcl];
-    
+
 //    NSLog( @"%@", [lcl displayNameForKey:NSLocaleCurrencySymbol value:@"AUD"] );
 //    NSLog( @"%@", [fmtr currencySymbol] );
 
@@ -431,10 +439,10 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
     cell.textField.delegate = self;
     
-    NSString *labelText = Localize(@"Check");
+    NSString *labelText = Localize(@"Total");
     if ([[MAUserUtil sharedInstance] enableTax])
     {
-        labelText = Localize(@"Check After Tax");
+        labelText = Localize(@"Total After Tax");
     }
     cell.textLabel.text = labelText;
 
@@ -496,7 +504,7 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
     cell.textField.delegate = self;
     
-    NSString *labelText = Localize(@"Total");
+    NSString *labelText = Localize(@"Grand Total");
     cell.textLabel.text = labelText;
     
     NSString *textFieldText = [self.bill formattedTotal];
@@ -537,7 +545,7 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     }
     else if (indexPath.row == BILL_BEFORE_TAX_ROW)
     {
-        labelText = Localize(@"Check Before Tax");
+        labelText = Localize(@"Total Before Tax");
         textFieldText = [self.bill formattedBillBeforeTax];
         image = [MAFilePaths billImage];
     }

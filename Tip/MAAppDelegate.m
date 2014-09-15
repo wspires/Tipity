@@ -101,7 +101,7 @@
     settingsViewController = [[MASettingsViewController alloc] initWithNibName:@"MASettingsViewController" bundle:nil];
     upgradeViewController = [[MAUpgradeViewController alloc] initWithNibName:@"MAUpgradeViewController" bundle:nil];
     
-    productsViewController.title = Localize(@"Gratuity");
+    productsViewController.title = Localize(@"Check");
     settingsViewController.title = Localize(@"Settings");
     upgradeViewController.title = Localize(@"Upgrade");
     
