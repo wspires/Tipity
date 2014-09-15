@@ -679,7 +679,7 @@ static double const DefaultSplitTotal = 120.;
 //        [nf setRoundingMode:NSNumberFormatterRoundHalfUp];
 //        [nf setRoundingMode:NSNumberFormatterRoundCeiling];
         
-        [nf setMaximumFractionDigits:1];
+        [nf setMaximumFractionDigits:2];
         [nf setMultiplier:@1];
     });
     return nf;

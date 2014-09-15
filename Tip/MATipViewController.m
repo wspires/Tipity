@@ -136,12 +136,18 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     [self.tableView reloadData];
     
     
-    [self testCurrency];
+//    [self testCurrency];
 }
 
 - (void)testCurrency
 {
     NSLocale *locale = [NSLocale currentLocale];
+
+    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
+    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
+    [nf setLocale:[NSLocale autoupdatingCurrentLocale]];
+    NSLog( @"%@", [nf currencySymbol]);
+
     for (NSString *code in [NSLocale ISOCurrencyCodes])
     {
         NSString *currencyCodeDisplayName = [locale displayNameForKey:NSLocaleCurrencyCode value:code];
@@ -151,14 +157,13 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
         {
             continue;
         }
+        
+        [nf setCurrencyCode:code];
+
         //        currencySymbol = [currencySymbol substringFromIndex:currencySymbol.length - 1];
-        NSLog(@"%@ : %@ (%@)", code, currencyCodeDisplayName, currencySymbol);
+        NSLog(@"%@ : %@ (%@) (%@, %@)", code, currencyCodeDisplayName, currencySymbol, [nf currencySymbol], [nf stringFromNumber:[NSNumber numberWithDouble:10]]);
     }
     
-    NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
-    [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
-    [nf setLocale:[NSLocale autoupdatingCurrentLocale]];
-    NSLog( @"%@", [nf currencySymbol]);
     
     
     NSLocale *lcl = [[NSLocale alloc] initWithLocaleIdentifier:@"en_AU"];
