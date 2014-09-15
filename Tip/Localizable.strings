@@ -10,16 +10,16 @@
 /* "%@ percent" = "%@ ciento"; */
 
 /* Check tab. */
-"Check" = "Check";
-"Bill" = "Check";
-"Check After Tax" = "Check After Tax";
-"Check Before Tax" = "Check Before Tax";
+"Check" = "Total";
+"Bill" = "Total";
+"Check After Tax" = "Total After Tax";
+"Check Before Tax" = "Total Before Tax";
 "Tax" = "Tax";
 "Percent" = "Percent";
 "Amount" = "Amount";
 "Gratuity" = "Gratuity";
 "Tip" = "Gratuity";
-"Total" = "Total";
+"Total" = "Grand Total";
 "Split" = "Split";
 "People" = "People";
 "Gratuity Per Person" = "Gratuity Per Person";

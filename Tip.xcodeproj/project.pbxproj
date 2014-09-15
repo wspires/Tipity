@@ -550,9 +550,9 @@
 				1809763719BE61600039F654 /* ForegroundColors.plist */,
 				1809760D19BE61010039F654 /* Images */,
 				1809753919BE5ED60039F654 /* Info.plist */,
+				1803AC4C19C63E9E006C7EFF /* Localizable.strings */,
 				1809763819BE61600039F654 /* PrefixHeader.pch */,
 				1809753A19BE5ED60039F654 /* main.m */,
-				1803AC4C19C63E9E006C7EFF /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
