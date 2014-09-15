@@ -136,22 +136,37 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     [self.tableView reloadData];
     
     
-    
+    [self testCurrency];
+}
+
+- (void)testCurrency
+{
+    NSLocale *locale = [NSLocale currentLocale];
+    for (NSString *code in [NSLocale ISOCurrencyCodes])
+    {
+        NSString *currencyCodeDisplayName = [locale displayNameForKey:NSLocaleCurrencyCode value:code];
+        NSString *currencySymbol = [locale displayNameForKey:NSLocaleCurrencySymbol value:code];
+        
+        if (currencySymbol.length == 0 || [currencySymbol isEqualToString:code])
+        {
+            continue;
+        }
+        //        currencySymbol = [currencySymbol substringFromIndex:currencySymbol.length - 1];
+        NSLog(@"%@ : %@ (%@)", code, currencyCodeDisplayName, currencySymbol);
+    }
     
     NSNumberFormatter *nf = [[NSNumberFormatter alloc] init];
     [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
     [nf setLocale:[NSLocale autoupdatingCurrentLocale]];
     NSLog( @"%@", [nf currencySymbol]);
-
-
+    
+    
     NSLocale *lcl = [[NSLocale alloc] initWithLocaleIdentifier:@"en_AU"];
     NSNumberFormatter *fmtr = [[NSNumberFormatter alloc] init];
     [fmtr setNumberStyle:NSNumberFormatterCurrencyStyle];
     [fmtr setLocale:lcl];
-
-//    NSLog( @"%@", [lcl displayNameForKey:NSLocaleCurrencySymbol value:@"AUD"] );
-//    NSLog( @"%@", [fmtr currencySymbol] );
-
+    //    NSLog( @"%@", [lcl displayNameForKey:NSLocaleCurrencySymbol value:@"AUD"] );
+    //    NSLog( @"%@", [fmtr currencySymbol] );
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -359,11 +374,13 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     }
     else if (section == TAX_SECTION)
     {
-        return Localize(@"Tax");
+//        return Localize(@"Tax");
+        return Localize(@"Deduct Tax");
     }
     else if (section == SPLIT_SECTION)
     {
-        return Localize(@"Split");
+//        return Localize(@"Split");
+        return Localize(@"Split Check");
     }
 
     return @"";
@@ -440,7 +457,7 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     NSString *labelText = Localize(@"Total");
     if ([[MAUserUtil sharedInstance] enableTax])
     {
-        labelText = Localize(@"Total After Tax");
+//        labelText = Localize(@"Total After Tax");
     }
     cell.textLabel.text = labelText;
 

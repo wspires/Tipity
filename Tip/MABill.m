@@ -640,7 +640,9 @@ static double const DefaultSplitTotal = 120.;
         nf = [[NSNumberFormatter alloc] init];
         [nf setNumberStyle:NSNumberFormatterCurrencyStyle];
         [nf setLocale:[NSLocale autoupdatingCurrentLocale]];
-        
+//        [nf setCurrencyCode:@"EUR"];
+//        [nf setCurrencyCode:nil];
+
         [nf setMaximumFractionDigits:2];
         [nf setMinimumFractionDigits:2];
         [nf setAlwaysShowsDecimalSeparator:YES];
