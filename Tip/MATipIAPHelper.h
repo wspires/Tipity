@@ -14,7 +14,7 @@
 
 // Flags to enable disable certain features as being part of an IAP.
 static BOOL const No_Ads_Iap = YES;
-static BOOL const Split_Tip_Iap = YES;
+static BOOL const Split_Tip_Iap = NO;
 static BOOL const Tax_Iap = YES;
 static BOOL const Customize_Color_Iap = YES;
 

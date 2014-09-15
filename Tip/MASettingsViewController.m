@@ -395,7 +395,10 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
     //[MAAppearance setFontForCellLabel:cell.label];
     [MAAppearance setFontForCell:cell tableStyle:tableView.style];
     
-    [MATipIAPHelper disableLabelIfNotPurchased:cell.label];
+    if (Split_Tip_Iap)
+    {
+        [MATipIAPHelper disableLabelIfNotPurchased:cell.label];
+    }
     
     cell.label.adjustsFontSizeToFitWidth = YES;
     
@@ -418,7 +421,7 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
 {
     UISwitch *swtch = (UISwitch *)sender;
     
-    if ([MATipIAPHelper checkAndAlertForIAP])
+    if (Split_Tip_Iap && [MATipIAPHelper checkAndAlertForIAP])
     {
         swtch.on = NO;
         return;
@@ -444,7 +447,10 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
     //[MAAppearance setFontForCellLabel:cell.label];
     [MAAppearance setFontForCell:cell tableStyle:tableView.style];
     
-    [MATipIAPHelper disableLabelIfNotPurchased:cell.label];
+    if (Tax_Iap)
+    {
+        [MATipIAPHelper disableLabelIfNotPurchased:cell.label];
+    }
     
     cell.label.adjustsFontSizeToFitWidth = YES;
     
@@ -467,7 +473,7 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
 {
     UISwitch *swtch = (UISwitch *)sender;
     
-    if ([MATipIAPHelper checkAndAlertForIAP])
+    if (Tax_Iap && [MATipIAPHelper checkAndAlertForIAP])
     {
         swtch.on = NO;
         return;
