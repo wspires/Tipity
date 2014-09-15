@@ -111,10 +111,7 @@
     settingsViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"740-gear-selected.png"];
     upgradeViewController.tabBarItem.image = [UIImage imageNamed:@"952-shopping-cart.png"];
     upgradeViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"952-shopping-cart-selected.png"];
-//    productsViewController.tabBarItem.image = [UIImage imageNamed:@"216-compose.png"];
-//    settingsViewController.tabBarItem.image = [UIImage imageNamed:@"19-gear.png"];
-//    upgradeViewController.tabBarItem.image = [UIImage imageNamed:@"80-shopping-cart.png"];
-    
+
     // Create the tab bar with the each view controller inside of a nav controller.
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     self.productsNavController = [[UINavigationController alloc] initWithRootViewController:productsViewController];

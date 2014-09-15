@@ -12,8 +12,6 @@
 #import "MAAppearance.h"
 #import "MABill.h"
 #import "MAFilePaths.h"
-#import "MAProductTableViewCell.h"
-#import "MAProduct.h"
 #import "MATextFieldCell.h"
 #import "MAUserUtil.h"
 #import "MAUtil.h"

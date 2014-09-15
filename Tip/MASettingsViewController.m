@@ -13,7 +13,6 @@
 #import "MAAppearanceSelectionViewController.h"
 #import "MACreditsViewController.h"
 #import "MAFilePaths.h"
-#import "MAProductTableViewCell.h"
 #import "MASwitchCell.h"
 #import "MATipIAPHelper.h"
 #import "MAUserUtil.h"

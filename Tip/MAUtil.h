@@ -26,13 +26,13 @@
 //#define Localize( s ) NSLocalizedStringFromTable((s), @"InfoPlist", nil)
 #define Localize( s ) NSLocalizedString((s), nil)
 
-#define APP_NAME @"Paper Towel Picker"
-#define APP_ID @"914223424"
+#define APP_NAME @"Gratuity"
+#define APP_ID @"919137272"
 
 // Create "shortcut" for accessing the app delegate. Users must still include MAAppDelegate.h.
 #define AppDelegate ((MAAppDelegate *)[UIApplication sharedApplication].delegate)
 
-#define APP_GROUP @"group.com.mindsaspire.Unit-Picker"
+#define APP_GROUP @"group.com.mindsaspire.Tip"
 
 #define USE_IOS8
 
