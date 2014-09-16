@@ -643,6 +643,10 @@ static double const DefaultSplitTotal = 120.;
 //        [nf setCurrencyCode:@"EUR"];
 //        [nf setCurrencyCode:nil];
 
+        // Rounding up to ensure that split checks always add up to at least the total.
+//        [nf setRoundingMode:NSNumberFormatterRoundHalfUp];
+        [nf setRoundingMode:NSNumberFormatterRoundUp];
+
         [nf setMaximumFractionDigits:2];
         [nf setMinimumFractionDigits:2];
         [nf setAlwaysShowsDecimalSeparator:YES];
