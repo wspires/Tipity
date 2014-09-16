@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		1803AC4E19C6967A006C7EFF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1803AC5019C6967A006C7EFF /* Localizable.strings */; };
+		1803AC5B19C89C8B006C7EFF /* MARatingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1803AC5919C89C8B006C7EFF /* MARatingTableViewCell.m */; };
+		1803AC5C19C89C8B006C7EFF /* MARatingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1803AC5A19C89C8B006C7EFF /* MARatingTableViewCell.xib */; };
+		1803AC5F19C8A2F2006C7EFF /* 726-star-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 1803AC5D19C8A2F2006C7EFF /* 726-star-selected.png */; };
+		1803AC6019C8A2F2006C7EFF /* 726-star-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1803AC5E19C8A2F2006C7EFF /* 726-star-selected@2x.png */; };
 		1808CDEB19C13B7900E972E1 /* Unit Price - Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1808CDEA19C13B7900E972E1 /* Unit Price - Icon.png */; };
 		1808CDF019C1412800E972E1 /* 826-money-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1808CDEC19C1412800E972E1 /* 826-money-1.png */; };
 		1808CDF119C1412800E972E1 /* 826-money-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1808CDED19C1412800E972E1 /* 826-money-1@2x.png */; };
@@ -144,6 +148,11 @@
 		1803AC4F19C6967A006C7EFF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1803AC5519C72450006C7EFF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1803AC5719C73840006C7EFF /* IAP.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IAP.png; sourceTree = "<group>"; };
+		1803AC5819C89C8B006C7EFF /* MARatingTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MARatingTableViewCell.h; sourceTree = "<group>"; };
+		1803AC5919C89C8B006C7EFF /* MARatingTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MARatingTableViewCell.m; sourceTree = "<group>"; };
+		1803AC5A19C89C8B006C7EFF /* MARatingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MARatingTableViewCell.xib; sourceTree = "<group>"; };
+		1803AC5D19C8A2F2006C7EFF /* 726-star-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "726-star-selected.png"; sourceTree = "<group>"; };
+		1803AC5E19C8A2F2006C7EFF /* 726-star-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "726-star-selected@2x.png"; sourceTree = "<group>"; };
 		1808CDEA19C13B7900E972E1 /* Unit Price - Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Unit Price - Icon.png"; sourceTree = "<group>"; };
 		1808CDEC19C1412800E972E1 /* 826-money-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "826-money-1.png"; sourceTree = "<group>"; };
 		1808CDED19C1412800E972E1 /* 826-money-1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "826-money-1@2x.png"; sourceTree = "<group>"; };
@@ -736,6 +745,8 @@
 		180975F619BE61010039F654 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				1803AC5D19C8A2F2006C7EFF /* 726-star-selected.png */,
+				1803AC5E19C8A2F2006C7EFF /* 726-star-selected@2x.png */,
 				1893F07919C339BF00F1485A /* 724-no-ad.png */,
 				1893F07A19C339BF00F1485A /* 724-no-ad@2x.png */,
 				1893F07519C2B4BB00F1485A /* govt_bldg.png */,
@@ -942,6 +953,9 @@
 				180976B919BF5D8C0039F654 /* MATextFieldCell.xib */,
 				180976B419BE96910039F654 /* MABill.h */,
 				180976B519BE96910039F654 /* MABill.m */,
+				1803AC5819C89C8B006C7EFF /* MARatingTableViewCell.h */,
+				1803AC5919C89C8B006C7EFF /* MARatingTableViewCell.m */,
+				1803AC5A19C89C8B006C7EFF /* MARatingTableViewCell.xib */,
 			);
 			name = "Tip Tab";
 			sourceTree = "<group>";
@@ -1104,6 +1118,7 @@
 				1893F07319C2B12A00F1485A /* 561-stamp.png in Resources */,
 				1808CDF019C1412800E972E1 /* 826-money-1.png in Resources */,
 				1809761D19BE61010039F654 /* blank.png in Resources */,
+				1803AC5F19C8A2F2006C7EFF /* 726-star-selected.png in Resources */,
 				1809762519BE61010039F654 /* tableview_placeholder.png in Resources */,
 				1808CE1419C14CF900E972E1 /* 740-gear-selected.png in Resources */,
 				1893F07419C2B12A00F1485A /* 561-stamp@2x.png in Resources */,
@@ -1145,12 +1160,14 @@
 				1808CDF719C142EE00E972E1 /* 887-notepad@2x.png in Resources */,
 				180976B119BE71140039F654 /* Credits.html in Resources */,
 				1808CDF319C1412800E972E1 /* 827-money-2@2x.png in Resources */,
+				1803AC5C19C89C8B006C7EFF /* MARatingTableViewCell.xib in Resources */,
 				1808CE0219C14A1C00E972E1 /* 949-paint-brush.png in Resources */,
 				180976A819BE70F00039F654 /* MAStepperCell.xib in Resources */,
 				18698A3219C29CB2005F2E32 /* 712-reply@2x.png in Resources */,
 				1809761F19BE61010039F654 /* Gym Log+ - Icon.png in Resources */,
 				180976A619BE70F00039F654 /* MACreditsViewController.xib in Resources */,
 				1809766F19BE6FE70039F654 /* MAUpgradeAlertViewController.xib in Resources */,
+				1803AC6019C8A2F2006C7EFF /* 726-star-selected@2x.png in Resources */,
 				1893F07B19C339BF00F1485A /* 724-no-ad.png in Resources */,
 				180975F419BE60A90039F654 /* AppiraterLocalizable.strings in Resources */,
 				1808CE0E19C14C0E00E972E1 /* 704-compose.png in Resources */,
@@ -1193,6 +1210,7 @@
 				1809765B19BE61FA0039F654 /* MAColorUtil.m in Sources */,
 				1809764A19BE61D20039F654 /* MAAppearance.m in Sources */,
 				180976A919BE70F00039F654 /* MASwitchCell.m in Sources */,
+				1803AC5B19C89C8B006C7EFF /* MARatingTableViewCell.m in Sources */,
 				1809767A19BE70700039F654 /* MASettingsViewController.m in Sources */,
 				1809764C19BE61D20039F654 /* MAFilePaths.m in Sources */,
 				1809767019BE6FE70039F654 /* MAUpgradeViewController.m in Sources */,

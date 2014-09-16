@@ -25,7 +25,7 @@
 
 @implementation MAAppDelegate
 @synthesize rootController = _rootController;
-@synthesize productsNavController = _productsNavController;
+@synthesize tipNavController = _tipNavController;
 @synthesize settingsNavController = _settingsNavController;
 @synthesize upgradeNavController = _upgradeNavController;
 @synthesize imageCache = _imageCache;
@@ -93,20 +93,20 @@
 
 - (UITabBarController *)setupTabBarController
 {
-    MATipViewController *productsViewController;
+    MATipViewController *tipViewController;
     MASettingsViewController *settingsViewController;
     MAUpgradeViewController *upgradeViewController;
     
-    productsViewController = [[MATipViewController alloc] initWithNibName:@"MATipViewController" bundle:nil];
+    tipViewController = [[MATipViewController alloc] initWithNibName:@"MATipViewController" bundle:nil];
     settingsViewController = [[MASettingsViewController alloc] initWithNibName:@"MASettingsViewController" bundle:nil];
     upgradeViewController = [[MAUpgradeViewController alloc] initWithNibName:@"MAUpgradeViewController" bundle:nil];
     
-    productsViewController.title = Localize(@"Check");
+    tipViewController.title = Localize(@"Check");
     settingsViewController.title = Localize(@"Settings");
     upgradeViewController.title = Localize(@"Upgrade");
     
-    productsViewController.tabBarItem.image = [UIImage imageNamed:@"704-compose.png"];
-    productsViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"704-compose-selected.png"];
+    tipViewController.tabBarItem.image = [UIImage imageNamed:@"704-compose.png"];
+    tipViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"704-compose-selected.png"];
     settingsViewController.tabBarItem.image = [UIImage imageNamed:@"740-gear.png"];
     settingsViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"740-gear-selected.png"];
     upgradeViewController.tabBarItem.image = [UIImage imageNamed:@"952-shopping-cart.png"];
@@ -114,11 +114,12 @@
 
     // Create the tab bar with the each view controller inside of a nav controller.
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
-    self.productsNavController = [[UINavigationController alloc] initWithRootViewController:productsViewController];
+    self.tipNavController = [[UINavigationController alloc] initWithRootViewController:tipViewController];
     self.settingsNavController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
     self.upgradeNavController = [[UINavigationController alloc] initWithRootViewController:upgradeViewController];
     
-    NSMutableArray *viewControllers = [[NSMutableArray alloc] initWithObjects:self.productsNavController, self.settingsNavController, nil];
+    NSMutableArray *viewControllers = [[NSMutableArray alloc] initWithObjects:self.tipNavController, self.settingsNavController, nil];
+//    NSMutableArray *viewControllers = [[NSMutableArray alloc] initWithObjects:tipViewController, self.settingsNavController, nil];
 
     BOOL const productPurchased = [MATipIAPHelper ProProductPurchased];
     if ( ! productPurchased)
@@ -136,8 +137,8 @@
 // Called by MAAppearance.
 - (void)setBarStyle:(UIBarStyle)barStyle translucent:(BOOL)translucent
 {
-    self.productsNavController.navigationBar.barStyle = barStyle;
-    self.productsNavController.navigationBar.translucent = translucent;
+    self.tipNavController.navigationBar.barStyle = barStyle;
+    self.tipNavController.navigationBar.translucent = translucent;
     
     self.settingsNavController.navigationBar.barStyle = barStyle;
     self.settingsNavController.navigationBar.translucent = translucent;

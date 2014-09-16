@@ -12,7 +12,7 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) UITabBarController *rootController;
-@property (strong, nonatomic) UINavigationController *productsNavController;
+@property (strong, nonatomic) UINavigationController *tipNavController;
 @property (strong, nonatomic) UINavigationController *settingsNavController;
 @property (strong, nonatomic) UINavigationController *upgradeNavController;
 

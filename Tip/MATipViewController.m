@@ -12,6 +12,7 @@
 #import "MAAppearance.h"
 #import "MABill.h"
 #import "MAFilePaths.h"
+#import "MARatingTableViewCell.h"
 #import "MATextFieldCell.h"
 #import "MAUserUtil.h"
 #import "MAUtil.h"
@@ -32,9 +33,10 @@ DECL_TABLE_IDX(BILL_ROW, 0);
 DECL_TABLE_IDX(BILL_SECTION_ROWS, 1);
 
 DECL_TABLE_IDX_VAR(TIP_SECTION, 1);
-DECL_TABLE_IDX(TIP_PERCENT_ROW, 0);
-DECL_TABLE_IDX(TIP_ROW, 1);
-DECL_TABLE_IDX(TIP_SECTION_ROWS, 2);
+DECL_TABLE_IDX(TIP_RATING_ROW, 0);
+DECL_TABLE_IDX(TIP_PERCENT_ROW, 1);
+DECL_TABLE_IDX(TIP_ROW, 2);
+DECL_TABLE_IDX(TIP_SECTION_ROWS, 3);
 
 DECL_TABLE_IDX_VAR(TOTAL_SECTION, 2);
 DECL_TABLE_IDX(TOTAL_ROW, 0);
@@ -53,8 +55,9 @@ DECL_TABLE_IDX(BILL_BEFORE_TAX_ROW, DISABLED_ROW);
 DECL_TABLE_IDX(TAX_SECTION_ROWS, 2);
 
 static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
+static NSString *MARatingTableViewCellIdentifier = @"MARatingTableViewCellIdentifier";
 
-@interface MATipViewController () <MABillDelegate, UITextFieldDelegate, UIActionSheetDelegate, ADBannerViewDelegate>
+@interface MATipViewController () <MABillDelegate, MARatingDelegate, UITextFieldDelegate, UIActionSheetDelegate, ADBannerViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) MABill *bill;
 @property (strong, nonatomic) NSArray *textFieldIndexPaths;
@@ -200,6 +203,9 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     
     nib = [UINib nibWithNibName:@"MATextFieldCell" bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:MATextFieldCellIdentifier];
+    
+    nib = [UINib nibWithNibName:@"MARatingTableViewCell" bundle:nil];
+    [self.tableView registerNib:nib forCellReuseIdentifier:MARatingTableViewCellIdentifier];
 }
 
 - (void)loadBill
@@ -427,6 +433,10 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     }
     else if (indexPath.section == TIP_SECTION)
     {
+        if (indexPath.row == TIP_RATING_ROW)
+        {
+            return [self tableView:tableView ratingCellForRowAtIndexPath:indexPath];
+        }
         return [self tableView:tableView tipCellForRowAtIndexPath:indexPath];
     }
     else if (indexPath.section == TOTAL_SECTION)
@@ -474,6 +484,28 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 //    UIImage *image = [MAFilePaths appearanceImage];
 //    NSInteger tag = [MAUtil toTag:indexPath];
 //    [MAUtil setImage:image forCell:cell withTag:tag];
+
+    return cell;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView ratingCellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    MARatingTableViewCell *cell = (MARatingTableViewCell *)[tableView dequeueReusableCellWithIdentifier:MARatingTableViewCellIdentifier];
+    if (cell == nil)
+    {
+        cell = [[MARatingTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MARatingTableViewCellIdentifier];
+    }
+
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    [cell setAppearanceInTable:tableView];
+    
+    NSString *labelText = @"";
+    cell.textLabel.text = labelText;
+    
+    cell.threeStars = YES;
+    NSUInteger rating = [cell ratingForTipPercent:self.bill.tipPercent];
+    cell.rating = rating;
+    cell.delegate = self;
 
     return cell;
 }
@@ -593,7 +625,7 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     UIImage *image = nil;
     if (indexPath.row == SPLIT_COUNT_ROW)
     {
-        labelText = Localize(@"People");
+        labelText = Localize(@"Party Size");
         textFieldText = [self.bill formattedSplit];
         image = [MAFilePaths peopleImage];
     }
@@ -634,6 +666,11 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
         return;
     }
 
+    if (indexPath.section == TIP_SECTION && indexPath.row == TIP_RATING_ROW)
+    {
+        return;
+    }
+    
     UITextField *textField = [self textFieldForIndexPath:indexPath];
     if (textField)
     {
@@ -670,6 +707,14 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 {
     // For instance, 0 was enter in for the split count, so just reload the table to refresh the invalid text field value.
     [self.tableView reloadData];
+}
+
+#pragma mark - MARatingDelegate
+
+- (void)ratingDidChange:(MARatingTableViewCell *)ratingCell
+{
+    NSNumber *tipPercent = [ratingCell tipPercentForRating:ratingCell.rating];
+    self.bill.tipPercent = tipPercent;
 }
 
 #pragma mark - Text field

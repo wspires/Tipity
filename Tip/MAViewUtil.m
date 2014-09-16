@@ -104,7 +104,7 @@
 {
     // If the user changes, then pop the routines tab back to the top since that tab may be drilled down in to the routine and exercises for a different user.
     MAAppDelegate* myDelegate = (((MAAppDelegate*) [UIApplication sharedApplication].delegate));
-    [myDelegate.productsNavController popToRootViewControllerAnimated:NO];
+    [myDelegate.tipNavController popToRootViewControllerAnimated:NO];
 }
 
 @end
