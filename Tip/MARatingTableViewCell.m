@@ -93,11 +93,15 @@ static NSUInteger const BUTTON_END_TAG = 6;
     
     if (self.threeStars)
     {
-//        double serviceRatingFair = [[MAUserUtil sharedInstance] serviceRatingFair].doubleValue;
+        double serviceRatingFair = [[MAUserUtil sharedInstance] serviceRatingFair].doubleValue;
         double serviceRatingGood = [[MAUserUtil sharedInstance] serviceRatingGood].doubleValue;
         double serviceRatingGreat = [[MAUserUtil sharedInstance] serviceRatingGreat].doubleValue;
-        
-        if (tipPercentDouble < serviceRatingGood)
+
+        if (tipPercentDouble < serviceRatingFair)
+        {
+            rating = 1;
+        }
+        else if (tipPercentDouble >= serviceRatingFair && tipPercentDouble < serviceRatingGood)
         {
             rating = 2;
         }
