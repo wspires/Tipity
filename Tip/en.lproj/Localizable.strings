@@ -64,7 +64,7 @@
 "Purchased" = "Purchased";
 "Loading..." = "Loading...";
 
-/* Color velection */
+/* Color selection */
 "Text" = "Text";
 "Row" = "Row";
 "Border" = "Border";
@@ -75,3 +75,8 @@
 "Select Custom Photo" = "Select Custom Photo";
 "Foreground" = "Foreground";
 "Change text brightness on previous page" = "Change text brightness on previous page";
+
+/* Service rating */
+"Fair" = "Fair";
+"Good" = "Good";
+"Great" = "Great";
