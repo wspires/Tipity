@@ -491,7 +491,8 @@ static NSString *MARatingTableViewCellIdentifier = @"MARatingTableViewCellIdenti
     
     cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
     cell.textField.delegate = self;
-    
+    cell.textField.clearsOnBeginEditing = YES;
+
     NSString *labelText = Localize(@"Total");
     if ([[MAUserUtil sharedInstance] enableTax])
     {
@@ -501,7 +502,7 @@ static NSString *MARatingTableViewCellIdentifier = @"MARatingTableViewCellIdenti
 
     NSString *textFieldText = [self.bill formattedBill];
     cell.textField.text = textFieldText;
-
+    
     UIImage *image = [MAFilePaths billImage];
     cell.imageView.image = image;
 //    UIImage *image = [MAFilePaths appearanceImage];
@@ -544,7 +545,8 @@ static NSString *MARatingTableViewCellIdentifier = @"MARatingTableViewCellIdenti
     
     cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
     cell.textField.delegate = self;
-    
+    cell.textField.clearsOnBeginEditing = YES;
+
     NSString *labelText = @"";
     NSString *textFieldText = @"";
     UIImage *image = nil;
@@ -578,7 +580,8 @@ static NSString *MARatingTableViewCellIdentifier = @"MARatingTableViewCellIdenti
     
     cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
     cell.textField.delegate = self;
-    
+    cell.textField.clearsOnBeginEditing = YES;
+
     NSString *labelText = Localize(@"Grand Total");
     cell.textLabel.text = labelText;
     
@@ -602,7 +605,8 @@ static NSString *MARatingTableViewCellIdentifier = @"MARatingTableViewCellIdenti
     
     cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
     cell.textField.delegate = self;
-    
+    cell.textField.clearsOnBeginEditing = YES;
+
     NSString *labelText = @"";
     NSString *textFieldText = @"";
     UIImage *image = nil;
@@ -642,7 +646,8 @@ static NSString *MARatingTableViewCellIdentifier = @"MARatingTableViewCellIdenti
         
     cell.textField.keyboardType = UIKeyboardTypeDecimalPad;
     cell.textField.delegate = self;
-    
+    cell.textField.clearsOnBeginEditing = YES;
+
     NSString *labelText = @"";
     NSString *textFieldText = @"";
     UIImage *image = nil;
