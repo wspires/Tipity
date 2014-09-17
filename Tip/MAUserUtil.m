@@ -703,7 +703,7 @@ static NSString *PerExerciseSettings = @"perExerciseSettings";
     
     CHECK_SETTING_OFF(EnableSplit)
     CHECK_SETTING_OFF(EnableTax)
-    CHECK_SETTING_OFF(EnableServiceRating)
+    CHECK_SETTING_ON(EnableServiceRating)
     CHECK_SETTING(ServiceRatingFair, DefaultServiceRatingFair)
     CHECK_SETTING(ServiceRatingGood, DefaultServiceRatingGood)
     CHECK_SETTING(ServiceRatingGreat, DefaultServiceRatingGreat)
@@ -737,7 +737,7 @@ static NSString *PerExerciseSettings = @"perExerciseSettings";
 
     key = EnableSplit;
     value = [settings objectForKey:key];
-    if (![value isEqualToString:@"on"] && ![value isEqualToString:@"off"])
+    if ( ! [value isEqualToString:@"on"] && ! [value isEqualToString:@"off"])
     {
         value = @"off";
         NSLog(@"Invalid setting for %@: %@", key, value);
@@ -747,7 +747,7 @@ static NSString *PerExerciseSettings = @"perExerciseSettings";
 
     key = EnableTax;
     value = [settings objectForKey:key];
-    if (![value isEqualToString:@"on"] && ![value isEqualToString:@"off"])
+    if ( ! [value isEqualToString:@"on"] && ! [value isEqualToString:@"off"])
     {
         value = @"off";
         NSLog(@"Invalid setting for %@: %@", key, value);
@@ -757,7 +757,7 @@ static NSString *PerExerciseSettings = @"perExerciseSettings";
 
     key = EnableServiceRating;
     value = [settings objectForKey:key];
-    if (![value isEqualToString:@"on"] && ![value isEqualToString:@"off"])
+    if ( ! [value isEqualToString:@"on"] && ! [value isEqualToString:@"off"])
     {
         value = @"off";
         NSLog(@"Invalid setting for %@: %@", key, value);
