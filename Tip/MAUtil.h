@@ -51,6 +51,9 @@
 // Simplify declaring types used for tableview indices.
 #define DECL_TABLE_IDX(name, value) static NSUInteger const (name) = (value)
 
+// Macro for declaring table index paths. Must be non-const, so they can be re-assigned depending on the settings.
+#define DECL_TABLE_IDX_VAR(name, value) static NSUInteger (name) = (value)
+
 NSUInteger DeviceSystemMajorVersion();
 #define BELOW_IOS7 (DeviceSystemMajorVersion() < 7)
 #define ABOVE_IOS7 ( ! BELOW_IOS7)

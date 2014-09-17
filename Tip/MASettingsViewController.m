@@ -11,6 +11,7 @@
 #import "MAAccessoryView.h"
 #import "MAAppearance.h"
 #import "MAAppearanceSelectionViewController.h"
+#import "MAServiceRatingSettingsViewController.h"
 #import "MACreditsViewController.h"
 #import "MAFilePaths.h"
 #import "MASwitchCell.h"
@@ -27,8 +28,9 @@ DECL_TABLE_IDX(NUM_SECTIONS, 3);
 DECL_TABLE_IDX(GEN_SECTION, 0);
 DECL_TABLE_IDX(ENABLE_TAX_ROW, 0);
 DECL_TABLE_IDX(ENABLE_SPLIT_TIP_ROW, 1);
-DECL_TABLE_IDX(APPEARANCE_ROW, 2);
-DECL_TABLE_IDX(GEN_SECTION_ROWS, 3);
+DECL_TABLE_IDX(SERVICE_RATING_ROW, 2);
+DECL_TABLE_IDX(APPEARANCE_ROW, 3);
+DECL_TABLE_IDX(GEN_SECTION_ROWS, 4);
 
 DECL_TABLE_IDX(APPS_SECTION, 1);
 
@@ -43,18 +45,19 @@ DECL_TABLE_IDX(INFO_SECTION_ROWS, 5);
 static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
 
 @interface MASettingsViewController ()
+@property (strong, nonatomic) MAServiceRatingSettingsViewController *serviceRatingController;
 @property (strong, nonatomic) MAAppearanceSelectionViewController *customizeColorController;
 @property (strong, nonatomic) MACreditsViewController *creditsController;
 @property (strong, nonatomic) NSArray *appList;
 
 - (void)handleReview;
 - (void)openReviewURL;
-
 - (void)sendFeedbackEmail;
 @end
 
 @implementation MASettingsViewController
 @synthesize tableView = _tableView;
+@synthesize serviceRatingController = _serviceRatingController;
 @synthesize customizeColorController = _customizeColorController;
 @synthesize creditsController = _creditsController;
 @synthesize appList = _appList;
@@ -163,6 +166,19 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
     
     self.customizeColorController.title = Localize(@"Color");
     [self.navigationController pushViewController:self.customizeColorController animated:YES];
+    
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)loadServiceRatingController:(NSIndexPath *)indexPath
+{
+    if (self.serviceRatingController == nil)
+    {
+        self.serviceRatingController = [[MAServiceRatingSettingsViewController alloc] initWithNibName:@"MAServiceRatingSettingsViewController" bundle:nil];
+    }
+    
+    self.serviceRatingController.title = Localize(@"Service Rating");
+    [self.navigationController pushViewController:self.serviceRatingController animated:YES];
     
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -282,6 +298,10 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
         {
             return [self tableView:tableView taxCellForRowAtIndexPath:indexPath];
         }
+        else if (indexPath.row == SERVICE_RATING_ROW)
+        {
+            return [self tableView:tableView serviceRatingCellForRowAtIndexPath:indexPath];
+        }
     }
     else if (indexPath.section == APPS_SECTION)
     {
@@ -365,11 +385,8 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
         [MATipIAPHelper disableLabelIfNotPurchased:cell.textLabel];
     }
 
-    UIImage *image = [MAFilePaths applyEffectsToImagePath:[MAFilePaths appearanceImageFilename]];
+    UIImage *image = [MAFilePaths appearanceImage];
     cell.imageView.image = image;
-//    UIImage *image = [MAFilePaths appearanceImage];
-//    NSInteger tag = [MAUtil toTag:indexPath];
-//    [MAUtil setImage:image forCell:cell withTag:tag];
     
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.accessoryView = [MAAccessoryView grayAccessoryViewForCell:cell];
@@ -481,6 +498,40 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
     [[MAUserUtil sharedInstance] setEnableTax:swtch.isOn];
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView serviceRatingCellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString * const CellIdentifier = @"MAServiceRatingCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+    }
+    [MAAppearance setAppearanceForCell:cell tableStyle:tableView.style];
+    
+    cell.textLabel.text = Localize(@"Service Rating");
+    
+    if (Service_Rating_Iap)
+    {
+        [MATipIAPHelper disableLabelIfNotPurchased:cell.textLabel];
+    }
+    
+    UIImage *image = nil;
+    if ([[MAUserUtil sharedInstance] enableServiceRating])
+    {
+        image = [MAFilePaths filledStarImage];
+    }
+    else
+    {
+        image = [MAFilePaths emptyStarImage];
+    }
+    cell.imageView.image = image;
+    
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.accessoryView = [MAAccessoryView grayAccessoryViewForCell:cell];
+    
+    return cell;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView appsCellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString * const CellIdentifier = @"MAAppsCell";
@@ -509,12 +560,6 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    CGFloat rowHeight = [MAUtil rowHeightForTableView:tableView];
-    return rowHeight;
-}
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -528,6 +573,14 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
                 return;
             }
             [self loadCustomizeColorController:indexPath];
+        }
+        else if (indexPath.row == SERVICE_RATING_ROW)
+        {
+            if (Service_Rating_Iap && [MATipIAPHelper checkAndAlertForIAP])
+            {
+                return;
+            }
+            [self loadServiceRatingController:indexPath];
         }
     }
     else if (indexPath.section == APPS_SECTION)

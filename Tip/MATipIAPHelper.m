@@ -329,6 +329,14 @@ static NSUInteger const ProductCountThreshold = 3;
             [feature setObject:[MAFilePaths taxAmountImage] forKey:Feature_Image_Key];
             [features addObject:feature];
         }
+        if (Service_Rating_Iap)
+        {
+            feature = [NSMutableDictionary dictionary];
+            [feature setObject:Localize(@"Service Rating") forKey:Feature_Title_Key];
+            [feature setObject:Localize(@"Customize the service rating buttons") forKey:Feature_Description_Key];
+            [feature setObject:[MAFilePaths taxAmountImage] forKey:Feature_Image_Key];
+            [features addObject:feature];
+        }
         if (Customize_Color_Iap)
         {
             feature = [NSMutableDictionary dictionary];

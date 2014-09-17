@@ -11,6 +11,10 @@
 
 static NSString *EnableSplit = @"enableSplit";
 static NSString *EnableTax = @"enableTax";
+static NSString *EnableServiceRating = @"enableServiceRating";
+static NSString *ServiceRatingFair = @"serviceRatingFair";
+static NSString *ServiceRatingGood = @"serviceRatingGood";
+static NSString *ServiceRatingGreat = @"serviceRatingGreat";
 
 static NSString *BackgroundColorId = @"backgroundColorId";
 static NSString *ForegroundColorId = @"foregroundColorId";
@@ -49,6 +53,11 @@ static NSString *TableTextColor = @"tableTextColor";
 - (void)setEnableSplit:(BOOL)enable;
 - (BOOL)enableTax;
 - (void)setEnableTax:(BOOL)enable;
+- (BOOL)enableServiceRating;
+- (void)setEnableServiceRating:(BOOL)enable;
+- (NSNumber *)serviceRatingFair;
+- (NSNumber *)serviceRatingGood;
+- (NSNumber *)serviceRatingGreat;
 
 #pragma mark Current user
 + (NSString *)defaultUserName;

@@ -10,6 +10,7 @@
 
 #import "MAAppearance.h"
 #import "MAFilePaths.h"
+#import "MAUserUtil.h"
 
 static NSUInteger const BUTTON_START_TAG = 1;
 static NSUInteger const BUTTON_END_TAG = 6;
@@ -36,11 +37,8 @@ static NSUInteger const BUTTON_END_TAG = 6;
     }
     _rating = rating;
     
-    NSString *filledStarImagePath = @"726-star-selected.png";
-    UIImage *filledStarImage = [MAFilePaths applyEffectsToImagePath:filledStarImagePath];
-    
-    NSString *starImagePath = @"726-star.png";
-    UIImage *starImage = [MAFilePaths applyEffectsToImagePath:starImagePath];
+    UIImage *filledStarImage = [MAFilePaths filledStarImage];
+    UIImage *emptyStarImage = [MAFilePaths emptyStarImage];
     
     for (NSUInteger i = BUTTON_START_TAG; i != BUTTON_END_TAG; ++i)
     {
@@ -50,7 +48,7 @@ static NSUInteger const BUTTON_END_TAG = 6;
         UIImage *image = filledStarImage;
         if (i > rating)
         {
-            image = starImage;
+            image = emptyStarImage;
         }
         button.imageView.image = image;
         [button setImage:image forState:UIControlStateHighlighted];
@@ -95,15 +93,19 @@ static NSUInteger const BUTTON_END_TAG = 6;
     
     if (self.threeStars)
     {
-        if (tipPercentDouble < 15)
+//        double serviceRatingFair = [[MAUserUtil sharedInstance] serviceRatingFair].doubleValue;
+        double serviceRatingGood = [[MAUserUtil sharedInstance] serviceRatingGood].doubleValue;
+        double serviceRatingGreat = [[MAUserUtil sharedInstance] serviceRatingGreat].doubleValue;
+        
+        if (tipPercentDouble < serviceRatingGood)
         {
             rating = 2;
         }
-        else if (tipPercentDouble >= 15 && tipPercentDouble < 20)
+        else if (tipPercentDouble >= serviceRatingGood && tipPercentDouble < serviceRatingGreat)
         {
             rating = 3;
         }
-        else // if (tipPercentDouble >= 20)
+        else // if (tipPercentDouble >= serviceRatingGreat)
         {
             rating = 4;
         }
@@ -141,18 +143,20 @@ static NSUInteger const BUTTON_END_TAG = 6;
 
     if (self.threeStars)
     {
+        NSNumber *tipPercent = nil;
         if (rating <= 2)
         {
-            tipPercentDouble = 10;
+            tipPercent = [[MAUserUtil sharedInstance] serviceRatingFair];
         }
         else if (rating <= 3)
         {
-            tipPercentDouble = 15;
+            tipPercent = [[MAUserUtil sharedInstance] serviceRatingGood];
         }
         else // if (rating <= 4)
         {
-            tipPercentDouble = 20;
+            tipPercent = [[MAUserUtil sharedInstance] serviceRatingGreat];
         }
+        tipPercentDouble = tipPercent.doubleValue;
     }
     else
     {

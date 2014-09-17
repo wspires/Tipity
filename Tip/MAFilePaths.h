@@ -68,6 +68,10 @@
 + (UIImage *)taxPercentImage;
 + (NSString *)taxAmountImageFilename;
 + (UIImage *)taxAmountImage;
++ (NSString *)filledStarImageFilename;
++ (UIImage *)filledStarImage;
++ (NSString *)emptyStarImageFilename;
++ (UIImage *)emptyStarImage;
 
 // Feedback icons.
 + (NSString *)tellFriendImageFilename;

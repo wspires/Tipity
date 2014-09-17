@@ -490,6 +490,24 @@ static NSString * const ExerciseFilterName = @"ExerciseFilterName";
     return [MAFilePaths applyEffectsToImagePath:[MAFilePaths taxAmountImageFilename]];
 }
 
++ (NSString *)filledStarImageFilename
+{
+    return @"726-star-selected.png";
+}
++ (UIImage *)filledStarImage
+{
+    return [MAFilePaths applyEffectsToImagePath:[MAFilePaths filledStarImageFilename]];
+}
+
++ (NSString *)emptyStarImageFilename
+{
+    return @"726-star.png";
+}
++ (UIImage *)emptyStarImage
+{
+    return [MAFilePaths applyEffectsToImagePath:[MAFilePaths emptyStarImageFilename]];
+}
+
 #pragma mark - Feedback icons
 
 + (NSString *)tellFriendImageFilename

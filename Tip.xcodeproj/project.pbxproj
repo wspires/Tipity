@@ -12,6 +12,8 @@
 		1803AC5C19C89C8B006C7EFF /* MARatingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1803AC5A19C89C8B006C7EFF /* MARatingTableViewCell.xib */; };
 		1803AC5F19C8A2F2006C7EFF /* 726-star-selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 1803AC5D19C8A2F2006C7EFF /* 726-star-selected.png */; };
 		1803AC6019C8A2F2006C7EFF /* 726-star-selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1803AC5E19C8A2F2006C7EFF /* 726-star-selected@2x.png */; };
+		1803AC6419C945C1006C7EFF /* MAServiceRatingSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1803AC6219C945C1006C7EFF /* MAServiceRatingSettingsViewController.m */; };
+		1803AC6519C945C1006C7EFF /* MAServiceRatingSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1803AC6319C945C1006C7EFF /* MAServiceRatingSettingsViewController.xib */; };
 		1808CDEB19C13B7900E972E1 /* Unit Price - Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1808CDEA19C13B7900E972E1 /* Unit Price - Icon.png */; };
 		1808CDF019C1412800E972E1 /* 826-money-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 1808CDEC19C1412800E972E1 /* 826-money-1.png */; };
 		1808CDF119C1412800E972E1 /* 826-money-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1808CDED19C1412800E972E1 /* 826-money-1@2x.png */; };
@@ -153,6 +155,9 @@
 		1803AC5A19C89C8B006C7EFF /* MARatingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MARatingTableViewCell.xib; sourceTree = "<group>"; };
 		1803AC5D19C8A2F2006C7EFF /* 726-star-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "726-star-selected.png"; sourceTree = "<group>"; };
 		1803AC5E19C8A2F2006C7EFF /* 726-star-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "726-star-selected@2x.png"; sourceTree = "<group>"; };
+		1803AC6119C945C1006C7EFF /* MAServiceRatingSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAServiceRatingSettingsViewController.h; sourceTree = "<group>"; };
+		1803AC6219C945C1006C7EFF /* MAServiceRatingSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAServiceRatingSettingsViewController.m; sourceTree = "<group>"; };
+		1803AC6319C945C1006C7EFF /* MAServiceRatingSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MAServiceRatingSettingsViewController.xib; sourceTree = "<group>"; };
 		1808CDEA19C13B7900E972E1 /* Unit Price - Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Unit Price - Icon.png"; sourceTree = "<group>"; };
 		1808CDEC19C1412800E972E1 /* 826-money-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "826-money-1.png"; sourceTree = "<group>"; };
 		1808CDED19C1412800E972E1 /* 826-money-1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "826-money-1@2x.png"; sourceTree = "<group>"; };
@@ -482,6 +487,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1803AC6619C945D5006C7EFF /* Service Rating */ = {
+			isa = PBXGroup;
+			children = (
+				1803AC6119C945C1006C7EFF /* MAServiceRatingSettingsViewController.h */,
+				1803AC6219C945C1006C7EFF /* MAServiceRatingSettingsViewController.m */,
+				1803AC6319C945C1006C7EFF /* MAServiceRatingSettingsViewController.xib */,
+			);
+			name = "Service Rating";
+			sourceTree = "<group>";
+		};
 		1809752C19BE5ED60039F654 = {
 			isa = PBXGroup;
 			children = (
@@ -934,6 +949,7 @@
 				1809767719BE70700039F654 /* MASettingsViewController.h */,
 				1809767819BE70700039F654 /* MASettingsViewController.m */,
 				1809767919BE70700039F654 /* MASettingsViewController.xib */,
+				1803AC6619C945D5006C7EFF /* Service Rating */,
 				180976B319BE71390039F654 /* Appearance */,
 				180976B219BE71240039F654 /* Custom Cells */,
 				180976AF19BE70FB0039F654 /* Credits */,
@@ -1122,6 +1138,7 @@
 				1809762519BE61010039F654 /* tableview_placeholder.png in Resources */,
 				1808CE1419C14CF900E972E1 /* 740-gear-selected.png in Resources */,
 				1893F07419C2B12A00F1485A /* 561-stamp@2x.png in Resources */,
+				1803AC6519C945C1006C7EFF /* MAServiceRatingSettingsViewController.xib in Resources */,
 				1808CE1D19C14D4800E972E1 /* 952-shopping-cart-selected@2x.png in Resources */,
 				1809767119BE6FE70039F654 /* MAUpgradeViewController.xib in Resources */,
 				1809762019BE61010039F654 /* Mat Calc - Icon.png in Resources */,
@@ -1204,6 +1221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1803AC6419C945C1006C7EFF /* MAServiceRatingSettingsViewController.m in Sources */,
 				180976A519BE70F00039F654 /* MACreditsViewController.m in Sources */,
 				180976AB19BE70F00039F654 /* MAUnitsSettingsCell.m in Sources */,
 				1809765E19BE61FA0039F654 /* UIImage+Gradient.m in Sources */,

@@ -20,9 +20,6 @@
 
 #import <iAd/iAd.h>
 
-// Macro for declaring table index paths. Must be non-const, so they can be re-assigned depending on the settings.
-#define DECL_TABLE_IDX_VAR(name, value) static NSUInteger (name) = (value)
-
 DECL_TABLE_IDX(DISABLED_SECTION, 9999);
 DECL_TABLE_IDX(DISABLED_ROW, 9999);
 
@@ -33,10 +30,10 @@ DECL_TABLE_IDX(BILL_ROW, 0);
 DECL_TABLE_IDX(BILL_SECTION_ROWS, 1);
 
 DECL_TABLE_IDX_VAR(TIP_SECTION, 1);
-DECL_TABLE_IDX(TIP_RATING_ROW, 0);
-DECL_TABLE_IDX(TIP_PERCENT_ROW, 1);
-DECL_TABLE_IDX(TIP_ROW, 2);
-DECL_TABLE_IDX(TIP_SECTION_ROWS, 3);
+DECL_TABLE_IDX_VAR(TIP_RATING_ROW, 0);
+DECL_TABLE_IDX_VAR(TIP_PERCENT_ROW, 1);
+DECL_TABLE_IDX_VAR(TIP_ROW, 2);
+DECL_TABLE_IDX_VAR(TIP_SECTION_ROWS, 3);
 
 DECL_TABLE_IDX_VAR(TOTAL_SECTION, 2);
 DECL_TABLE_IDX(TOTAL_ROW, 0);
@@ -270,6 +267,21 @@ static NSString *MARatingTableViewCellIdentifier = @"MARatingTableViewCellIdenti
         ++NUM_SECTIONS;
         
         SPLIT_SECTION = TOTAL_SECTION + 1;
+    }
+    
+    if ([[MAUserUtil sharedInstance] enableServiceRating])
+    {
+        TIP_RATING_ROW = 0;
+        TIP_PERCENT_ROW = 1;
+        TIP_ROW = 2;
+        TIP_SECTION_ROWS = 3;
+    }
+    else
+    {
+        TIP_RATING_ROW = DISABLED_ROW;
+        TIP_PERCENT_ROW = 0;
+        TIP_ROW = 1;
+        TIP_SECTION_ROWS = 2;
     }
     
     [self makeTextFieldIndexPaths];
@@ -647,12 +659,6 @@ static NSString *MARatingTableViewCellIdentifier = @"MARatingTableViewCellIdenti
     cell.imageView.image = image;
 
     return cell;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    CGFloat rowHeight = [MAUtil rowHeightForTableView:tableView];
-    return rowHeight;
 }
 
 #pragma mark - Table view delegate

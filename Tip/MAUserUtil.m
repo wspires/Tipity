@@ -30,10 +30,9 @@ static NSString * const UserListName = @"UserList.plist";
 // Base name for file containing settings.
 static NSString * const SettingsName = @"Settings";
 
-static NSString * const RoutinesListName = @"RoutinesList";
-static NSString * const RoutinesDirName = @"Routines";
-
-static NSString * const DefaultPastLogViewCount = @"3";
+static NSString * const DefaultServiceRatingFair = @"10";
+static NSString * const DefaultServiceRatingGood = @"15";
+static NSString * const DefaultServiceRatingGreat = @"20";
 
 static NSString * const DefaultBackgroundColorId = @"cloth";
 static NSString * const DefaultForegroundColorId = @"denimBlueColor";
@@ -188,6 +187,41 @@ static NSString *PerExerciseSettings = @"perExerciseSettings";
         value = @"on";
     }
     [self saveSetting:value forKey:EnableTax];
+}
+
+- (BOOL)enableServiceRating
+{
+    NSString *enableStr = [self objectForKey:EnableServiceRating];
+    BOOL const enable = [MAUtil isStringOn:enableStr];
+    return enable;
+}
+- (void)setEnableServiceRating:(BOOL)enable
+{
+    NSString *value = @"off";
+    if (enable)
+    {
+        value = @"on";
+    }
+    [self saveSetting:value forKey:EnableServiceRating];
+}
+
+- (NSNumber *)serviceRatingFair
+{
+    NSString *rating = [self objectForKey:ServiceRatingFair];
+    NSNumber *number = [NSNumber numberWithDouble:[rating doubleValue]];
+    return number;
+}
+- (NSNumber *)serviceRatingGood
+{
+    NSString *rating = [self objectForKey:ServiceRatingGood];
+    NSNumber *number = [NSNumber numberWithDouble:[rating doubleValue]];
+    return number;
+}
+- (NSNumber *)serviceRatingGreat
+{
+    NSString *rating = [self objectForKey:ServiceRatingGreat];
+    NSNumber *number = [NSNumber numberWithDouble:[rating doubleValue]];
+    return number;
 }
 
 - (NSDictionary *)saveSetting:(id)setting forKey:(NSString *)key perDictSettingsKey:(NSString *)perDictSettingsKey nameKey:(NSString *)nameKey
@@ -669,7 +703,11 @@ static NSString *PerExerciseSettings = @"perExerciseSettings";
     
     CHECK_SETTING_OFF(EnableSplit)
     CHECK_SETTING_OFF(EnableTax)
-    
+    CHECK_SETTING_OFF(EnableServiceRating)
+    CHECK_SETTING(ServiceRatingFair, DefaultServiceRatingFair)
+    CHECK_SETTING(ServiceRatingGood, DefaultServiceRatingGood)
+    CHECK_SETTING(ServiceRatingGreat, DefaultServiceRatingGreat)
+
     // Appearance settings.
     CHECK_SETTING(BackgroundColorId, [MAUserUtil defaultBackgroundColorId])
     CHECK_SETTING(ForegroundColorId, DefaultForegroundColorId)
@@ -708,6 +746,16 @@ static NSString *PerExerciseSettings = @"perExerciseSettings";
     }
 
     key = EnableTax;
+    value = [settings objectForKey:key];
+    if (![value isEqualToString:@"on"] && ![value isEqualToString:@"off"])
+    {
+        value = @"off";
+        NSLog(@"Invalid setting for %@: %@", key, value);
+        [settings setObject:@"on" forKey:key];
+        updatedSettings = YES;
+    }
+
+    key = EnableServiceRating;
     value = [settings objectForKey:key];
     if (![value isEqualToString:@"on"] && ![value isEqualToString:@"off"])
     {
