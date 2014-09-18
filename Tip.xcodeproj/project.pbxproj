@@ -443,6 +443,36 @@
 		18A9C58819CB846300789D2E /* 5 - Dynamic Type - Simulator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "5 - Dynamic Type - Simulator.png"; sourceTree = "<group>"; };
 		18A9C58919CB846300789D2E /* 5 - Dynamic Type.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "5 - Dynamic Type.png"; sourceTree = "<group>"; };
 		18A9C58A19CB846300789D2E /* 5 - Dynamic Type.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "5 - Dynamic Type.pxm"; sourceTree = "<group>"; };
+		18A9C58C19CB925B00789D2E /* 1 - Basic - No Status.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1 - Basic - No Status.png"; sourceTree = "<group>"; };
+		18A9C58D19CB925B00789D2E /* 1 - Basic - No Status.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "1 - Basic - No Status.pxm"; sourceTree = "<group>"; };
+		18A9C58E19CB925B00789D2E /* 1 - Basic - Simulator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1 - Basic - Simulator.png"; sourceTree = "<group>"; };
+		18A9C58F19CB925B00789D2E /* 2 - Advanced - No Status.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2 - Advanced - No Status.png"; sourceTree = "<group>"; };
+		18A9C59019CB925B00789D2E /* 2 - Advanced - No Status.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2 - Advanced - No Status.pxm"; sourceTree = "<group>"; };
+		18A9C59119CB925B00789D2E /* 2 - Advanced - Simulator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2 - Advanced - Simulator.png"; sourceTree = "<group>"; };
+		18A9C59219CB925B00789D2E /* 3 - Settings - No Status.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3 - Settings - No Status.png"; sourceTree = "<group>"; };
+		18A9C59319CB925B00789D2E /* 3 - Settings - No Status.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "3 - Settings - No Status.pxm"; sourceTree = "<group>"; };
+		18A9C59419CB925B00789D2E /* 3 - Settings - Simulator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3 - Settings - Simulator.png"; sourceTree = "<group>"; };
+		18A9C59519CB925B00789D2E /* 4 - Color - No Status.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "4 - Color - No Status.png"; sourceTree = "<group>"; };
+		18A9C59619CB925B00789D2E /* 4 - Color - No Status.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "4 - Color - No Status.pxm"; sourceTree = "<group>"; };
+		18A9C59719CB925B00789D2E /* 4 - Color - Simulator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "4 - Color - Simulator.png"; sourceTree = "<group>"; };
+		18A9C59819CB925B00789D2E /* 5 - Dynamic Type - No Status.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "5 - Dynamic Type - No Status.png"; sourceTree = "<group>"; };
+		18A9C59919CB925B00789D2E /* 5 - Dynamic Type - No Status.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "5 - Dynamic Type - No Status.pxm"; sourceTree = "<group>"; };
+		18A9C59A19CB925B00789D2E /* 5 - Dynamic Type - Simulator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "5 - Dynamic Type - Simulator.png"; sourceTree = "<group>"; };
+		18A9C59C19CB927500789D2E /* 1 - Basic - No Status.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1 - Basic - No Status.png"; sourceTree = "<group>"; };
+		18A9C59D19CB927500789D2E /* 1 - Basic - No Status.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "1 - Basic - No Status.pxm"; sourceTree = "<group>"; };
+		18A9C59E19CB927500789D2E /* 1 - Basic - Simulator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1 - Basic - Simulator.png"; sourceTree = "<group>"; };
+		18A9C59F19CB927500789D2E /* 2 - Advanced - No Status.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2 - Advanced - No Status.png"; sourceTree = "<group>"; };
+		18A9C5A019CB927500789D2E /* 2 - Advanced - No Status.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2 - Advanced - No Status.pxm"; sourceTree = "<group>"; };
+		18A9C5A119CB927500789D2E /* 2 - Advanced - Simulator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2 - Advanced - Simulator.png"; sourceTree = "<group>"; };
+		18A9C5A219CB927500789D2E /* 3 - Settings - No Status.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3 - Settings - No Status.png"; sourceTree = "<group>"; };
+		18A9C5A319CB927500789D2E /* 3 - Settings - No Status.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "3 - Settings - No Status.pxm"; sourceTree = "<group>"; };
+		18A9C5A419CB927500789D2E /* 3 - Settings - Simulator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3 - Settings - Simulator.png"; sourceTree = "<group>"; };
+		18A9C5A519CB927500789D2E /* 4 - Color - No Status.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "4 - Color - No Status.png"; sourceTree = "<group>"; };
+		18A9C5A619CB927500789D2E /* 4 - Color - No Status.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "4 - Color - No Status.pxm"; sourceTree = "<group>"; };
+		18A9C5A719CB927500789D2E /* 4 - Color - Simulator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "4 - Color - Simulator.png"; sourceTree = "<group>"; };
+		18A9C5A819CB927500789D2E /* 5 - Dynamic Type - No Status.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "5 - Dynamic Type - No Status.png"; sourceTree = "<group>"; };
+		18A9C5A919CB927500789D2E /* 5 - Dynamic Type - No Status.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "5 - Dynamic Type - No Status.pxm"; sourceTree = "<group>"; };
+		18A9C5AA19CB927500789D2E /* 5 - Dynamic Type - Simulator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "5 - Dynamic Type - Simulator.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -619,9 +649,11 @@
 			isa = PBXGroup;
 			children = (
 				1803AC5719C73840006C7EFF /* IAP.png */,
-				1809758519BE5FF40039F654 /* 1536x2008 */,
 				1809759619BE5FF40039F654 /* 640x1096 */,
 				180975A719BE5FF40039F654 /* 640x920 */,
+				18A9C58B19CB925B00789D2E /* 750x1334 */,
+				18A9C59B19CB927500789D2E /* 1242x2208 */,
+				1809758519BE5FF40039F654 /* 1536x2008 */,
 			);
 			path = Screenshots;
 			sourceTree = "<group>";
@@ -992,6 +1024,50 @@
 				180976A019BE70F00039F654 /* MOGlassButton.m */,
 			);
 			name = Appearance;
+			sourceTree = "<group>";
+		};
+		18A9C58B19CB925B00789D2E /* 750x1334 */ = {
+			isa = PBXGroup;
+			children = (
+				18A9C58C19CB925B00789D2E /* 1 - Basic - No Status.png */,
+				18A9C58D19CB925B00789D2E /* 1 - Basic - No Status.pxm */,
+				18A9C58E19CB925B00789D2E /* 1 - Basic - Simulator.png */,
+				18A9C58F19CB925B00789D2E /* 2 - Advanced - No Status.png */,
+				18A9C59019CB925B00789D2E /* 2 - Advanced - No Status.pxm */,
+				18A9C59119CB925B00789D2E /* 2 - Advanced - Simulator.png */,
+				18A9C59219CB925B00789D2E /* 3 - Settings - No Status.png */,
+				18A9C59319CB925B00789D2E /* 3 - Settings - No Status.pxm */,
+				18A9C59419CB925B00789D2E /* 3 - Settings - Simulator.png */,
+				18A9C59519CB925B00789D2E /* 4 - Color - No Status.png */,
+				18A9C59619CB925B00789D2E /* 4 - Color - No Status.pxm */,
+				18A9C59719CB925B00789D2E /* 4 - Color - Simulator.png */,
+				18A9C59819CB925B00789D2E /* 5 - Dynamic Type - No Status.png */,
+				18A9C59919CB925B00789D2E /* 5 - Dynamic Type - No Status.pxm */,
+				18A9C59A19CB925B00789D2E /* 5 - Dynamic Type - Simulator.png */,
+			);
+			path = 750x1334;
+			sourceTree = "<group>";
+		};
+		18A9C59B19CB927500789D2E /* 1242x2208 */ = {
+			isa = PBXGroup;
+			children = (
+				18A9C59C19CB927500789D2E /* 1 - Basic - No Status.png */,
+				18A9C59D19CB927500789D2E /* 1 - Basic - No Status.pxm */,
+				18A9C59E19CB927500789D2E /* 1 - Basic - Simulator.png */,
+				18A9C59F19CB927500789D2E /* 2 - Advanced - No Status.png */,
+				18A9C5A019CB927500789D2E /* 2 - Advanced - No Status.pxm */,
+				18A9C5A119CB927500789D2E /* 2 - Advanced - Simulator.png */,
+				18A9C5A219CB927500789D2E /* 3 - Settings - No Status.png */,
+				18A9C5A319CB927500789D2E /* 3 - Settings - No Status.pxm */,
+				18A9C5A419CB927500789D2E /* 3 - Settings - Simulator.png */,
+				18A9C5A519CB927500789D2E /* 4 - Color - No Status.png */,
+				18A9C5A619CB927500789D2E /* 4 - Color - No Status.pxm */,
+				18A9C5A719CB927500789D2E /* 4 - Color - Simulator.png */,
+				18A9C5A819CB927500789D2E /* 5 - Dynamic Type - No Status.png */,
+				18A9C5A919CB927500789D2E /* 5 - Dynamic Type - No Status.pxm */,
+				18A9C5AA19CB927500789D2E /* 5 - Dynamic Type - Simulator.png */,
+			);
+			path = 1242x2208;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
