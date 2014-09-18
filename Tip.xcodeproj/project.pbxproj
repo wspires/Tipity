@@ -239,7 +239,6 @@
 		1809756F19BE5FF40039F654 /* AppIcon_80x80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon_80x80.png; sourceTree = "<group>"; };
 		1809757019BE5FF40039F654 /* make_app_icons.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = make_app_icons.sh; sourceTree = "<group>"; };
 		1809757119BE5FF40039F654 /* Description.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Description.txt; sourceTree = "<group>"; };
-		1809757219BE5FF40039F654 /* Large App Icon - Lines.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Large App Icon - Lines.png"; sourceTree = "<group>"; };
 		1809757319BE5FF40039F654 /* Large App Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Large App Icon.png"; sourceTree = "<group>"; };
 		1809758619BE5FF40039F654 /* 1 - Basic Items - Screentaker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1 - Basic Items - Screentaker.png"; sourceTree = "<group>"; };
 		1809758719BE5FF40039F654 /* 1 - Basic Items - Simulator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1 - Basic Items - Simulator.png"; sourceTree = "<group>"; };
@@ -571,7 +570,6 @@
 				1809756219BE5FF40039F654 /* App Icons */,
 				180975B919BE5FF40039F654 /* Version.txt */,
 				1809757119BE5FF40039F654 /* Description.txt */,
-				1809757219BE5FF40039F654 /* Large App Icon - Lines.png */,
 				1809757319BE5FF40039F654 /* Large App Icon.png */,
 				1809757419BE5FF40039F654 /* Launch Images */,
 				1809758419BE5FF40039F654 /* Screenshots */,
