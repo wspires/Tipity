@@ -340,7 +340,7 @@ static NSUInteger const ProductCountThreshold = 3;
         if (Customize_Color_Iap)
         {
             feature = [NSMutableDictionary dictionary];
-            [feature setObject:Localize(@"Customize Color") forKey:Feature_Title_Key];
+            [feature setObject:Localize(@"Personalize Color") forKey:Feature_Title_Key];
             [feature setObject:Localize(@"Change background and foreground colors, or set your own wallpaper") forKey:Feature_Description_Key];
             [feature setObject:[MAFilePaths appearanceImage] forKey:Feature_Image_Key];
             [features addObject:feature];
