@@ -457,6 +457,27 @@
 		18A9C5A819CB927500789D2E /* 5 - Dynamic Type - No Status.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "5 - Dynamic Type - No Status.png"; sourceTree = "<group>"; };
 		18A9C5A919CB927500789D2E /* 5 - Dynamic Type - No Status.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "5 - Dynamic Type - No Status.pxm"; sourceTree = "<group>"; };
 		18A9C5AA19CB927500789D2E /* 5 - Dynamic Type - Simulator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "5 - Dynamic Type - Simulator.png"; sourceTree = "<group>"; };
+		18A9C5BA19CB96DA00789D2E /* 1 - Basic - Screentaker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1 - Basic - Screentaker.png"; sourceTree = "<group>"; };
+		18A9C5BB19CB96DA00789D2E /* 1 - Basic - Simulator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1 - Basic - Simulator.png"; sourceTree = "<group>"; };
+		18A9C5BC19CB96DA00789D2E /* 1 - Basic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1 - Basic.png"; sourceTree = "<group>"; };
+		18A9C5BD19CB96DA00789D2E /* 1 - Basic.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "1 - Basic.pxm"; sourceTree = "<group>"; };
+		18A9C5BE19CB96DA00789D2E /* 2 - Advanced - Screentaker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2 - Advanced - Screentaker.png"; sourceTree = "<group>"; };
+		18A9C5BF19CB96DA00789D2E /* 2 - Advanced - Simulator .png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2 - Advanced - Simulator .png"; sourceTree = "<group>"; };
+		18A9C5C019CB96DA00789D2E /* 2 - Advanced - Simulator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2 - Advanced - Simulator.png"; sourceTree = "<group>"; };
+		18A9C5C119CB96DA00789D2E /* 2 - Advanced.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2 - Advanced.png"; sourceTree = "<group>"; };
+		18A9C5C219CB96DA00789D2E /* 2 - Advanced.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2 - Advanced.pxm"; sourceTree = "<group>"; };
+		18A9C5C319CB96DA00789D2E /* 3 - Settings - Screentaker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3 - Settings - Screentaker.png"; sourceTree = "<group>"; };
+		18A9C5C419CB96DA00789D2E /* 3 - Settings - Simulator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3 - Settings - Simulator.png"; sourceTree = "<group>"; };
+		18A9C5C519CB96DA00789D2E /* 3 - Settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3 - Settings.png"; sourceTree = "<group>"; };
+		18A9C5C619CB96DA00789D2E /* 3 - Settings.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "3 - Settings.pxm"; sourceTree = "<group>"; };
+		18A9C5C719CB96DA00789D2E /* 4 - Color - Screentaker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "4 - Color - Screentaker.png"; sourceTree = "<group>"; };
+		18A9C5C819CB96DA00789D2E /* 4 - Color - Simulator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "4 - Color - Simulator.png"; sourceTree = "<group>"; };
+		18A9C5C919CB96DA00789D2E /* 4 - Color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "4 - Color.png"; sourceTree = "<group>"; };
+		18A9C5CA19CB96DA00789D2E /* 4 - Color.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "4 - Color.pxm"; sourceTree = "<group>"; };
+		18A9C5CB19CB96DA00789D2E /* 5 - Dynamic Type - Screentaker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "5 - Dynamic Type - Screentaker.png"; sourceTree = "<group>"; };
+		18A9C5CC19CB96DA00789D2E /* 5 - Dynamic Type - Simulator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "5 - Dynamic Type - Simulator.png"; sourceTree = "<group>"; };
+		18A9C5CD19CB96DA00789D2E /* 5 - Dynamic Type.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "5 - Dynamic Type.png"; sourceTree = "<group>"; };
+		18A9C5CE19CB96DA00789D2E /* 5 - Dynamic Type.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "5 - Dynamic Type.pxm"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -645,6 +666,27 @@
 		1809758519BE5FF40039F654 /* 1536x2008 */ = {
 			isa = PBXGroup;
 			children = (
+				18A9C5BA19CB96DA00789D2E /* 1 - Basic - Screentaker.png */,
+				18A9C5BB19CB96DA00789D2E /* 1 - Basic - Simulator.png */,
+				18A9C5BC19CB96DA00789D2E /* 1 - Basic.png */,
+				18A9C5BD19CB96DA00789D2E /* 1 - Basic.pxm */,
+				18A9C5BE19CB96DA00789D2E /* 2 - Advanced - Screentaker.png */,
+				18A9C5BF19CB96DA00789D2E /* 2 - Advanced - Simulator .png */,
+				18A9C5C019CB96DA00789D2E /* 2 - Advanced - Simulator.png */,
+				18A9C5C119CB96DA00789D2E /* 2 - Advanced.png */,
+				18A9C5C219CB96DA00789D2E /* 2 - Advanced.pxm */,
+				18A9C5C319CB96DA00789D2E /* 3 - Settings - Screentaker.png */,
+				18A9C5C419CB96DA00789D2E /* 3 - Settings - Simulator.png */,
+				18A9C5C519CB96DA00789D2E /* 3 - Settings.png */,
+				18A9C5C619CB96DA00789D2E /* 3 - Settings.pxm */,
+				18A9C5C719CB96DA00789D2E /* 4 - Color - Screentaker.png */,
+				18A9C5C819CB96DA00789D2E /* 4 - Color - Simulator.png */,
+				18A9C5C919CB96DA00789D2E /* 4 - Color.png */,
+				18A9C5CA19CB96DA00789D2E /* 4 - Color.pxm */,
+				18A9C5CB19CB96DA00789D2E /* 5 - Dynamic Type - Screentaker.png */,
+				18A9C5CC19CB96DA00789D2E /* 5 - Dynamic Type - Simulator.png */,
+				18A9C5CD19CB96DA00789D2E /* 5 - Dynamic Type.png */,
+				18A9C5CE19CB96DA00789D2E /* 5 - Dynamic Type.pxm */,
 			);
 			path = 1536x2008;
 			sourceTree = "<group>";
