@@ -16,7 +16,7 @@
 
 // Uncomment to unlock all IAP.
 // Comment before deploying or else all IAP will be unlocked for free!
-#define UNLOCK_ALL_IAP
+//#define UNLOCK_ALL_IAP
 
 static NSUInteger const ProductCountThreshold = 3;
 
@@ -334,7 +334,7 @@ static NSUInteger const ProductCountThreshold = 3;
             feature = [NSMutableDictionary dictionary];
             [feature setObject:Localize(@"Service Rating") forKey:Feature_Title_Key];
             [feature setObject:Localize(@"Customize the service rating buttons") forKey:Feature_Description_Key];
-            [feature setObject:[MAFilePaths taxAmountImage] forKey:Feature_Image_Key];
+            [feature setObject:[MAFilePaths emptyStarImage] forKey:Feature_Image_Key];
             [features addObject:feature];
         }
         if (Customize_Color_Iap)
