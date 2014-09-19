@@ -116,6 +116,10 @@
 		180976B619BE96910039F654 /* MABill.m in Sources */ = {isa = PBXBuildFile; fileRef = 180976B519BE96910039F654 /* MABill.m */; };
 		180976BA19BF5D8C0039F654 /* MATextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 180976B819BF5D8C0039F654 /* MATextFieldCell.m */; };
 		180976BB19BF5D8C0039F654 /* MATextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180976B919BF5D8C0039F654 /* MATextFieldCell.xib */; };
+		184CF4B419CCA9E300A12628 /* govt_bldg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 184CF4B319CCA9E300A12628 /* govt_bldg@3x.png */; };
+		184CF4B719CCAC2100A12628 /* people@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 184CF4B619CCAC2100A12628 /* people@3x.png */; };
+		184CF4BB19CCAEC900A12628 /* 973-user-total@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 184CF4BA19CCAEC900A12628 /* 973-user-total@3x.png */; };
+		184CF4BE19CCB69300A12628 /* 973-user-tip@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 184CF4BD19CCB69300A12628 /* 973-user-tip@3x.png */; };
 		18698A2F19C29CB2005F2E32 /* 702-share.png in Resources */ = {isa = PBXBuildFile; fileRef = 18698A2719C29CB2005F2E32 /* 702-share.png */; };
 		18698A3019C29CB2005F2E32 /* 702-share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18698A2819C29CB2005F2E32 /* 702-share@2x.png */; };
 		18698A3119C29CB2005F2E32 /* 712-reply.png in Resources */ = {isa = PBXBuildFile; fileRef = 18698A2919C29CB2005F2E32 /* 712-reply.png */; };
@@ -214,10 +218,8 @@
 		1808CE4519C1655900E972E1 /* 973-user-tip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "973-user-tip.png"; sourceTree = "<group>"; };
 		1808CE4619C1655900E972E1 /* 973-user-tip@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "973-user-tip@2x.png"; sourceTree = "<group>"; };
 		1808CE4719C1655900E972E1 /* 973-user-total.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "973-user-total.png"; sourceTree = "<group>"; };
-		1808CE4B19C1D49100E972E1 /* 973-user-total@2x.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "973-user-total@2x.pxm"; sourceTree = "<group>"; };
 		1808CE4D19C1D8F700E972E1 /* people.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = people.png; sourceTree = "<group>"; };
 		1808CE4E19C1D8F700E972E1 /* people@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "people@2x.png"; sourceTree = "<group>"; };
-		1808CE5119C1D90200E972E1 /* people@2x.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "people@2x.pxm"; sourceTree = "<group>"; };
 		1809753519BE5ED60039F654 /* Tip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1809753A19BE5ED60039F654 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1809753C19BE5ED60039F654 /* MAAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MAAppDelegate.h; sourceTree = "<group>"; };
@@ -377,6 +379,15 @@
 		180976B819BF5D8C0039F654 /* MATextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MATextFieldCell.m; sourceTree = "<group>"; };
 		180976B919BF5D8C0039F654 /* MATextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MATextFieldCell.xib; sourceTree = "<group>"; };
 		184914AA19BFA507003D9B1F /* AppIcon_180x180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon_180x180.png; sourceTree = "<group>"; };
+		184CF4B319CCA9E300A12628 /* govt_bldg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "govt_bldg@3x.png"; sourceTree = "<group>"; };
+		184CF4B519CCA9EE00A12628 /* govt_bldg.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = govt_bldg.pxm; sourceTree = "<group>"; };
+		184CF4B619CCAC2100A12628 /* people@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "people@3x.png"; sourceTree = "<group>"; };
+		184CF4B819CCAC3200A12628 /* people.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = people.pxm; sourceTree = "<group>"; };
+		184CF4B919CCAC5A00A12628 /* percent.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = percent.pxm; sourceTree = "<group>"; };
+		184CF4BA19CCAEC900A12628 /* 973-user-total@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "973-user-total@3x.png"; sourceTree = "<group>"; };
+		184CF4BC19CCAFA200A12628 /* 973-user-total.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "973-user-total.pxm"; sourceTree = "<group>"; };
+		184CF4BD19CCB69300A12628 /* 973-user-tip@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "973-user-tip@3x.png"; sourceTree = "<group>"; };
+		184CF4BF19CCB6E100A12628 /* 973-user-tip.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "973-user-tip.pxm"; sourceTree = "<group>"; };
 		18698A2719C29CB2005F2E32 /* 702-share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "702-share.png"; sourceTree = "<group>"; };
 		18698A2819C29CB2005F2E32 /* 702-share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "702-share@2x.png"; sourceTree = "<group>"; };
 		18698A2919C29CB2005F2E32 /* 712-reply.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "712-reply.png"; sourceTree = "<group>"; };
@@ -834,21 +845,28 @@
 				1808CE1B19C14D4800E972E1 /* 952-shopping-cart@2x.png */,
 				18A9C5DF19CC89AC00789D2E /* 952-shopping-cart@3x.png */,
 				1808CE4519C1655900E972E1 /* 973-user-tip.png */,
+				184CF4BF19CCB6E100A12628 /* 973-user-tip.pxm */,
 				1808CE4619C1655900E972E1 /* 973-user-tip@2x.png */,
+				184CF4BD19CCB69300A12628 /* 973-user-tip@3x.png */,
 				1808CE4719C1655900E972E1 /* 973-user-total.png */,
+				184CF4BC19CCAFA200A12628 /* 973-user-total.pxm */,
 				1808CE3F19C159A800E972E1 /* 973-user-total@2x.png */,
-				1808CE4B19C1D49100E972E1 /* 973-user-total@2x.pxm */,
+				184CF4BA19CCAEC900A12628 /* 973-user-total@3x.png */,
 				180975F919BE61010039F654 /* 1402390544_icon-arrow-up-a.png */,
 				1809760619BE61010039F654 /* blank_square.png */,
 				1809760519BE61010039F654 /* blank.png */,
 				1893F07519C2B4BB00F1485A /* govt_bldg.png */,
+				184CF4B519CCA9EE00A12628 /* govt_bldg.pxm */,
 				1893F07619C2B4BB00F1485A /* govt_bldg@2x.png */,
+				184CF4B319CCA9E300A12628 /* govt_bldg@3x.png */,
 				1809760719BE61010039F654 /* Gym Log+ - Icon.png */,
 				1809760819BE61010039F654 /* Mat Calc - Icon.png */,
 				1808CE4D19C1D8F700E972E1 /* people.png */,
+				184CF4B819CCAC3200A12628 /* people.pxm */,
 				1808CE4E19C1D8F700E972E1 /* people@2x.png */,
-				1808CE5119C1D90200E972E1 /* people@2x.pxm */,
+				184CF4B619CCAC2100A12628 /* people@3x.png */,
 				1808CE4119C15AC600E972E1 /* percent.png */,
+				184CF4B919CCAC5A00A12628 /* percent.pxm */,
 				1808CE4319C15CB000E972E1 /* percent@2x.png */,
 				18A9C5E019CC89AC00789D2E /* percent@3x.png */,
 				1808CDEA19C13B7900E972E1 /* Unit Price - Icon.png */,
@@ -1181,8 +1199,10 @@
 				1808CE4A19C1655900E972E1 /* 973-user-total.png in Resources */,
 				18A9C5F119CC89AC00789D2E /* 952-shopping-cart@3x.png in Resources */,
 				18A9C5E119CC89AC00789D2E /* 702-share@3x.png in Resources */,
+				184CF4B419CCA9E300A12628 /* govt_bldg@3x.png in Resources */,
 				1808CE4F19C1D8F700E972E1 /* people.png in Resources */,
 				1809763919BE61600039F654 /* BackgroundColors.plist in Resources */,
+				184CF4B719CCAC2100A12628 /* people@3x.png in Resources */,
 				18A9C5EA19CC89AC00789D2E /* 777-thumbs-up@3x.png in Resources */,
 				18A9C62919CC97BF00789D2E /* Launch Screen.xib in Resources */,
 				180975D519BE60940039F654 /* HockeySDK.xcconfig in Resources */,
@@ -1220,6 +1240,7 @@
 				18A9C5E619CC89AC00789D2E /* 726-star-selected@3x.png in Resources */,
 				1808CE4819C1655900E972E1 /* 973-user-tip.png in Resources */,
 				18698A3419C29CB2005F2E32 /* 724-info@2x.png in Resources */,
+				184CF4BE19CCB69300A12628 /* 973-user-tip@3x.png in Resources */,
 				180976AC19BE70F00039F654 /* MAUnitsSettingsCell.xib in Resources */,
 				1808CDF119C1412800E972E1 /* 826-money-1@2x.png in Resources */,
 				18A9C5EC19CC89AC00789D2E /* 827-money-2@3x.png in Resources */,
@@ -1266,6 +1287,7 @@
 				1808CE1719C14CF900E972E1 /* 740-gear@2x.png in Resources */,
 				1808CE0D19C14C0E00E972E1 /* 704-compose-selected@2x.png in Resources */,
 				18A9C5EF19CC89AC00789D2E /* 949-paint-brush@3x.png in Resources */,
+				184CF4BB19CCAEC900A12628 /* 973-user-total@3x.png in Resources */,
 				180976A419BE70F00039F654 /* MAColorSelectionViewController.xib in Resources */,
 				18A9C5ED19CC89AC00789D2E /* 887-notepad@3x.png in Resources */,
 				1808CE0C19C14C0E00E972E1 /* 704-compose-selected.png in Resources */,
