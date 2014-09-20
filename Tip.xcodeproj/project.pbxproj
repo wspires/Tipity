@@ -395,6 +395,11 @@
 		184CF4C419CD212D00A12628 /* pie_chart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pie_chart@2x.png"; sourceTree = "<group>"; };
 		184CF4C519CD212D00A12628 /* pie_chart@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pie_chart@3x.png"; sourceTree = "<group>"; };
 		184CF4C919CD276B00A12628 /* pie_chart.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = pie_chart.pxm; sourceTree = "<group>"; };
+		184CF4CA19CDDF1600A12628 /* Default-Landscape_ios8@3x~iphone6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape_ios8@3x~iphone6.png"; sourceTree = "<group>"; };
+		184CF4CB19CDDF1600A12628 /* Default-Portrait_ios8@2x~iphone6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait_ios8@2x~iphone6.png"; sourceTree = "<group>"; };
+		184CF4CC19CDDF1600A12628 /* Default-Portrait_ios8@2x~iphone6.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Default-Portrait_ios8@2x~iphone6.pxm"; sourceTree = "<group>"; };
+		184CF4CD19CDDF1600A12628 /* Default-Portrait_ios8@3x~iphone6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait_ios8@3x~iphone6.png"; sourceTree = "<group>"; };
+		184CF4CE19CDDF1600A12628 /* Default-Portrait_ios8@3x~iphone6.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Default-Portrait_ios8@3x~iphone6.pxm"; sourceTree = "<group>"; };
 		18698A2719C29CB2005F2E32 /* 702-share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "702-share.png"; sourceTree = "<group>"; };
 		18698A2819C29CB2005F2E32 /* 702-share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "702-share@2x.png"; sourceTree = "<group>"; };
 		18698A2919C29CB2005F2E32 /* 712-reply.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "712-reply.png"; sourceTree = "<group>"; };
@@ -656,6 +661,11 @@
 		1809757419BE5FF40039F654 /* Launch Images */ = {
 			isa = PBXGroup;
 			children = (
+				184CF4CA19CDDF1600A12628 /* Default-Landscape_ios8@3x~iphone6.png */,
+				184CF4CB19CDDF1600A12628 /* Default-Portrait_ios8@2x~iphone6.png */,
+				184CF4CC19CDDF1600A12628 /* Default-Portrait_ios8@2x~iphone6.pxm */,
+				184CF4CD19CDDF1600A12628 /* Default-Portrait_ios8@3x~iphone6.png */,
+				184CF4CE19CDDF1600A12628 /* Default-Portrait_ios8@3x~iphone6.pxm */,
 				1808CE2119C14FF400E972E1 /* Default_ios7-568h@2x.pxm */,
 				1808CE2E19C1532600E972E1 /* Default_ios7@2x.pxm */,
 				1808CE2F19C1532600E972E1 /* Default-Landscape_ios7@2x~ipad.pxm */,
@@ -1519,6 +1529,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1536,6 +1547,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
