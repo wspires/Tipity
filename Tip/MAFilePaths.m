@@ -416,7 +416,8 @@ static NSString * const ExerciseFilterName = @"ExerciseFilterName";
 
 + (NSString *)tipPercentImageFilename
 {
-    return @"percent.png";
+    return @"pie_chart.png";
+//    return @"percent.png";
 }
 + (UIImage *)tipPercentImage
 {
@@ -471,7 +472,8 @@ static NSString * const ExerciseFilterName = @"ExerciseFilterName";
 
 + (NSString *)taxPercentImageFilename
 {
-    return @"percent.png";
+    return @"pie_chart.png";
+//    return @"percent.png";
 }
 + (UIImage *)taxPercentImage
 {

@@ -120,6 +120,9 @@
 		184CF4B719CCAC2100A12628 /* people@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 184CF4B619CCAC2100A12628 /* people@3x.png */; };
 		184CF4BB19CCAEC900A12628 /* 973-user-total@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 184CF4BA19CCAEC900A12628 /* 973-user-total@3x.png */; };
 		184CF4BE19CCB69300A12628 /* 973-user-tip@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 184CF4BD19CCB69300A12628 /* 973-user-tip@3x.png */; };
+		184CF4C619CD212D00A12628 /* pie_chart.png in Resources */ = {isa = PBXBuildFile; fileRef = 184CF4C319CD212D00A12628 /* pie_chart.png */; };
+		184CF4C719CD212D00A12628 /* pie_chart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 184CF4C419CD212D00A12628 /* pie_chart@2x.png */; };
+		184CF4C819CD212D00A12628 /* pie_chart@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 184CF4C519CD212D00A12628 /* pie_chart@3x.png */; };
 		18698A2F19C29CB2005F2E32 /* 702-share.png in Resources */ = {isa = PBXBuildFile; fileRef = 18698A2719C29CB2005F2E32 /* 702-share.png */; };
 		18698A3019C29CB2005F2E32 /* 702-share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18698A2819C29CB2005F2E32 /* 702-share@2x.png */; };
 		18698A3119C29CB2005F2E32 /* 712-reply.png in Resources */ = {isa = PBXBuildFile; fileRef = 18698A2919C29CB2005F2E32 /* 712-reply.png */; };
@@ -388,6 +391,10 @@
 		184CF4BC19CCAFA200A12628 /* 973-user-total.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "973-user-total.pxm"; sourceTree = "<group>"; };
 		184CF4BD19CCB69300A12628 /* 973-user-tip@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "973-user-tip@3x.png"; sourceTree = "<group>"; };
 		184CF4BF19CCB6E100A12628 /* 973-user-tip.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "973-user-tip.pxm"; sourceTree = "<group>"; };
+		184CF4C319CD212D00A12628 /* pie_chart.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pie_chart.png; sourceTree = "<group>"; };
+		184CF4C419CD212D00A12628 /* pie_chart@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pie_chart@2x.png"; sourceTree = "<group>"; };
+		184CF4C519CD212D00A12628 /* pie_chart@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pie_chart@3x.png"; sourceTree = "<group>"; };
+		184CF4C919CD276B00A12628 /* pie_chart.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = pie_chart.pxm; sourceTree = "<group>"; };
 		18698A2719C29CB2005F2E32 /* 702-share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "702-share.png"; sourceTree = "<group>"; };
 		18698A2819C29CB2005F2E32 /* 702-share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "702-share@2x.png"; sourceTree = "<group>"; };
 		18698A2919C29CB2005F2E32 /* 712-reply.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "712-reply.png"; sourceTree = "<group>"; };
@@ -869,6 +876,10 @@
 				184CF4B919CCAC5A00A12628 /* percent.pxm */,
 				1808CE4319C15CB000E972E1 /* percent@2x.png */,
 				18A9C5E019CC89AC00789D2E /* percent@3x.png */,
+				184CF4C319CD212D00A12628 /* pie_chart.png */,
+				184CF4C919CD276B00A12628 /* pie_chart.pxm */,
+				184CF4C419CD212D00A12628 /* pie_chart@2x.png */,
+				184CF4C519CD212D00A12628 /* pie_chart@3x.png */,
 				1808CDEA19C13B7900E972E1 /* Unit Price - Icon.png */,
 				1809760C19BE61010039F654 /* Weight Log+ - Icon.png */,
 			);
@@ -1204,6 +1215,7 @@
 				1809763919BE61600039F654 /* BackgroundColors.plist in Resources */,
 				184CF4B719CCAC2100A12628 /* people@3x.png in Resources */,
 				18A9C5EA19CC89AC00789D2E /* 777-thumbs-up@3x.png in Resources */,
+				184CF4C619CD212D00A12628 /* pie_chart.png in Resources */,
 				18A9C62919CC97BF00789D2E /* Launch Screen.xib in Resources */,
 				180975D519BE60940039F654 /* HockeySDK.xcconfig in Resources */,
 				1808CDF019C1412800E972E1 /* 826-money-1.png in Resources */,
@@ -1237,6 +1249,7 @@
 				18698A2F19C29CB2005F2E32 /* 702-share.png in Resources */,
 				1808CE1F19C14D4800E972E1 /* 952-shopping-cart@2x.png in Resources */,
 				1808CDF619C142EE00E972E1 /* 887-notepad.png in Resources */,
+				184CF4C719CD212D00A12628 /* pie_chart@2x.png in Resources */,
 				18A9C5E619CC89AC00789D2E /* 726-star-selected@3x.png in Resources */,
 				1808CE4819C1655900E972E1 /* 973-user-tip.png in Resources */,
 				18698A3419C29CB2005F2E32 /* 724-info@2x.png in Resources */,
@@ -1268,6 +1281,7 @@
 				1809761F19BE61010039F654 /* Gym Log+ - Icon.png in Resources */,
 				180976A619BE70F00039F654 /* MACreditsViewController.xib in Resources */,
 				1809766F19BE6FE70039F654 /* MAUpgradeAlertViewController.xib in Resources */,
+				184CF4C819CD212D00A12628 /* pie_chart@3x.png in Resources */,
 				1803AC6019C8A2F2006C7EFF /* 726-star-selected@2x.png in Resources */,
 				1893F07B19C339BF00F1485A /* 724-no-ad.png in Resources */,
 				180975F419BE60A90039F654 /* AppiraterLocalizable.strings in Resources */,
