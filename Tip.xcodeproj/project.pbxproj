@@ -400,6 +400,10 @@
 		184CF4CC19CDDF1600A12628 /* Default-Portrait_ios8@2x~iphone6.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Default-Portrait_ios8@2x~iphone6.pxm"; sourceTree = "<group>"; };
 		184CF4CD19CDDF1600A12628 /* Default-Portrait_ios8@3x~iphone6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait_ios8@3x~iphone6.png"; sourceTree = "<group>"; };
 		184CF4CE19CDDF1600A12628 /* Default-Portrait_ios8@3x~iphone6.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Default-Portrait_ios8@3x~iphone6.pxm"; sourceTree = "<group>"; };
+		184CF4D019CE6E2B00A12628 /* keywords.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = keywords.txt; sourceTree = "<group>"; };
+		184CF4D119CE6E2B00A12628 /* keywords_out.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = keywords_out.txt; sourceTree = "<group>"; };
+		184CF4D219CE6E2B00A12628 /* keywords_selected.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = keywords_selected.txt; sourceTree = "<group>"; };
+		184CF4D319CE6E2B00A12628 /* keywords_uniq.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = keywords_uniq.txt; sourceTree = "<group>"; };
 		18698A2719C29CB2005F2E32 /* 702-share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "702-share.png"; sourceTree = "<group>"; };
 		18698A2819C29CB2005F2E32 /* 702-share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "702-share@2x.png"; sourceTree = "<group>"; };
 		18698A2919C29CB2005F2E32 /* 712-reply.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "712-reply.png"; sourceTree = "<group>"; };
@@ -621,6 +625,7 @@
 				180975B919BE5FF40039F654 /* Version.txt */,
 				1809757119BE5FF40039F654 /* Description.txt */,
 				1809757319BE5FF40039F654 /* Large App Icon.png */,
+				184CF4CF19CE6E2B00A12628 /* Keywords */,
 				1809757419BE5FF40039F654 /* Launch Images */,
 				1809758419BE5FF40039F654 /* Screenshots */,
 			);
@@ -1064,6 +1069,17 @@
 				180976A019BE70F00039F654 /* MOGlassButton.m */,
 			);
 			name = Appearance;
+			sourceTree = "<group>";
+		};
+		184CF4CF19CE6E2B00A12628 /* Keywords */ = {
+			isa = PBXGroup;
+			children = (
+				184CF4D019CE6E2B00A12628 /* keywords.txt */,
+				184CF4D119CE6E2B00A12628 /* keywords_out.txt */,
+				184CF4D219CE6E2B00A12628 /* keywords_selected.txt */,
+				184CF4D319CE6E2B00A12628 /* keywords_uniq.txt */,
+			);
+			path = Keywords;
 			sourceTree = "<group>";
 		};
 		18A9C58B19CB925B00789D2E /* 750x1334 */ = {

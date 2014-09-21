@@ -33,11 +33,16 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
 static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 
 @interface MAServiceRatingSettingsViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
-
+@property (strong, nonatomic) UITextField *activeTextField;
+@property (strong, nonatomic) UIToolbar *keyboardAccessoryView;
+@property (strong, nonatomic) UIBarButtonItem *doneBarButton;
 @end
 
 @implementation MAServiceRatingSettingsViewController
+@synthesize activeTextField = _activeTextField;
 @synthesize tableView = _tableView;
+@synthesize keyboardAccessoryView = _keyboardAccessoryView;
+@synthesize doneBarButton = _doneBarButton;
 
 - (void)viewDidLoad
 {
@@ -84,6 +89,12 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     [self.tableView reloadData];
     
     [super viewWillAppear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self configureInputAccessoryView];
 }
 
 #pragma mark - Table view data source
@@ -294,6 +305,8 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    self.activeTextField = textField;
+    [textField setInputAccessoryView:self.keyboardAccessoryView];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
@@ -356,6 +369,59 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     }
     
     return YES;
+}
+
+#pragma mark - Scroll view delegate
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)sender
+{
+    [self dismissKeyboard];
+}
+
+#pragma mark - Input accessory view
+
+- (UIToolbar *)makeInputAccessoryView
+{
+    UIToolbar *toolbar = [[UIToolbar alloc] init];
+    toolbar.frame = CGRectMake(0, 0, self.view.frame.size.width, 44);
+    
+    NSMutableArray *items = [[NSMutableArray alloc] init];
+    
+    UIBarButtonItem *flexibleItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
+    [items addObject:flexibleItem];
+
+    self.doneBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneBarButtonTapped)];
+    [items addObject:self.doneBarButton];
+    
+    [toolbar setItems:items animated:NO];
+    
+    return toolbar;
+}
+
+- (void)configureInputAccessoryView
+{
+    self.keyboardAccessoryView = [self makeInputAccessoryView];
+}
+
+- (void)updateInputAccessoryView
+{
+    // Button text defaults to blue, so set to black to match the regular keyboard button title colors.
+    UIColor *barButtonColor = [UIColor blackColor];
+    self.doneBarButton.tintColor = barButtonColor;
+}
+
+- (IBAction)doneBarButtonTapped
+{
+    [self dismissKeyboard];
+}
+
+- (IBAction)dismissKeyboard
+{
+    if (self.activeTextField && [self.activeTextField isFirstResponder])
+    {
+        [self.activeTextField resignFirstResponder];
+        self.activeTextField = nil;
+    }
 }
 
 @end
