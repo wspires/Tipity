@@ -1,0 +1,34 @@
+/* Neue */
+
+Theme by Aether-Themes
+
+Created: Tuesday, 09 July 2013
+
+
+
+
+/* v1.0 */
+
+
+- initial release
+
+
+
+/* v1.1 */
+- minor improovements
+- added android devices
+
+/* v1.2 */
+- added responsive functionality
+
+/* v1.3 */
+- improved responsive functionality
+- added mobile navigation
+- fixed responsive image cropping
+
+/* v1.3.1 */
+-fixed a bug with mobile navigation
+
+/* v1.4 */
+- fixed and improved smooth scrolling
+- added images for iPhone 5S
