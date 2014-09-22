@@ -16,7 +16,7 @@
 #import "MAUserUtil.h"
 #import "MAUtil.h"
 
-#import <HockeySDK/HockeySDK.h>
+//#import <HockeySDK/HockeySDK.h>
 #import "Appirater.h"
 
 @interface MAAppDelegate ()
@@ -43,7 +43,7 @@
     }
 
     // Enable HockeyApp for crash reporting.
-    [self enableHockeyApp];
+//    [self enableHockeyApp];
 
     // As a precaution, get the current user, which will create the current user if it's the first time the app is ran, which we may want to do since it will try to switch to the user in the DB. Otherwise, the DB instance will also try to access the current user
     NSString *currentUser = [MAUserUtil currentUser];
@@ -144,13 +144,16 @@
     self.settingsNavController.navigationBar.translucent = translucent;
 }
 
+/*
 - (void)enableHockeyApp
 {
+    // TODO: Changed identifier (copied from another app).
     NSString *identifier = @"7a7c13d7615c53c2d6dba3432b822656";
     
     [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:identifier];
     [[BITHockeyManager sharedHockeyManager] startManager];
     [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
 }
+ */
 
 @end

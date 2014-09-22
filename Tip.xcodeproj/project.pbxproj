@@ -59,9 +59,6 @@
 		180975C919BE60630039F654 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 180975C819BE60630039F654 /* CoreText.framework */; };
 		180975CB19BE606C0039F654 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 180975CA19BE606B0039F654 /* Foundation.framework */; };
 		180975CD19BE60730039F654 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 180975CC19BE60730039F654 /* iAd.framework */; };
-		180975D419BE60940039F654 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 180975D019BE60940039F654 /* HockeySDK.framework */; };
-		180975D519BE60940039F654 /* HockeySDK.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 180975D219BE60940039F654 /* HockeySDK.xcconfig */; };
-		180975D619BE60940039F654 /* HockeySDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 180975D319BE60940039F654 /* HockeySDKResources.bundle */; };
 		180975F319BE60A90039F654 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 180975D919BE60A90039F654 /* Appirater.m */; };
 		180975F419BE60A90039F654 /* AppiraterLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 180975DB19BE60A90039F654 /* AppiraterLocalizable.strings */; };
 		1809761119BE61010039F654 /* 1402390544_icon-arrow-up-a.png in Resources */ = {isa = PBXBuildFile; fileRef = 180975F919BE61010039F654 /* 1402390544_icon-arrow-up-a.png */; };
@@ -260,9 +257,6 @@
 		180975C819BE60630039F654 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		180975CA19BE606B0039F654 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		180975CC19BE60730039F654 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
-		180975D019BE60940039F654 /* HockeySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HockeySDK.framework; sourceTree = "<group>"; };
-		180975D219BE60940039F654 /* HockeySDK.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = HockeySDK.xcconfig; sourceTree = "<group>"; };
-		180975D319BE60940039F654 /* HockeySDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = HockeySDKResources.bundle; sourceTree = "<group>"; };
 		180975D819BE60A90039F654 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
 		180975D919BE60A90039F654 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
 		180975DA19BE60A90039F654 /* AppiraterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppiraterDelegate.h; sourceTree = "<group>"; };
@@ -524,7 +518,6 @@
 				180975C119BE603A0039F654 /* CoreGraphics.framework in Frameworks */,
 				180975BF19BE60320039F654 /* ImageIO.framework in Frameworks */,
 				180975BD19BE60280039F654 /* QuartzCore.framework in Frameworks */,
-				180975D419BE60940039F654 /* HockeySDK.framework in Frameworks */,
 				180975BB19BE601E0039F654 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -765,7 +758,6 @@
 		180975CE19BE60850039F654 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				180975CF19BE60940039F654 /* HockeySDK.embeddedframework */,
 				180975CC19BE60730039F654 /* iAd.framework */,
 				180975CA19BE606B0039F654 /* Foundation.framework */,
 				180975C819BE60630039F654 /* CoreText.framework */,
@@ -778,24 +770,6 @@
 				180975BA19BE601E0039F654 /* UIKit.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		180975CF19BE60940039F654 /* HockeySDK.embeddedframework */ = {
-			isa = PBXGroup;
-			children = (
-				180975D019BE60940039F654 /* HockeySDK.framework */,
-				180975D119BE60940039F654 /* Resources */,
-			);
-			path = HockeySDK.embeddedframework;
-			sourceTree = "<group>";
-		};
-		180975D119BE60940039F654 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				180975D219BE60940039F654 /* HockeySDK.xcconfig */,
-				180975D319BE60940039F654 /* HockeySDKResources.bundle */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		180975D719BE60A90039F654 /* Appirater */ = {
@@ -1243,7 +1217,6 @@
 				18A9C5EA19CC89AC00789D2E /* 777-thumbs-up@3x.png in Resources */,
 				184CF4C619CD212D00A12628 /* pie_chart.png in Resources */,
 				18A9C62919CC97BF00789D2E /* Launch Screen.xib in Resources */,
-				180975D519BE60940039F654 /* HockeySDK.xcconfig in Resources */,
 				1808CDF019C1412800E972E1 /* 826-money-1.png in Resources */,
 				1809761D19BE61010039F654 /* blank.png in Resources */,
 				1803AC5F19C8A2F2006C7EFF /* 726-star-selected.png in Resources */,
@@ -1262,7 +1235,6 @@
 				18698A3919C29EAC005F2E32 /* 777-thumbs-up.png in Resources */,
 				18698A3119C29CB2005F2E32 /* 712-reply.png in Resources */,
 				1809768919BE70A70039F654 /* MATipViewController.xib in Resources */,
-				180975D619BE60940039F654 /* HockeySDKResources.bundle in Resources */,
 				1893F07C19C339BF00F1485A /* 724-no-ad@2x.png in Resources */,
 				1893F07719C2B4BB00F1485A /* govt_bldg.png in Resources */,
 				1809762419BE61010039F654 /* Weight Log+ - Icon.png in Resources */,
