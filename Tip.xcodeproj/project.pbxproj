@@ -1074,9 +1074,9 @@
 		184CF4CF19CE6E2B00A12628 /* Keywords */ = {
 			isa = PBXGroup;
 			children = (
+				184CF4D219CE6E2B00A12628 /* keywords_selected.txt */,
 				184CF4D019CE6E2B00A12628 /* keywords.txt */,
 				184CF4D119CE6E2B00A12628 /* keywords_out.txt */,
-				184CF4D219CE6E2B00A12628 /* keywords_selected.txt */,
 				184CF4D319CE6E2B00A12628 /* keywords_uniq.txt */,
 			);
 			path = Keywords;

@@ -18,8 +18,8 @@
 "Tax" = "Tax";
 "Percent" = "Percent";
 "Amount" = "Amount";
-"Gratuity" = "Gratuity";
-"Tip" = "Gratuity";
+"Gratuity" = "Tip";
+"Tip" = "Tip";
 "Grand Total" = "Grand Total";
 "Split" = "Split";
 "Party Size" = "Party Size";
