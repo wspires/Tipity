@@ -32,7 +32,6 @@ resize_img 72
 resize_img 144
 resize_img 76
 resize_img 152
-resize_img 180
 
 # Spotlight
 resize_img 29
@@ -48,3 +47,9 @@ resize_img 29
 resize_img 58
 resize_img 29
 resize_img 58
+
+
+# iOS 8 3x
+resize_img 87
+resize_img 120
+resize_img 180
