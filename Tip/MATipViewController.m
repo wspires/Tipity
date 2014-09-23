@@ -102,7 +102,6 @@ static NSString *MARatingTableViewCellIdentifier = @"MARatingTableViewCellIdenti
     
     // Row height. Having some issues with automatic sizes. Getting warning:
     // Warning once only: Detected a case where constraints ambiguously suggest a height of zero for a tableview cell's content view. We're considering the collapse unintentional and using standard height instead.
-    // On iOS 7, get exception with 0 height cell unless force the heigh to 44. I could implement heightForRowAtIndexPath, but then the cell sizes do not auto-update with Dynamic Type. 
     self.tableView.estimatedRowHeight = 44;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     if (BELOW_IOS8)
@@ -675,6 +674,13 @@ static NSString *MARatingTableViewCellIdentifier = @"MARatingTableViewCellIdenti
     cell.imageView.image = image;
 
     return cell;
+}
+
+// On iOS 7, get exception with 0 height cell unless force the heigh to 44. I could implement heightForRowAtIndexPath, but then the cell sizes do not auto-update with Dynamic Type.
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat height = [MAUtil rowHeightForTableView:tableView];    
+    return height;
 }
 
 #pragma mark - Table view delegate
