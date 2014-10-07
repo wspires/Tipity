@@ -26,7 +26,7 @@
 //#define Localize( s ) NSLocalizedStringFromTable((s), @"InfoPlist", nil)
 #define Localize( s ) NSLocalizedString((s), nil)
 
-#define APP_NAME @"Gratuity"
+#define APP_NAME @"Tipity"
 #define APP_ID @"919137272"
 
 // Create "shortcut" for accessing the app delegate. Users must still include MAAppDelegate.h.
