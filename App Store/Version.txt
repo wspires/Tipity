@@ -4,9 +4,11 @@
 1.00
 
 Title (256 bytes):
+Tipity — Tip Calculator
+Tipulator — Tip Calculator
 Gratuity — Tip Calculator
 (em dash —)
 
 Keywords (100 bytes):
 1234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
-bill,dinner,delivery,eztip,lunch,percent,pizza,restaurant,taxtip,tipcalc,tipcalculator,gratuity
+bill,dinner,delivery,eztip,lunch,percent,restaurant,taxtip,tipcalc,tipcalculator,gratuity,tipulator

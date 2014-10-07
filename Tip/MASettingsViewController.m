@@ -617,7 +617,7 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
     
     NSString *appName = APP_NAME; //[[[NSBundle mainBundle] localizedInfoDictionary] objectForKey:@"CFBundleDisplayName"];
 
-    NSString *toAddr = @"<support@tipulator.com>";
+    NSString *toAddr = @"<support@tipityapp.com>";
     NSArray *recipients = [NSArray arrayWithObjects:toAddr, nil];
     [controller setToRecipients:recipients];
 

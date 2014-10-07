@@ -1,6 +1,6 @@
 <?php
 
-$emailmanager = 'support@tipulator.com';
+$emailmanager = 'support@tipityapp.com';
 
 error_reporting(0);
 

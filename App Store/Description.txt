@@ -1,4 +1,4 @@
-Tipulator makes tipping simple! Built from the ground up to look and feel like a modern iOS app, Tipulator is a great looking and easy to use tip calculator. Personalize Tipulator's appearance to make it look and work the way you want!
+Tipity makes tipping simple! Built from the ground up to look and feel like a modern iOS app, Tipity is a great looking and easy to use tip calculator. Personalize Tipity's appearance to make it look and work the way you want!
 
 • Quick and easy interface—just enter the check total at the top, and the tip and grand total update automatically
 • Edit any field—enter the tip percentage or the tip value itself, or enter the grand total to have the corresponding tip calculated
@@ -8,9 +8,9 @@ Tipulator makes tipping simple! Built from the ground up to look and feel like a
 • Rounding supported—intuitive +1 and -1 buttons on the keyboard making rounding to the nearest dollar easy (or adding an extra dollar to the tip) without cluttering up the screen with lots of extra buttons everywhere
 • 3 star or 1 star service? Preset service rating stars make it quick to change the tip and can even be assigned custom values
 • Customizable appearance lets you change the background and foreground color, or set your own photo as the background wallpaper
-• Supports large font sizes with Apple's Dynamic Type system making Tipulator easy to read
+• Supports large font sizes with Apple's Dynamic Type system making Tipity easy to read
 
-Take Tipulator out to dinner today!
+Take Tipity out to dinner today!
 
 * App development supported by one, single In-App Purchase that unlocks all of these features:
 • No Ads
