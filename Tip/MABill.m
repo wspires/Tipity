@@ -229,9 +229,9 @@ static double const DefaultSplitTotal = 120.;
     [self delegateWillUpdateBill];
     
     _total = [total copy];
-    _tip = [NSNumber numberWithDouble:(_total.doubleValue - _billBeforeTax.doubleValue)];
+    _tip = [NSNumber numberWithDouble:(_total.doubleValue - _bill.doubleValue)];
     _tipPercent = [MABill percentFromNumber:_billBeforeTax percentageOfNumber:_tip];
-    
+
     [self updateBill];
     [self delegateDidUpdateBill];
 }
