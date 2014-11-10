@@ -142,6 +142,14 @@ static NSString *MARatingTableViewCellIdentifier = @"MARatingTableViewCellIdenti
         [self.bill clearTax];
     }
 
+    MAAppDelegate* myDelegate = (((MAAppDelegate*) [UIApplication sharedApplication].delegate));
+    if (myDelegate.todayViewBill)
+    {
+        self.bill.bill = myDelegate.todayViewBill.bill;
+        self.bill.tipPercent = myDelegate.todayViewBill.tipPercent;
+        myDelegate.todayViewBill = nil;
+    }
+
     [self configureTableSections];
     [self.tableView reloadData];
     

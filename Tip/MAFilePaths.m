@@ -8,6 +8,7 @@
 
 #import "MAFilePaths.h"
 #import "MAUtil.h"
+#import "MAImageCache.h"
 #import "MAAppearance.h"
 #import "UIColor+ExtraColors.h"
 #import "UIImage+Gradient.h"
@@ -359,15 +360,20 @@ static NSString * const ExerciseFilterName = @"ExerciseFilterName";
 + (UIImage *)applyEffectsToImagePath:(NSString *)path
 {
     // Applying the image effects uses memory and CPU, so cache the image.
-    UIImage *image = [AppDelegate.imageCache objectForKey:path];
+    UIImage *image = [[MAImageCache sharedInstance] objectForKey:path];
     if ( ! image)
     {
         image = [UIImage imageNamed:path];
+        if ( ! image)
+        {
+            NSLog(@"Image not found: %@", path);
+            return nil;
+        }
         image = [MAFilePaths applyEffectsToImage:image];
         // Note that, unlike NSMutableDictionary, NSCache does not copy the key--need to verify whether the key should be copied or not.
         if (image)
         {
-            [AppDelegate.imageCache setObject:image forKey:path];
+            [[MAImageCache sharedInstance] setObject:image forKey:path];
         }
     }
     return image;
@@ -381,12 +387,12 @@ static NSString * const ExerciseFilterName = @"ExerciseFilterName";
 + (UIImage *)imageFromCacheAtPath:(NSString *)path
 {
     // Applying the image effects uses memory and CPU, so cache the image.
-    UIImage *image = [AppDelegate.imageCache objectForKey:path];
+    UIImage *image = [[MAImageCache sharedInstance] objectForKey:path];
     if ( ! image)
     {
         image = [UIImage imageNamed:path];
         // Note that, unlike NSMutableDictionary, NSCache does not copy the key--need to verify whether the key should be copied or not.
-        [AppDelegate.imageCache setObject:image forKey:path];
+        [[MAImageCache sharedInstance] setObject:image forKey:path];
     }
     return image;
 }
@@ -508,6 +514,40 @@ static NSString * const ExerciseFilterName = @"ExerciseFilterName";
 + (UIImage *)emptyStarImage
 {
     return [MAFilePaths applyEffectsToImagePath:[MAFilePaths emptyStarImageFilename]];
+}
+
++ (NSString *)plusImageFilename
+{
+    return @"746-plus-circle.png";
+}
++ (UIImage *)plusImage
+{
+    return [MAFilePaths applyEffectsToImagePath:[MAFilePaths plusImageFilename]];
+}
++ (NSString *)plusImageSelectedFilename
+{
+    return @"746-plus-circle-selected.png";
+}
++ (UIImage *)plusImageSelected
+{
+    return [MAFilePaths applyEffectsToImagePath:[MAFilePaths plusImageSelectedFilename]];
+}
+
++ (NSString *)minusImageFilename
+{
+    return @"746-minus-circle.png";
+}
++ (UIImage *)minusImage
+{
+    return [MAFilePaths applyEffectsToImagePath:[MAFilePaths minusImageFilename]];
+}
++ (NSString *)minusImageSelectedFilename
+{
+    return @"746-minus-circle-selected.png";
+}
++ (UIImage *)minusImageSelected
+{
+    return [MAFilePaths applyEffectsToImagePath:[MAFilePaths minusImageSelectedFilename]];
 }
 
 #pragma mark - Feedback icons
@@ -925,7 +965,7 @@ static NSString * const ExerciseFilterName = @"ExerciseFilterName";
 + (UIImage *)restTimerButtonImage
 {
     NSString *path = [MAFilePaths restTimerButtonImageFilename];
-    UIImage *image = [AppDelegate.imageCache objectForKey:path];
+    UIImage *image = [[MAImageCache sharedInstance] objectForKey:path];
     if (!image)
     {
         image = [UIImage imageNamed:[MAFilePaths restTimerButtonImageFilename]];
@@ -933,7 +973,7 @@ static NSString * const ExerciseFilterName = @"ExerciseFilterName";
         image = [MAAppearance tintImage:image tintColor:color];
         
         // Note that, unlike NSMutableDictionary, NSCache does not copy the key--need to verify whether the key should be copied or not.
-        [AppDelegate.imageCache setObject:image forKey:path];
+        [[MAImageCache sharedInstance] setObject:image forKey:path];
     }
     
     return image;
@@ -946,7 +986,7 @@ static NSString * const ExerciseFilterName = @"ExerciseFilterName";
 + (UIImage *)supersetImage
 {
     NSString *path = [MAFilePaths supersetImageFilename];
-    UIImage *image = [AppDelegate.imageCache objectForKey:path];
+    UIImage *image = [[MAImageCache sharedInstance] objectForKey:path];
     if (!image)
     {
         image = [UIImage imageNamed:[MAFilePaths supersetImageFilename]];
@@ -954,7 +994,7 @@ static NSString * const ExerciseFilterName = @"ExerciseFilterName";
         image = [MAAppearance tintImage:image tintColor:color];
         
         // Note that, unlike NSMutableDictionary, NSCache does not copy the key--need to verify whether the key should be copied or not.
-        [AppDelegate.imageCache setObject:image forKey:path];
+        [[MAImageCache sharedInstance] setObject:image forKey:path];
     }
     
     return image;

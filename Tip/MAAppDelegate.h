@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "MABill.h"
+
 @interface MAAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
@@ -15,8 +17,7 @@
 @property (strong, nonatomic) UINavigationController *tipNavController;
 @property (strong, nonatomic) UINavigationController *settingsNavController;
 @property (strong, nonatomic) UINavigationController *upgradeNavController;
-
-@property (strong, readonly, nonatomic) NSCache *imageCache;
+@property (strong, nonatomic) MABill *todayViewBill;
 
 - (void)setBarStyle:(UIBarStyle)barStyle translucent:(BOOL)translucent;
 

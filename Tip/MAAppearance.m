@@ -12,6 +12,7 @@
 #import "MAColorUtil.h"
 #import "UIColor+ExtraColors.h"
 #import "MAFilePaths.h"
+#import "MAImageCache.h"
 #import "MAUtil.h"
 #import "MAUserUtil.h"
 #import "UIImage+Extensions.h"
@@ -117,10 +118,10 @@ static UIColor *ForegroundColor = nil;
 
 + (void)setNavBarAppearance
 {
-    MAAppDelegate* myDelegate = (((MAAppDelegate*) [UIApplication sharedApplication].delegate));
-    UITabBarController *tabBarController = (UITabBarController *)myDelegate.window.rootViewController;
-    tabBarController.navigationController.navigationBar.translucent = YES;
-    return;
+//    MAAppDelegate* myDelegate = (((MAAppDelegate *) [UIApplication sharedApplication].delegate));
+//    UITabBarController *tabBarController = (UITabBarController *)myDelegate.window.rootViewController;
+//    tabBarController.navigationController.navigationBar.translucent = YES;
+//    return;
     
     /*
      MAAppDelegate* myDelegate = (((MAAppDelegate*) [UIApplication sharedApplication].delegate));
@@ -189,7 +190,7 @@ static UIColor *ForegroundColor = nil;
     [MAAppearance setSeparatorColor];
 
     // Clear the cache of gradient images.
-    [AppDelegate.imageCache removeAllObjects];
+    [[MAImageCache sharedInstance] removeAllObjects];
     
     // TODO: Would it make sense to set the window tint here?
 }
@@ -762,7 +763,8 @@ viewForHeaderInSection:(NSInteger)section
 
 + (void)setTabAndNavBarColor
 {
-    MAAppDelegate* myDelegate = (((MAAppDelegate*) [UIApplication sharedApplication].delegate));
+#ifndef APP_EXTENSION
+    MAAppDelegate* myDelegate = (((MAAppDelegate *) [UIApplication sharedApplication].delegate));
     UITabBarController *tabBarController = (UITabBarController *)myDelegate.window.rootViewController;
     
     UIBarStyle barStyle = UIBarStyleBlackOpaque;
@@ -787,6 +789,7 @@ viewForHeaderInSection:(NSInteger)section
         tabBarController.tabBar.barStyle = barStyle;
         tabBarController.tabBar.translucent = NO;
     }
+#endif // APP_EXTENSION
 }
 
 + (UIColor *)buttonTextColor

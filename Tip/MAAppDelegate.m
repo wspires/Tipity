@@ -9,6 +9,7 @@
 #import "MAAppDelegate.h"
 
 #import "MAAppearance.h"
+#import "MAImageCache.h"
 #import "MATipViewController.h"
 #import "MASettingsViewController.h"
 #import "MATipIAPHelper.h"
@@ -28,11 +29,11 @@
 @synthesize tipNavController = _tipNavController;
 @synthesize settingsNavController = _settingsNavController;
 @synthesize upgradeNavController = _upgradeNavController;
-@synthesize imageCache = _imageCache;
+@synthesize todayViewBill = _todayViewBill;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    _imageCache = [[NSCache alloc] init];
+    [MAImageCache sharedInstance];
 
     // As soon as your app launches it will create the singleton MAWeightLogIAPHelper. This means the initWithProducts: method you just modified will be called, which registers itself as the transaction observer. So you will be notified about any transactions that were never quite finished.
     // http://www.raywenderlich.com/21081/introduction-to-in-app-purchases-in-ios-6-tutorial
@@ -155,5 +156,75 @@
     [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
 }
  */
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    DLog(@"application openURL");
+    
+    // Note: this is called after 'application didFinishLaunchingWithOptions' is called.
+    if (url)
+    {
+        NSString *absPath = [url absoluteString];
+//        NSString *pathExt = [absPath pathExtension];
+//        pathExt = [pathExt lowercaseString];
+//        UIAlertView *alert = [[UIAlertView alloc]
+//                              initWithTitle:Localize(@"Extension Opened")
+//                              message:SFmt(@"%@", absPath)
+//                              delegate:nil
+//                              cancelButtonTitle:NSLocalizedString(@"Dismiss", @"")
+//                              otherButtonTitles:nil];
+//        [alert show];
+        
+        self.todayViewBill = [self billFromPath:absPath];
+    }
+    
+    return YES;
+}
+
+- (MABill *)billFromPath:(NSString *)path
+{
+    // Parse URL path like below into a MABill.
+    // Tipity://bill=%f;tipPercent=%f
+    NSArray *strings = [path componentsSeparatedByString:@"Tipity://"];
+    if ( ! strings || strings.count <= 1)
+    {
+        return nil;
+    }
+    NSString *billString = [strings objectAtIndex:1];
+
+    BOOL didNotParseAnyField = YES;
+    MABill *bill = [[MABill alloc] init];
+    strings = [billString componentsSeparatedByString:@";"];
+    for (NSString *string in strings)
+    {
+        NSArray *keyValue = [string componentsSeparatedByString:@"="];
+        if ( ! keyValue || keyValue.count != 2)
+        {
+            continue;
+        }
+        NSString *key = [keyValue objectAtIndex:0];
+        NSString *value = [keyValue objectAtIndex:1];
+
+        if ([key isEqualToString:@"bill"])
+        {
+            CGFloat doubleValue = value.doubleValue;
+            bill.bill = [NSNumber numberWithDouble:doubleValue];
+            didNotParseAnyField = NO;
+        }
+        else if ([key isEqualToString:@"tipPercent"])
+        {
+            CGFloat doubleValue = value.doubleValue;
+            bill.tipPercent = [NSNumber numberWithDouble:doubleValue];
+            didNotParseAnyField = NO;
+        }
+    }
+
+    if (didNotParseAnyField)
+    {
+        return nil;
+    }
+
+    return bill;
+}
 
 @end

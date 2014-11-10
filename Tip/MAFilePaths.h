@@ -72,6 +72,14 @@
 + (UIImage *)filledStarImage;
 + (NSString *)emptyStarImageFilename;
 + (UIImage *)emptyStarImage;
++ (NSString *)plusImageFilename;
++ (UIImage *)plusImage;
++ (NSString *)plusImageSelectedFilename;
++ (UIImage *)plusImageSelected;
++ (NSString *)minusImageFilename;
++ (UIImage *)minusImage;
++ (NSString *)minusImageSelectedFilename;
++ (UIImage *)minusImageSelected;
 
 // Feedback icons.
 + (NSString *)tellFriendImageFilename;

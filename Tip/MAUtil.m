@@ -328,6 +328,7 @@ NSUInteger DeviceSystemMajorVersion()
 
 + (UIAlertView *)showAlertWithError:(NSError *)error
 {
+#ifndef APP_EXTENSION
     UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle:[error localizedDescription]
                           message:[error localizedRecoverySuggestion]
@@ -337,6 +338,9 @@ NSUInteger DeviceSystemMajorVersion()
     
     [alert show];
     return alert;
+#else
+    return nil;
+#endif // APP_EXTENSION
 }
 
 + (void)findMisbehavingScrollViewsIn:(UIView *)view
