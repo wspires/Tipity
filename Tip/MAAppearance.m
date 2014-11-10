@@ -223,7 +223,8 @@ static UIColor *ForegroundColor = nil;
 + (UIColor *)loadColorFromColors:(NSArray *)colors forKey:(NSString *)colorSettingsKey
 {
     UIColor *color = nil;
-    NSDictionary *settings = [MAUserUtil loadSettings];
+//    NSDictionary *settings = [MAUserUtil loadSettings];
+    NSDictionary *settings = [MAUserUtil sharedInstance].settings;
     NSString *currentColorId = [settings objectForKey:colorSettingsKey];
     
     // Check for custom color.

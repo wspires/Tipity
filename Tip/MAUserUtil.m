@@ -17,6 +17,8 @@
 
 // TODO: Make thread-safe and add a sharedInstance with instance methods (like MAActivity) instead of static methods.
 
+static NSString *AppGroup = @"group.com.mindsaspire.Tip";
+
 static NSString * CurrentUser = nil;
 static NSString * const DefaultUserName = @"";
 static NSString * const DefaultVisibleUserName = @"Default";
@@ -144,8 +146,28 @@ static NSString *PerExerciseSettings = @"perExerciseSettings";
 
 - (BOOL)saveSettings
 {
+    [self saveSettingsToSharedDefaults];
     NSString *path = [MAUserUtil settingsFilePath];
     return [_settings writeToFile:path atomically:YES];
+}
+
+- (BOOL)saveSettingsToSharedDefaults
+{
+    NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:AppGroup];
+    [sharedDefaults setObject:_settings forKey:@"settings"];
+    BOOL saved = [sharedDefaults synchronize];
+    if ( ! saved)
+    {
+        TLog(@"Failed to save settings to sharedDefaults");
+    }
+    return saved;
+}
+
++ (NSDictionary *)loadSettingsFromSharedDefaults
+{
+    NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:AppGroup];
+    NSDictionary *settings = [sharedDefaults dictionaryForKey:@"settings"];
+    return settings;
 }
 
 - (NSDictionary *)saveSetting:(id)setting forKey:(NSString *)key

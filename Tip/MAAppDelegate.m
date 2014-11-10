@@ -30,6 +30,7 @@
 @synthesize settingsNavController = _settingsNavController;
 @synthesize upgradeNavController = _upgradeNavController;
 @synthesize todayViewBill = _todayViewBill;
+@synthesize tipViewController = _tipViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -132,6 +133,8 @@
     
     // Note: tab and nav bar styles are set in MAAppearance.
     
+    self.tipViewController = tipViewController;
+    
     return tabBarController;
 }
 
@@ -176,6 +179,7 @@
 //        [alert show];
         
         self.todayViewBill = [self billFromPath:absPath];
+        [self.tipViewController viewWillAppear:YES];
     }
     
     return YES;

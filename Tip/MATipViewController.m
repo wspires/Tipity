@@ -51,6 +51,8 @@ DECL_TABLE_IDX(TAX_ROW, 1);
 DECL_TABLE_IDX(BILL_BEFORE_TAX_ROW, DISABLED_ROW);
 DECL_TABLE_IDX(TAX_SECTION_ROWS, 2);
 
+static NSString *AppGroup = @"group.com.mindsaspire.Tip";
+
 static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 static NSString *MARatingTableViewCellIdentifier = @"MARatingTableViewCellIdentifier";
 
@@ -256,7 +258,15 @@ static NSString *MARatingTableViewCellIdentifier = @"MARatingTableViewCellIdenti
     BOOL saved = [defaults synchronize];
     if ( ! saved)
     {
-        TLog(@"Failed to save bill");
+        TLog(@"Failed to save bill to standardUserDefaults");
+    }
+    
+    NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:AppGroup];
+    [sharedDefaults setObject:encodedBill forKey:@"bill"];
+    saved = [sharedDefaults synchronize];
+    if ( ! saved)
+    {
+        TLog(@"Failed to save bill to sharedDefaults");
     }
 }
 

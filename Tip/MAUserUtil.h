@@ -37,7 +37,7 @@ static NSString *TableTextColor = @"tableTextColor";
 @interface MAUserUtil : NSObject
 
 @property (copy, nonatomic) NSString *user;
-@property (strong, readonly, nonatomic) NSDictionary *settings;
+@property (strong, nonatomic) NSDictionary *settings;
 
 // Shared instance to easily share the same settings object.
 + (MAUserUtil *)sharedInstance;
@@ -47,6 +47,8 @@ static NSString *TableTextColor = @"tableTextColor";
 - (id)objectForKey:(NSString *)key;
 - (BOOL)saveSettings;
 - (NSDictionary *)saveSetting:(id)setting forKey:(NSString *)key;
+
++ (NSDictionary *)loadSettingsFromSharedDefaults;
 
 #pragma mark BOOL settings
 - (BOOL)enableSplit;

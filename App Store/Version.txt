@@ -1,3 +1,6 @@
+1.5
+• Added Today extension widget for easy tip calculation from the Today view on Notification Center. To add the Tipity widget, swipe down from the top of the screen to open Notification Center, tap or swipe to the Today view, tap Edit at the bottom of the Today view, and finally tap the + beside Tipity. Today view widgets are only available on iOS 8.
+
 1.4
 • Bug fixes.
 

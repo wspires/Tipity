@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "MABill.h"
+#import "MATipViewController.h"
 
 @interface MAAppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -18,6 +19,7 @@
 @property (strong, nonatomic) UINavigationController *settingsNavController;
 @property (strong, nonatomic) UINavigationController *upgradeNavController;
 @property (strong, nonatomic) MABill *todayViewBill;
+@property (strong, nonatomic) MATipViewController *tipViewController;
 
 - (void)setBarStyle:(UIBarStyle)barStyle translucent:(BOOL)translucent;
 

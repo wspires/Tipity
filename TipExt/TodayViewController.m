@@ -8,17 +8,23 @@
 
 #import "TodayViewController.h"
 
+#import "MAAppearance.h"
 #import "MABill.h"
 #import "MAFilePaths.h"
+#import "MAUserUtil.h"
 #import "MAUtil.h"
 #import "UIImage+ImageWithColor.h"
 
 #import <NotificationCenter/NotificationCenter.h>
 
+static NSString *AppGroup = @"group.com.mindsaspire.Tip";
+
 static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 
 @interface TodayViewController () <NCWidgetProviding, MABillDelegate>
 @property (strong, nonatomic) MABill *bill;
+
+@property (strong, nonatomic) NSDictionary *settings;
 
 @property (strong, nonatomic) IBOutlet UIButton *billButton;
 @property (strong, nonatomic) IBOutlet UIButton *tipButton;
@@ -59,47 +65,60 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    self.bill = [[MABill alloc] init];
-    self.bill.delegate = self;
+    self.settings = [MAUserUtil loadSettingsFromSharedDefaults];
+    [MAUserUtil sharedInstance].settings = [self.settings copy];
+    [MAAppearance reloadAppearanceSettings];
     
     [self setImage:[MAFilePaths billImage] forButton:self.billButton];
     [self setImage:[MAFilePaths tipAmountImage] forButton:self.tipButton];
     [self setImage:[MAFilePaths totalImage] forButton:self.grandTotalButton];
-
-//    [self setPlusImageForButton:self.incrementCentsButton];
-//    [self setPlusImageForButton:self.incrementDollarsButton];
-//    [self setMinusImageForButton:self.decrementDollarsButton];
-//    [self setMinusImageForButton:self.decrementCentsButton];
     
-//    [self setImagesForStepper:self.incrementDollarsStepper isPlusButton:YES];
-//    [self setImagesForStepper:self.decrementDollarsStepper isPlusButton:NO];
-//    [self setImagesForStepper:self.incrementCentsStepper isPlusButton:YES];
-//    [self setImagesForStepper:self.decrementCentsStepper isPlusButton:NO];
-
+    //    [self setPlusImageForButton:self.incrementCentsButton];
+    //    [self setPlusImageForButton:self.incrementDollarsButton];
+    //    [self setMinusImageForButton:self.decrementDollarsButton];
+    //    [self setMinusImageForButton:self.decrementCentsButton];
+    
+    //    [self setImagesForStepper:self.incrementDollarsStepper isPlusButton:YES];
+    //    [self setImagesForStepper:self.decrementDollarsStepper isPlusButton:NO];
+    //    [self setImagesForStepper:self.incrementCentsStepper isPlusButton:YES];
+    //    [self setImagesForStepper:self.decrementCentsStepper isPlusButton:NO];
+    
+    [[UIStepper appearance] setTintColor:[MAAppearance foregroundColor]];
+    
+    [self loadBill];
     [self setupSteppers];
     
-    UILongPressGestureRecognizer *tapAndHold = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapAndHold)];
-    [tapAndHold setMinimumPressDuration:0.01];
-    [self.incrementDollarsButton addGestureRecognizer:tapAndHold];
-
-    CGFloat const defaultBill = 100.;
-    self.bill.bill = [NSNumber numberWithDouble:defaultBill];
     [self setCurrentRatingButton:self.ratingButton3];
-
+    
     // Increase the today widget view's height.
     // Use 0 for the width; otherwise, the view resizes strangely when a button is first tapped.
     self.preferredContentSize = CGSizeMake(0., 180.);
 }
 
-- (void)handleTapAndHold
+- (void)loadBill
 {
-    [self updateBillByDollars:+1 cents:0];
+    NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:AppGroup];
+    NSData *encodedBill = [sharedDefaults objectForKey:@"bill"];
+    if (encodedBill)
+    {
+        MABill *bill = [NSKeyedUnarchiver unarchiveObjectWithData:encodedBill];
+        if (bill)
+        {
+            self.bill = bill;
+        }
+    }
+    else // First run.
+    {
+        self.bill = [[MABill alloc] initWithBill:[NSNumber numberWithDouble:100.]];
+    }
+    
+    self.bill.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
     [self updateLabels];
 }
 
@@ -231,18 +250,31 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 
 - (void)setTipForRatingButton:(UIButton *)currentRatingButton
 {
+    // Get service rating tip % based on the button tapped and the current settings.
+    // Use a default tip % just in case the rating in the settings is not set.
+    NSNumber *number = nil;
+    NSString *rating = nil;
     if (currentRatingButton == self.ratingButton1)
     {
-        self.bill.tipPercent = [NSNumber numberWithDouble:10.];
+        rating = [self.settings objectForKey:ServiceRatingFair];
+        number = [NSNumber numberWithDouble:10.];
     }
     else if (currentRatingButton == self.ratingButton2)
     {
-        self.bill.tipPercent = [NSNumber numberWithDouble:15.];
+        rating = [self.settings objectForKey:ServiceRatingGood];
+        number = [NSNumber numberWithDouble:15.];
     }
     else if (currentRatingButton == self.ratingButton3)
     {
-        self.bill.tipPercent = [NSNumber numberWithDouble:20.];
+        rating = [self.settings objectForKey:ServiceRatingGreat];
+        number = [NSNumber numberWithDouble:20.];
     }
+    
+    if (rating)
+    {
+        number = [NSNumber numberWithDouble:[rating doubleValue]];
+    }
+    self.bill.tipPercent = number;
 }
 
 #pragma mark - MABillDelegate
