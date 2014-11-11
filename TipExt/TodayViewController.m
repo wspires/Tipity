@@ -30,23 +30,14 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 @property (strong, nonatomic) IBOutlet UIButton *tipButton;
 @property (strong, nonatomic) IBOutlet UIButton *grandTotalButton;
 
-@property (strong, nonatomic) IBOutlet UIButton *incrementDollarsButton;
-@property (strong, nonatomic) IBOutlet UIButton *decrementDollarsButton;
-@property (strong, nonatomic) IBOutlet UIButton *incrementCentsButton;
-@property (strong, nonatomic) IBOutlet UIButton *decrementCentsButton;
 @property (strong, nonatomic) IBOutlet UIStepper *dollarsStepper;
 @property (strong, nonatomic) IBOutlet UIStepper *centsStepper;
-@property (strong, nonatomic) IBOutlet UIStepper *incrementDollarsStepper;
-@property (strong, nonatomic) IBOutlet UIStepper *decrementDollarsStepper;
-@property (strong, nonatomic) IBOutlet UIStepper *incrementCentsStepper;
-@property (strong, nonatomic) IBOutlet UIStepper *decrementCentsStepper;
 
 @property (strong, nonatomic) IBOutlet UIButton *ratingButton1;
 @property (strong, nonatomic) IBOutlet UIButton *ratingButton2;
 @property (strong, nonatomic) IBOutlet UIButton *ratingButton3;
 
-@property (strong, nonatomic) IBOutlet UILabel *billDollarsLabel;
-@property (strong, nonatomic) IBOutlet UILabel *billCentsLabel;
+@property (strong, nonatomic) IBOutlet UILabel *billLabel;
 @property (strong, nonatomic) IBOutlet UILabel *tipLabel;
 @property (strong, nonatomic) IBOutlet UILabel *grandTotalLabel;
 @end
@@ -72,16 +63,6 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     [self setImage:[MAFilePaths billImage] forButton:self.billButton];
     [self setImage:[MAFilePaths tipAmountImage] forButton:self.tipButton];
     [self setImage:[MAFilePaths totalImage] forButton:self.grandTotalButton];
-    
-    //    [self setPlusImageForButton:self.incrementCentsButton];
-    //    [self setPlusImageForButton:self.incrementDollarsButton];
-    //    [self setMinusImageForButton:self.decrementDollarsButton];
-    //    [self setMinusImageForButton:self.decrementCentsButton];
-    
-    //    [self setImagesForStepper:self.incrementDollarsStepper isPlusButton:YES];
-    //    [self setImagesForStepper:self.decrementDollarsStepper isPlusButton:NO];
-    //    [self setImagesForStepper:self.incrementCentsStepper isPlusButton:YES];
-    //    [self setImagesForStepper:self.decrementCentsStepper isPlusButton:NO];
     
     [[UIStepper appearance] setTintColor:[MAAppearance foregroundColor]];
     
@@ -296,7 +277,7 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 
 - (void)updateLabels
 {
-    [self setBillLabels];
+    self.billLabel.text = [self.bill formattedBill];
     self.tipLabel.text = [self.bill formattedTip];
     self.grandTotalLabel.text = [self.bill formattedTotal];
 }
@@ -341,23 +322,6 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     return decimal;
 }
 
-// Format dollar and cents labels.
-- (void)setBillLabels
-{
-    NSArray *dollarsAndCents = [self dollarsAndCentsFromFormattedPrice:[self.bill formattedBill]];
-
-    NSString *billDollars = [dollarsAndCents objectAtIndex:0];
-    self.billDollarsLabel.text = billDollars;
-    
-    // Format using stepper value so don't have any weird floating point rounding issues where incrementing from .00 to .01 doesn't show any change.
-//    NSString *billCents = [dollarsAndCents objectAtIndex:1];
-//    self.billCentsLabel.text = billCents;
-    NSNumberFormatter *priceFormatter = [MABill priceFormatter];
-    NSString *billSeparator = priceFormatter.decimalSeparator;
-    NSString *cents = [NSString stringWithFormat:@"%@%02d", billSeparator, (int)self.centsStepper.value];
-    self.billCentsLabel.text = cents;
-}
-
 - (IBAction)openButtonTapped:(id)sender
 {
     [self openHostApp];
@@ -383,89 +347,30 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 
 - (IBAction)stepperValueChanged:(id)sender
 {
-    if (sender == self.incrementDollarsStepper)
-    {
-        [self updateBillByDollars:+1 cents:0];
-    }
-    else if (sender == self.decrementDollarsStepper)
-    {
-        [self updateBillByDollars:-1 cents:0];
-    }
-    else if (sender == self.incrementCentsStepper)
-    {
-        [self updateBillByDollars:0 cents:+1];
-    }
-    else if (sender == self.decrementCentsStepper)
-    {
-        [self updateBillByDollars:0 cents:-1];
-    }
-    
-    if (sender == self.dollarsStepper)
-    {
-    }
-    else if (sender == self.centsStepper)
-    {
-    }
-    
     NSInteger dollars = self.dollarsStepper.value;
     NSInteger cents = self.centsStepper.value;
     
     CGFloat centsFloat = (CGFloat)cents / 100.;
     CGFloat bill = (CGFloat)dollars + centsFloat;
     self.bill.bill = [NSNumber numberWithDouble:bill];
-
+    [self saveBill];
 }
 
-- (IBAction)incrementDollarsButtonTapped:(id)sender
+- (void)saveBill
 {
-    [self updateBillByDollars:+1 cents:0];
-}
-
-- (IBAction)decrementDollarsButtonTapped:(id)sender
-{
-    [self updateBillByDollars:-1 cents:0];
-}
-
-- (IBAction)incrementCentsButtonTapped:(id)sender
-{
-    [self updateBillByDollars:0 cents:+1];
-}
-
-- (IBAction)decrementCentsButtonTapped:(id)sender
-{
-    [self updateBillByDollars:0 cents:-1];
-}
-
-- (void)updateBillByDollars:(NSInteger)updateDollars cents:(NSInteger)updateCents
-{
-    NSInteger dollars;
-    NSInteger cents;
-    [self splitDecimalNumber:self.bill.bill.doubleValue integer:&dollars fraction:&cents];
-    
-    if ((dollars + updateDollars) >= 0)
+    if ( ! self.bill)
     {
-        dollars += updateDollars;
+        return;
     }
     
-    // 1.50 + .01 -> 1.51
-    // 1.99 + .01 -> 1.00 (not 2.00)
-    // 1.00 - .01 -> 1.99 (not 0.99)
-    if ((cents + updateCents) >= 100)
+    NSData *encodedBill = [NSKeyedArchiver archivedDataWithRootObject:self.bill];
+    NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:AppGroup];
+    [sharedDefaults setObject:encodedBill forKey:@"bill"];
+    BOOL const saved = [sharedDefaults synchronize];
+    if ( ! saved)
     {
-        cents = 0;
+        TLog(@"Failed to save bill to sharedDefaults");
     }
-    else if ((cents + updateCents) < 0)
-    {
-        cents = 99;
-    }
-    else
-    {
-        cents += updateCents;
-    }
-    
-    CGFloat centsFloat = (CGFloat)cents / 100.;
-    CGFloat bill = (CGFloat)dollars + centsFloat;
-    self.bill.bill = [NSNumber numberWithDouble:bill];
 }
 
 @end

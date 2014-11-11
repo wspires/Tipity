@@ -113,19 +113,10 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="880-1h-Zka">
                                 <rect key="frame" x="27" y="8" width="320" height="29"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=".99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GJ0-Ps-GFp">
-                                        <rect key="frame" x="167" y="4" width="25" height="20.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$999.99" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="scw-dr-nxg">
+                                        <rect key="frame" x="128" y="4" width="64" height="20.5"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="25" id="PVv-R3-CHy"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$999" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="scw-dr-nxg">
-                                        <rect key="frame" x="128" y="4" width="40" height="20.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="AAx-he-9HO"/>
+                                            <constraint firstAttribute="width" constant="64" id="AAx-he-9HO"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
@@ -154,8 +145,7 @@
                                     <constraint firstAttribute="width" constant="320" id="eBO-tE-7dw"/>
                                     <constraint firstItem="EEt-Ya-xWn" firstAttribute="leading" secondItem="880-1h-Zka" secondAttribute="leading" constant="26" id="hvc-kt-66B"/>
                                     <constraint firstItem="EEt-Ya-xWn" firstAttribute="centerY" secondItem="scw-dr-nxg" secondAttribute="centerY" constant="0.25" id="iNQ-a8-FK8"/>
-                                    <constraint firstItem="nqw-6d-aEr" firstAttribute="leading" secondItem="GJ0-Ps-GFp" secondAttribute="trailing" constant="8" id="lp5-jd-yoV"/>
-                                    <constraint firstItem="nqw-6d-aEr" firstAttribute="centerY" secondItem="GJ0-Ps-GFp" secondAttribute="centerY" constant="0.25" id="nsQ-ge-Bs4"/>
+                                    <constraint firstItem="nqw-6d-aEr" firstAttribute="leading" secondItem="scw-dr-nxg" secondAttribute="trailing" constant="8" id="klf-wI-Gfl"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -186,8 +176,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="180"/>
                     <connections>
-                        <outlet property="billCentsLabel" destination="GJ0-Ps-GFp" id="UBr-iu-b7T"/>
-                        <outlet property="billDollarsLabel" destination="scw-dr-nxg" id="yz5-Sh-VA7"/>
+                        <outlet property="billLabel" destination="scw-dr-nxg" id="PIj-6h-wnI"/>
                         <outlet property="centsStepper" destination="nqw-6d-aEr" id="MKp-Bl-a6w"/>
                         <outlet property="dollarsStepper" destination="EEt-Ya-xWn" id="WHB-uj-MTp"/>
                         <outlet property="grandTotalButton" destination="bfd-yi-b0X" id="het-dh-lGY"/>
