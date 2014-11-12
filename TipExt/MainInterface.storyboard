@@ -113,39 +113,38 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="880-1h-Zka">
                                 <rect key="frame" x="27" y="8" width="320" height="29"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$999.99" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="scw-dr-nxg">
-                                        <rect key="frame" x="128" y="4" width="64" height="20.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="64" id="AAx-he-9HO"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="9999" maximumValue="9999" translatesAutoresizingMaskIntoConstraints="NO" id="EEt-Ya-xWn">
-                                        <rect key="frame" x="26" y="0.0" width="94" height="29"/>
+                                        <rect key="frame" x="10" y="0.0" width="94" height="29"/>
                                         <connections>
                                             <action selector="stepperValueChanged:" destination="M4Y-Lb-cyx" eventType="valueChanged" id="hPZ-au-tNE"/>
                                         </connections>
                                     </stepper>
                                     <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" wraps="YES" value="99" maximumValue="99" translatesAutoresizingMaskIntoConstraints="NO" id="nqw-6d-aEr">
-                                        <rect key="frame" x="200" y="0.0" width="94" height="29"/>
+                                        <rect key="frame" x="216" y="0.0" width="94" height="29"/>
                                         <connections>
                                             <action selector="stepperValueChanged:" destination="M4Y-Lb-cyx" eventType="valueChanged" id="9ch-3O-0Go"/>
                                         </connections>
                                     </stepper>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$9999.99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="scw-dr-nxg">
+                                        <rect key="frame" x="110" y="4" width="100" height="20.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="AAx-he-9HO"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="scw-dr-nxg" firstAttribute="leading" secondItem="EEt-Ya-xWn" secondAttribute="trailing" constant="8" id="3eh-il-BEr"/>
                                     <constraint firstAttribute="centerY" secondItem="nqw-6d-aEr" secondAttribute="centerY" id="5yi-eh-Oov"/>
+                                    <constraint firstAttribute="centerX" secondItem="scw-dr-nxg" secondAttribute="centerX" id="LRk-Y2-M2Y"/>
                                     <constraint firstAttribute="centerY" secondItem="EEt-Ya-xWn" secondAttribute="centerY" id="NNb-0p-i8r"/>
-                                    <constraint firstAttribute="trailing" secondItem="nqw-6d-aEr" secondAttribute="trailing" constant="26" id="QSx-fd-x3y"/>
+                                    <constraint firstAttribute="trailing" secondItem="nqw-6d-aEr" secondAttribute="trailing" constant="10" id="QSx-fd-x3y"/>
                                     <constraint firstAttribute="height" constant="29" id="adJ-fs-k40"/>
                                     <constraint firstAttribute="width" constant="320" id="eBO-tE-7dw"/>
-                                    <constraint firstItem="EEt-Ya-xWn" firstAttribute="leading" secondItem="880-1h-Zka" secondAttribute="leading" constant="26" id="hvc-kt-66B"/>
+                                    <constraint firstItem="EEt-Ya-xWn" firstAttribute="leading" secondItem="880-1h-Zka" secondAttribute="leading" constant="10" id="hvc-kt-66B"/>
                                     <constraint firstItem="EEt-Ya-xWn" firstAttribute="centerY" secondItem="scw-dr-nxg" secondAttribute="centerY" constant="0.25" id="iNQ-a8-FK8"/>
-                                    <constraint firstItem="nqw-6d-aEr" firstAttribute="leading" secondItem="scw-dr-nxg" secondAttribute="trailing" constant="8" id="klf-wI-Gfl"/>
                                 </constraints>
                             </view>
                         </subviews>
