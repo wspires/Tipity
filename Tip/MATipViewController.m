@@ -144,6 +144,7 @@ static NSString *MARatingTableViewCellIdentifier = @"MARatingTableViewCellIdenti
         [self.bill clearTax];
     }
 
+    // Check if the view is appearing via the Today view extension. If so, use the Today view bill that was copied to the app delegate.
     MAAppDelegate* myDelegate = (((MAAppDelegate*) [UIApplication sharedApplication].delegate));
     if (myDelegate.todayViewBill)
     {

@@ -94,6 +94,11 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     }
     
     self.bill.delegate = self;
+    
+    if ( ! [[MAUserUtil sharedInstance] enableTax])
+    {
+        [self.bill clearTax];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
