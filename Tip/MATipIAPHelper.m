@@ -309,7 +309,7 @@ static NSUInteger const ProductCountThreshold = 3;
         {
             feature = [NSMutableDictionary dictionary];
             [feature setObject:Localize(@"No Ads") forKey:Feature_Title_Key];
-            [feature setObject:Localize(@"No advertisements") forKey:Feature_Description_Key];
+            [feature setObject:Localize(@"No advertisements or upgrade tab") forKey:Feature_Description_Key];
             [feature setObject:[MAFilePaths noAdImage] forKey:Feature_Image_Key];
             [features addObject:feature];
         }
