@@ -69,4 +69,21 @@
     }
 }
 
+
++ (NSString *)cellIdentifier
+{
+    return @"MASwitchCellIdentifier";
+}
+
++ (NSString *)nibName
+{
+    return @"MASwitchCell";
+}
+
++ (void)registerNibWithTableView:(UITableView *)tableView
+{
+    UINib *nib = [UINib nibWithNibName:[MASwitchCell nibName] bundle:nil];
+    [tableView registerNib:nib forCellReuseIdentifier:[MASwitchCell cellIdentifier]];
+}
+
 @end

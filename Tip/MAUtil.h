@@ -32,8 +32,6 @@
 // Create "shortcut" for accessing the app delegate. Users must still include MAAppDelegate.h.
 #define AppDelegate ((MAAppDelegate *)[UIApplication sharedApplication].delegate)
 
-#define APP_GROUP @"group.com.mindsaspire.Tip"
-
 #define USE_IOS8
 
 // Courtesy of https://github.com/facebook/three20

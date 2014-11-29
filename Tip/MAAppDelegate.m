@@ -9,6 +9,7 @@
 #import "MAAppDelegate.h"
 
 #import "MAAppearance.h"
+#import "MAAppGroup.h"
 #import "MAImageCache.h"
 #import "MATipViewController.h"
 #import "MASettingsViewController.h"
@@ -229,6 +230,12 @@
     }
 
     return bill;
+}
+
+- (BOOL)application:(UIApplication *)application willContinueUserActivityWithType:(NSString *)userActivityType
+{
+    TLog(@"%@", userActivityType);
+    return YES;
 }
 
 @end

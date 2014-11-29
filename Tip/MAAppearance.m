@@ -764,7 +764,7 @@ viewForHeaderInSection:(NSInteger)section
 
 + (void)setTabAndNavBarColor
 {
-#ifndef APP_EXTENSION
+#ifndef IS_EXTENSION
     MAAppDelegate* myDelegate = (((MAAppDelegate *) [UIApplication sharedApplication].delegate));
     UITabBarController *tabBarController = (UITabBarController *)myDelegate.window.rootViewController;
     
@@ -790,7 +790,7 @@ viewForHeaderInSection:(NSInteger)section
         tabBarController.tabBar.barStyle = barStyle;
         tabBarController.tabBar.translucent = NO;
     }
-#endif // APP_EXTENSION
+#endif // IS_EXTENSION
 }
 
 + (UIColor *)buttonTextColor

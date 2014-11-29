@@ -9,6 +9,7 @@
 #import "TodayViewController.h"
 
 #import "MAAppearance.h"
+#import "MAAppGroup.h"
 #import "MABill.h"
 #import "MAFilePaths.h"
 #import "MAUserUtil.h"
@@ -16,10 +17,6 @@
 #import "UIImage+ImageWithColor.h"
 
 #import <NotificationCenter/NotificationCenter.h>
-
-static NSString *AppGroup = @"group.com.mindsaspire.Tip";
-
-static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 
 @interface TodayViewController () <NCWidgetProviding, MABillDelegate>
 @property (strong, nonatomic) MABill *bill;
@@ -44,6 +41,7 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 
 @implementation TodayViewController
 @synthesize bill = _bill;
+@synthesize settings = _settings;
 
 @synthesize billButton = _billButton;
 @synthesize tipButton = _tipButton;
@@ -78,26 +76,21 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 
 - (void)loadBill
 {
-    NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:AppGroup];
-    NSData *encodedBill = [sharedDefaults objectForKey:@"bill"];
-    if (encodedBill)
-    {
-        MABill *bill = [NSKeyedUnarchiver unarchiveObjectWithData:encodedBill];
-        if (bill)
-        {
-            self.bill = bill;
-        }
-    }
-    else // First run.
-    {
-        self.bill = [[MABill alloc] initWithBill:[NSNumber numberWithDouble:100.]];
-    }
-    
+    self.bill = [MABill sharedInstance];
     self.bill.delegate = self;
     
     if ( ! [[MAUserUtil sharedInstance] enableTax])
     {
         [self.bill clearTax];
+    }
+}
+
+- (void)saveBill
+{
+    BOOL saved = [MABill saveSharedInstance];
+    if ( ! saved)
+    {
+        TLog(@"Failed to save bill");
     }
 }
 
@@ -359,23 +352,6 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
     CGFloat bill = (CGFloat)dollars + centsFloat;
     self.bill.bill = [NSNumber numberWithDouble:bill];
     [self saveBill];
-}
-
-- (void)saveBill
-{
-    if ( ! self.bill)
-    {
-        return;
-    }
-    
-    NSData *encodedBill = [NSKeyedArchiver archivedDataWithRootObject:self.bill];
-    NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:AppGroup];
-    [sharedDefaults setObject:encodedBill forKey:@"bill"];
-    BOOL const saved = [sharedDefaults synchronize];
-    if ( ! saved)
-    {
-        TLog(@"Failed to save bill to sharedDefaults");
-    }
 }
 
 @end

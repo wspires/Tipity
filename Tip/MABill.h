@@ -45,9 +45,14 @@
 
 @property (weak, nonatomic) id <MABillDelegate> delegate;
 
-- (id)init;
-- (id)initWithBill:(NSNumber *)bill;
-- (id)initWithBill:(NSNumber *)bill tipPercent:(NSNumber *)tipPercent;
++ (MABill *)sharedInstance;
++ (MABill *)reloadSharedInstance:(BOOL)reload;
++ (MABill *)loadSharedInstance;
++ (BOOL)saveSharedInstance;
+
+- (instancetype)init;
+- (instancetype)initWithBill:(NSNumber *)bill;
+- (instancetype)initWithBill:(NSNumber *)bill tipPercent:(NSNumber *)tipPercent;
 
 // Sets tax to 0 without invoking delegate update methods.
 - (void)clearTax;

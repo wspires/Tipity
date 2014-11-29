@@ -28,6 +28,10 @@
 
 - (NSUInteger)ratingForTipPercent:(NSNumber *)tipPercent;
 - (NSNumber *)tipPercentForRating:(NSUInteger)rating;
+
++ (NSString *)cellIdentifier;
++ (NSString *)nibName;
++ (void)registerNibWithTableView:(UITableView *)tableView;
 @end
 
 @protocol MARatingDelegate <NSObject>

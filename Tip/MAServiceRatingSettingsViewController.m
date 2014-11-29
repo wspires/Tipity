@@ -29,9 +29,6 @@ DECL_TABLE_IDX(RATING_GOOD_ROW, 1);
 DECL_TABLE_IDX(RATING_GREAT_ROW, 2);
 DECL_TABLE_IDX(RATING_VALUES_SECTION_ROWS, 3);
 
-static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
-static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
-
 @interface MAServiceRatingSettingsViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 @property (strong, nonatomic) UITextField *activeTextField;
 @property (strong, nonatomic) UIToolbar *keyboardAccessoryView;
@@ -65,13 +62,8 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 
 - (void)registerNibs
 {
-    UINib *nib = nil;
-    
-    nib = [UINib nibWithNibName:@"MASwitchCell" bundle:nil];
-    [self.tableView registerNib:nib forCellReuseIdentifier:MASwitchCellIdentifier];
-    
-    nib = [UINib nibWithNibName:@"MATextFieldCell" bundle:nil];
-    [self.tableView registerNib:nib forCellReuseIdentifier:MATextFieldCellIdentifier];
+    [MASwitchCell registerNibWithTableView:self.tableView];
+    [MATextFieldCell registerNibWithTableView:self.tableView];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -152,10 +144,10 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView enableRatingCellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MASwitchCell *cell = (MASwitchCell *)[tableView dequeueReusableCellWithIdentifier:MASwitchCellIdentifier];
+    MASwitchCell *cell = (MASwitchCell *)[tableView dequeueReusableCellWithIdentifier:[MASwitchCell cellIdentifier]];
     if (cell == nil)
     {
-        cell = [[MASwitchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MASwitchCellIdentifier];
+        cell = [[MASwitchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[MASwitchCell cellIdentifier]];
     }
     //[MAAppearance setAppearanceForCell:cell tableStyle:tableView.style];
     [cell setAppearanceInTable:tableView];
@@ -209,10 +201,10 @@ static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView ratingValuesCellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MATextFieldCell *cell = (MATextFieldCell *)[tableView dequeueReusableCellWithIdentifier:MATextFieldCellIdentifier];
+    MATextFieldCell *cell = (MATextFieldCell *)[tableView dequeueReusableCellWithIdentifier:[MATextFieldCell cellIdentifier]];
     if (cell == nil)
     {
-        cell = [[MATextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MATextFieldCellIdentifier];
+        cell = [[MATextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[MATextFieldCell cellIdentifier]];
     }
     [cell setAppearanceInTable:tableView];
     

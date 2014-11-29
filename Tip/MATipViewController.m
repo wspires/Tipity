@@ -9,6 +9,8 @@
 #import "MATipViewController.h"
 
 #import "MAAppDelegate.h"
+#import "MAAppGroup.h"
+#import "MASharedDataChangedNotifier.h"
 #import "MAAppearance.h"
 #import "MABill.h"
 #import "MAFilePaths.h"
@@ -19,6 +21,8 @@
 #import "MATipIAPHelper.h"
 
 #import <iAd/iAd.h>
+
+#import <CoreFoundation/CoreFoundation.h>
 
 DECL_TABLE_IDX(DISABLED_SECTION, 9999);
 DECL_TABLE_IDX(DISABLED_ROW, 9999);
@@ -51,14 +55,9 @@ DECL_TABLE_IDX(TAX_ROW, 1);
 DECL_TABLE_IDX(BILL_BEFORE_TAX_ROW, DISABLED_ROW);
 DECL_TABLE_IDX(TAX_SECTION_ROWS, 2);
 
-static NSString *AppGroup = @"group.com.mindsaspire.Tip";
-
-static NSString *MATextFieldCellIdentifier = @"MATextFieldCellIdentifier";
-static NSString *MARatingTableViewCellIdentifier = @"MARatingTableViewCellIdentifier";
-
 @interface MATipViewController () <MABillDelegate, MARatingDelegate, UITextFieldDelegate, UIActionSheetDelegate, ADBannerViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) MABill *bill;
+@property (weak, nonatomic) MABill *bill;
 @property (strong, nonatomic) NSArray *textFieldIndexPaths;
 @property (strong, nonatomic) NSDictionary *indexPathToBillKeyDict;
 @property (strong, nonatomic) NSIndexPath *activeIndexPath;
@@ -124,6 +123,14 @@ static NSString *MARatingTableViewCellIdentifier = @"MARatingTableViewCellIdenti
     [self setupAdBanner];
 
 //    [self hideUIToMakeLaunchImages];
+
+    [self registerForSharedDataChangedNotifications];
+}
+
+- (void)removeNotifications
+{
+    CFNotificationCenterRef center = CFNotificationCenterGetDarwinNotifyCenter();
+    CFNotificationCenterRemoveObserver(center, NULL, CFSTR("TestValue"), NULL);
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -217,58 +224,24 @@ static NSString *MARatingTableViewCellIdentifier = @"MARatingTableViewCellIdenti
 
 - (void)registerNibs
 {
-    UINib *nib = nil;
-    
-    nib = [UINib nibWithNibName:@"MATextFieldCell" bundle:nil];
-    [self.tableView registerNib:nib forCellReuseIdentifier:MATextFieldCellIdentifier];
-    
-    nib = [UINib nibWithNibName:@"MARatingTableViewCell" bundle:nil];
-    [self.tableView registerNib:nib forCellReuseIdentifier:MARatingTableViewCellIdentifier];
+    [MATextFieldCell registerNibWithTableView:self.tableView];
+    [MARatingTableViewCell registerNibWithTableView:self.tableView];
 }
 
 - (void)loadBill
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSData *encodedBill = [defaults objectForKey:@"bill"];
-    if (encodedBill)
-    {
-        MABill *bill = [NSKeyedUnarchiver unarchiveObjectWithData:encodedBill];
-        if (bill)
-        {
-            self.bill = bill;
-        }
-    }
-    else // First run.
-    {
-        self.bill = [[MABill alloc] init];
-    }
-    
+    self.bill = [MABill sharedInstance];
     self.bill.delegate = self;
 }
 
 - (void)saveBill
 {
-    if ( ! self.bill)
-    {
-        return;
-    }
-    
-    NSData *encodedBill = [NSKeyedArchiver archivedDataWithRootObject:self.bill];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:encodedBill forKey:@"bill"];
-    BOOL saved = [defaults synchronize];
+    BOOL saved = [MABill saveSharedInstance];
     if ( ! saved)
     {
-        TLog(@"Failed to save bill to standardUserDefaults");
+        TLog(@"Failed to save bill");
     }
-    
-    NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:AppGroup];
-    [sharedDefaults setObject:encodedBill forKey:@"bill"];
-    saved = [sharedDefaults synchronize];
-    if ( ! saved)
-    {
-        TLog(@"Failed to save bill to sharedDefaults");
-    }
+    [MASharedDataChangedNotifier postNotification];
 }
 
 // Update the number and position of the table sections.
@@ -500,10 +473,10 @@ static NSString *MARatingTableViewCellIdentifier = @"MARatingTableViewCellIdenti
 
 - (UITableViewCell *)tableView:(UITableView *)tableView billCellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MATextFieldCell *cell = (MATextFieldCell *)[tableView dequeueReusableCellWithIdentifier:MATextFieldCellIdentifier];
+    MATextFieldCell *cell = (MATextFieldCell *)[tableView dequeueReusableCellWithIdentifier:[MATextFieldCell cellIdentifier]];
     if (cell == nil)
     {
-        cell = [[MATextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MATextFieldCellIdentifier];
+        cell = [[MATextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[MATextFieldCell cellIdentifier]];
     }
     [cell setAppearanceInTable:tableView];
     
@@ -532,10 +505,10 @@ static NSString *MARatingTableViewCellIdentifier = @"MARatingTableViewCellIdenti
 
 - (UITableViewCell *)tableView:(UITableView *)tableView ratingCellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MARatingTableViewCell *cell = (MARatingTableViewCell *)[tableView dequeueReusableCellWithIdentifier:MARatingTableViewCellIdentifier];
+    MARatingTableViewCell *cell = (MARatingTableViewCell *)[tableView dequeueReusableCellWithIdentifier:[MARatingTableViewCell cellIdentifier]];
     if (cell == nil)
     {
-        cell = [[MARatingTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MARatingTableViewCellIdentifier];
+        cell = [[MARatingTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[MARatingTableViewCell cellIdentifier]];
     }
 
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -554,10 +527,10 @@ static NSString *MARatingTableViewCellIdentifier = @"MARatingTableViewCellIdenti
 
 - (UITableViewCell *)tableView:(UITableView *)tableView tipCellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MATextFieldCell *cell = (MATextFieldCell *)[tableView dequeueReusableCellWithIdentifier:MATextFieldCellIdentifier];
+    MATextFieldCell *cell = (MATextFieldCell *)[tableView dequeueReusableCellWithIdentifier:[MATextFieldCell cellIdentifier]];
     if (cell == nil)
     {
-        cell = [[MATextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MATextFieldCellIdentifier];
+        cell = [[MATextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[MATextFieldCell cellIdentifier]];
     }
     [cell setAppearanceInTable:tableView];
     
@@ -583,16 +556,16 @@ static NSString *MARatingTableViewCellIdentifier = @"MARatingTableViewCellIdenti
     cell.textLabel.text = labelText;
     cell.textField.text = textFieldText;
     cell.imageView.image = image;
-
+    
     return cell;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView totalCellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MATextFieldCell *cell = (MATextFieldCell *)[tableView dequeueReusableCellWithIdentifier:MATextFieldCellIdentifier];
+    MATextFieldCell *cell = (MATextFieldCell *)[tableView dequeueReusableCellWithIdentifier:[MATextFieldCell cellIdentifier]];
     if (cell == nil)
     {
-        cell = [[MATextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MATextFieldCellIdentifier];
+        cell = [[MATextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[MATextFieldCell cellIdentifier]];
     }
     [cell setAppearanceInTable:tableView];
     
@@ -614,10 +587,10 @@ static NSString *MARatingTableViewCellIdentifier = @"MARatingTableViewCellIdenti
 
 - (UITableViewCell *)tableView:(UITableView *)tableView taxCellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MATextFieldCell *cell = (MATextFieldCell *)[tableView dequeueReusableCellWithIdentifier:MATextFieldCellIdentifier];
+    MATextFieldCell *cell = (MATextFieldCell *)[tableView dequeueReusableCellWithIdentifier:[MATextFieldCell cellIdentifier]];
     if (cell == nil)
     {
-        cell = [[MATextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MATextFieldCellIdentifier];
+        cell = [[MATextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[MATextFieldCell cellIdentifier]];
     }
     [cell setAppearanceInTable:tableView];
     
@@ -655,10 +628,10 @@ static NSString *MARatingTableViewCellIdentifier = @"MARatingTableViewCellIdenti
 
 - (UITableViewCell *)tableView:(UITableView *)tableView splitCellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MATextFieldCell *cell = (MATextFieldCell *)[tableView dequeueReusableCellWithIdentifier:MATextFieldCellIdentifier];
+    MATextFieldCell *cell = (MATextFieldCell *)[tableView dequeueReusableCellWithIdentifier:[MATextFieldCell cellIdentifier]];
     if (cell == nil)
     {
-        cell = [[MATextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MATextFieldCellIdentifier];
+        cell = [[MATextFieldCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:[MATextFieldCell cellIdentifier]];
     }
     [cell setAppearanceInTable:tableView];
         
@@ -1231,6 +1204,27 @@ static NSString *MARatingTableViewCellIdentifier = @"MARatingTableViewCellIdenti
     // Resume stopped processes.
     // [video resume];
     // [audio resume];
+}
+
+#pragma mark - Shared Data Changed
+
+- (void)registerForSharedDataChangedNotifications
+{
+    [[MASharedDataChangedNotifier sharedInstance] registerForSharedDataChangedNotifications];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sharedDataChanged:) name:MASharedDataChangedNotification object:nil];
+}
+
+- (void)unregisterForSharedDataChangedNotifications
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MASharedDataChangedNotification object:nil];
+}
+
+- (void)sharedDataChanged:(NSNotification *)notification
+{
+    self.bill = [MABill reloadSharedInstance:YES];
+    self.bill.delegate = self;
+    [self.tableView reloadData];
 }
 
 @end

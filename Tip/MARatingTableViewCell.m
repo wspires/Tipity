@@ -189,4 +189,20 @@ static NSUInteger const BUTTON_END_TAG = 6;
     return [NSNumber numberWithDouble:tipPercentDouble];
 }
 
++ (NSString *)cellIdentifier
+{
+    return @"MARatingTableViewCellIdentifier";
+}
+
++ (NSString *)nibName
+{
+    return @"MARatingTableViewCell";
+}
+
++ (void)registerNibWithTableView:(UITableView *)tableView
+{
+    UINib *nib = [UINib nibWithNibName:[MARatingTableViewCell nibName] bundle:nil];
+    [tableView registerNib:nib forCellReuseIdentifier:[MARatingTableViewCell cellIdentifier]];
+}
+
 @end

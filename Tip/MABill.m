@@ -8,6 +8,8 @@
 
 #import "MABill.h"
 
+#import "MAAppGroup.h"
+
 static double const DefaultBill = 100.;
 static double const DefaultTipPercent = 20.;
 static double const DefaultTip = 20.;
@@ -33,17 +35,63 @@ static double const DefaultSplitTotal = 120.;
 
 @synthesize delegate = _delegate;
 
-- (id)init
++ (MABill *)sharedInstance
+{
+    return [MABill reloadSharedInstance:NO];
+}
+
++ (MABill *)reloadSharedInstance:(BOOL)reload
+{
+    static dispatch_once_t once;
+    static MABill * sharedInstance;
+    dispatch_once(&once, ^{
+        sharedInstance = [MABill loadSharedInstance];
+    });
+    
+    if (reload)
+    {
+        sharedInstance = [MABill loadSharedInstance];
+    }
+    
+    return sharedInstance;
+}
+
++ (MABill *)loadSharedInstance
+{
+    MABill *bill = nil;
+    NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:AppGroup];
+    NSData *encodedBill = [defaults objectForKey:@"bill"];
+    if (encodedBill)
+    {
+        bill = [NSKeyedUnarchiver unarchiveObjectWithData:encodedBill];
+    }
+    else // First run.
+    {
+        bill = [[MABill alloc] init];
+    }
+    return bill;
+}
+
++ (BOOL)saveSharedInstance
+{
+    NSData *encodedBill = [NSKeyedArchiver archivedDataWithRootObject:[MABill sharedInstance]];
+    NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:AppGroup];
+    [defaults setObject:encodedBill forKey:@"bill"];
+    BOOL saved = [defaults synchronize];
+    return saved;
+}
+
+- (instancetype)init
 {
     return [self initWithBill:[NSNumber numberWithDouble:DefaultBill]];
 }
 
-- (id)initWithBill:(NSNumber *)bill
+- (instancetype)initWithBill:(NSNumber *)bill
 {
     return [self initWithBill:[NSNumber numberWithDouble:DefaultBill] tipPercent:[NSNumber numberWithDouble:DefaultTipPercent]];
 }
 
-- (id)initWithBill:(NSNumber *)bill tipPercent:(NSNumber *)tipPercent
+- (instancetype)initWithBill:(NSNumber *)bill tipPercent:(NSNumber *)tipPercent
 {
     self = [super init];
     if (self)

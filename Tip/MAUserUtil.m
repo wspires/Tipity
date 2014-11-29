@@ -8,6 +8,7 @@
 
 #import "MAUserUtil.h"
 
+#import "MAAppGroup.h"
 #import "MADateUtil.h"
 #import "MAFilePaths.h"
 #import "MAUtil.h"
@@ -16,8 +17,6 @@
 #import "MATipIAPHelper.h"
 
 // TODO: Make thread-safe and add a sharedInstance with instance methods (like MAActivity) instead of static methods.
-
-static NSString *AppGroup = @"group.com.mindsaspire.Tip";
 
 static NSString * CurrentUser = nil;
 static NSString * const DefaultUserName = @"";

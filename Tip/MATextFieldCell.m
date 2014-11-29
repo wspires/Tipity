@@ -64,4 +64,20 @@
     self.textField.textColor = [MAAppearance detailLabelTextColor];
 }
 
++ (NSString *)cellIdentifier
+{
+    return @"MATextFieldCellIdentifier";
+}
+
++ (NSString *)nibName
+{
+    return @"MATextFieldCell";
+}
+
++ (void)registerNibWithTableView:(UITableView *)tableView
+{
+    UINib *nib = [UINib nibWithNibName:[MATextFieldCell nibName] bundle:nil];
+    [tableView registerNib:nib forCellReuseIdentifier:[MATextFieldCell cellIdentifier]];
+}
+
 @end

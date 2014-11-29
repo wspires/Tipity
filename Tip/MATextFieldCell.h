@@ -14,4 +14,8 @@
 
 - (void)setAppearanceInTable:(UITableView *)tableView;
 
++ (NSString *)cellIdentifier;
++ (NSString *)nibName;
++ (void)registerNibWithTableView:(UITableView *)tableView;
+
 @end
