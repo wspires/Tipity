@@ -8,8 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-// Local notification center name through which to be notified for changes to the shared app container.
-// For example:
+// Local notification center name through which to be notified of changes to the shared app container. For example:
 // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sharedDataChanged:) name:MASharedDataChangedNotification object:nil];
 static NSString * const MASharedDataChangedNotification = @"com.mindsaspire.Tip.SharedDataChangedNotificationNameForHostApp";
 

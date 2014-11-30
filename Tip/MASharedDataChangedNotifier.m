@@ -27,8 +27,7 @@ static CFStringRef const kExtensionNotificationName = CFSTR("com.mindsaspire.Tip
 @interface MASharedDataChangedNotifier ()
 @property (assign, nonatomic) BOOL isRegisteredForNotifications;
 
-- (void)registerForSharedDataChangedNotifications;
-- (void)unregisterForSharedDataChangedNotifications;
+- (instancetype)init;
 @end
 
 @implementation MASharedDataChangedNotifier
@@ -57,31 +56,37 @@ static CFStringRef const kExtensionNotificationName = CFSTR("com.mindsaspire.Tip
 
 - (void)registerForSharedDataChangedNotifications
 {
-    if (_isRegisteredForNotifications)
+    @synchronized(self)
     {
-        return;
+        if (_isRegisteredForNotifications)
+        {
+            return;
+        }
+        
+        // Use the Darwin notification center to deliver messages to other processes or extensions.
+        // Note, however, that the Darwin notification center ignores the suspensionBehavior parameter.
+        CFNotificationCenterRef const center = CFNotificationCenterGetDarwinNotifyCenter();
+        CFNotificationSuspensionBehavior const suspensionBehavior = CFNotificationSuspensionBehaviorDeliverImmediately;
+        CFNotificationCenterAddObserver(center, NULL, sharedDataChangedCallback, kRecvNotificationName, NULL, suspensionBehavior);
+        
+        _isRegisteredForNotifications = YES;
     }
-    
-    // Use the Darwin notification center to deliver messages to other processes or extensions.
-    // Note, however, that the Darwin notification center ignores the suspensionBehavior parameter.
-    CFNotificationCenterRef const center = CFNotificationCenterGetDarwinNotifyCenter();
-    CFNotificationSuspensionBehavior const suspensionBehavior = CFNotificationSuspensionBehaviorDeliverImmediately;
-    CFNotificationCenterAddObserver(center, NULL, sharedDataChangedCallback, kRecvNotificationName, NULL, suspensionBehavior);
-    
-    _isRegisteredForNotifications = YES;
 }
 
 - (void)unregisterForSharedDataChangedNotifications
 {
-    if ( ! _isRegisteredForNotifications)
+    @synchronized(self)
     {
-        return;
+        if ( ! _isRegisteredForNotifications)
+        {
+            return;
+        }
+        
+        CFNotificationCenterRef const center = CFNotificationCenterGetDarwinNotifyCenter();
+        CFNotificationCenterRemoveObserver(center, NULL, kRecvNotificationName, NULL);
+        
+        _isRegisteredForNotifications = NO;
     }
-
-    CFNotificationCenterRef const center = CFNotificationCenterGetDarwinNotifyCenter();
-    CFNotificationCenterRemoveObserver(center, NULL, kRecvNotificationName, NULL);
-    
-    _isRegisteredForNotifications = NO;
 }
 
 void sharedDataChangedCallback(CFNotificationCenterRef center,
@@ -90,7 +95,7 @@ void sharedDataChangedCallback(CFNotificationCenterRef center,
                                void const * object,
                                CFDictionaryRef userInfo)
 {
-    // This is a plain C function, not a member of any class, so we post a notification to the local notification center to notify all observers in this app that the shared container has been changed.
+    // This callback is a plain C function, not a member of any class, so we post a notification to the local notification center to notify all observers in this app that the shared container has been changed.
     [[NSNotificationCenter defaultCenter] postNotificationName:MASharedDataChangedNotification object:nil];
 }
 

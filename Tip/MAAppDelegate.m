@@ -33,7 +33,8 @@
 @synthesize todayViewBill = _todayViewBill;
 @synthesize tipViewController = _tipViewController;
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
     // Override point for customization after application launch.
     [MAImageCache sharedInstance];
 
