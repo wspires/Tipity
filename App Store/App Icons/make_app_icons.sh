@@ -50,6 +50,18 @@ resize_img 58
 
 
 # iOS 8 3x
-resize_img 87
+resize_img 88
 resize_img 120
 resize_img 180
+
+
+# Apple Watch
+resize_img 29
+resize_img 36
+resize_img 29
+resize_img 58
+resize_img 40
+resize_img 88
+resize_img 172
+resize_img 196
+resize_img 60

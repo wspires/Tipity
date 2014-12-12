@@ -22,7 +22,7 @@
 #import "Appirater.h"
 
 @interface MAAppDelegate ()
-
+//@property (assign, nonatomic) UIBackgroundTaskIdentifier bgTask;
 @end
 
 @implementation MAAppDelegate
@@ -78,9 +78,41 @@
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application {
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    /*
+    NSLog(@"applicationDidEnterBackground");
+    self.bgTask = [application beginBackgroundTaskWithName:@"MyTask" expirationHandler:^{
+        // Clean up any unfinished task business by marking where you
+        // stopped or ending the task outright.
+        NSLog(@"beginBackgroundTaskWithName");
+
+        [application endBackgroundTask:self.bgTask];
+        self.bgTask = UIBackgroundTaskInvalid;
+    }];
+    
+    // Start the long-running task and return immediately.
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSLog(@"dispatch_async");
+
+        // Do the work associated with the task, preferably in chunks.
+        if ( ! self.todayViewBill)
+        {
+            self.todayViewBill = [[MABill alloc] init];
+        }
+        else
+        {
+            // Test changing the bill amount to see if it changes.
+            self.todayViewBill.bill = [NSNumber numberWithDouble:self.todayViewBill.bill.doubleValue + 5];
+        }
+
+        [application endBackgroundTask:self.bgTask];
+        self.bgTask = UIBackgroundTaskInvalid;
+    });
+     */
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
@@ -233,10 +265,27 @@
     return bill;
 }
 
-- (BOOL)application:(UIApplication *)application willContinueUserActivityWithType:(NSString *)userActivityType
+- (void)application:(UIApplication *)application handleWatchKitExtensionRequest:(NSDictionary *)userInfo reply:(void (^)(NSDictionary *))reply
 {
-    TLog(@"%@", userActivityType);
-    return YES;
+    // Note: on actual devices, this gets called in the background on the host/iPhone app, but on the simulator, it actually launches the app into the foreground.
+    // So, we do not actually need to load the bill here since the bill is loaded from the shared app container when the app is launched already.
+//    return;
+    
+    //
+    // Test handleWatchKitExtensionRequest.
+    self.todayViewBill = [MABill reloadSharedInstance:YES];
+    [self.tipViewController viewWillAppear:YES];
+
+//    self.todayViewBill = [[MABill alloc] init];
+    
+    NSLog(@"handleWatchKitExtensionRequest: %@", userInfo);
+    
+    // Execute reply block and pass in another dictionary to send data to the watch extension.
+    NSData *encodedBill = [NSKeyedArchiver archivedDataWithRootObject:[MABill sharedInstance]];
+    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] init];
+    [dictionary setObject:encodedBill forKey:@"bill"];
+    reply(dictionary);
+     //
 }
 
 @end

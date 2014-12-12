@@ -19,20 +19,24 @@
 
 #include <CoreFoundation/CoreFoundation.h>
 
+// Must also set the steps for the slider in the storyboard. Cannot do programmatically yet.
+static CGFloat const DollarSliderMax = 200.;
+
 @interface InterfaceController() <MABillDelegate>
 @property (strong, nonatomic) MABill *bill;
 @property (strong, nonatomic) NSDictionary *settings;
 
-@property (strong, nonatomic) IBOutlet WKInterfaceSlider *dollarSlider;
+@property (weak, nonatomic) IBOutlet WKInterfaceSlider *dollarSlider;
 @property (strong, nonatomic) NSNumber *dollars;
-@property (strong, nonatomic) IBOutlet WKInterfaceSlider *centSlider;
+@property (weak, nonatomic) IBOutlet WKInterfaceSlider *centSlider;
 @property (strong, nonatomic) NSNumber *cents;
 
-@property (strong, nonatomic) IBOutlet WKInterfaceLabel *billLabel;
-@property (strong, nonatomic) IBOutlet WKInterfaceLabel *tipLabel;
-@property (strong, nonatomic) IBOutlet WKInterfaceLabel *grandTotalLabel;
+@property (weak, nonatomic) IBOutlet WKInterfaceLabel *billLabel;
+@property (weak, nonatomic) IBOutlet WKInterfaceLabel *tipLabel;
+@property (weak, nonatomic) IBOutlet WKInterfaceLabel *grandTotalLabel;
 
-@property (strong, nonatomic) IBOutlet WKInterfaceButton *openButton;
+@property (weak, nonatomic) IBOutlet WKInterfaceButton *openButton;
+@property (weak, nonatomic) IBOutlet WKInterfaceImage *image;
 @end
 
 @implementation InterfaceController
@@ -66,8 +70,12 @@
 //        [[UIStepper appearance] setTintColor:[MAAppearance foregroundColor]];
         
         [self loadBill];
+        
+        // TODO: Would be better to not use sliders to select the $ and cents. However, there is no API for accessing the digital crown.
+        
         [self setupSliders];
         
+        //[self.image setImageNamed:@"BillImage"];
 //        [self setCurrentRatingButton:self.ratingButton3];
         
         
@@ -151,10 +159,14 @@
     self.dollars = [NSNumber numberWithInteger:dollars];
     self.cents = [NSNumber numberWithInteger:cents];
 
-    self.dollarSlider.value = self.dollars.integerValue / 100.;
+    self.dollarSlider.value = self.dollars.integerValue / DollarSliderMax;
     self.centSlider.value = self.cents.integerValue / 100.;
 
     NSLog(@"Initial bill values: dollars=%@, cents=%@", self.dollars, self.cents);
+    
+    UIColor *color = [MAAppearance foregroundColor];
+    [self.dollarSlider setColor:color];
+    [self.centSlider setColor:color];
 }
 
 #pragma mark - MABillDelegate
@@ -174,7 +186,7 @@
 
 - (IBAction)dollarSliderAction:(float)value
 {
-    NSInteger dollars = (NSInteger) roundf(100 * value);
+    NSInteger dollars = (NSInteger) roundf(DollarSliderMax * value);
     self.dollars = [NSNumber numberWithInteger:dollars];
     [self newDollarsValue:self.dollars centsValue:self.cents];
 
@@ -241,13 +253,31 @@
 
 - (void)openHostApp
 {
-    NSString *type = @"com.mindsaspire.Tip.bill";
-    
     NSData *encodedBill = [NSKeyedArchiver archivedDataWithRootObject:self.bill];
     NSMutableDictionary *userInfo = [[NSMutableDictionary alloc] init];
     [userInfo setObject:encodedBill forKey:@"bill"];
-    [self updateUserActivity:type userInfo:userInfo];
-    NSLog(@"openHostApp");
+    
+
+    BOOL const wasSent = [WKInterfaceController openParentApplication:userInfo reply:^(NSDictionary *replyInfo, NSError *error) {
+        
+        NSData *encodedBill = [replyInfo objectForKey:@"bill"];
+        if (encodedBill)
+        {
+            MABill *bill = [NSKeyedUnarchiver unarchiveObjectWithData:encodedBill];
+            NSLog(@"Reply from openParentApplication: %@", bill.bill);
+        }
+        else
+        {
+            NSLog(@"Reply from openParentApplication: No bill");
+        }
+    }];
+    NSLog(@"openParentApplication: %d", wasSent);
+
+//    NSString *type = @"com.mindsaspire.Tip.bill";
+
+    
+//    [self updateUserActivity:type userInfo:userInfo];
+//    NSLog(@"openHostApp");
     
     // Apple Watch does not have an extension context.
 //    NSString *urlString = SFmt(@"Tipity://bill=%f;tipPercent=%f", self.bill.bill.doubleValue, self.bill.tipPercent.doubleValue);

@@ -120,6 +120,9 @@
 		180976B619BE96910039F654 /* MABill.m in Sources */ = {isa = PBXBuildFile; fileRef = 180976B519BE96910039F654 /* MABill.m */; };
 		180976BA19BF5D8C0039F654 /* MATextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 180976B819BF5D8C0039F654 /* MATextFieldCell.m */; };
 		180976BB19BF5D8C0039F654 /* MATextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180976B919BF5D8C0039F654 /* MATextFieldCell.xib */; };
+		1831FC4C1A3B64BD00642A10 /* 692-iphone-5.png in Resources */ = {isa = PBXBuildFile; fileRef = 1831FC491A3B64BD00642A10 /* 692-iphone-5.png */; };
+		1831FC4D1A3B64BD00642A10 /* 692-iphone-5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1831FC4A1A3B64BD00642A10 /* 692-iphone-5@2x.png */; };
+		1831FC4E1A3B64BD00642A10 /* 692-iphone-5@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1831FC4B1A3B64BD00642A10 /* 692-iphone-5@3x.png */; };
 		1836BAC21A1D303500A05C0F /* MAUserUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 1809764419BE61D20039F654 /* MAUserUtil.m */; };
 		1836BAC31A1D304200A05C0F /* MABill.m in Sources */ = {isa = PBXBuildFile; fileRef = 180976B519BE96910039F654 /* MABill.m */; };
 		1836BAC41A1D307B00A05C0F /* UIImage+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1809765619BE61FA0039F654 /* UIImage+Extensions.m */; };
@@ -479,6 +482,9 @@
 		180976B719BF5D8C0039F654 /* MATextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MATextFieldCell.h; sourceTree = "<group>"; };
 		180976B819BF5D8C0039F654 /* MATextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MATextFieldCell.m; sourceTree = "<group>"; };
 		180976B919BF5D8C0039F654 /* MATextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MATextFieldCell.xib; sourceTree = "<group>"; };
+		1831FC491A3B64BD00642A10 /* 692-iphone-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "692-iphone-5.png"; sourceTree = "<group>"; };
+		1831FC4A1A3B64BD00642A10 /* 692-iphone-5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "692-iphone-5@2x.png"; sourceTree = "<group>"; };
+		1831FC4B1A3B64BD00642A10 /* 692-iphone-5@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "692-iphone-5@3x.png"; sourceTree = "<group>"; };
 		1836BAC11A1D2EE400A05C0F /* MAAppGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAAppGroup.h; sourceTree = "<group>"; };
 		184914AA19BFA507003D9B1F /* AppIcon_180x180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon_180x180.png; sourceTree = "<group>"; };
 		184CF4B319CCA9E300A12628 /* govt_bldg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "govt_bldg@3x.png"; sourceTree = "<group>"; };
@@ -1376,6 +1382,9 @@
 		180975F619BE61010039F654 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				1831FC491A3B64BD00642A10 /* 692-iphone-5.png */,
+				1831FC4A1A3B64BD00642A10 /* 692-iphone-5@2x.png */,
+				1831FC4B1A3B64BD00642A10 /* 692-iphone-5@3x.png */,
 				1883585E1A0AEC8500CE3962 /* 746-minus-circle.png */,
 				1883585F1A0AEC8500CE3962 /* 746-minus-circle@2x.png */,
 				188358601A0AEC8500CE3962 /* 746-minus-circle@3x.png */,
@@ -2602,6 +2611,9 @@
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
 							};
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
 						};
 					};
 					1809754D19BE5ED60039F654 = {
@@ -2706,6 +2718,7 @@
 				1809761D19BE61010039F654 /* blank.png in Resources */,
 				1803AC5F19C8A2F2006C7EFF /* 726-star-selected.png in Resources */,
 				18A9C5E819CC89AC00789D2E /* 740-gear-selected@3x.png in Resources */,
+				1831FC4D1A3B64BD00642A10 /* 692-iphone-5@2x.png in Resources */,
 				1809762519BE61010039F654 /* tableview_placeholder.png in Resources */,
 				1808CE1419C14CF900E972E1 /* 740-gear-selected.png in Resources */,
 				1803AC6519C945C1006C7EFF /* MAServiceRatingSettingsViewController.xib in Resources */,
@@ -2728,6 +2741,7 @@
 				18698A3A19C29EAC005F2E32 /* 777-thumbs-up@2x.png in Resources */,
 				18A9C5E519CC89AC00789D2E /* 724-info@3x.png in Resources */,
 				1808CE1C19C14D4800E972E1 /* 952-shopping-cart-selected.png in Resources */,
+				1831FC4E1A3B64BD00642A10 /* 692-iphone-5@3x.png in Resources */,
 				1809767B19BE70700039F654 /* MASettingsViewController.xib in Resources */,
 				18698A2F19C29CB2005F2E32 /* 702-share.png in Resources */,
 				1808CE1F19C14D4800E972E1 /* 952-shopping-cart@2x.png in Resources */,
@@ -2772,6 +2786,7 @@
 				1808CE0F19C14C0E00E972E1 /* 704-compose@2x.png in Resources */,
 				1808CE3E19C1572900E972E1 /* 895-user-group@2x.png in Resources */,
 				1808CE4019C159A800E972E1 /* 973-user-total@2x.png in Resources */,
+				1831FC4C1A3B64BD00642A10 /* 692-iphone-5.png in Resources */,
 				18698A3019C29CB2005F2E32 /* 702-share@2x.png in Resources */,
 				18A9C5E919CC89AC00789D2E /* 740-gear@3x.png in Resources */,
 				1809754919BE5ED60039F654 /* Images.xcassets in Resources */,
