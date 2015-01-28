@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "887-notepad.png"
+      "filename" : "887-notepad-blue.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "887-notepad@2x.png"
+      "filename" : "887-notepad-blue@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "887-notepad@3x.png"
+      "filename" : "887-notepad-blue@3x.png"
     }
   ],
   "info" : {

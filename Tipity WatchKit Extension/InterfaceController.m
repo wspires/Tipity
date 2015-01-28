@@ -26,33 +26,69 @@ static CGFloat const DollarSliderMax = 200.;
 @property (strong, nonatomic) MABill *bill;
 @property (strong, nonatomic) NSDictionary *settings;
 
+@property (weak, nonatomic) IBOutlet WKInterfaceButton *hundredsButton;
+@property (strong, nonatomic) NSNumber *hundredsNumber;
+@property (weak, nonatomic) IBOutlet WKInterfaceButton *teensButton;
+@property (strong, nonatomic) NSNumber *teensNumber;
+@property (weak, nonatomic) IBOutlet WKInterfaceButton *onesButton;
+@property (strong, nonatomic) NSNumber *onesNumber;
+@property (weak, nonatomic) IBOutlet WKInterfaceButton *tenthsButton;
+@property (strong, nonatomic) NSNumber *tenthsNumber;
+@property (weak, nonatomic) IBOutlet WKInterfaceButton *hundredthsButton;
+@property (strong, nonatomic) NSNumber *hundredthsNumber;
+
+@property (weak, nonatomic) WKInterfaceButton *selectedButton;
+@property (weak, nonatomic) NSNumber *selectedNumber;
+
+@property (weak, nonatomic) IBOutlet WKInterfaceButton *plusButton;
+@property (weak, nonatomic) IBOutlet WKInterfaceButton *minusButton;
+
+
 @property (weak, nonatomic) IBOutlet WKInterfaceSlider *dollarSlider;
 @property (strong, nonatomic) NSNumber *dollars;
 @property (weak, nonatomic) IBOutlet WKInterfaceSlider *centSlider;
 @property (strong, nonatomic) NSNumber *cents;
 
+@property (weak, nonatomic) IBOutlet WKInterfaceGroup *billGroup;
+@property (weak, nonatomic) IBOutlet WKInterfaceImage *billImage;
 @property (weak, nonatomic) IBOutlet WKInterfaceLabel *billLabel;
+
 @property (weak, nonatomic) IBOutlet WKInterfaceLabel *tipLabel;
 @property (weak, nonatomic) IBOutlet WKInterfaceLabel *grandTotalLabel;
 
 @property (weak, nonatomic) IBOutlet WKInterfaceButton *openButton;
-@property (weak, nonatomic) IBOutlet WKInterfaceImage *image;
 @end
 
 @implementation InterfaceController
 @synthesize bill = _bill;
 @synthesize settings = _settings;
+
+@synthesize hundredsButton = _hundredsButton;
+@synthesize hundredsNumber = _hundredsNumber;
+@synthesize teensButton = _teensButton;
+@synthesize teensNumber = _teensNumber;
+@synthesize onesButton = _onesButton;
+@synthesize onesNumber = _onesNumber;
+@synthesize tenthsButton = _tenthsButton;
+@synthesize tenthsNumber = _tenthsNumber;
+@synthesize hundredthsButton = _hundredthsButton;
+@synthesize hundredthsNumber = _hundredthsNumber;
+
+@synthesize selectedButton = _selectedButton;
+@synthesize selectedNumber = _selectedNumber;
+
 @synthesize dollarSlider = _dollarSlider;
 @synthesize dollars = _dollars;
 @synthesize centSlider = _centSlider;
 @synthesize cents = _cents;
+@synthesize billImage = _billImage;
 @synthesize billLabel = _billLabel;
 @synthesize tipLabel = _tipLabel;
 @synthesize grandTotalLabel = _grandTotalLabel;
 
-- (instancetype)initWithContext:(id)context
+- (instancetype)init
 {
-    self = [super initWithContext:context];
+    self = [super init];
     if (self)
     {
         // Initialize variables here.
@@ -71,11 +107,14 @@ static CGFloat const DollarSliderMax = 200.;
         
         [self loadBill];
         
+        [self setDigitButtonsWithBill];
+        [self initSelectedButton];
+        
         // TODO: Would be better to not use sliders to select the $ and cents. However, there is no API for accessing the digital crown.
         
         [self setupSliders];
         
-        //[self.image setImageNamed:@"BillImage"];
+        //[self.billImage setImageNamed:@"BillImage"];
 //        [self setCurrentRatingButton:self.ratingButton3];
         
         
@@ -104,9 +143,17 @@ static CGFloat const DollarSliderMax = 200.;
 {
     // This method is called when watch view controller is about to be visible to user
     NSLog(@"%@ will activate", self);
-
+    
+    [self.dollarSlider setHidden:YES];
+    [self.billImage setHidden:YES];
+    [self.centSlider setHidden:YES];
+    [self.billLabel setHidden:YES];
+    [self.billGroup setHidden:YES];
+    
     [self updateLabels];
 
+//    [self hideUIForLaunchImages];
+    
 //    MAAppDelegate* myDelegate = (((MAAppDelegate*) [UIApplication sharedApplication].delegate));
 //    if (myDelegate.todayViewBill)
 //    {
@@ -114,6 +161,17 @@ static CGFloat const DollarSliderMax = 200.;
 //        self.bill.tipPercent = myDelegate.todayViewBill.tipPercent;
 //        myDelegate.todayViewBill = nil;
 //    }
+}
+
+- (void)hideUIForLaunchImages
+{
+    [self.hundredsButton setTitle:@""];
+    [self.teensButton setTitle:@""];
+    [self.onesButton setTitle:@""];
+    [self.tenthsButton setTitle:@""];
+    [self.hundredthsButton setTitle:@""];
+    [self.tipLabel setText:@""];
+    [self.grandTotalLabel setText:@""];
 }
 
 - (void)didDeactivate
@@ -296,8 +354,7 @@ static CGFloat const DollarSliderMax = 200.;
 //    }];
 }
 
-#pragma mark - #pragma mark - Shared Data Changed
-
+#pragma mark - Shared Data Changed
 
 - (void)registerForSharedDataChangedNotifications
 {
@@ -315,8 +372,206 @@ static CGFloat const DollarSliderMax = 200.;
 {
     self.bill = [MABill reloadSharedInstance:YES];
     self.bill.delegate = self;
+    
+    [self setDigitButtonsWithBill];
     [self setupSliders];
     [self updateLabels];
+}
+
+#pragma mark - Edit bill
+
+- (UIColor *)unselectedColor
+{
+    return [UIColor darkGrayColor];
+}
+
+- (UIColor *)selectedColor
+{
+    return [MAAppearance foregroundColor];
+}
+
+- (void)setDigitButtonsWithBill
+{
+    [self numberToDigitButtons:self.bill.bill];
+}
+
+- (void)initSelectedButton
+{
+    [self.hundredsButton setBackgroundColor:[self unselectedColor]];
+    [self.teensButton setBackgroundColor:[self unselectedColor]];
+    [self.onesButton setBackgroundColor:[self unselectedColor]];
+    [self.tenthsButton setBackgroundColor:[self unselectedColor]];
+    [self.hundredthsButton setBackgroundColor:[self unselectedColor]];
+
+    [self selectButton:self.onesButton];
+}
+
+- (IBAction)hundredsButtonTapped:(id)sender
+{
+    [self selectButton:self.hundredsButton];
+}
+- (IBAction)teensButtonTapped:(id)sender
+{
+    [self selectButton:self.teensButton];
+}
+- (IBAction)onesButtonTapped:(id)sender
+{
+    [self selectButton:self.onesButton];
+}
+- (IBAction)tenthsButtonTapped:(id)sender
+{
+    [self selectButton:self.tenthsButton];
+}
+- (IBAction)hundredthsButtonTapped:(id)sender
+{
+    [self selectButton:self.hundredthsButton];
+}
+
+- (void)selectButton:(WKInterfaceButton *)button
+{
+    if (self.selectedButton)
+    {
+        [self.selectedButton setBackgroundColor:[self unselectedColor]];
+    }
+    
+    self.selectedButton = button;
+    [self.selectedButton setBackgroundColor:[self selectedColor]];
+    
+    self.selectedNumber = [self numberForButton:self.selectedButton];
+}
+
+- (NSNumber *)numberForButton:(WKInterfaceButton *)button
+{
+    if (button == self.hundredsButton)
+    {
+        return self.hundredsNumber;
+    }
+    else if (button == self.teensButton)
+    {
+        return self.teensNumber;
+    }
+    else if (button == self.onesButton)
+    {
+        return self.onesNumber;
+    }
+    else if (button == self.tenthsButton)
+    {
+        return self.tenthsNumber;
+    }
+    else if (button == self.hundredthsButton)
+    {
+        return self.hundredthsNumber;
+    }
+ 
+    return nil;
+}
+
+- (NSNumber *)digitButtonsToNumber
+{
+    double value = 0;
+    value += 100 * self.hundredsNumber.intValue;
+    value += 10 * self.teensNumber.intValue;
+    value += 1 * self.onesNumber.intValue;
+    value += 1 / 10. * self.tenthsNumber.intValue;
+    value += 1 / 100. * self.hundredthsNumber.intValue;
+    NSNumber *number = [NSNumber numberWithDouble:value];
+    return number;
+}
+
+- (void)numberToDigitButtons:(NSNumber *)number
+{
+    double value = number.doubleValue;
+    int intPart = (int)value;
+    int fracPart = (int)(100 * (value - intPart)); // Fraction part: x100 because we only want cents.
+    
+    self.hundredsNumber = [NSNumber numberWithInt:[self digit:2 integer:intPart]];
+    NSLog(@"%d %@", [self digit:2 integer:intPart], self.hundredsNumber);
+    self.teensNumber = [NSNumber numberWithInt:[self digit:1 integer:intPart]];
+    self.onesNumber = [NSNumber numberWithInt:[self digit:0 integer:intPart]];
+    self.tenthsNumber = [NSNumber numberWithInt:[self digit:1 integer:fracPart]];
+    self.hundredthsNumber = [NSNumber numberWithInt:[self digit:0 integer:fracPart]];
+    
+    [self setTitleForDigitButton:self.hundredsButton number:self.hundredsNumber];
+    [self setTitleForDigitButton:self.teensButton number:self.teensNumber];
+    [self setTitleForDigitButton:self.onesButton number:self.onesNumber];
+    [self setTitleForDigitButton:self.tenthsButton number:self.tenthsNumber];
+    [self setTitleForDigitButton:self.hundredthsButton number:self.hundredthsNumber];
+}
+
+- (int)digit:(int)digit integer:(int)integer
+{
+    double p = pow(10, digit);
+    int i = (int)(integer / p);
+    int d = i % 10;
+    return d;
+}
+
+- (void)setTitleForDigitButton:(WKInterfaceButton *)button number:(NSNumber *)number
+{
+    [button setTitle:[MABill formatCount:number]];
+}
+
+- (IBAction)plusButtonTapped:(id)sender
+{
+    [self incrementSelectButtonWithValue:+1];
+}
+
+- (IBAction)minusButtonTapped:(id)sender
+{
+    [self incrementSelectButtonWithValue:-1];
+}
+
+- (void)incrementSelectButtonWithValue:(int)incrementValue
+{
+    // The new value must be a single digit [0,9], so wraparound if go passed either end.
+    int value = self.selectedNumber.intValue;
+    int newValue = value + incrementValue;
+    if (newValue < 0)
+    {
+        newValue = 9;
+    }
+    else if (newValue > 9)
+    {
+        newValue = 0;
+    }
+    
+    self.selectedNumber = [NSNumber numberWithInt:newValue];
+    [self updateNumber:self.selectedNumber forButton:self.selectedButton];
+    [self setTitleForDigitButton:self.selectedButton number:self.selectedNumber];
+    [self updateBill];
+}
+
+// Use this function to reassign the number that is paired with the given button.
+// Must use this when changing the self.selectedNumber since NSNumber is immutable.
+- (void)updateNumber:(NSNumber *)number forButton:(WKInterfaceButton *)button
+{
+    if (button == self.hundredsButton)
+    {
+        self.hundredsNumber = number;
+    }
+    else if (button == self.teensButton)
+    {
+        self.teensNumber = number;
+    }
+    else if (button == self.onesButton)
+    {
+        self.onesNumber = number;
+    }
+    else if (button == self.tenthsButton)
+    {
+        self.tenthsNumber = number;
+    }
+    else if (button == self.hundredthsButton)
+    {
+        self.hundredthsNumber = number;
+    }
+}
+
+- (void)updateBill
+{
+    NSNumber *bill = [self digitButtonsToNumber];
+    self.bill.bill = bill;
+    [self saveBill];
 }
 
 @end
