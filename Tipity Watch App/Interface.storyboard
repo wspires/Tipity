@@ -93,16 +93,26 @@
                         </slider>
                         <group width="1" alignment="left" id="Hbv-uV-yVw">
                             <items>
-                                <label alignment="left" text=" " id="6XX-lf-4i2"/>
-                                <imageView alignment="left" image="TipImage" id="1Tz-B5-P8K"/>
-                                <label width="100" alignment="center" verticalAlignment="center" text="$9.99" textAlignment="center" id="3ay-in-IJ9"/>
+                                <separator alignment="left" verticalAlignment="center" id="Pad-ou-Gpv">
+                                    <color key="color" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </separator>
+                                <separator alignment="left" verticalAlignment="center" id="0Hn-ZH-kCs">
+                                    <color key="color" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </separator>
+                                <imageView alignment="left" verticalAlignment="center" image="TipImage" id="1Tz-B5-P8K"/>
+                                <label width="70" alignment="center" verticalAlignment="center" text="$9.99" textAlignment="right" id="3ay-in-IJ9"/>
                             </items>
                         </group>
                         <group width="1" alignment="left" id="cPl-1Q-Rcc">
                             <items>
-                                <label alignment="left" text=" " id="VXB-oC-FMy"/>
+                                <separator alignment="left" id="FEz-Mh-Rum">
+                                    <color key="color" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </separator>
+                                <separator alignment="left" id="62v-sS-Mel">
+                                    <color key="color" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </separator>
                                 <imageView alignment="left" image="GrandTotalImage" id="DjS-xV-6yG"/>
-                                <label width="100" alignment="center" verticalAlignment="center" text="$1.99" textAlignment="center" id="bwE-nb-Zbb"/>
+                                <label width="70" alignment="center" verticalAlignment="center" text="$1.99" textAlignment="right" id="bwE-nb-Zbb"/>
                             </items>
                         </group>
                         <button width="1" alignment="left" hidden="YES" title="Open in iPhone" id="SJX-Fe-jrB">
