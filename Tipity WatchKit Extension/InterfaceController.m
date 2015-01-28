@@ -152,6 +152,8 @@ static CGFloat const DollarSliderMax = 200.;
     
     [self updateLabels];
 
+    [self configureMenuItems];
+
 //    [self hideUIForLaunchImages];
     
 //    MAAppDelegate* myDelegate = (((MAAppDelegate*) [UIApplication sharedApplication].delegate));
@@ -378,7 +380,7 @@ static CGFloat const DollarSliderMax = 200.;
     [self updateLabels];
 }
 
-#pragma mark - Edit bill
+#pragma mark - Bill digit buttons
 
 - (UIColor *)unselectedColor
 {
@@ -571,6 +573,43 @@ static CGFloat const DollarSliderMax = 200.;
 {
     NSNumber *bill = [self digitButtonsToNumber];
     self.bill.bill = bill;
+    [self saveBill];
+}
+
+#pragma mark - Menu items
+
+- (void)configureMenuItems
+{
+    [self clearAllMenuItems];
+    
+    NSString *title = [NSString stringWithFormat:@"Fair"];
+    [self addMenuItemWithImageNamed:@"FairServiceRatingImage" title:title action:@selector(doMenuItemAction1)];
+
+    title = [NSString stringWithFormat:@"Good"];
+    [self addMenuItemWithImageNamed:@"GoodServiceRatingImage" title:title action:@selector(doMenuItemAction2)];
+    
+    title = [NSString stringWithFormat:@"Great"];
+    [self addMenuItemWithImageNamed:@"GreatServiceRatingImage" title:title action:@selector(doMenuItemAction3)];
+}
+
+- (void)doMenuItemAction1
+{
+    NSNumber *tipPercent = [[MAUserUtil sharedInstance] serviceRatingFair];
+    self.bill.tipPercent = tipPercent;
+    [self saveBill];
+}
+
+- (void)doMenuItemAction2
+{
+    NSNumber *tipPercent = [[MAUserUtil sharedInstance] serviceRatingGood];
+    self.bill.tipPercent = tipPercent;
+    [self saveBill];
+}
+
+- (void)doMenuItemAction3
+{
+    NSNumber *tipPercent = [[MAUserUtil sharedInstance] serviceRatingGreat];
+    self.bill.tipPercent = tipPercent;
     [self saveBill];
 }
 
