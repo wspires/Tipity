@@ -93,27 +93,23 @@
                         </slider>
                         <group width="1" alignment="left" id="Hbv-uV-yVw">
                             <items>
-                                <separator alignment="left" verticalAlignment="center" id="Pad-ou-Gpv">
-                                    <color key="color" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </separator>
-                                <separator alignment="left" verticalAlignment="center" id="0Hn-ZH-kCs">
-                                    <color key="color" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </separator>
                                 <imageView alignment="left" verticalAlignment="center" image="TipImage" id="1Tz-B5-P8K"/>
-                                <label width="70" alignment="center" verticalAlignment="center" text="$9.99" textAlignment="right" id="3ay-in-IJ9"/>
+                                <label alignment="left" text="Tip" id="WJv-nx-Nrt">
+                                    <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                </label>
+                                <label alignment="right" verticalAlignment="center" text="$9.99" textAlignment="right" id="3ay-in-IJ9"/>
                             </items>
+                            <edgeInsets key="margins" left="5" right="0.0" top="0.0" bottom="0.0"/>
                         </group>
                         <group width="1" alignment="left" id="cPl-1Q-Rcc">
                             <items>
-                                <separator alignment="left" id="FEz-Mh-Rum">
-                                    <color key="color" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </separator>
-                                <separator alignment="left" id="62v-sS-Mel">
-                                    <color key="color" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </separator>
                                 <imageView alignment="left" image="GrandTotalImage" id="DjS-xV-6yG"/>
-                                <label width="70" alignment="center" verticalAlignment="center" text="$1.99" textAlignment="right" id="bwE-nb-Zbb"/>
+                                <label alignment="left" text="Total" id="Dmu-a3-0Op">
+                                    <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                </label>
+                                <label alignment="right" verticalAlignment="center" text="$1.99" textAlignment="right" id="bwE-nb-Zbb"/>
                             </items>
+                            <edgeInsets key="margins" left="5" right="0.0" top="0.0" bottom="0.0"/>
                         </group>
                         <button width="1" alignment="left" hidden="YES" title="Open in iPhone" id="SJX-Fe-jrB">
                             <connections>
