@@ -45,7 +45,7 @@
                                                 <action selector="onesButtonTapped:" destination="AgC-eL-Hgc" id="oaA-oo-9aM"/>
                                             </connections>
                                         </button>
-                                        <label alignment="left" verticalAlignment="bottom" text="." id="9Kb-m8-1w9">
+                                        <label alignment="left" verticalAlignment="center" text="." id="9Kb-m8-1w9">
                                             <fontDescription key="font" style="UICTFontTextStyleBody"/>
                                         </label>
                                         <button width="21" height="40" alignment="left" title="4" id="Xtf-zN-Af5">

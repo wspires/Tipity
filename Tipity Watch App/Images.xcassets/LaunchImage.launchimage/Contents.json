@@ -18,7 +18,7 @@
       "orientation" : "portrait",
       "scale" : "2x"
     },
-    { 
+    {
       "orientation" : "portrait",
       "idiom" : "iphone",
       "extent" : "full-screen",
@@ -26,7 +26,7 @@
       "filename" : "Default_ios7@2x.png",
       "scale" : "2x"
     },
-    { 
+    {
       "extent" : "full-screen",
       "idiom" : "iphone",
       "subtype" : "retina4",
