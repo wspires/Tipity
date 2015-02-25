@@ -1018,6 +1018,24 @@
 		18A9C5E019CC89AC00789D2E /* percent@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "percent@3x.png"; sourceTree = "<group>"; };
 		18A9C62819CC97BF00789D2E /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		18AAA7891A24DACD009547D9 /* Tipity WatchKit Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Tipity WatchKit Extension.entitlements"; sourceTree = "<group>"; };
+		18AE4EC41A9E367F00A62A08 /* Large App Icon - Apple Watch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Large App Icon - Apple Watch.png"; path = "App Store/Large App Icon - Apple Watch.png"; sourceTree = SOURCE_ROOT; };
+		18AE4EC51A9E36A200A62A08 /* AppIcon_36x36.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon_36x36.png; sourceTree = "<group>"; };
+		18AE4EC61A9E36A200A62A08 /* AppIcon_44x44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon_44x44.png; sourceTree = "<group>"; };
+		18AE4EC71A9E36A200A62A08 /* AppIcon_60x60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon_60x60.png; sourceTree = "<group>"; };
+		18AE4EC81A9E36A200A62A08 /* AppIcon_88x88.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon_88x88.png; sourceTree = "<group>"; };
+		18AE4EC91A9E36A200A62A08 /* AppIcon_172x172.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon_172x172.png; sourceTree = "<group>"; };
+		18AE4ECA1A9E36A200A62A08 /* AppIcon_196x196.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon_196x196.png; sourceTree = "<group>"; };
+		18AE4ECB1A9E36A200A62A08 /* AppIconWatch_29x29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIconWatch_29x29.png; sourceTree = "<group>"; };
+		18AE4ECC1A9E36A200A62A08 /* AppIconWatch_36x36.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIconWatch_36x36.png; sourceTree = "<group>"; };
+		18AE4ECD1A9E36A200A62A08 /* AppIconWatch_48x48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIconWatch_48x48.png; sourceTree = "<group>"; };
+		18AE4ECE1A9E36A200A62A08 /* AppIconWatch_55x55.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIconWatch_55x55.png; sourceTree = "<group>"; };
+		18AE4ECF1A9E36A200A62A08 /* AppIconWatch_58x58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIconWatch_58x58.png; sourceTree = "<group>"; };
+		18AE4ED01A9E36A200A62A08 /* AppIconWatch_80x80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIconWatch_80x80.png; sourceTree = "<group>"; };
+		18AE4ED11A9E36A200A62A08 /* AppIconWatch_87x87.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIconWatch_87x87.png; sourceTree = "<group>"; };
+		18AE4ED21A9E36A200A62A08 /* AppIconWatch_88x88.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIconWatch_88x88.png; sourceTree = "<group>"; };
+		18AE4ED31A9E36A200A62A08 /* AppIconWatch_172x172.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIconWatch_172x172.png; sourceTree = "<group>"; };
+		18AE4ED41A9E36A200A62A08 /* AppIconWatch_196x196.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIconWatch_196x196.png; sourceTree = "<group>"; };
+		18AE4ED51A9E36A200A62A08 /* make_watch_app_icons.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = make_watch_app_icons.sh; sourceTree = "<group>"; };
 		18C5AE821A0B34370093D952 /* 746-plus-circle-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "746-plus-circle-selected.png"; sourceTree = "<group>"; };
 		18C5AE831A0B34370093D952 /* 746-plus-circle-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "746-plus-circle-selected@2x.png"; sourceTree = "<group>"; };
 		18C5AE841A0B34370093D952 /* 746-plus-circle-selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "746-plus-circle-selected@3x.png"; sourceTree = "<group>"; };
@@ -1216,6 +1234,7 @@
 			children = (
 				1809756019BE5FF40039F654 /* Large App Icon.png */,
 				1809756119BE5FF40039F654 /* Large App Icon.pxm */,
+				18AE4EC41A9E367F00A62A08 /* Large App Icon - Apple Watch.png */,
 			);
 			path = "App Icon";
 			sourceTree = "<group>";
@@ -1223,7 +1242,14 @@
 		1809756219BE5FF40039F654 /* App Icons */ = {
 			isa = PBXGroup;
 			children = (
+				1809757019BE5FF40039F654 /* make_app_icons.sh */,
 				184914AA19BFA507003D9B1F /* AppIcon_180x180.png */,
+				18AE4EC51A9E36A200A62A08 /* AppIcon_36x36.png */,
+				18AE4EC61A9E36A200A62A08 /* AppIcon_44x44.png */,
+				18AE4EC71A9E36A200A62A08 /* AppIcon_60x60.png */,
+				18AE4EC81A9E36A200A62A08 /* AppIcon_88x88.png */,
+				18AE4EC91A9E36A200A62A08 /* AppIcon_172x172.png */,
+				18AE4ECA1A9E36A200A62A08 /* AppIcon_196x196.png */,
 				1809756319BE5FF40039F654 /* AppIcon_100x100.png */,
 				1809756419BE5FF40039F654 /* AppIcon_114x114.png */,
 				1809756519BE5FF40039F654 /* AppIcon_120x120.png */,
@@ -1237,7 +1263,17 @@
 				1809756D19BE5FF40039F654 /* AppIcon_72x72.png */,
 				1809756E19BE5FF40039F654 /* AppIcon_76x76.png */,
 				1809756F19BE5FF40039F654 /* AppIcon_80x80.png */,
-				1809757019BE5FF40039F654 /* make_app_icons.sh */,
+				18AE4ED51A9E36A200A62A08 /* make_watch_app_icons.sh */,
+				18AE4ECB1A9E36A200A62A08 /* AppIconWatch_29x29.png */,
+				18AE4ECC1A9E36A200A62A08 /* AppIconWatch_36x36.png */,
+				18AE4ECD1A9E36A200A62A08 /* AppIconWatch_48x48.png */,
+				18AE4ECE1A9E36A200A62A08 /* AppIconWatch_55x55.png */,
+				18AE4ECF1A9E36A200A62A08 /* AppIconWatch_58x58.png */,
+				18AE4ED01A9E36A200A62A08 /* AppIconWatch_80x80.png */,
+				18AE4ED11A9E36A200A62A08 /* AppIconWatch_87x87.png */,
+				18AE4ED21A9E36A200A62A08 /* AppIconWatch_88x88.png */,
+				18AE4ED31A9E36A200A62A08 /* AppIconWatch_172x172.png */,
+				18AE4ED41A9E36A200A62A08 /* AppIconWatch_196x196.png */,
 			);
 			path = "App Icons";
 			sourceTree = "<group>";
