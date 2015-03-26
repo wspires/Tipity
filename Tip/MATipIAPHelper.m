@@ -16,7 +16,7 @@
 
 // Uncomment to unlock all IAP.
 // Comment before deploying or else all IAP will be unlocked for free!
-//#define UNLOCK_ALL_IAP
+#define UNLOCK_ALL_IAP
 
 static NSUInteger const ProductCountThreshold = 3;
 

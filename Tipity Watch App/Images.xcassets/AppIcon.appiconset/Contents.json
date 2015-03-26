@@ -67,7 +67,7 @@
       "idiom" : "watch",
       "scale" : "2x",
       "filename" : "AppIcon_88x88.png",
-      "role" : "appLauncher",
+      "role" : "longLook",
       "subtype" : "42mm"
     },
     {

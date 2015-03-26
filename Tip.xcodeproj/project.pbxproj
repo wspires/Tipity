@@ -928,6 +928,9 @@
 		1893F07619C2B4BB00F1485A /* govt_bldg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "govt_bldg@2x.png"; sourceTree = "<group>"; };
 		1893F07919C339BF00F1485A /* 724-no-ad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "724-no-ad.png"; sourceTree = "<group>"; };
 		1893F07A19C339BF00F1485A /* 724-no-ad@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "724-no-ad@2x.png"; sourceTree = "<group>"; };
+		1895C07C1AC4B74C008DC86C /* 1 - Basic Amount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1 - Basic Amount.png"; sourceTree = "<group>"; };
+		1895C07D1AC4B74C008DC86C /* 2 - Edited Amount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2 - Edited Amount.png"; sourceTree = "<group>"; };
+		1895C07E1AC4B74C008DC86C /* 3 - Menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3 - Menu.png"; sourceTree = "<group>"; };
 		18A9C57719CB846300789D2E /* 1 - Basic - Screentaker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1 - Basic - Screentaker.png"; sourceTree = "<group>"; };
 		18A9C57819CB846300789D2E /* 1 - Basic - Simulator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1 - Basic - Simulator.png"; sourceTree = "<group>"; };
 		18A9C57919CB846300789D2E /* 1 - Basic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1 - Basic.png"; sourceTree = "<group>"; };
@@ -1306,6 +1309,7 @@
 			isa = PBXGroup;
 			children = (
 				1803AC5719C73840006C7EFF /* IAP.png */,
+				1895C07B1AC4B74C008DC86C /* 312x390 */,
 				1809759619BE5FF40039F654 /* 640x1096 */,
 				180975A719BE5FF40039F654 /* 640x920 */,
 				18A9C58B19CB925B00789D2E /* 750x1334 */,
@@ -2450,6 +2454,16 @@
 				185B5DE31A0C1A8100BB193F /* TipExt.entitlements */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		1895C07B1AC4B74C008DC86C /* 312x390 */ = {
+			isa = PBXGroup;
+			children = (
+				1895C07C1AC4B74C008DC86C /* 1 - Basic Amount.png */,
+				1895C07D1AC4B74C008DC86C /* 2 - Edited Amount.png */,
+				1895C07E1AC4B74C008DC86C /* 3 - Menu.png */,
+			);
+			path = 312x390;
 			sourceTree = "<group>";
 		};
 		18A9C58B19CB925B00789D2E /* 750x1334 */ = {
