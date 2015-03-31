@@ -1,4 +1,10 @@
-1.6
+1.9
+• Bug fixes.
+
+1.8
+• Oops, added version 1.9 and accidently skipped 1.8!
+
+1.7
 Tip with the Apple Watch!
 • Enter your bill on the Apple Watch to see the tip and total amounts.
 • Force Touch the Apple Watch screen to select the service rating for different tip amounts.
