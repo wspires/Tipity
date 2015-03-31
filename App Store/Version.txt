@@ -1,3 +1,8 @@
+1.6
+Tip with the Apple Watch!
+• Enter your bill on the Apple Watch to see the tip and total amounts.
+• Force Touch the Apple Watch screen to select the service rating for different tip amounts.
+
 1.5
 • Added Today extension widget for quick tip calculation from the Today view on Notification Center. To add the Tipity widget, swipe down from the top of the screen to open Notification Center, tap or swipe to the Today view, tap Edit at the bottom of the Today view, and finally tap the + beside Tipity. Today view widgets are only available on iOS 8.
 

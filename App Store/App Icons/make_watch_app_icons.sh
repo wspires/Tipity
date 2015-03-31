@@ -24,16 +24,20 @@ function resize_img
   convert -resize ${resize_opt} "$img" "$out_img"
 }
 
-# Apple Watch
-resize_img 29
-resize_img 36
-resize_img 58
-resize_img 87
+# Notification Center
+resize_img 48
+resize_img 55
+
+# Home Screen
 resize_img 80
+
+# Long Look
 resize_img 88
+
+# Short Look
 resize_img 172
 resize_img 196
 
-# Notifications
-resize_img 48
-resize_img 55
+# Companion App (maybe use regular large app icon?)
+resize_img 58
+resize_img 87
