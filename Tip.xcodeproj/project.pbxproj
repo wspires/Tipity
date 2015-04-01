@@ -900,6 +900,9 @@
 		1856CB8E1A15654C00A1CF84 /* 5 - Today View.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "5 - Today View.pxm"; sourceTree = "<group>"; };
 		185B5DE31A0C1A8100BB193F /* TipExt.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = TipExt.entitlements; sourceTree = "<group>"; };
 		185B5DE41A0C1A9000BB193F /* Tip.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Tip.entitlements; sourceTree = "<group>"; };
+		185EA6221ACB8CA30030D5F6 /* 1 - Basic Amount.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "1 - Basic Amount.pxm"; sourceTree = "<group>"; };
+		185EA6231ACB8CA30030D5F6 /* 2 - Edited Amount.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2 - Edited Amount.pxm"; sourceTree = "<group>"; };
+		185EA6241ACB8CA30030D5F6 /* 3 - Menu.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "3 - Menu.pxm"; sourceTree = "<group>"; };
 		18698A2719C29CB2005F2E32 /* 702-share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "702-share.png"; sourceTree = "<group>"; };
 		18698A2819C29CB2005F2E32 /* 702-share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "702-share@2x.png"; sourceTree = "<group>"; };
 		18698A2919C29CB2005F2E32 /* 712-reply.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "712-reply.png"; sourceTree = "<group>"; };
@@ -2460,8 +2463,11 @@
 			isa = PBXGroup;
 			children = (
 				1895C07C1AC4B74C008DC86C /* 1 - Basic Amount.png */,
+				185EA6221ACB8CA30030D5F6 /* 1 - Basic Amount.pxm */,
 				1895C07D1AC4B74C008DC86C /* 2 - Edited Amount.png */,
+				185EA6231ACB8CA30030D5F6 /* 2 - Edited Amount.pxm */,
 				1895C07E1AC4B74C008DC86C /* 3 - Menu.png */,
+				185EA6241ACB8CA30030D5F6 /* 3 - Menu.pxm */,
 			);
 			path = 312x390;
 			sourceTree = "<group>";
