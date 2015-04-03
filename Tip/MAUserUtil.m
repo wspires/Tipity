@@ -8,7 +8,7 @@
 
 #import "MAUserUtil.h"
 
-#import "MAAppGroup.h"
+#import "MAAppGroupNotifier.h"
 #import "MADateUtil.h"
 #import "MAFilePaths.h"
 #import "MAUtil.h"
@@ -61,12 +61,53 @@ static NSString *PerExerciseSettings = @"perExerciseSettings";
 
 + (MAUserUtil *)sharedInstance
 {
+    return [MAUserUtil reloadSharedInstance:NO];
+}
++ (MAUserUtil *)reloadSharedInstance:(BOOL)reload
+{
     static dispatch_once_t once;
     static MAUserUtil * sharedInstance;
     dispatch_once(&once, ^{
-        sharedInstance = [[self alloc] init];
+        sharedInstance = [MAUserUtil loadSharedInstance];
     });
+    
+    if (reload)
+    {
+        sharedInstance = [MAUserUtil loadSharedInstance];
+    }
+    
     return sharedInstance;
+}
+
++ (NSString *)sharedContainerKey
+{
+    return @"userUtil";
+}
++ (MAUserUtil *)loadSharedInstance
+{
+    MAUserUtil *object = (MAUserUtil *)[MAAppGroupNotifier loadObjectForKey:[MAUserUtil sharedContainerKey]];
+    if ( ! object)
+    {
+        object = [[MAUserUtil alloc] init];
+    }
+    return object;
+}
++ (BOOL)saveSharedInstance
+{
+    return [MAUserUtil saveSharedInstanceAndPostNotification:YES];
+}
++ (BOOL)saveSharedInstanceAndPostNotification:(BOOL)postNotification
+{
+    MAUserUtil *object = [MAUserUtil sharedInstance];
+    NSString *key = [MAUserUtil sharedContainerKey];
+    BOOL const saved = [MAAppGroupNotifier saveObject:object key:key];
+    
+    if (saved && postNotification)
+    {
+        [MAAppGroupNotifier postNotificationForKey:key];
+    }
+    
+    return saved;
 }
 
 - (id)init
@@ -76,7 +117,7 @@ static NSString *PerExerciseSettings = @"perExerciseSettings";
     {
         // Custom initialization
         _user = [[MAUserUtil currentUser] copy];
-        [self loadSettings];
+        _settings = [self loadSettings];
     }
     return self;
 }
@@ -145,28 +186,9 @@ static NSString *PerExerciseSettings = @"perExerciseSettings";
 
 - (BOOL)saveSettings
 {
-    [self saveSettingsToSharedDefaults];
+    [MAUserUtil saveSharedInstance];
     NSString *path = [MAUserUtil settingsFilePath];
     return [_settings writeToFile:path atomically:YES];
-}
-
-- (BOOL)saveSettingsToSharedDefaults
-{
-    NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:AppGroup];
-    [sharedDefaults setObject:_settings forKey:@"settings"];
-    BOOL saved = [sharedDefaults synchronize];
-    if ( ! saved)
-    {
-        TLog(@"Failed to save settings to sharedDefaults");
-    }
-    return saved;
-}
-
-+ (NSDictionary *)loadSettingsFromSharedDefaults
-{
-    NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:AppGroup];
-    NSDictionary *settings = [sharedDefaults dictionaryForKey:@"settings"];
-    return settings;
 }
 
 - (NSDictionary *)saveSetting:(id)setting forKey:(NSString *)key
@@ -945,6 +967,86 @@ static NSString *PerExerciseSettings = @"perExerciseSettings";
 {
     NSString *customBackgroundImageFilePath = [MAUserUtil customBackgroundImageFilePath];
     [MAFilePaths saveImage:image withFilePath:customBackgroundImageFilePath];
+}
+
+#pragma mark isEqual
+
+- (BOOL)isEqual:(id)other
+{
+    if (other == self)
+    {
+        return YES;
+    }
+    if ( ! other || ! [other isKindOfClass:[self class]])
+    {
+        return NO;
+    }
+    return [self isEqualToUserUtil:other];
+}
+
+- (BOOL)isEqualToUserUtil:(MAUserUtil *)aUserUtil
+{
+    if (self == aUserUtil)
+    {
+        return YES;
+    }
+    
+    if ( ! [self.user isEqual:aUserUtil.user])
+    {
+        return NO;
+    }
+
+    if ( ! [self.settings isEqual:aUserUtil.settings])
+    {
+        return NO;
+    }
+    
+    return YES;
+}
+
+- (NSUInteger)hash
+{
+    return [self.user hash]
+    ^ [self.settings hash]
+    ;
+}
+
+#pragma mark NSCopying
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    MAUserUtil *copy = [[[self class] allocWithZone:zone] init];
+    copy.user = [self.user copy];
+    copy.settings = [self.settings copy];
+    return copy;
+}
+
+#pragma mark NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    [aCoder encodeObject:self.user forKey:@"user"];
+    [aCoder encodeObject:self.settings forKey:@"settings"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super init];
+    if (self)
+    {
+        _user = [aDecoder decodeObjectForKey:@"user"];
+        if ( ! _user)
+        {
+            _user = DefaultUserName;
+        }
+        
+        _settings = [aDecoder decodeObjectForKey:@"settings"];
+        if ( ! _settings)
+        {
+            _settings = [self loadSettings];
+        }
+    }
+    return self;
 }
 
 @end

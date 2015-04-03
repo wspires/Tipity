@@ -21,8 +21,6 @@
 @interface TodayViewController () <NCWidgetProviding, MABillDelegate>
 @property (strong, nonatomic) MABill *bill;
 
-@property (strong, nonatomic) NSDictionary *settings;
-
 @property (strong, nonatomic) IBOutlet UIButton *billButton;
 @property (strong, nonatomic) IBOutlet UIButton *tipButton;
 @property (strong, nonatomic) IBOutlet UIButton *grandTotalButton;
@@ -41,7 +39,6 @@
 
 @implementation TodayViewController
 @synthesize bill = _bill;
-@synthesize settings = _settings;
 
 @synthesize billButton = _billButton;
 @synthesize tipButton = _tipButton;
@@ -54,8 +51,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.settings = [MAUserUtil loadSettingsFromSharedDefaults];
-    [MAUserUtil sharedInstance].settings = [self.settings copy];
+    [MAUserUtil reloadSharedInstance:YES];
     [MAAppearance reloadAppearanceSettings];
     
     [self setImage:[MAFilePaths billImage] forButton:self.billButton];
@@ -235,17 +231,17 @@
     NSString *rating = nil;
     if (currentRatingButton == self.ratingButton1)
     {
-        rating = [self.settings objectForKey:ServiceRatingFair];
+        rating = [[MAUserUtil sharedInstance] objectForKey:ServiceRatingFair];
         number = [NSNumber numberWithDouble:10.];
     }
     else if (currentRatingButton == self.ratingButton2)
     {
-        rating = [self.settings objectForKey:ServiceRatingGood];
+        rating = [[MAUserUtil sharedInstance] objectForKey:ServiceRatingGood];
         number = [NSNumber numberWithDouble:15.];
     }
     else if (currentRatingButton == self.ratingButton3)
     {
-        rating = [self.settings objectForKey:ServiceRatingGreat];
+        rating = [[MAUserUtil sharedInstance] objectForKey:ServiceRatingGreat];
         number = [NSNumber numberWithDouble:20.];
     }
     

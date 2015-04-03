@@ -8,7 +8,7 @@
 
 #import "MABill.h"
 
-#import "MAAppGroup.h"
+#import "MAAppGroupNotifier.h"
 
 static double const DefaultBill = 100.;
 static double const DefaultTipPercent = 20.;
@@ -39,7 +39,6 @@ static double const DefaultSplitTotal = 120.;
 {
     return [MABill reloadSharedInstance:NO];
 }
-
 + (MABill *)reloadSharedInstance:(BOOL)reload
 {
     static dispatch_once_t once;
@@ -56,28 +55,34 @@ static double const DefaultSplitTotal = 120.;
     return sharedInstance;
 }
 
++ (NSString *)sharedContainerKey
+{
+    return @"bill";
+}
 + (MABill *)loadSharedInstance
 {
-    MABill *bill = nil;
-    NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:AppGroup];
-    NSData *encodedBill = [defaults objectForKey:@"bill"];
-    if (encodedBill)
+    MABill *object = (MABill *)[MAAppGroupNotifier loadObjectForKey:[MABill sharedContainerKey]];
+    if ( ! object)
     {
-        bill = [NSKeyedUnarchiver unarchiveObjectWithData:encodedBill];
+        object = [[MABill alloc] init];
     }
-    else // First run.
-    {
-        bill = [[MABill alloc] init];
-    }
-    return bill;
+    return object;
 }
-
 + (BOOL)saveSharedInstance
 {
-    NSData *encodedBill = [NSKeyedArchiver archivedDataWithRootObject:[MABill sharedInstance]];
-    NSUserDefaults *defaults = [[NSUserDefaults alloc] initWithSuiteName:AppGroup];
-    [defaults setObject:encodedBill forKey:@"bill"];
-    BOOL saved = [defaults synchronize];
+    return [MABill saveSharedInstanceAndPostNotification:YES];
+}
++ (BOOL)saveSharedInstanceAndPostNotification:(BOOL)postNotification
+{
+    MABill *object = [MABill sharedInstance];
+    NSString *key = [MABill sharedContainerKey];
+    BOOL const saved = [MAAppGroupNotifier saveObject:object key:key];
+    
+    if (saved && postNotification)
+    {
+        [MAAppGroupNotifier postNotificationForKey:key];
+    }
+    
     return saved;
 }
 

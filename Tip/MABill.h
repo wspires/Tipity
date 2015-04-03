@@ -49,6 +49,7 @@
 + (MABill *)reloadSharedInstance:(BOOL)reload;
 + (MABill *)loadSharedInstance;
 + (BOOL)saveSharedInstance;
++ (NSString *)sharedContainerKey;
 
 - (instancetype)init;
 - (instancetype)initWithBill:(NSNumber *)bill;

@@ -9,7 +9,7 @@
 #import "InterfaceController.h"
 
 #import "MAAppearance.h"
-#import "MASharedDataChangedNotifier.h"
+#import "MAAppGroupNotifier.h"
 #import "MAAppGroup.h"
 #import "MABill.h"
 //#import "MAFilePaths.h"
@@ -61,7 +61,6 @@ static CGFloat const DollarSliderMax = 200.;
 
 @implementation InterfaceController
 @synthesize bill = _bill;
-@synthesize settings = _settings;
 
 @synthesize hundredsButton = _hundredsButton;
 @synthesize hundredsNumber = _hundredsNumber;
@@ -95,8 +94,7 @@ static CGFloat const DollarSliderMax = 200.;
         // Configure interface objects here.
         NSLog(@"%@ initWithContext", self);
         
-        self.settings = [MAUserUtil loadSettingsFromSharedDefaults];
-        [MAUserUtil sharedInstance].settings = [self.settings copy];
+        [self loadSettings];
         [MAAppearance reloadAppearanceSettings];
         
 //        [self setImage:[MAFilePaths billImage] forButton:self.billButton];
@@ -118,25 +116,9 @@ static CGFloat const DollarSliderMax = 200.;
 //        [self setCurrentRatingButton:self.ratingButton3];
         
         
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userDefaultsChanged:) name:NSUserDefaultsDidChangeNotification object:nil];
-        
         [self registerForSharedDataChangedNotifications];
     }
     return self;
-}
-
--(void)userDefaultsChanged:(NSNotification *)notification
-{
-    NSLog(@"userDefaultsChanged");
-    return;
-    
-    MABill *bill = [MABill reloadSharedInstance:YES];
-    if ( ! [bill isEqual:self.bill])
-    {
-        NSLog(@"Bill changed");
-        self.bill = [MABill sharedInstance];
-    }
-    bill.delegate = self;
 }
 
 - (void)willActivate
@@ -184,7 +166,7 @@ static CGFloat const DollarSliderMax = 200.;
 
 - (void)loadBill
 {
-    self.bill = [MABill sharedInstance];
+    self.bill = [MABill reloadSharedInstance:YES];
     self.bill.delegate = self;
     
     if ( ! [[MAUserUtil sharedInstance] enableTax])
@@ -200,7 +182,7 @@ static CGFloat const DollarSliderMax = 200.;
     {
         NSLog(@"Failed to save bill");
     }
-    [MASharedDataChangedNotifier postNotification];
+    [MAAppGroupNotifier postNotificationForKey:@"bill"];
 }
 
 - (void)updateLabels
@@ -360,17 +342,17 @@ static CGFloat const DollarSliderMax = 200.;
 
 - (void)registerForSharedDataChangedNotifications
 {
-    [[MASharedDataChangedNotifier sharedInstance] registerForSharedDataChangedNotifications];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sharedDataChanged:) name:MASharedDataChangedNotification object:nil];
+    [[MAAppGroupNotifier sharedInstance] addObserver:self selector:@selector(billChanged:) key:[MABill sharedContainerKey]];
+    [[MAAppGroupNotifier sharedInstance] addObserver:self selector:@selector(settingsChanged:) key:[MAUserUtil sharedContainerKey]];
 }
 
 - (void)unregisterForSharedDataChangedNotifications
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:MASharedDataChangedNotification object:nil];
+    [[MAAppGroupNotifier sharedInstance] removeObserver:self key:[MABill sharedContainerKey]];
+    [[MAAppGroupNotifier sharedInstance] removeObserver:self key:[MAUserUtil sharedContainerKey]];
 }
 
-- (void)sharedDataChanged:(NSNotification *)notification
+- (void)billChanged:(NSNotification *)notification
 {
     self.bill = [MABill reloadSharedInstance:YES];
     self.bill.delegate = self;
@@ -378,6 +360,16 @@ static CGFloat const DollarSliderMax = 200.;
     [self setDigitButtonsWithBill];
     [self setupSliders];
     [self updateLabels];
+}
+
+- (void)settingsChanged:(NSNotification *)settingsChanged
+{
+    [self loadSettings];
+}
+
+- (void)loadSettings
+{
+    [MAUserUtil reloadSharedInstance:YES];
 }
 
 #pragma mark - Bill digit buttons

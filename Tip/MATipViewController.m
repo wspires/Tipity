@@ -10,7 +10,7 @@
 
 #import "MAAppDelegate.h"
 #import "MAAppGroup.h"
-#import "MASharedDataChangedNotifier.h"
+#import "MAAppGroupNotifier.h"
 #import "MAAppearance.h"
 #import "MABill.h"
 #import "MAFilePaths.h"
@@ -234,14 +234,10 @@ DECL_TABLE_IDX(TAX_SECTION_ROWS, 2);
     self.bill.delegate = self;
 }
 
-- (void)saveBill
+- (BOOL)saveBill
 {
-    BOOL saved = [MABill saveSharedInstance];
-    if ( ! saved)
-    {
-        TLog(@"Failed to save bill");
-    }
-    [MASharedDataChangedNotifier postNotification];
+    BOOL const saved = [MABill saveSharedInstance];
+    return saved;
 }
 
 // Update the number and position of the table sections.
@@ -1210,17 +1206,15 @@ DECL_TABLE_IDX(TAX_SECTION_ROWS, 2);
 
 - (void)registerForSharedDataChangedNotifications
 {
-    [[MASharedDataChangedNotifier sharedInstance] registerForSharedDataChangedNotifications];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sharedDataChanged:) name:MASharedDataChangedNotification object:nil];
+    [[MAAppGroupNotifier sharedInstance] addObserver:self selector:@selector(billChanged:) key:[MABill sharedContainerKey]];
 }
 
 - (void)unregisterForSharedDataChangedNotifications
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:MASharedDataChangedNotification object:nil];
+    [[MAAppGroupNotifier sharedInstance] removeObserver:self key:[MABill sharedContainerKey]];
 }
 
-- (void)sharedDataChanged:(NSNotification *)notification
+- (void)billChanged:(NSNotification *)notification
 {
     self.bill = [MABill reloadSharedInstance:YES];
     self.bill.delegate = self;

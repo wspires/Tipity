@@ -144,6 +144,9 @@
 		184CF4C619CD212D00A12628 /* pie_chart.png in Resources */ = {isa = PBXBuildFile; fileRef = 184CF4C319CD212D00A12628 /* pie_chart.png */; };
 		184CF4C719CD212D00A12628 /* pie_chart@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 184CF4C419CD212D00A12628 /* pie_chart@2x.png */; };
 		184CF4C819CD212D00A12628 /* pie_chart@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 184CF4C519CD212D00A12628 /* pie_chart@3x.png */; };
+		185EA62C1ACE49EF0030D5F6 /* MAAppGroupNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EA62B1ACE49EF0030D5F6 /* MAAppGroupNotifier.m */; };
+		185EA62D1ACE49EF0030D5F6 /* MAAppGroupNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EA62B1ACE49EF0030D5F6 /* MAAppGroupNotifier.m */; };
+		185EA62E1ACE49EF0030D5F6 /* MAAppGroupNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 185EA62B1ACE49EF0030D5F6 /* MAAppGroupNotifier.m */; };
 		18698A2F19C29CB2005F2E32 /* 702-share.png in Resources */ = {isa = PBXBuildFile; fileRef = 18698A2719C29CB2005F2E32 /* 702-share.png */; };
 		18698A3019C29CB2005F2E32 /* 702-share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18698A2819C29CB2005F2E32 /* 702-share@2x.png */; };
 		18698A3119C29CB2005F2E32 /* 712-reply.png in Resources */ = {isa = PBXBuildFile; fileRef = 18698A2919C29CB2005F2E32 /* 712-reply.png */; };
@@ -211,9 +214,6 @@
 		18A9C5F119CC89AC00789D2E /* 952-shopping-cart@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A9C5DF19CC89AC00789D2E /* 952-shopping-cart@3x.png */; };
 		18A9C5F219CC89AC00789D2E /* percent@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18A9C5E019CC89AC00789D2E /* percent@3x.png */; };
 		18A9C62919CC97BF00789D2E /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A9C62819CC97BF00789D2E /* Launch Screen.xib */; };
-		18F0FEDF1A29148F006EDAE5 /* MASharedDataChangedNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F0FEDE1A29148F006EDAE5 /* MASharedDataChangedNotifier.m */; };
-		18F0FEE01A29148F006EDAE5 /* MASharedDataChangedNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F0FEDE1A29148F006EDAE5 /* MASharedDataChangedNotifier.m */; };
-		18F0FEE11A29148F006EDAE5 /* MASharedDataChangedNotifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F0FEDE1A29148F006EDAE5 /* MASharedDataChangedNotifier.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -903,6 +903,8 @@
 		185EA6221ACB8CA30030D5F6 /* 1 - Basic Amount.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "1 - Basic Amount.pxm"; sourceTree = "<group>"; };
 		185EA6231ACB8CA30030D5F6 /* 2 - Edited Amount.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "2 - Edited Amount.pxm"; sourceTree = "<group>"; };
 		185EA6241ACB8CA30030D5F6 /* 3 - Menu.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "3 - Menu.pxm"; sourceTree = "<group>"; };
+		185EA62A1ACE49EF0030D5F6 /* MAAppGroupNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAAppGroupNotifier.h; sourceTree = "<group>"; };
+		185EA62B1ACE49EF0030D5F6 /* MAAppGroupNotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAAppGroupNotifier.m; sourceTree = "<group>"; };
 		18698A2719C29CB2005F2E32 /* 702-share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "702-share.png"; sourceTree = "<group>"; };
 		18698A2819C29CB2005F2E32 /* 702-share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "702-share@2x.png"; sourceTree = "<group>"; };
 		18698A2919C29CB2005F2E32 /* 712-reply.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "712-reply.png"; sourceTree = "<group>"; };
@@ -1048,8 +1050,6 @@
 		18C5AE881A0B36DC0093D952 /* 746-minus-circle-selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "746-minus-circle-selected.png"; sourceTree = "<group>"; };
 		18C5AE891A0B36DC0093D952 /* 746-minus-circle-selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "746-minus-circle-selected@2x.png"; sourceTree = "<group>"; };
 		18C5AE8A1A0B36DC0093D952 /* 746-minus-circle-selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "746-minus-circle-selected@3x.png"; sourceTree = "<group>"; };
-		18F0FEDD1A29148F006EDAE5 /* MASharedDataChangedNotifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASharedDataChangedNotifier.h; sourceTree = "<group>"; };
-		18F0FEDE1A29148F006EDAE5 /* MASharedDataChangedNotifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASharedDataChangedNotifier.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1556,8 +1556,8 @@
 				1809764119BE61D20039F654 /* MAFilePaths.h */,
 				1809764219BE61D20039F654 /* MAFilePaths.m */,
 				1836BAC11A1D2EE400A05C0F /* MAAppGroup.h */,
-				18F0FEDD1A29148F006EDAE5 /* MASharedDataChangedNotifier.h */,
-				18F0FEDE1A29148F006EDAE5 /* MASharedDataChangedNotifier.m */,
+				185EA62A1ACE49EF0030D5F6 /* MAAppGroupNotifier.h */,
+				185EA62B1ACE49EF0030D5F6 /* MAAppGroupNotifier.m */,
 				189389521A087286006142DE /* MAImageCache.h */,
 				189389531A087286006142DE /* MAImageCache.m */,
 				1809764319BE61D20039F654 /* MAUserUtil.h */,
@@ -2906,7 +2906,7 @@
 				1836BACC1A1D30EB00A05C0F /* MAFilePaths.m in Sources */,
 				1836BACB1A1D30D700A05C0F /* MAAppearance.m in Sources */,
 				1836BACA1A1D30C700A05C0F /* MAUtil.m in Sources */,
-				18F0FEE11A29148F006EDAE5 /* MASharedDataChangedNotifier.m in Sources */,
+				185EA62E1ACE49EF0030D5F6 /* MAAppGroupNotifier.m in Sources */,
 				1836BAC91A1D30B500A05C0F /* MAColorUtil.m in Sources */,
 				1836BAC81A1D30A000A05C0F /* MADateUtil.m in Sources */,
 				1836BAC71A1D308A00A05C0F /* UIColor+ExtraColors.m in Sources */,
@@ -2954,7 +2954,7 @@
 				1809753E19BE5ED60039F654 /* MAAppDelegate.m in Sources */,
 				1809764F19BE61D20039F654 /* MAViewUtil.m in Sources */,
 				1809763519BE61120039F654 /* FDTakeController.m in Sources */,
-				18F0FEDF1A29148F006EDAE5 /* MASharedDataChangedNotifier.m in Sources */,
+				185EA62C1ACE49EF0030D5F6 /* MAAppGroupNotifier.m in Sources */,
 				1809768819BE70A70039F654 /* MATipViewController.m in Sources */,
 				1809764E19BE61D20039F654 /* MAUtil.m in Sources */,
 				1809765C19BE61FA0039F654 /* UIColor+ExtraColors.m in Sources */,
@@ -2979,7 +2979,7 @@
 				189389671A0ABE8A006142DE /* UIImage+Extensions.m in Sources */,
 				189389681A0ABE8A006142DE /* UIImage+Gradient.m in Sources */,
 				189389691A0ABE8A006142DE /* UIImage+ImageWithColor.m in Sources */,
-				18F0FEE01A29148F006EDAE5 /* MASharedDataChangedNotifier.m in Sources */,
+				185EA62D1ACE49EF0030D5F6 /* MAAppGroupNotifier.m in Sources */,
 				189389661A0ABE59006142DE /* UIColor+ExtraColors.m in Sources */,
 				1893895A1A0875CC006142DE /* MADateUtil.m in Sources */,
 				189389591A0875BC006142DE /* MAColorUtil.m in Sources */,

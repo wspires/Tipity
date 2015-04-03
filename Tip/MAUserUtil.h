@@ -35,20 +35,24 @@ static NSString *TableTextColor = @"tableTextColor";
 #define DarkColorString BlackColorString;
 
 @interface MAUserUtil : NSObject
+<NSCoding, NSCopying>
 
 @property (copy, nonatomic) NSString *user;
 @property (strong, nonatomic) NSDictionary *settings;
 
 // Shared instance to easily share the same settings object.
 + (MAUserUtil *)sharedInstance;
++ (MAUserUtil *)reloadSharedInstance:(BOOL)reload;
++ (NSString *)sharedContainerKey;
++ (MAUserUtil *)loadSharedInstance;
++ (BOOL)saveSharedInstance;
++ (BOOL)saveSharedInstanceAndPostNotification:(BOOL)postNotification;
 
 - (id)init;
 - (NSDictionary *)loadSettings;
 - (id)objectForKey:(NSString *)key;
 - (BOOL)saveSettings;
 - (NSDictionary *)saveSetting:(id)setting forKey:(NSString *)key;
-
-+ (NSDictionary *)loadSettingsFromSharedDefaults;
 
 #pragma mark BOOL settings
 - (BOOL)enableSplit;

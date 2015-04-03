@@ -54,6 +54,9 @@
     DLog(@"Initial user: '%@'", currentUser);
     [MAUserUtil switchToUser:currentUser];
 
+    // Accessing the shared instance will cause the settings to be loaded, which is needed for the Watch app in case the host app has not been loaded yet since this still gets called.
+    [[MAUserUtil sharedInstance] loadSettings];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.rootController = [self setupTabBarController];
     [self.window setRootViewController:self.rootController];
