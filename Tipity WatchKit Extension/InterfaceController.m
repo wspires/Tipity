@@ -115,7 +115,6 @@ static CGFloat const DollarSliderMax = 200.;
         //[self.billImage setImageNamed:@"BillImage"];
 //        [self setCurrentRatingButton:self.ratingButton3];
         
-        
         [self registerForSharedDataChangedNotifications];
     }
     return self;
