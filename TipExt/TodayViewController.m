@@ -98,7 +98,7 @@
     
     // Increase the today widget view's height.
     // Use 0 for the width; otherwise, the view resizes strangely when a button is first tapped.
-    self.preferredContentSize = CGSizeMake(0., 232.);
+    self.preferredContentSize = CGSizeMake(0., 176.);
 }
 
 - (void)loadSettings
