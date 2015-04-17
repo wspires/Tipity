@@ -21,6 +21,13 @@
 
 #define TLog( s, ... ) NSLog( @"<%p %@:(%d, %s) %@> %@", self, [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, __FUNCTION__, [NSThread currentThread], [NSString stringWithFormat:(s), ##__VA_ARGS__] )
 
+#define LOG NSLog( @"%s (%d)", __FUNCTION__, __LINE__ );
+#define LOG_BEGIN NSLog( @"%s (%d) - Begin", __FUNCTION__, __LINE__ );
+#define LOG_END NSLog( @"%s (%d) - End", __FUNCTION__, __LINE__ );
+#define LOG_I(i) NSLog( @"%s (%d) - %d", __FUNCTION__, __LINE__, (i) );
+#define LOG_O(o) NSLog( @"%s (%d) - %@", __FUNCTION__, __LINE__, (o) );
+#define LOG_S(s, ...) NSLog( @"%s (%d) - %@", __FUNCTION__, __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] );
+
 #define SFmt( s, ... ) [NSString stringWithFormat:(s), ##__VA_ARGS__]
 
 //#define Localize( s ) NSLocalizedStringFromTable((s), @"InfoPlist", nil)

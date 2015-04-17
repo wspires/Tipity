@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="6750" systemVersion="14C109" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6735"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="3737"/>
     </dependencies>
     <scenes>
@@ -74,23 +74,27 @@
                                 </group>
                             </items>
                         </group>
-                        <slider width="1" alignment="left" continuous="YES" value="0.5" steps="200" id="Csc-Oj-Nkj">
-                            <connections>
-                                <action selector="dollarSliderAction:" destination="AgC-eL-Hgc" id="OfE-Vz-mqy"/>
-                            </connections>
-                        </slider>
                         <group width="1" alignment="left" id="hmI-Y8-Z7X">
                             <items>
-                                <label alignment="left" text=" " id="YMg-Sk-uu1"/>
-                                <imageView alignment="left" image="BillImage" id="uss-0K-hNF"/>
-                                <label width="100" alignment="center" verticalAlignment="center" text="$9.99" textAlignment="center" id="i4f-M5-CiN"/>
+                                <separator alignment="left" id="m1W-yB-sEO">
+                                    <color key="color" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </separator>
+                                <imageView alignment="left" verticalAlignment="center" image="BillImage" id="uss-0K-hNF"/>
+                                <label alignment="left" verticalAlignment="center" text="Check" id="uH6-sS-bqO">
+                                    <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                </label>
+                                <button alignment="right" verticalAlignment="center" title="$9.99" id="1tj-pm-hX0">
+                                    <color key="backgroundColor" red="0.078431375319999996" green="0.49803924560000001" blue="0.82745105029999999" alpha="1" colorSpace="deviceRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                    <connections>
+                                        <action selector="billButtonTapped:" destination="AgC-eL-Hgc" id="11u-X3-cXA"/>
+                                    </connections>
+                                </button>
                             </items>
                         </group>
-                        <slider width="1" alignment="left" continuous="YES" value="0.5" maximum="0.98999999999999999" steps="100" id="8qo-Hx-lpR">
-                            <connections>
-                                <action selector="centSliderAction:" destination="AgC-eL-Hgc" id="462-5O-ow2"/>
-                            </connections>
-                        </slider>
+                        <separator alignment="left" id="Ya8-Yj-8mC">
+                            <color key="color" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </separator>
                         <group width="1" alignment="left" id="Hbv-uV-yVw">
                             <items>
                                 <imageView alignment="left" verticalAlignment="center" image="TipImage" id="1Tz-B5-P8K"/>
@@ -118,11 +122,10 @@
                         </button>
                     </items>
                     <connections>
+                        <outlet property="billButton" destination="1tj-pm-hX0" id="Of0-Dy-ZLp"/>
+                        <outlet property="billButtonGroup" destination="oSW-xB-fXh" id="diu-Yq-RwD"/>
                         <outlet property="billGroup" destination="hmI-Y8-Z7X" id="hIN-mQ-1kP"/>
                         <outlet property="billImage" destination="uss-0K-hNF" id="YoB-rr-fcj"/>
-                        <outlet property="billLabel" destination="i4f-M5-CiN" id="ZLx-MY-qU8"/>
-                        <outlet property="centSlider" destination="8qo-Hx-lpR" id="npS-jT-jUL"/>
-                        <outlet property="dollarSlider" destination="Csc-Oj-Nkj" id="yAq-VW-Sta"/>
                         <outlet property="grandTotalLabel" destination="bwE-nb-Zbb" id="NxZ-vg-k6b"/>
                         <outlet property="hundredsButton" destination="1Ct-nd-cug" id="5h6-rR-t93"/>
                         <outlet property="hundredthsButton" destination="UJV-G9-nHQ" id="F8m-eT-dX5"/>
@@ -137,6 +140,134 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="139" y="132.5"/>
+        </scene>
+        <!--MAKeyboardController-->
+        <scene sceneID="P9z-W5-MlZ">
+            <objects>
+                <controller identifier="MAKeyboardController" id="UKU-th-FM6" customClass="MAKeyboardController">
+                    <items>
+                        <group width="1" alignment="left" id="Upv-W2-sb6">
+                            <items>
+                                <label width="78" alignment="left" verticalAlignment="center" text="100 lb" textAlignment="center" id="XzW-hQ-EGc">
+                                    <variation key="device=watch38mm" width="68"/>
+                                </label>
+                                <button width="78" height="30" alignment="right" verticalAlignment="center" title="Done" id="V65-lt-Pnv">
+                                    <color key="backgroundColor" red="0.078431375319999996" green="0.49803924560000001" blue="0.82745105029999999" alpha="1" colorSpace="deviceRGB"/>
+                                    <variation key="device=watch38mm" width="68"/>
+                                    <connections>
+                                        <action selector="doneButtonTapped:" destination="UKU-th-FM6" id="CHR-1n-XWU"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" id="5ez-8S-Tdh">
+                            <items>
+                                <button width="44" height="30" alignment="left" title="1" id="GOd-Xj-R3m">
+                                    <color key="backgroundColor" red="0.078431375319999996" green="0.49803924560000001" blue="0.82745105029999999" alpha="1" colorSpace="deviceRGB"/>
+                                    <connections>
+                                        <action selector="oneButtonTapped:" destination="UKU-th-FM6" id="Q8x-Nd-FWE"/>
+                                    </connections>
+                                </button>
+                                <button width="44" height="30" alignment="center" title="2" id="rwo-oK-PI6">
+                                    <color key="backgroundColor" red="0.078431375319999996" green="0.49803924560000001" blue="0.82745105029999999" alpha="1" colorSpace="deviceRGB"/>
+                                    <connections>
+                                        <action selector="twoButtonTapped:" destination="UKU-th-FM6" id="VMe-5V-Pjg"/>
+                                    </connections>
+                                </button>
+                                <button width="44" height="30" alignment="right" title="3" id="f5d-EB-0p8">
+                                    <color key="backgroundColor" red="0.078431375319999996" green="0.49803924560000001" blue="0.82745105029999999" alpha="1" colorSpace="deviceRGB"/>
+                                    <connections>
+                                        <action selector="threeButtonTapped:" destination="UKU-th-FM6" id="mCZ-5B-K1b"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" id="Kki-Vv-ATI">
+                            <items>
+                                <button width="44" height="30" alignment="left" title="4" id="Fyt-Wa-PVb">
+                                    <color key="backgroundColor" red="0.078431375319999996" green="0.49803924560000001" blue="0.82745105029999999" alpha="1" colorSpace="deviceRGB"/>
+                                    <connections>
+                                        <action selector="fourButtonTapped:" destination="UKU-th-FM6" id="nWf-lF-41j"/>
+                                    </connections>
+                                </button>
+                                <button width="44" height="30" alignment="center" title="5" id="N3T-0T-8ZU">
+                                    <color key="backgroundColor" red="0.078431375319999996" green="0.49803924560000001" blue="0.82745105029999999" alpha="1" colorSpace="deviceRGB"/>
+                                    <connections>
+                                        <action selector="fiveButtonTapped:" destination="UKU-th-FM6" id="5hX-s4-LsO"/>
+                                    </connections>
+                                </button>
+                                <button width="44" height="30" alignment="right" title="6" id="qcw-UR-BVH">
+                                    <color key="backgroundColor" red="0.078431375319999996" green="0.49803924560000001" blue="0.82745105029999999" alpha="1" colorSpace="deviceRGB"/>
+                                    <connections>
+                                        <action selector="sixButtonTapped:" destination="UKU-th-FM6" id="lu2-US-Hxr"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" id="Ii3-gG-t8y">
+                            <items>
+                                <button width="44" height="30" alignment="left" title="7" id="Zys-VK-R3S">
+                                    <color key="backgroundColor" red="0.078431375319999996" green="0.49803924560000001" blue="0.82745105029999999" alpha="1" colorSpace="deviceRGB"/>
+                                    <connections>
+                                        <action selector="sevenButtonTapped:" destination="UKU-th-FM6" id="WyB-Yt-Itw"/>
+                                    </connections>
+                                </button>
+                                <button width="44" height="30" alignment="center" title="8" id="aHz-AK-YpB">
+                                    <color key="backgroundColor" red="0.078431375319999996" green="0.49803924560000001" blue="0.82745105029999999" alpha="1" colorSpace="deviceRGB"/>
+                                    <connections>
+                                        <action selector="eightButtonTapped:" destination="UKU-th-FM6" id="JXM-WO-T55"/>
+                                    </connections>
+                                </button>
+                                <button width="44" height="30" alignment="right" title="9" id="mMK-r9-9Oh">
+                                    <color key="backgroundColor" red="0.078431375319999996" green="0.49803924560000001" blue="0.82745105029999999" alpha="1" colorSpace="deviceRGB"/>
+                                    <connections>
+                                        <action selector="nineButtonTapped:" destination="UKU-th-FM6" id="8MQ-Nh-9td"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" id="5uh-KB-1Lz">
+                            <items>
+                                <button width="44" height="30" alignment="left" title="." id="ZTa-9Y-hDe">
+                                    <color key="backgroundColor" red="0.078431375319999996" green="0.49803924560000001" blue="0.82745105029999999" alpha="1" colorSpace="deviceRGB"/>
+                                    <connections>
+                                        <action selector="dotButtonTapped:" destination="UKU-th-FM6" id="dDb-xV-7UG"/>
+                                    </connections>
+                                </button>
+                                <button width="44" height="30" alignment="center" title="0" id="qf4-Zo-tRM">
+                                    <color key="backgroundColor" red="0.078431375319999996" green="0.49803924560000001" blue="0.82745105029999999" alpha="1" colorSpace="deviceRGB"/>
+                                    <connections>
+                                        <action selector="zeroButtonTapped:" destination="UKU-th-FM6" id="LzS-Te-hbS"/>
+                                    </connections>
+                                </button>
+                                <button width="44" height="30" alignment="right" backgroundImage="DeleteButtonImage" id="L7C-hB-Pi9">
+                                    <color key="backgroundColor" red="0.078431375319999996" green="0.49803924560000001" blue="0.82745105029999999" alpha="1" colorSpace="deviceRGB"/>
+                                    <connections>
+                                        <action selector="deleteButtonTapped:" destination="UKU-th-FM6" id="47B-lF-Uie"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="deleteButton" destination="L7C-hB-Pi9" id="8eJ-cY-xtr"/>
+                        <outlet property="doneButton" destination="V65-lt-Pnv" id="oZb-WN-GDQ"/>
+                        <outlet property="dotButton" destination="ZTa-9Y-hDe" id="Hk1-Y2-Pjr"/>
+                        <outlet property="eightButton" destination="aHz-AK-YpB" id="0lb-I5-9B0"/>
+                        <outlet property="fiveButton" destination="N3T-0T-8ZU" id="nYH-0z-kPJ"/>
+                        <outlet property="fourButton" destination="Fyt-Wa-PVb" id="VJF-Tv-9KR"/>
+                        <outlet property="nineButton" destination="mMK-r9-9Oh" id="vgR-2O-ZII"/>
+                        <outlet property="oneButton" destination="GOd-Xj-R3m" id="sJg-u9-H87"/>
+                        <outlet property="sevenButton" destination="Zys-VK-R3S" id="R8I-HR-7p9"/>
+                        <outlet property="sixButton" destination="qcw-UR-BVH" id="APq-HA-ogP"/>
+                        <outlet property="threeButton" destination="f5d-EB-0p8" id="E7d-A2-S9K"/>
+                        <outlet property="twoButton" destination="rwo-oK-PI6" id="rbq-5N-2lg"/>
+                        <outlet property="valueLabel" destination="XzW-hQ-EGc" id="DHS-av-Jai"/>
+                        <outlet property="zeroButton" destination="qf4-Zo-tRM" id="cuu-bl-aOK"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="344" y="80.5"/>
         </scene>
     </scenes>
     <color key="tintColor" red="0.059651169929999998" green="0.4954067171" blue="0.99844944479999997" alpha="1" colorSpace="calibratedRGB"/>

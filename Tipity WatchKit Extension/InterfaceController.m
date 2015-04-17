@@ -12,6 +12,7 @@
 #import "MAAppGroupNotifier.h"
 #import "MAAppGroup.h"
 #import "MABill.h"
+#import "MAKeyboardController.h"
 //#import "MAFilePaths.h"
 #import "MAUserUtil.h"
 //#import "MAUtil.h"
@@ -19,13 +20,14 @@
 
 #include <CoreFoundation/CoreFoundation.h>
 
-// Must also set the steps for the slider in the storyboard. Cannot do programmatically yet.
-static CGFloat const DollarSliderMax = 200.;
+// Whether to display the group for changing the tip amount via individual digit buttons and +/-.
+static BOOL const hideBillButtonGroup = YES;
 
 @interface InterfaceController() <MABillDelegate>
 @property (strong, nonatomic) MABill *bill;
 @property (strong, nonatomic) NSDictionary *settings;
 
+@property (weak, nonatomic) IBOutlet WKInterfaceGroup *billButtonGroup;
 @property (weak, nonatomic) IBOutlet WKInterfaceButton *hundredsButton;
 @property (strong, nonatomic) NSNumber *hundredsNumber;
 @property (weak, nonatomic) IBOutlet WKInterfaceButton *teensButton;
@@ -43,25 +45,22 @@ static CGFloat const DollarSliderMax = 200.;
 @property (weak, nonatomic) IBOutlet WKInterfaceButton *plusButton;
 @property (weak, nonatomic) IBOutlet WKInterfaceButton *minusButton;
 
-
-@property (weak, nonatomic) IBOutlet WKInterfaceSlider *dollarSlider;
-@property (strong, nonatomic) NSNumber *dollars;
-@property (weak, nonatomic) IBOutlet WKInterfaceSlider *centSlider;
-@property (strong, nonatomic) NSNumber *cents;
-
 @property (weak, nonatomic) IBOutlet WKInterfaceGroup *billGroup;
 @property (weak, nonatomic) IBOutlet WKInterfaceImage *billImage;
-@property (weak, nonatomic) IBOutlet WKInterfaceLabel *billLabel;
+@property (weak, nonatomic) IBOutlet WKInterfaceButton *billButton;
 
 @property (weak, nonatomic) IBOutlet WKInterfaceLabel *tipLabel;
 @property (weak, nonatomic) IBOutlet WKInterfaceLabel *grandTotalLabel;
 
 @property (weak, nonatomic) IBOutlet WKInterfaceButton *openButton;
+
+@property (strong, nonatomic) NSMutableDictionary *billKeyboardDict;
 @end
 
 @implementation InterfaceController
 @synthesize bill = _bill;
 
+@synthesize billButtonGroup = _billButtonGroup;
 @synthesize hundredsButton = _hundredsButton;
 @synthesize hundredsNumber = _hundredsNumber;
 @synthesize teensButton = _teensButton;
@@ -76,14 +75,11 @@ static CGFloat const DollarSliderMax = 200.;
 @synthesize selectedButton = _selectedButton;
 @synthesize selectedNumber = _selectedNumber;
 
-@synthesize dollarSlider = _dollarSlider;
-@synthesize dollars = _dollars;
-@synthesize centSlider = _centSlider;
-@synthesize cents = _cents;
 @synthesize billImage = _billImage;
-@synthesize billLabel = _billLabel;
 @synthesize tipLabel = _tipLabel;
 @synthesize grandTotalLabel = _grandTotalLabel;
+
+@synthesize billKeyboardDict = _billKeyboardDict;
 
 - (instancetype)init
 {
@@ -108,10 +104,6 @@ static CGFloat const DollarSliderMax = 200.;
         [self setDigitButtonsWithBill];
         [self initSelectedButton];
         
-        // TODO: Would be better to not use sliders to select the $ and cents. However, there is no API for accessing the digital crown.
-        
-        [self setupSliders];
-        
         //[self.billImage setImageNamed:@"BillImage"];
 //        [self setCurrentRatingButton:self.ratingButton3];
         
@@ -125,12 +117,10 @@ static CGFloat const DollarSliderMax = 200.;
     // This method is called when watch view controller is about to be visible to user
     NSLog(@"%@ will activate", self);
     
-    [self.dollarSlider setHidden:YES];
-    [self.billImage setHidden:YES];
-    [self.centSlider setHidden:YES];
-    [self.billLabel setHidden:YES];
-    [self.billGroup setHidden:YES];
-    
+    [self.billGroup setHidden: ! hideBillButtonGroup];
+    [self.billButtonGroup setHidden:hideBillButtonGroup];
+
+    [self loadBillFromKeyboard];
     [self updateLabels];
 
     [self configureMenuItems];
@@ -184,30 +174,34 @@ static CGFloat const DollarSliderMax = 200.;
     [MAAppGroupNotifier postNotificationForKey:@"bill"];
 }
 
-- (void)updateLabels
+- (void)loadBillFromKeyboard
 {
-    self.billLabel.text = [self.bill formattedBill];
-    self.tipLabel.text = [self.bill formattedTip];
-    self.grandTotalLabel.text = [self.bill formattedTotal];
+    if ( ! self.billKeyboardDict)
+    {
+        return;
+    }
+    
+    NSString *billStr = [self.billKeyboardDict objectForKey:[MAKeyboardController keyboardValueKey]];
+    
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    f.numberStyle = NSNumberFormatterCurrencyStyle;
+    NSNumber *bill = [f numberFromString:billStr];
+    if (bill)
+    {
+        self.bill.bill = bill;
+        [self saveBill];
+    }
+
+    self.billKeyboardDict = nil;
+    
+    [self setDigitButtonsWithBill];
 }
 
-- (void)setupSliders
+- (void)updateLabels
 {
-    NSInteger dollars;
-    NSInteger cents;
-    [self splitDecimalNumber:self.bill.bill.doubleValue integer:&dollars fraction:&cents];
-    
-    self.dollars = [NSNumber numberWithInteger:dollars];
-    self.cents = [NSNumber numberWithInteger:cents];
-
-    self.dollarSlider.value = self.dollars.integerValue / DollarSliderMax;
-    self.centSlider.value = self.cents.integerValue / 100.;
-
-    NSLog(@"Initial bill values: dollars=%@, cents=%@", self.dollars, self.cents);
-    
-    UIColor *color = [MAAppearance foregroundColor];
-    [self.dollarSlider setColor:color];
-    [self.centSlider setColor:color];
+    [self.billButton setTitle:[self.bill formattedBill]];
+    self.tipLabel.text = [self.bill formattedTip];
+    self.grandTotalLabel.text = [self.bill formattedTotal];
 }
 
 #pragma mark - MABillDelegate
@@ -223,44 +217,6 @@ static CGFloat const DollarSliderMax = 200.;
 
 - (void)errorUpdatingBill:(MABill *)bill
 {
-}
-
-- (IBAction)dollarSliderAction:(float)value
-{
-    NSInteger dollars = (NSInteger) roundf(DollarSliderMax * value);
-    self.dollars = [NSNumber numberWithInteger:dollars];
-    [self newDollarsValue:self.dollars centsValue:self.cents];
-
-    NSLog(@"Dollar slider value is now: %f (%@)", value, self.dollars);
-}
-
-- (IBAction)centSliderAction:(float)value
-{
-    // Wrap around the slider value if necessary.
-    static float const sliderMin = 0.;
-    static float const centsMin = 100 * sliderMin;
-    static float const sliderMax = .99;
-    static float const centsMax = 100 * sliderMax;
-    if (self.cents.integerValue == centsMax && value >= sliderMax)
-    {
-        value = sliderMin;
-        self.centSlider.value = value;
-    }
-    else if (self.cents.integerValue == centsMin && value <= sliderMin)
-    {
-        value = sliderMax;
-        self.centSlider.value = value;
-    }
-
-    NSInteger cents = (NSInteger) roundf(100 * value);
-    if (cents >= centsMax)
-    {
-        cents = centsMax;
-    }
-    self.cents = [NSNumber numberWithInteger:cents];
-    [self newDollarsValue:self.dollars centsValue:self.cents];
-    
-    NSLog(@"Cent slider value is now: %f (%@)", value, self.cents);
 }
 
 - (void)newDollarsValue:(NSNumber *)dollarsNumber centsValue:(NSNumber *)centsNumber
@@ -357,7 +313,6 @@ static CGFloat const DollarSliderMax = 200.;
     self.bill.delegate = self;
     
     [self setDigitButtonsWithBill];
-    [self setupSliders];
     [self updateLabels];
 }
 
@@ -572,36 +527,79 @@ static CGFloat const DollarSliderMax = 200.;
 - (void)configureMenuItems
 {
     [self clearAllMenuItems];
-    
-    NSString *title = [NSString stringWithFormat:@"Fair"];
-    [self addMenuItemWithImageNamed:@"FairServiceRatingImage" title:title action:@selector(doMenuItemAction1)];
+
+    NSString *title = nil;
+
+    if ( ! hideBillButtonGroup)
+    {
+        //    title = [NSString stringWithFormat:@"Enter Bill"];
+        //    title = [NSString stringWithFormat:@"Keyboard"];
+        //    title = [NSString stringWithFormat:@"Check Total"];
+        title = [NSString stringWithFormat:@"Enter Total"];
+        //    title = [NSString stringWithFormat:@"Type Total"];
+        [self addMenuItemWithImageNamed:@"KeyboardImage" title:title action:@selector(doMenuItemAction1)];
+        //    [self addMenuItemWithImageNamed:@"BillImage" title:title action:@selector(doMenuItemAction1)];
+    }
+
+    title = [NSString stringWithFormat:@"Fair"];
+    [self addMenuItemWithImageNamed:@"FairServiceRatingImage" title:title action:@selector(doMenuItemAction2)];
 
     title = [NSString stringWithFormat:@"Good"];
-    [self addMenuItemWithImageNamed:@"GoodServiceRatingImage" title:title action:@selector(doMenuItemAction2)];
+    [self addMenuItemWithImageNamed:@"GoodServiceRatingImage" title:title action:@selector(doMenuItemAction3)];
     
     title = [NSString stringWithFormat:@"Great"];
-    [self addMenuItemWithImageNamed:@"GreatServiceRatingImage" title:title action:@selector(doMenuItemAction3)];
+    [self addMenuItemWithImageNamed:@"GreatServiceRatingImage" title:title action:@selector(doMenuItemAction4)];
 }
 
 - (void)doMenuItemAction1
 {
-    NSNumber *tipPercent = [[MAUserUtil sharedInstance] serviceRatingFair];
-    self.bill.tipPercent = tipPercent;
-    [self saveBill];
+    [self showBillKeyboard];
 }
 
 - (void)doMenuItemAction2
 {
-    NSNumber *tipPercent = [[MAUserUtil sharedInstance] serviceRatingGood];
-    self.bill.tipPercent = tipPercent;
-    [self saveBill];
+    NSNumber *tipPercent = [[MAUserUtil sharedInstance] serviceRatingFair];
+    [self setTipPercent:tipPercent];
 }
 
 - (void)doMenuItemAction3
 {
+    NSNumber *tipPercent = [[MAUserUtil sharedInstance] serviceRatingGood];
+    [self setTipPercent:tipPercent];
+}
+
+- (void)doMenuItemAction4
+{
     NSNumber *tipPercent = [[MAUserUtil sharedInstance] serviceRatingGreat];
+    [self setTipPercent:tipPercent];
+}
+
+- (void)setTipPercent:(NSNumber *)tipPercent
+{
     self.bill.tipPercent = tipPercent;
     [self saveBill];
+}
+
+- (IBAction)billButtonTapped:(id)sender
+{
+    [self showBillKeyboard];
+}
+
+- (void)showBillKeyboard
+{
+    self.billKeyboardDict = [[NSMutableDictionary alloc] init];
+    
+    NSString *unit = @""; // No unit.
+
+    // Start with an empty bill to make easier to enter.
+    NSNumberFormatter *formatter = [MABill priceFormatter];
+    NSString *billStr = [formatter currencySymbol];
+//    NSString *billStr = [MABill formatBill:self.bill.bill];
+    
+    [self.billKeyboardDict setObject:billStr forKey:[MAKeyboardController keyboardValueKey]];
+    [self.billKeyboardDict setObject:unit forKey:[MAKeyboardController unitKey]];
+    
+    [self presentControllerWithName:@"MAKeyboardController" context:self.billKeyboardDict];
 }
 
 @end

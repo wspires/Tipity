@@ -1,5 +1,10 @@
-2.1
+2.2
 • TODO
+
+2.1
+Tip with the Apple Watch!
+• Enter your bill on the Apple Watch to see the tip and total amounts.
+• Force Touch the Apple Watch screen to select the service rating for different tip amounts.
 
 2.0
 • Apple Watch release

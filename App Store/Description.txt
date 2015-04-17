@@ -1,3 +1,5 @@
+Tipity is ready for your Apple Watch.
+
 Tipity makes tipping simple! Built from the ground up to look and feel like a modern iOS app, Tipity is a great looking and easy to use tip calculator. Personalize Tipity's appearance to make it look and work the way you want!
 
 • Quick and easy interface—just enter the check total at the top, and the tip and grand total update automatically
