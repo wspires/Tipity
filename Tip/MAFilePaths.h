@@ -80,6 +80,16 @@
 + (UIImage *)minusImage;
 + (NSString *)minusImageSelectedFilename;
 + (UIImage *)minusImageSelected;
++ (NSString *)roundingImageFilename;
++ (UIImage *)roundingImage;
++ (NSString *)roundNoneImageFilename;
++ (UIImage *)roundNoneImage;
++ (NSString *)roundUpImageFilename;
++ (UIImage *)roundUpImage;
++ (NSString *)roundDownImageFilename;
++ (UIImage *)roundDownImage;
++ (NSString *)roundNearestImageFilename;
++ (UIImage *)roundNearestImage;
 
 // Feedback icons.
 + (NSString *)tellFriendImageFilename;

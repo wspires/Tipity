@@ -11,9 +11,11 @@
 #import "MAAccessoryView.h"
 #import "MAAppearance.h"
 #import "MAAppearanceSelectionViewController.h"
-#import "MAServiceRatingSettingsViewController.h"
 #import "MACreditsViewController.h"
 #import "MAFilePaths.h"
+#import "MARounder.h"
+#import "MARoundingSettingsViewController.h"
+#import "MAServiceRatingSettingsViewController.h"
 #import "MASwitchCell.h"
 #import "MATipIAPHelper.h"
 #import "MAUserUtil.h"
@@ -29,8 +31,9 @@ DECL_TABLE_IDX(GEN_SECTION, 0);
 DECL_TABLE_IDX(ENABLE_TAX_ROW, 0);
 DECL_TABLE_IDX(ENABLE_SPLIT_TIP_ROW, 1);
 DECL_TABLE_IDX(SERVICE_RATING_ROW, 2);
-DECL_TABLE_IDX(APPEARANCE_ROW, 3);
-DECL_TABLE_IDX(GEN_SECTION_ROWS, 4);
+DECL_TABLE_IDX(ROUNDING_ROW, 3);
+DECL_TABLE_IDX(APPEARANCE_ROW, 4);
+DECL_TABLE_IDX(GEN_SECTION_ROWS, 5);
 
 DECL_TABLE_IDX(APPS_SECTION, 1);
 
@@ -46,6 +49,7 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
 
 @interface MASettingsViewController ()
 @property (strong, nonatomic) MAServiceRatingSettingsViewController *serviceRatingController;
+@property (strong, nonatomic) MARoundingSettingsViewController *roundingController;
 @property (strong, nonatomic) MAAppearanceSelectionViewController *customizeColorController;
 @property (strong, nonatomic) MACreditsViewController *creditsController;
 @property (strong, nonatomic) NSArray *appList;
@@ -58,6 +62,7 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
 @implementation MASettingsViewController
 @synthesize tableView = _tableView;
 @synthesize serviceRatingController = _serviceRatingController;
+@synthesize roundingController = _roundingController;
 @synthesize customizeColorController = _customizeColorController;
 @synthesize creditsController = _creditsController;
 @synthesize appList = _appList;
@@ -183,6 +188,19 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+- (void)loadRoundingController:(NSIndexPath *)indexPath
+{
+    if (self.roundingController == nil)
+    {
+        self.roundingController = [[MARoundingSettingsViewController alloc] initWithNibName:@"MARoundingSettingsViewController" bundle:nil];
+    }
+    
+    self.roundingController.title = Localize(@"Round Total");
+    [self.navigationController pushViewController:self.roundingController animated:YES];
+    
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
 - (void)handleApp:(NSIndexPath *)indexPath
 {
     NSDictionary *appInfo = [self.appList objectAtIndex:indexPath.row];
@@ -301,6 +319,10 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
         else if (indexPath.row == SERVICE_RATING_ROW)
         {
             return [self tableView:tableView serviceRatingCellForRowAtIndexPath:indexPath];
+        }
+        else if (indexPath.row == ROUNDING_ROW)
+        {
+            return [self tableView:tableView roundingCellForRowAtIndexPath:indexPath];
         }
     }
     else if (indexPath.section == APPS_SECTION)
@@ -532,6 +554,36 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
     return cell;
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView roundingCellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString * const CellIdentifier = @"MARoundingCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+    }
+    [MAAppearance setAppearanceForCell:cell tableStyle:tableView.style];
+    
+    cell.textLabel.text = Localize(@"Round Total");
+    
+    if (Service_Rating_Iap)
+    {
+        [MATipIAPHelper disableLabelIfNotPurchased:cell.textLabel];
+    }
+    
+    UIImage *image = [MAFilePaths roundingImage];
+    cell.imageView.image = image;
+
+    NSString *roundingMode = [[MAUserUtil sharedInstance] objectForKey:RoundingMode];
+    NSString *roundingModeTitle = [MARounder printableNameForMode:roundingMode];
+    cell.detailTextLabel.text = roundingModeTitle;
+
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.accessoryView = [MAAccessoryView grayAccessoryViewForCell:cell];
+    
+    return cell;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView appsCellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString * const CellIdentifier = @"MAAppsCell";
@@ -581,6 +633,14 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
                 return;
             }
             [self loadServiceRatingController:indexPath];
+        }
+        else if (indexPath.row == ROUNDING_ROW)
+        {
+            if (Rounding_Iap && [MATipIAPHelper checkAndAlertForIAP])
+            {
+                return;
+            }
+            [self loadRoundingController:indexPath];
         }
     }
     else if (indexPath.section == APPS_SECTION)

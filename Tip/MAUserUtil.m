@@ -35,6 +35,9 @@ static NSString * const DefaultServiceRatingFair = @"10";
 static NSString * const DefaultServiceRatingGood = @"15";
 static NSString * const DefaultServiceRatingGreat = @"20";
 
+static NSString * const DefaultRoundingMode = @"RoundingModeNone";
+static NSString * const DefaultLastSelectedServiceRating = @"5";
+
 static NSString * const DefaultBackgroundColorId = @"cloth";
 static NSString * const DefaultForegroundColorId = @"denimBlueColor";
 
@@ -265,6 +268,16 @@ static NSString *PerExerciseSettings = @"perExerciseSettings";
     NSString *rating = [self objectForKey:ServiceRatingGreat];
     NSNumber *number = [NSNumber numberWithDouble:[rating doubleValue]];
     return number;
+}
+
+- (BOOL)enableRounding
+{
+    NSString *roundingMode = [self objectForKey:RoundingMode];
+    if ([roundingMode isEqualToString:RoundingModeNone])
+    {
+        return NO;
+    }
+    return YES;
 }
 
 - (NSDictionary *)saveSetting:(id)setting forKey:(NSString *)key perDictSettingsKey:(NSString *)perDictSettingsKey nameKey:(NSString *)nameKey
@@ -750,6 +763,9 @@ static NSString *PerExerciseSettings = @"perExerciseSettings";
     CHECK_SETTING(ServiceRatingFair, DefaultServiceRatingFair)
     CHECK_SETTING(ServiceRatingGood, DefaultServiceRatingGood)
     CHECK_SETTING(ServiceRatingGreat, DefaultServiceRatingGreat)
+
+    CHECK_SETTING(RoundingMode, DefaultRoundingMode)
+    CHECK_SETTING(LastSelectedServiceRating, DefaultLastSelectedServiceRating)
 
     // Appearance settings.
     CHECK_SETTING(BackgroundColorId, [MAUserUtil defaultBackgroundColorId])

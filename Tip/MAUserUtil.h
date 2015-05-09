@@ -16,6 +16,14 @@ static NSString *ServiceRatingFair = @"serviceRatingFair";
 static NSString *ServiceRatingGood = @"serviceRatingGood";
 static NSString *ServiceRatingGreat = @"serviceRatingGreat";
 
+static NSString *RoundingMode = @"RoundingMode";
+static NSString *RoundingModeNone = @"RoundingModeNone";
+static NSString *RoundingModeUp = @"RoundingModeUp";
+static NSString *RoundingModeDown = @"RoundingModeDown";
+static NSString *RoundingModeNear = @"RoundingModeNear";
+static NSString *LastSelectedServiceRating = @"LastSelectedServiceRating";
+static NSString *NoLastSelectedServiceRating = @"";
+
 static NSString *BackgroundColorId = @"backgroundColorId";
 static NSString *ForegroundColorId = @"foregroundColorId";
 
@@ -64,6 +72,7 @@ static NSString *TableTextColor = @"tableTextColor";
 - (NSNumber *)serviceRatingFair;
 - (NSNumber *)serviceRatingGood;
 - (NSNumber *)serviceRatingGreat;
+- (BOOL)enableRounding;
 
 #pragma mark Current user
 + (NSString *)defaultUserName;

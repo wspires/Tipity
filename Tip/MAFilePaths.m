@@ -550,6 +550,47 @@ static NSString * const ExerciseFilterName = @"ExerciseFilterName";
     return [MAFilePaths applyEffectsToImagePath:[MAFilePaths minusImageSelectedFilename]];
 }
 
++ (NSString *)roundingImageFilename
+{
+    return @"746-round-up.png";
+}
++ (UIImage *)roundingImage
+{
+    return [MAFilePaths applyEffectsToImagePath:[MAFilePaths roundingImageFilename]];
+}
++ (NSString *)roundNoneImageFilename
+{
+    return @"746-round-none.png";
+}
++ (UIImage *)roundNoneImage
+{
+    return [MAFilePaths applyEffectsToImagePath:[MAFilePaths roundNoneImageFilename]];
+}
++ (NSString *)roundUpImageFilename
+{
+    return @"746-round-up.png";
+}
++ (UIImage *)roundUpImage
+{
+    return [MAFilePaths applyEffectsToImagePath:[MAFilePaths roundUpImageFilename]];
+}
++ (NSString *)roundDownImageFilename
+{
+    return @"746-round-down.png";
+}
++ (UIImage *)roundDownImage
+{
+    return [MAFilePaths applyEffectsToImagePath:[MAFilePaths roundDownImageFilename]];
+}
++ (NSString *)roundNearestImageFilename
+{
+    return @"746-round-nearest.png";
+}
++ (UIImage *)roundNearestImage
+{
+    return [MAFilePaths applyEffectsToImagePath:[MAFilePaths roundNearestImageFilename]];
+}
+
 #pragma mark - Feedback icons
 
 + (NSString *)tellFriendImageFilename

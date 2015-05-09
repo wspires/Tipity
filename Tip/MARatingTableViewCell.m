@@ -88,15 +88,23 @@ static NSUInteger const BUTTON_END_TAG = 6;
 
 - (NSUInteger)ratingForTipPercent:(NSNumber *)tipPercent
 {
+    return [MARatingTableViewCell ratingForTipPercent:tipPercent useThreeStars:self.threeStars];
+}
++ (NSUInteger)ratingForTipPercent:(NSNumber *)tipPercent
+{
+    return [MARatingTableViewCell ratingForTipPercent:tipPercent useThreeStars:YES];
+}
++ (NSUInteger)ratingForTipPercent:(NSNumber *)tipPercent useThreeStars:(BOOL)threeStars
+{
     NSUInteger rating = 1;
     double tipPercentDouble = tipPercent.doubleValue;
     
-    if (self.threeStars)
+    if (threeStars)
     {
         double serviceRatingFair = [[MAUserUtil sharedInstance] serviceRatingFair].doubleValue;
         double serviceRatingGood = [[MAUserUtil sharedInstance] serviceRatingGood].doubleValue;
         double serviceRatingGreat = [[MAUserUtil sharedInstance] serviceRatingGreat].doubleValue;
-
+        
         if (tipPercentDouble < serviceRatingFair)
         {
             rating = 1;
@@ -137,15 +145,23 @@ static NSUInteger const BUTTON_END_TAG = 6;
             rating = 5;
         }
     }
-
+    
     return rating;
 }
 
 - (NSNumber *)tipPercentForRating:(NSUInteger)rating
 {
+    return [MARatingTableViewCell tipPercentForRating:rating useThreeStars:self.threeStars];
+}
++ (NSNumber *)tipPercentForRating:(NSUInteger)rating
+{
+    return [MARatingTableViewCell tipPercentForRating:rating useThreeStars:YES];
+}
++ (NSNumber *)tipPercentForRating:(NSUInteger)rating useThreeStars:(BOOL)threeStars
+{
     double tipPercentDouble = 0;
-
-    if (self.threeStars)
+    
+    if (threeStars)
     {
         NSNumber *tipPercent = nil;
         if (rating <= 2)
@@ -185,7 +201,7 @@ static NSUInteger const BUTTON_END_TAG = 6;
             tipPercentDouble = 20;
         }
     }
-
+    
     return [NSNumber numberWithDouble:tipPercentDouble];
 }
 

@@ -15,6 +15,7 @@
 #import "MABill.h"
 #import "MAFilePaths.h"
 #import "MARatingTableViewCell.h"
+#import "MARounder.h"
 #import "MATextFieldCell.h"
 #import "MAUserUtil.h"
 #import "MAUtil.h"
@@ -54,6 +55,10 @@ DECL_TABLE_IDX(TAX_PERCENT_ROW, 0);
 DECL_TABLE_IDX(TAX_ROW, 1);
 DECL_TABLE_IDX(BILL_BEFORE_TAX_ROW, DISABLED_ROW);
 DECL_TABLE_IDX(TAX_SECTION_ROWS, 2);
+
+// Property in MABill corresponding to the check sub-total. Referenced in a few places below.
+static NSString * const BillTotalKey = @"bill";
+static NSString * const TipPercentKey = @"tipPercent";
 
 @interface MATipViewController () <MABillDelegate, MARatingDelegate, UITextFieldDelegate, UIActionSheetDelegate, ADBannerViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -161,8 +166,7 @@ DECL_TABLE_IDX(TAX_SECTION_ROWS, 2);
     }
 
     [self configureTableSections];
-    [self.tableView reloadData];
-    
+    [self reloadTable];
     
 //    [self testCurrency];
 }
@@ -316,8 +320,8 @@ DECL_TABLE_IDX(TAX_SECTION_ROWS, 2);
 - (void)makeIndexPathToBillKeyDict
 {
     NSMutableDictionary *indexPathToBillKeyDict = [[NSMutableDictionary alloc] init];
-    [indexPathToBillKeyDict setObject:@"bill" forKey:[NSIndexPath indexPathForRow:BILL_ROW inSection:BILL_SECTION]];
-    [indexPathToBillKeyDict setObject:@"tipPercent" forKey:[NSIndexPath indexPathForRow:TIP_PERCENT_ROW inSection:TIP_SECTION]];
+    [indexPathToBillKeyDict setObject:BillTotalKey forKey:[NSIndexPath indexPathForRow:BILL_ROW inSection:BILL_SECTION]];
+    [indexPathToBillKeyDict setObject:TipPercentKey forKey:[NSIndexPath indexPathForRow:TIP_PERCENT_ROW inSection:TIP_SECTION]];
     [indexPathToBillKeyDict setObject:@"tip" forKey:[NSIndexPath indexPathForRow:TIP_ROW inSection:TIP_SECTION]];
     [indexPathToBillKeyDict setObject:@"total" forKey:[NSIndexPath indexPathForRow:TOTAL_ROW inSection:TOTAL_SECTION]];
     [indexPathToBillKeyDict setObject:@"taxPercent" forKey:[NSIndexPath indexPathForRow:TAX_PERCENT_ROW inSection:TAX_SECTION]];
@@ -716,13 +720,13 @@ DECL_TABLE_IDX(TAX_SECTION_ROWS, 2);
 - (void)didUpdateBill:(MABill *)bill
 {
     [self saveBill];
-    [self.tableView reloadData];
+    [self reloadTable];
 }
 
 - (void)errorUpdatingBill:(MABill *)bill
 {
     // For instance, 0 was enter in for the split count, so just reload the table to refresh the invalid text field value.
-    [self.tableView reloadData];
+    [self reloadTable];
 }
 
 #pragma mark - MARatingDelegate
@@ -731,6 +735,13 @@ DECL_TABLE_IDX(TAX_SECTION_ROWS, 2);
 {
     NSNumber *tipPercent = [ratingCell tipPercentForRating:ratingCell.rating];
     self.bill.tipPercent = tipPercent;
+    
+    // Save the last selected service rating--required by roundGrandTotalInBill.
+    NSUInteger const rating = ratingCell.rating;
+    NSString *ratingString = SFmt(@"%d", (int)rating);
+    [[MAUserUtil sharedInstance] saveSetting:ratingString forKey:LastSelectedServiceRating];
+
+    [MARounder roundGrandTotalInBill:self.bill];
 }
 
 #pragma mark - Text field
@@ -789,7 +800,7 @@ DECL_TABLE_IDX(TAX_SECTION_ROWS, 2);
 {
     if (textField.text.length == 0)
     {
-        [self.tableView reloadData];
+        [self reloadTable];
         return;
     }
     
@@ -807,6 +818,19 @@ DECL_TABLE_IDX(TAX_SECTION_ROWS, 2);
     NSNumber *billValue = [NSNumber numberWithDouble:[textField.text doubleValue]];
 
     [self.bill setValue:billValue forKey:billKey];
+    
+    // Maybe if manually typed in a tip, then remove the last selected service rating since it's overruling the preset tip percent tied to the star buttons.
+    // Commenting this out because I think it makes the most sense (is user-friendlier) to always keep the last selected star selection so that rounding works the way the user expects.
+//    if (billKey && [billKey isEqualToString:TipPercentKey])
+//    {
+//        [[MAUserUtil sharedInstance] saveSetting:NoLastSelectedServiceRating forKey:LastSelectedServiceRating];
+//    }
+    
+    // Only round the total after the check total has been entered.
+    if (billKey && [billKey isEqualToString:BillTotalKey])
+    {
+        [MARounder roundGrandTotalInBill:self.bill];
+    }
 
     [textField resignFirstResponder];
 }
@@ -1218,7 +1242,15 @@ DECL_TABLE_IDX(TAX_SECTION_ROWS, 2);
 {
     self.bill = [MABill reloadSharedInstance:YES];
     self.bill.delegate = self;
-    [self.tableView reloadData];
+    [self reloadTable];
+}
+
+- (void)reloadTable
+{
+    // Reload using an animation because it looks better than just doing '[self.tableView reloadData]'.
+    NSRange range = NSMakeRange(0, [self numberOfSectionsInTableView:self.tableView]);
+    NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:range];
+    [self.tableView reloadSections:sections withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 @end
