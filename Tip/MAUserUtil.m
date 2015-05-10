@@ -35,7 +35,8 @@ static NSString * const DefaultServiceRatingFair = @"10";
 static NSString * const DefaultServiceRatingGood = @"15";
 static NSString * const DefaultServiceRatingGreat = @"20";
 
-static NSString * const DefaultRoundingMode = @"RoundingModeNone";
+static NSString * const DefaultRoundItem = @"RoundItemNone";
+static NSString * const DefaultRoundingMode = @"RoundingModeUp";
 static NSString * const DefaultLastSelectedServiceRating = @"5";
 
 static NSString * const DefaultBackgroundColorId = @"cloth";
@@ -270,10 +271,28 @@ static NSString *PerExerciseSettings = @"perExerciseSettings";
     return number;
 }
 
-- (BOOL)enableRounding
+- (BOOL)roundOn
 {
-    NSString *roundingMode = [self objectForKey:RoundingMode];
-    if ([roundingMode isEqualToString:RoundingModeNone])
+    NSString *roundingMode = [self objectForKey:RoundItem];
+    if ([roundingMode isEqualToString:RoundItemNone])
+    {
+        return NO;
+    }
+    return YES;
+}
+- (BOOL)roundTip
+{
+    NSString *roundingMode = [self objectForKey:RoundItem];
+    if ( ! [roundingMode isEqualToString:RoundItemTip])
+    {
+        return NO;
+    }
+    return YES;
+}
+- (BOOL)roundTotal
+{
+    NSString *roundingMode = [self objectForKey:RoundItem];
+    if ( ! [roundingMode isEqualToString:RoundItemTotal])
     {
         return NO;
     }
@@ -764,6 +783,7 @@ static NSString *PerExerciseSettings = @"perExerciseSettings";
     CHECK_SETTING(ServiceRatingGood, DefaultServiceRatingGood)
     CHECK_SETTING(ServiceRatingGreat, DefaultServiceRatingGreat)
 
+    CHECK_SETTING(RoundItem, DefaultRoundItem)
     CHECK_SETTING(RoundingMode, DefaultRoundingMode)
     CHECK_SETTING(LastSelectedServiceRating, DefaultLastSelectedServiceRating)
 

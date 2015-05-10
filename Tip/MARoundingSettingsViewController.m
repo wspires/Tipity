@@ -18,22 +18,26 @@
 #import "MAUserUtil.h"
 #import "MAUtil.h"
 
-DECL_TABLE_IDX(NUM_SECTIONS, 2);
+DECL_TABLE_IDX(NUM_SECTIONS, 3);
 
-DECL_TABLE_IDX(ROUNDING_OPTIONS_SECTION, 0);
+DECL_TABLE_IDX(ROUND_SECTION, 0);
 DECL_TABLE_IDX(ROUND_NONE_ROW, 0);
-DECL_TABLE_IDX(ROUND_UP_ROW, 1);
-DECL_TABLE_IDX(ROUND_DOWN_ROW, 2);
-DECL_TABLE_IDX(ROUND_NEAREST_ROW, 3);
-DECL_TABLE_IDX(ROUNDING_OPTIONS_SECTION_ROWS, 4);
+DECL_TABLE_IDX(ROUND_TIP_ROW, 1);
+DECL_TABLE_IDX(ROUND_TOTAL_ROW, 2);
+DECL_TABLE_IDX(ROUND_SECTION_ROWS, 3);
 
-DECL_TABLE_IDX(EXAMPLES_SECTION, 1);
+DECL_TABLE_IDX(ROUNDING_OPTIONS_SECTION, 1);
+DECL_TABLE_IDX(ROUND_UP_ROW, 0);
+DECL_TABLE_IDX(ROUND_DOWN_ROW, 1);
+DECL_TABLE_IDX(ROUND_NEAREST_ROW, 2);
+DECL_TABLE_IDX(ROUNDING_OPTIONS_SECTION_ROWS, 3);
+
+DECL_TABLE_IDX(EXAMPLES_SECTION, 2);
 
 @interface MARoundingSettingsViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
-@property (strong, nonatomic) IBOutlet NSArray *examples;
+@property (strong, nonatomic) NSArray *examples;
 
 @end
 
@@ -80,7 +84,7 @@ DECL_TABLE_IDX(EXAMPLES_SECTION, 1);
 {
     [[self view] setBackgroundColor:[MAAppearance backgroundColor]];
     [MAUtil updateNavItem:self.navigationItem withTitle:self.title];
-    
+        
     // Not reloading the table each time it appears to make it snappier since it should not have changed between views changing.
     // BUT: We need to reload the app colors for the icons!
     [self.tableView reloadData];
@@ -88,18 +92,39 @@ DECL_TABLE_IDX(EXAMPLES_SECTION, 1);
     [super viewWillAppear:animated];
 }
 
+- (BOOL)isRoundingOn
+{
+    return [[MAUserUtil sharedInstance] roundOn];
+}
+- (BOOL)isRoundingModeTip
+{
+    return [[MAUserUtil sharedInstance] roundTip];
+}
+- (BOOL)isRoundingModeTotal
+{
+    return [[MAUserUtil sharedInstance] roundTotal];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return NUM_SECTIONS;
+    if ([self isRoundingOn])
+    {
+        return NUM_SECTIONS;
+    }
+    return NUM_SECTIONS - 2; // Skip last "Options" and "Examples" section.
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    if (section == ROUNDING_OPTIONS_SECTION)
+    if (section == ROUND_SECTION)
     {
+    }
+    else if (section == ROUNDING_OPTIONS_SECTION)
+    {
+        return Localize(@"Direction");
     }
     else if (section == EXAMPLES_SECTION)
     {
@@ -110,8 +135,11 @@ DECL_TABLE_IDX(EXAMPLES_SECTION, 1);
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
-    if (section == ROUNDING_OPTIONS_SECTION)
+    if (section == ROUND_SECTION)
+    {
+        return ROUND_SECTION_ROWS;
+    }
+    else if (section == ROUNDING_OPTIONS_SECTION)
     {
         return ROUNDING_OPTIONS_SECTION_ROWS;
     }
@@ -124,7 +152,11 @@ DECL_TABLE_IDX(EXAMPLES_SECTION, 1);
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == ROUNDING_OPTIONS_SECTION)
+    if (indexPath.section == ROUND_SECTION)
+    {
+        return [self tableView:tableView selectRoundCellForRowAtIndexPath:indexPath];
+    }
+    else if (indexPath.section == ROUNDING_OPTIONS_SECTION)
     {
         return [self tableView:tableView selectRoundingModeCellForRowAtIndexPath:indexPath];
     }
@@ -135,6 +167,55 @@ DECL_TABLE_IDX(EXAMPLES_SECTION, 1);
     
     DLog(@"Error: Not returning a cell!");
     return nil;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView selectRoundCellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString * const cellIdentifier = @"selectRoundCellForRowAtIndexPath";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil)
+    {
+        cell = [[MASwitchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+    }
+    
+    UIImage *image = nil;
+    NSString *text = nil;
+    NSString *settingValue = nil;
+    if (indexPath.row == ROUND_NONE_ROW)
+    {
+        image = [MAFilePaths roundNoneImage];
+        text = Localize(@"No Rounding");
+        settingValue = RoundItemNone;
+    }
+    else if (indexPath.row == ROUND_TIP_ROW)
+    {
+        image = [MAFilePaths tipAmountImage];
+        text = Localize(@"Round Tip Amount");
+        settingValue = RoundItemTip;
+    }
+    else if (indexPath.row == ROUND_TOTAL_ROW)
+    {
+        image = [MAFilePaths totalImage];
+        text = Localize(@"Round Grand Total");
+        settingValue = RoundItemTotal;
+    }
+    
+    cell.imageView.image = image;
+    cell.textLabel.text = text;
+    
+    NSString *currentValue = [[MAUserUtil sharedInstance] objectForKey:RoundItem];
+    BOOL isCurrentSetting = [currentValue isEqualToString:settingValue];
+    if (isCurrentSetting)
+    {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+    else
+    {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    
+    return cell;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView selectRoundingModeCellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -149,25 +230,20 @@ DECL_TABLE_IDX(EXAMPLES_SECTION, 1);
     UIImage *image = nil;
     NSString *text = nil;
     NSString *settingValue = nil;
-    if (indexPath.row == ROUND_NONE_ROW)
+    if (indexPath.row == ROUND_UP_ROW)
     {
-        settingValue = RoundingModeNone;
-        image = [MAFilePaths roundNoneImage];
-    }
-    else if (indexPath.row == ROUND_UP_ROW)
-    {
-        settingValue = RoundingModeUp;
         image = [MAFilePaths roundUpImage];
+        settingValue = RoundingModeUp;
     }
     else if (indexPath.row == ROUND_DOWN_ROW)
     {
-        settingValue = RoundingModeDown;
         image = [MAFilePaths roundDownImage];
+        settingValue = RoundingModeDown;
     }
     else if (indexPath.row == ROUND_NEAREST_ROW)
     {
-        settingValue = RoundingModeNear;
         image = [MAFilePaths roundNearestImage];
+        settingValue = RoundingModeNear;
     }
     text = [MARounder printableNameForMode:settingValue];
 
@@ -198,10 +274,19 @@ DECL_TABLE_IDX(EXAMPLES_SECTION, 1);
     }
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    NSString *labelText = Localize(@"Grand Total");
+    NSString *labelText = nil;
+    UIImage *image = nil;
+    if ([self isRoundingModeTip])
+    {
+        labelText = Localize(@"Tip Amount");
+        image = [MAFilePaths tipAmountImage];
+    }
+    else if ([self isRoundingModeTotal])
+    {
+        labelText = Localize(@"Grand Total");
+        image = [MAFilePaths totalImage];
+    }
     cell.textLabel.text = labelText;
-    
-    UIImage *image = [MAFilePaths totalImage];
     cell.imageView.image = image;
 
     NSNumber *originalNumber = [self.examples objectAtIndex:indexPath.row];
@@ -238,30 +323,84 @@ DECL_TABLE_IDX(EXAMPLES_SECTION, 1);
     {
         return;
     }
-    
-    NSString *newSetting = nil;
-    if (indexPath.row == ROUND_NONE_ROW)
+
+    BOOL deleteSections = NO;
+    BOOL addSections = NO;
+
+    NSString *settingKey = nil;
+    NSString *settingValue = nil;
+    if (indexPath.section == ROUND_SECTION)
     {
-        newSetting = RoundingModeNone;
+        settingKey = RoundItem;
+        if (indexPath.row == ROUND_NONE_ROW)
+        {
+            settingValue = RoundItemNone;
+            if ([self isRoundingOn])
+            {
+                deleteSections = YES;
+            }
+        }
+        else if (indexPath.row == ROUND_TIP_ROW)
+        {
+            settingValue = RoundItemTip;
+            if ( ! [self isRoundingOn])
+            {
+                addSections = YES;
+            }
+        }
+        else if (indexPath.row == ROUND_TOTAL_ROW)
+        {
+            settingValue = RoundItemTotal;
+            if ( ! [self isRoundingOn])
+            {
+                addSections = YES;
+            }
+        }
     }
-    else if (indexPath.row == ROUND_UP_ROW)
+    else if (indexPath.section == ROUNDING_OPTIONS_SECTION)
     {
-        newSetting = RoundingModeUp;
+        settingKey = RoundingMode;
+        if (indexPath.row == ROUND_UP_ROW)
+        {
+            settingValue = RoundingModeUp;
+        }
+        else if (indexPath.row == ROUND_DOWN_ROW)
+        {
+            settingValue = RoundingModeDown;
+        }
+        else if (indexPath.row == ROUND_NEAREST_ROW)
+        {
+            settingValue = RoundingModeNear;
+        }
     }
-    else if (indexPath.row == ROUND_DOWN_ROW)
-    {
-        newSetting = RoundingModeDown;
-    }
-    else if (indexPath.row == ROUND_NEAREST_ROW)
-    {
-        newSetting = RoundingModeNear;
-    }
-    
-    [[MAUserUtil sharedInstance] saveSetting:newSetting forKey:RoundingMode];
+    [[MAUserUtil sharedInstance] saveSetting:settingValue forKey:settingKey];
     
     NSRange range = NSMakeRange(0, [self numberOfSectionsInTableView:self.tableView]);
     NSIndexSet *sections = [NSIndexSet indexSetWithIndexesInRange:range];
-    [self.tableView reloadSections:sections withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.tableView beginUpdates];
+    if (addSections || deleteSections)
+    {
+        NSMutableIndexSet *sectionsToReload = [[NSMutableIndexSet alloc] init];
+        [sectionsToReload addIndex:ROUND_SECTION];
+
+        NSMutableIndexSet *sectionsToEdit = [[NSMutableIndexSet alloc] init];
+        [sectionsToEdit addIndex:ROUNDING_OPTIONS_SECTION];
+        [sectionsToEdit addIndex:EXAMPLES_SECTION];
+        if (addSections)
+        {
+            [self.tableView insertSections:sectionsToEdit withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+        else if (deleteSections)
+        {
+            [self.tableView deleteSections:sectionsToEdit withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+        [self.tableView reloadSections:sectionsToReload withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+    else
+    {
+        [self.tableView reloadSections:sections withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+    [self.tableView endUpdates];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -269,7 +408,7 @@ DECL_TABLE_IDX(EXAMPLES_SECTION, 1);
     return NO;
 }
 
-static CGFloat const Footer_Height = 40.;
+static CGFloat const Footer_Height = 50.;
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     if (section == EXAMPLES_SECTION)
@@ -282,7 +421,21 @@ static CGFloat const Footer_Height = 40.;
         tableFooter.textColor = [MAAppearance tableTextFontColor];
         tableFooter.backgroundColor = [tableView backgroundColor];
         
-        tableFooter.text = Localize(@"Enable rounding to automatically round the grand total to a whole dollar amount after entering the check total.");
+        NSString *text = nil;
+        if ([self isRoundingModeTip])
+        {
+            text = Localize(@"Automatically round the tip amount to a whole dollar amount after entering the check total or selecting a service rating.");
+        }
+        else if ([self isRoundingModeTotal])
+        {
+            text = Localize(@"Automatically round the grand total to a whole dollar amount after entering the check total or selecting a service rating.");
+        }
+        else
+        {
+            text = Localize(@"Turn off automatic rounding.");
+        }
+
+        tableFooter.text = text;
         
         // Note: must override heightForFooterInSection in order for this to have an effect.
         //tableView.tableFooterView = tableFooter;

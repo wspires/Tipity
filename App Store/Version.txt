@@ -1,5 +1,5 @@
 2.3
-• Added a new setting for automatically rounding the grand total to a whole dollar amount after entering the check total.
+• Added a new setting for automatically rounding the tip amount or grand total to a whole dollar amount after entering the check total.
 
 2.2
 Tip with the Apple Watch!

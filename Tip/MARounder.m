@@ -16,7 +16,7 @@
 
 - (instancetype)init
 {
-    return [self initWithMode:RoundingModeNone];
+    return [self initWithMode:RoundingModeUp];
 }
 - (instancetype)initWithMode:(NSString *)mode
 {
@@ -33,11 +33,10 @@
 {
     if ( ! mode)
     {
-        _mode = RoundingModeNone;
+        _mode = RoundingModeUp;
     }
     
-    BOOL isValidMode = [mode isEqualToString:RoundingModeNone]
-        || [mode isEqualToString:RoundingModeUp]
+    BOOL isValidMode = [mode isEqualToString:RoundingModeUp]
         || [mode isEqualToString:RoundingModeDown]
         || [mode isEqualToString:RoundingModeNear];
     if ( ! isValidMode)
@@ -57,11 +56,7 @@
 }
 - (double)roundFloat:(double)f
 {
-    if ([_mode isEqualToString:RoundingModeNone])
-    {
-        return f;
-    }
-    else if ([_mode isEqualToString:RoundingModeUp])
+    if ([_mode isEqualToString:RoundingModeUp])
     {
         return ceil(f);
     }
@@ -82,11 +77,7 @@
 }
 + (NSString *)printableNameForMode:(NSString *)mode
 {
-    if ([mode isEqualToString:RoundingModeNone])
-    {
-        return Localize(@"None");
-    }
-    else if ([mode isEqualToString:RoundingModeUp])
+    if ([mode isEqualToString:RoundingModeUp])
     {
         return Localize(@"Up");
     }
@@ -98,13 +89,12 @@
     {
         return Localize(@"Nearest");
     }
-    return Localize(@"None");
+    return Localize(@"Off");
 }
 
 + (void)roundGrandTotalInBill:(MABill *)bill
 {
-    // Check if rounding is enabled.
-    if ( ! [[MAUserUtil sharedInstance] enableRounding])
+    if ( ! [[MAUserUtil sharedInstance] roundOn])
     {
         return;
     }
@@ -118,12 +108,26 @@
         NSNumber *tipPercent = [MARatingTableViewCell tipPercentForRating:rating];
         bill.tipPercent = tipPercent;
     }
+
+    // Apply rounding. If multiple values are being rounded, then only the last value will be rounded since the preceding rounded values will be changed after rounding the last value since they depend on each other. For example, rounding the total after rounding the tip will change the tip.
     
-    // Round the grand total.
-    NSString *roundingMode = [[MAUserUtil sharedInstance] objectForKey:RoundingMode];
-    MARounder *rounder = [[MARounder alloc] initWithMode:roundingMode];
-    NSNumber *roundedTotal = [rounder roundNumber:bill.total];
-    bill.total = roundedTotal;
+    if ([[MAUserUtil sharedInstance] roundTip])
+    {
+        // Round the tip amount.
+        NSString *roundingMode = [[MAUserUtil sharedInstance] objectForKey:RoundingMode];
+        MARounder *rounder = [[MARounder alloc] initWithMode:roundingMode];
+        NSNumber *roundedTotal = [rounder roundNumber:bill.tip];
+        bill.tip = roundedTotal;
+    }
+
+    if ([[MAUserUtil sharedInstance] roundTotal])
+    {
+        // Round the grand total.
+        NSString *roundingMode = [[MAUserUtil sharedInstance] objectForKey:RoundingMode];
+        MARounder *rounder = [[MARounder alloc] initWithMode:roundingMode];
+        NSNumber *roundedTotal = [rounder roundNumber:bill.total];
+        bill.total = roundedTotal;
+    }
 }
 
 @end

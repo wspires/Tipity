@@ -31,7 +31,7 @@ DECL_TABLE_IDX(GEN_SECTION, 0);
 DECL_TABLE_IDX(ENABLE_TAX_ROW, 0);
 DECL_TABLE_IDX(ENABLE_SPLIT_TIP_ROW, 1);
 DECL_TABLE_IDX(SERVICE_RATING_ROW, 2);
-DECL_TABLE_IDX(ROUNDING_ROW, 3);
+DECL_TABLE_IDX(ROUND_ROW, 3);
 DECL_TABLE_IDX(APPEARANCE_ROW, 4);
 DECL_TABLE_IDX(GEN_SECTION_ROWS, 5);
 
@@ -195,7 +195,7 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
         self.roundingController = [[MARoundingSettingsViewController alloc] initWithNibName:@"MARoundingSettingsViewController" bundle:nil];
     }
     
-    self.roundingController.title = Localize(@"Round Total");
+    self.roundingController.title = Localize(@"Rounding");
     [self.navigationController pushViewController:self.roundingController animated:YES];
     
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -320,7 +320,7 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
         {
             return [self tableView:tableView serviceRatingCellForRowAtIndexPath:indexPath];
         }
-        else if (indexPath.row == ROUNDING_ROW)
+        else if (indexPath.row == ROUND_ROW)
         {
             return [self tableView:tableView roundingCellForRowAtIndexPath:indexPath];
         }
@@ -556,7 +556,7 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView roundingCellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString * const CellIdentifier = @"MARoundingCell";
+    static NSString * const CellIdentifier = @"roundingCellForRowAtIndexPath";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
     {
@@ -564,8 +564,31 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
     }
     [MAAppearance setAppearanceForCell:cell tableStyle:tableView.style];
     
-    cell.textLabel.text = Localize(@"Round Total");
-    
+    NSString *text = nil;
+    NSString *detailText = nil;
+    if ([[MAUserUtil sharedInstance] roundTip])
+    {
+        text = Localize(@"Round Tip Amount");
+        
+        NSString *roundingMode = [[MAUserUtil sharedInstance] objectForKey:RoundingMode];
+        detailText = [MARounder printableNameForMode:roundingMode];
+    }
+    else if ([[MAUserUtil sharedInstance] roundTotal])
+    {
+        text = Localize(@"Round Grand Total");
+        
+        NSString *roundingMode = [[MAUserUtil sharedInstance] objectForKey:RoundingMode];
+        detailText = [MARounder printableNameForMode:roundingMode];
+    }
+    else
+    {
+        text = Localize(@"Rounding");
+
+        detailText = Localize(@"Off");
+    }
+
+    cell.textLabel.text = text;
+
     if (Service_Rating_Iap)
     {
         [MATipIAPHelper disableLabelIfNotPurchased:cell.textLabel];
@@ -574,9 +597,7 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
     UIImage *image = [MAFilePaths roundingImage];
     cell.imageView.image = image;
 
-    NSString *roundingMode = [[MAUserUtil sharedInstance] objectForKey:RoundingMode];
-    NSString *roundingModeTitle = [MARounder printableNameForMode:roundingMode];
-    cell.detailTextLabel.text = roundingModeTitle;
+    cell.detailTextLabel.text = detailText;
 
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.accessoryView = [MAAccessoryView grayAccessoryViewForCell:cell];
@@ -632,9 +653,10 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
             {
                 return;
             }
+         
             [self loadServiceRatingController:indexPath];
         }
-        else if (indexPath.row == ROUNDING_ROW)
+        else if (indexPath.row == ROUND_ROW)
         {
             if (Rounding_Iap && [MATipIAPHelper checkAndAlertForIAP])
             {
