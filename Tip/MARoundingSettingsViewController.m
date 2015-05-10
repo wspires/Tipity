@@ -185,7 +185,7 @@ DECL_TABLE_IDX(EXAMPLES_SECTION, 2);
     if (indexPath.row == ROUND_NONE_ROW)
     {
         image = [MAFilePaths roundNoneImage];
-        text = Localize(@"No Rounding");
+        text = Localize(@"Rounding Off");
         settingValue = RoundItemNone;
     }
     else if (indexPath.row == ROUND_TIP_ROW)
@@ -411,7 +411,7 @@ DECL_TABLE_IDX(EXAMPLES_SECTION, 2);
 static CGFloat const Footer_Height = 50.;
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    if (section == EXAMPLES_SECTION)
+    if (section == ROUND_SECTION)
     {
         CGRect footerRect = CGRectMake(50, 0, tableView.frame.size.width, Footer_Height);
         UITextView *tableFooter = [[UITextView alloc] initWithFrame:footerRect];
@@ -446,7 +446,7 @@ static CGFloat const Footer_Height = 50.;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-    if (section == EXAMPLES_SECTION)
+    if (section == ROUND_SECTION)
     {
         return Footer_Height;
     }

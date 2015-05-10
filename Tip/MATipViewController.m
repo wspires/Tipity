@@ -166,7 +166,8 @@ static NSString * const TipPercentKey = @"tipPercent";
     }
 
     [self configureTableSections];
-    [self reloadTable];
+    [self.tableView reloadData];
+//    [self reloadTable];
     
 //    [self testCurrency];
 }
