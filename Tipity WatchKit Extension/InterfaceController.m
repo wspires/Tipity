@@ -20,7 +20,7 @@
 #include <CoreFoundation/CoreFoundation.h>
 
 // Whether to display the group for changing the tip amount via individual digit buttons and +/-.
-static BOOL const hideBillButtonGroup = YES;
+static BOOL const hideBillButtonGroup = NO;
 
 @interface InterfaceController() <MABillDelegate>
 @property (strong, nonatomic) MABill *bill;
@@ -536,10 +536,9 @@ static BOOL const hideBillButtonGroup = YES;
         //    title = [NSString stringWithFormat:@"Enter Bill"];
         //    title = [NSString stringWithFormat:@"Keyboard"];
         //    title = [NSString stringWithFormat:@"Check Total"];
-        title = [NSString stringWithFormat:@"Enter Total"];
         //    title = [NSString stringWithFormat:@"Type Total"];
-        [self addMenuItemWithImageNamed:@"KeyboardImage" title:title action:@selector(doMenuItemAction1)];
-        //    [self addMenuItemWithImageNamed:@"BillImage" title:title action:@selector(doMenuItemAction1)];
+//        title = [NSString stringWithFormat:@"Enter Total"];
+//        [self addMenuItemWithImageNamed:@"KeyboardImage" title:title action:@selector(doMenuItemAction1)];
     }
 
     title = [NSString stringWithFormat:@"Fair"];
