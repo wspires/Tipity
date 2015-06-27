@@ -10,11 +10,13 @@
 
 #import "MAAppearance.h"
 #import "MABill.h"
+#import "MADeviceUtil.h"
 #import "MAFilePaths.h"
 #import "MARounder.h"
 #import "MASwitchCell.h"
 #import "MATextFieldCell.h"
 #import "MATipIAPHelper.h"
+#import "MAUIUtil.h"
 #import "MAUserUtil.h"
 #import "MAUtil.h"
 
@@ -49,7 +51,7 @@ DECL_TABLE_IDX(EXAMPLES_SECTION, 2);
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [[self view] setBackgroundColor:[MAAppearance backgroundColor]];
-    [MAUtil setAdjustableNavTitle:self.navigationItem.title withNavigationItem:self.navigationItem];
+    [MAUIUtil setAdjustableNavTitle:self.navigationItem.title withNavigationItem:self.navigationItem];
     
     [self registerNibs];
     
@@ -83,7 +85,7 @@ DECL_TABLE_IDX(EXAMPLES_SECTION, 2);
 - (void)viewWillAppear:(BOOL)animated
 {
     [[self view] setBackgroundColor:[MAAppearance backgroundColor]];
-    [MAUtil updateNavItem:self.navigationItem withTitle:self.title];
+    [MAUIUtil updateNavItem:self.navigationItem withTitle:self.title];
         
     // Not reloading the table each time it appears to make it snappier since it should not have changed between views changing.
     // BUT: We need to reload the app colors for the icons!

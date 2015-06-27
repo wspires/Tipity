@@ -9,6 +9,7 @@
 #import "MAAccessoryView.h"
 
 #import "MAAppearance.h"
+#import "MADeviceUtil.h"
 #import "MAUtil.h"
 
 #define PADDING 4.f //give the canvas some padding so the ends and joints of the lines can be drawn with a mitered joint

@@ -8,12 +8,12 @@
 
 #import "InterfaceController.h"
 
-#import "MAAppearance.h"
+//#import "MAAppearance.h"
 #import "MAAppGroupNotifier.h"
 #import "MAAppGroup.h"
 #import "MABill.h"
 #import "MAKeyboardController.h"
-#import "MARatingTableViewCell.h"
+//#import "MARatingTableViewCell.h"
 #import "MARounder.h"
 #import "MAUserUtil.h"
 
@@ -90,7 +90,7 @@ static BOOL const hideBillButtonGroup = NO;
         NSLog(@"%@ initWithContext", self);
         
         [self loadSettings];
-        [MAAppearance reloadAppearanceSettings];
+//        [MAAppearance reloadAppearanceSettings];
         
 //        [self setImage:[MAFilePaths billImage] forButton:self.billButton];
 //        [self setImage:[MAFilePaths tipAmountImage] forButton:self.tipButton];
@@ -255,6 +255,7 @@ static BOOL const hideBillButtonGroup = NO;
     [userInfo setObject:encodedBill forKey:@"bill"];
     
 
+    /*
     BOOL const wasSent = [WKInterfaceController openParentApplication:userInfo reply:^(NSDictionary *replyInfo, NSError *error) {
         
         NSData *encodedBill = [replyInfo objectForKey:@"bill"];
@@ -269,7 +270,8 @@ static BOOL const hideBillButtonGroup = NO;
         }
     }];
     NSLog(@"openParentApplication: %d", wasSent);
-
+*/
+    
 //    NSString *type = @"com.mindsaspire.Tip.bill";
 
     
@@ -335,7 +337,8 @@ static BOOL const hideBillButtonGroup = NO;
 
 - (UIColor *)selectedColor
 {
-    return [MAAppearance foregroundColor];
+    return [UIColor blueColor];
+//    return [MAAppearance foregroundColor];
 }
 
 - (void)setDigitButtonsWithBill
@@ -579,7 +582,8 @@ static BOOL const hideBillButtonGroup = NO;
     self.bill.tipPercent = tipPercent;
 
     // ratingInt is the ID of the service rating, like 1, 2, 3, 4, 5, while the other "rating" variable is the actual tip percent. Needed to handle rounding.
-    NSUInteger const rating = [MARatingTableViewCell ratingForTipPercent:tipPercent];
+    NSUInteger const rating = 1;
+//    NSUInteger const rating = [MARatingTableViewCell ratingForTipPercent:tipPercent];
     NSString *ratingString = [NSString stringWithFormat:@"%d", (int)rating];
     [[MAUserUtil sharedInstance] saveSetting:ratingString forKey:LastSelectedServiceRating];
     

@@ -10,6 +10,7 @@
 
 #import "MAAppearance.h"
 #import "MAFilePaths.h"
+#import "MAStringUtil.h"
 
 #import "CustomIOS7AlertView.h"
 #import "MAUpgradeAlertViewController.h"
@@ -290,7 +291,7 @@ static NSUInteger const ProductCountThreshold = 3;
             [featuresString appendString:string];
         }
         
-        sharedInstance = [MAUtil trimWhitespace:featuresString];
+        sharedInstance = [MAStringUtil trimWhitespace:featuresString];
     });
     return sharedInstance;
 }

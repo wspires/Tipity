@@ -6,13 +6,14 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
+#import "MADeviceUtil.h"
 #import "MAFilePaths.h"
 #import "MAUtil.h"
 #import "MAImageCache.h"
 #import "MAAppearance.h"
 #import "UIColor+ExtraColors.h"
 #import "UIImage+Gradient.h"
-#include "MAAppDelegate.h"
+#import "MAStringUtil.h"
 
 static NSString * const BackgroundImageNamePhone = @"Cloth - iPhone.png";
 static NSString * const BackgroundImageNamePad = @"Cloth - iPad.png";
@@ -25,17 +26,17 @@ static NSString * const ExerciseFilterName = @"ExerciseFilterName";
 
 @implementation MAFilePaths
 
-+ (NSString *)backgroundImageName
-{
-    if ([MAUtil iPad])
-    {
-        return BackgroundImageNamePad;
-    }
-    else
-    {
-        return BackgroundImageNamePhone;
-    }
-}
+//+ (NSString *)backgroundImageName
+//{
+//    if ([MAUtil iPad])
+//    {
+//        return BackgroundImageNamePad;
+//    }
+//    else
+//    {
+//        return BackgroundImageNamePhone;
+//    }
+//}
 
 + (NSString *)docDir
 {
@@ -297,7 +298,7 @@ static NSString * const ExerciseFilterName = @"ExerciseFilterName";
         return [[NSArray alloc] init];
     }
     NSArray *list = [[NSArray alloc] initWithContentsOfFile:path];
-    list = [MAUtil localizeArray:list];
+    list = [MAStringUtil localizeArray:list];
     return list;
 }
 
@@ -795,7 +796,7 @@ static NSString * const ExerciseFilterName = @"ExerciseFilterName";
                 BOOL const shouldAppendDeviceSuffix = !isCustom || ![isCustom boolValue];
                 if (shouldAppendDeviceSuffix)
                 {
-                    if ([MAUtil iPad])
+                    if ([MADeviceUtil iPad])
                     {
                         // E.g., "Cloth - iPad.png"
                         imageName = SFmt(@"%@ - iPad.png", imageName);

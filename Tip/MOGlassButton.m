@@ -37,6 +37,8 @@
 */
 
 #import "MOGlassButton.h"
+
+#import "MADeviceUtil.h"
 #import "UIColor+ExtraColors.h"
 #import "MAUtil.h"
 #import "MAAppearance.h"

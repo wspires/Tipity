@@ -8,6 +8,7 @@
 
 #import "MAAppearanceSelectionViewController.h"
 
+#import "MADeviceUtil.h"
 #import "MAFilePaths.h"
 #import "MAUserUtil.h"
 #import "MAUtil.h"
@@ -22,6 +23,7 @@
 #import "FDTakeController.h"
 #import "UIImage+Extensions.h"
 #import "MAUnitsSettingsCell.h"
+#import "MAUIUtil.h"
 #import "MAColorUtil.h"
 
 #define DISABLE_TEST_BUTTON
@@ -100,7 +102,7 @@ static NSString *MAUnitsCellIdentifier = @"MAUnitsCellIdentifier";
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [[self view] setBackgroundColor:[MAAppearance backgroundColor]];
-    [MAUtil setAdjustableNavTitle:self.navigationItem.title withNavigationItem:self.navigationItem];
+    [MAUIUtil setAdjustableNavTitle:self.navigationItem.title withNavigationItem:self.navigationItem];
 
     [self registerNibs];
     
@@ -162,7 +164,7 @@ static NSString *MAUnitsCellIdentifier = @"MAUnitsCellIdentifier";
 - (void)viewWillAppear:(BOOL)animated
 {
     [[self view] setBackgroundColor:[MAAppearance backgroundColor]];
-    [MAUtil updateNavItem:self.navigationItem withTitle:self.title];
+    [MAUIUtil updateNavItem:self.navigationItem withTitle:self.title];
 
     self.settings = [MAUserUtil loadSettings];
     self.selectedBackgroundColorId = [self.settings objectForKey:BackgroundColorId];
@@ -322,8 +324,8 @@ static NSString *MAUnitsCellIdentifier = @"MAUnitsCellIdentifier";
 
     UIImage *image = [UIImage imageNamed:[MAFilePaths blankImageFilename]];
     image = [MAAppearance tintImage:image tintColor:color];
-    NSInteger tag = [MAUtil toTag:indexPath];
-    [MAUtil setImage:image forCell:cell withTag:tag];
+    NSInteger tag = [MAUIUtil toTag:indexPath];
+    [MAUIUtil setImage:image forCell:cell withTag:tag];
     
     if ([colorId isEqualToString:selectedColorId])
     {
@@ -376,8 +378,8 @@ static NSString *MAUnitsCellIdentifier = @"MAUnitsCellIdentifier";
     NSUInteger hex = [[self.settings objectForKey:customColorSettingName] integerValue];
     UIColor *color = [UIColor colorWithHex:hex];
     UIImage *image = [UIImage imageWithColor:color];
-    NSInteger tag = [MAUtil toTag:indexPath];
-    [MAUtil setImage:image forCell:cell withTag:tag];
+    NSInteger tag = [MAUIUtil toTag:indexPath];
+    [MAUIUtil setImage:image forCell:cell withTag:tag];
 
     return cell;
 }
@@ -399,8 +401,8 @@ static NSString *MAUnitsCellIdentifier = @"MAUnitsCellIdentifier";
     // Put in a clear image/placeholder so that the text lines up with the "Use Color" row above it.
     UIColor *color = [UIColor clearColor];
     UIImage *image = [UIImage imageWithColor:color];
-    NSInteger tag = [MAUtil toTag:indexPath];
-    [MAUtil setImage:image forCell:cell withTag:tag];
+    NSInteger tag = [MAUIUtil toTag:indexPath];
+    [MAUIUtil setImage:image forCell:cell withTag:tag];
 
     return cell;
 }
@@ -442,8 +444,8 @@ static NSString *MAUnitsCellIdentifier = @"MAUnitsCellIdentifier";
     {
         image = [UIImage imageWithColor:color];
     }
-    NSInteger tag = [MAUtil toTag:indexPath];
-    [MAUtil setImage:image forCell:cell withTag:tag];
+    NSInteger tag = [MAUIUtil toTag:indexPath];
+    [MAUIUtil setImage:image forCell:cell withTag:tag];
 
     return cell;
 }
@@ -465,8 +467,8 @@ static NSString *MAUnitsCellIdentifier = @"MAUnitsCellIdentifier";
     // Put in a clear image/placeholder so that the text lines up with the other rows.
     UIColor *color = [UIColor clearColor];
     UIImage *image = [UIImage imageWithColor:color];
-    NSInteger tag = [MAUtil toTag:indexPath];
-    [MAUtil setImage:image forCell:cell withTag:tag];
+    NSInteger tag = [MAUIUtil toTag:indexPath];
+    [MAUIUtil setImage:image forCell:cell withTag:tag];
     
     return cell;
 }
@@ -495,7 +497,6 @@ static NSString *MAUnitsCellIdentifier = @"MAUnitsCellIdentifier";
     {
         cell.segCtrl.selectedSegmentIndex = 1;
     }
-    [cell.segCtrl addTarget:nil action:NULL forControlEvents:UIControlEventValueChanged];
     [cell.segCtrl addTarget:self action:@selector(tabBarColorChanged:) forControlEvents:UIControlEventValueChanged];
     
     //cell.label.text = Localize(@"Top and Bottom Bar Color");
@@ -560,7 +561,6 @@ static NSString *MAUnitsCellIdentifier = @"MAUnitsCellIdentifier";
     {
         cell.segCtrl.selectedSegmentIndex = 1;
     }
-    [cell.segCtrl addTarget:nil action:NULL forControlEvents:UIControlEventValueChanged];
     [cell.segCtrl addTarget:self action:@selector(tableTextColorChanged:) forControlEvents:UIControlEventValueChanged];
     
     cell.label.text = Localize(@"Row");
@@ -623,7 +623,6 @@ static NSString *MAUnitsCellIdentifier = @"MAUnitsCellIdentifier";
     {
         cell.segCtrl.selectedSegmentIndex = 1;
     }
-    [cell.segCtrl addTarget:nil action:NULL forControlEvents:UIControlEventValueChanged];
     [cell.segCtrl addTarget:self action:@selector(buttonTextColorChanged:) forControlEvents:UIControlEventValueChanged];
     
     cell.label.text = Localize(@"Button");
@@ -733,7 +732,7 @@ static NSString *MAUnitsCellIdentifier = @"MAUnitsCellIdentifier";
             appDelegate.window.tintColor = color;
             [appDelegate.window setNeedsDisplay];
             
-            [MAUtil setAdjustableNavTitle:self.navigationItem.title withNavigationItem:self.navigationItem];
+            [MAUIUtil setAdjustableNavTitle:self.navigationItem.title withNavigationItem:self.navigationItem];
         }
         
         textColorKey = ButtonTextColor;
@@ -798,7 +797,7 @@ static NSString *MAUnitsCellIdentifier = @"MAUnitsCellIdentifier";
             appDelegate.window.tintColor = color;
             [appDelegate.window setNeedsDisplay];
             
-            [MAUtil setAdjustableNavTitle:self.navigationItem.title withNavigationItem:self.navigationItem];
+            [MAUIUtil setAdjustableNavTitle:self.navigationItem.title withNavigationItem:self.navigationItem];
         }
         
         textColorKey = ButtonTextColor;

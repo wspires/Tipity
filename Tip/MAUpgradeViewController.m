@@ -11,8 +11,10 @@
 #import "MAAccessoryView.h"
 #import "MAAppDelegate.h"
 #import "MAAppearance.h"
+#import "MADeviceUtil.h"
 #import "MAFilePaths.h"
 #import "MATipIAPHelper.h"
+#import "MAUIUtil.h"
 #import "MAUserUtil.h"
 #import "MAUtil.h"
 
@@ -51,7 +53,7 @@ DECL_TABLE_IDX(BUY_SECTION_ROWS, 1);
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [[self view] setBackgroundColor:[MAAppearance backgroundColor]];
-    [MAUtil setAdjustableNavTitle:self.navigationItem.title withNavigationItem:self.navigationItem];
+    [MAUIUtil setAdjustableNavTitle:self.navigationItem.title withNavigationItem:self.navigationItem];
     
     // Make the table background clear, so that this view's background shows.
     self.tableView.backgroundColor = [UIColor clearColor];
@@ -115,7 +117,7 @@ DECL_TABLE_IDX(BUY_SECTION_ROWS, 1);
 - (void)viewWillAppear:(BOOL)animated
 {
     [[self view] setBackgroundColor:[MAAppearance backgroundColor]];
-    [MAUtil updateNavItem:self.navigationItem withTitle:self.title];
+    [MAUIUtil updateNavItem:self.navigationItem withTitle:self.title];
 
     // Get notified when upgrade is purchased or restored.
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
@@ -281,8 +283,8 @@ DECL_TABLE_IDX(BUY_SECTION_ROWS, 1);
     cell.accessoryType = UITableViewCellAccessoryNone;
 
     UIImage *image = [MAFilePaths upgradeImage];
-    NSInteger tag = [MAUtil toTag:indexPath];
-    [MAUtil setImage:image forCell:cell withTag:tag];
+    NSInteger tag = [MAUIUtil toTag:indexPath];
+    [MAUIUtil setImage:image forCell:cell withTag:tag];
 
     static dispatch_once_t once;
     static NSNumberFormatter *priceFormatter = nil;
@@ -337,7 +339,7 @@ DECL_TABLE_IDX(BUY_SECTION_ROWS, 1);
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat height = [MAUtil rowHeightForTableView:tableView];
+    CGFloat height = [MAUIUtil rowHeightForTableView:tableView];
     if (indexPath.section == BUY_SECTION)
     {
     }

@@ -9,12 +9,11 @@
 #import "MAUserUtil.h"
 
 #import "MAAppGroupNotifier.h"
-#import "MADateUtil.h"
+#import "MADefines.h"
+#import "MADeviceUtil.h"
 #import "MAFilePaths.h"
-#import "MAUtil.h"
-#import "UIColor+ExtraColors.h"
-#import "MAAppDelegate.h"
-#import "MATipIAPHelper.h"
+#import "MALogUtil.h"
+#import "MAStringUtil.h"
 
 // TODO: Make thread-safe and add a sharedInstance with instance methods (like MAActivity) instead of static methods.
 
@@ -207,7 +206,7 @@ static NSString *PerExerciseSettings = @"perExerciseSettings";
 - (BOOL)enableSplit
 {
     NSString *enableStr = [self objectForKey:EnableSplit];
-    BOOL const enable = [MAUtil isStringOn:enableStr];
+    BOOL const enable = [MAStringUtil isStringOn:enableStr];
     return enable;
 }
 - (void)setEnableSplit:(BOOL)enable
@@ -223,7 +222,7 @@ static NSString *PerExerciseSettings = @"perExerciseSettings";
 - (BOOL)enableTax
 {
     NSString *enableStr = [self objectForKey:EnableTax];
-    BOOL const enable = [MAUtil isStringOn:enableStr];
+    BOOL const enable = [MAStringUtil isStringOn:enableStr];
     return enable;
 }
 - (void)setEnableTax:(BOOL)enable
@@ -239,7 +238,7 @@ static NSString *PerExerciseSettings = @"perExerciseSettings";
 - (BOOL)enableServiceRating
 {
     NSString *enableStr = [self objectForKey:EnableServiceRating];
-    BOOL const enable = [MAUtil isStringOn:enableStr];
+    BOOL const enable = [MAStringUtil isStringOn:enableStr];
     return enable;
 }
 - (void)setEnableServiceRating:(BOOL)enable
@@ -887,7 +886,7 @@ static NSString *PerExerciseSettings = @"perExerciseSettings";
     // Do not remove default user.
     if ([MAUserUtil isDefaultUser:user])
     {
-        DLog(@"Cannot remove settings for default user '%@'", user);
+        LOG_S(@"Cannot remove settings for default user '%@'", user);
         return NO;
     }
     

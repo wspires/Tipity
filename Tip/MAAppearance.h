@@ -12,14 +12,24 @@
 @interface MAAppearance : NSObject
 
 + (void)setAppearance;
-
 + (void)reloadAppearanceSettings;
 + (UIColor *)backgroundColor;
 + (UIColor *)foregroundColor;
 + (UIColor *)selectedColor;
 + (UIColor *)highlightedColor;
 + (UIColor *)disabledColor;
++ (UIColor *)buttonTextColor;
 
++ (UIColor *)searchBarColor;
+
++ (UIImage *)tintImage:(UIImage *)image tintColor:(UIColor *)tintColor;
++ (UIImage *)tintImage:(UIImage *)image;
++ (UIImage *)tintedImageNamed:(NSString *)name;
++ (UIColor *)correctColor:(UIColor *)color;
+
++ (UIImage *)imageWithForegroundGradient:(UIImage *)image;
+
+#ifndef IS_WATCH_EXTENSION
 + (void)setBackgroundColorForCell:(UITableViewCell *)cell;
 + (BOOL)shouldSetFontColorForTableStyle:(UITableViewStyle)tableStyle;
 + (CGFloat)cellFontSize;
@@ -51,18 +61,7 @@ viewForHeaderInSection:(NSInteger)section
 
 + (void)setTableViewHeaderAppearanceForLabel:(UILabel *)label;
 
-+ (UIColor *)searchBarColor;
-
-+ (UIImage *)tintImage:(UIImage *)image tintColor:(UIColor *)tintColor;
-+ (UIImage *)tintImage:(UIImage *)image;
-+ (UIImage *)tintedImageNamed:(NSString *)name;
-+ (UIColor *)correctColor:(UIColor *)color;
-
-+ (UIImage *)imageWithForegroundGradient:(UIImage *)image;
-
 + (void)setTabAndNavBarColor;
-
-+ (UIColor *)buttonTextColor;
 
 + (NSString *)tableTextFontName;
 + (CGFloat)tableTextFontSize;
@@ -73,8 +72,6 @@ viewForHeaderInSection:(NSInteger)section
 + (UIColor *)separatorColor;
 + (UIColor *)headerLabelTextColor;
 + (UIColor *)detailLabelTextColor;
-
-//- (KWFontPicker *)tableFontPicker;
 
 + (UIActivityIndicatorViewStyle)tableViewActivityIndicatorStyle;
 + (UIActivityIndicatorViewStyle)activityIndicatorStyle;
@@ -89,5 +86,6 @@ viewForHeaderInSection:(NSInteger)section
 + (CGFloat)heightForString:(NSString *)string textStyle:(NSString *)textStyle frameWidth:(CGFloat)frameWidth defaultHeight:(CGFloat)defaultHeight;
 + (CGFloat)numberOfLinesForString:(NSString *)string textStyle:(NSString *)textStyle frameWidth:(CGFloat)frameWidth defaultHeight:(CGFloat)defaultHeight;
 + (CGFloat)heightForLines:(NSUInteger)numberOfLines textStyle:(NSString *)textStyle defaultHeight:(CGFloat)defaultHeight;
+#endif // IS_EXTENSION
 
 @end

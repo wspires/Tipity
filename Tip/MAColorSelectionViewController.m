@@ -11,7 +11,9 @@
 #import "MAAppearance.h"
 #import "MAAppDelegate.h"
 #import "MAColorUtil.h"
+#import "MADeviceUtil.h"
 #import "MAFilePaths.h"
+#import "MAUIUtil.h"
 #import "MAUserUtil.h"
 #import "MAUtil.h"
 
@@ -60,7 +62,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [[self view] setBackgroundColor:[MAAppearance backgroundColor]];
-    [MAUtil setAdjustableNavTitle:self.navigationItem.title withNavigationItem:self.navigationItem];
+    [MAUIUtil setAdjustableNavTitle:self.navigationItem.title withNavigationItem:self.navigationItem];
 
     [self.testBtn setupAsLogButton];
 
@@ -126,7 +128,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [MAUtil updateNavItem:self.navigationItem withTitle:self.title];
+    [MAUIUtil updateNavItem:self.navigationItem withTitle:self.title];
 
     self.settings = [MAUserUtil loadSettings];
     
@@ -242,7 +244,7 @@
             appDelegate.window.tintColor = color;
             [appDelegate.window setNeedsDisplay];
             
-            [MAUtil setAdjustableNavTitle:self.navigationItem.title withNavigationItem:self.navigationItem];
+            [MAUIUtil setAdjustableNavTitle:self.navigationItem.title withNavigationItem:self.navigationItem];
         }
     }
 }

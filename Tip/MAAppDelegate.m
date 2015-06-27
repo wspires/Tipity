@@ -10,6 +10,7 @@
 
 #import "MAAppearance.h"
 #import "MAAppGroup.h"
+#import "MADeviceUtil.h"
 #import "MAImageCache.h"
 #import "MATipViewController.h"
 #import "MASettingsViewController.h"
@@ -18,10 +19,18 @@
 #import "MAUserUtil.h"
 #import "MAUtil.h"
 
+#ifdef USE_IOS9
+#import <WatchConnectivity/WatchConnectivity.h>
+#endif
+
 //#import <HockeySDK/HockeySDK.h>
 #import "Appirater.h"
 
 @interface MAAppDelegate ()
+#ifdef USE_IOS9
+<WCSessionDelegate>
+#endif
+
 //@property (assign, nonatomic) UIBackgroundTaskIdentifier bgTask;
 @end
 
@@ -70,11 +79,142 @@
     {
         self.window.tintColor = [MAAppearance foregroundColor];
     }
-
+    
     [Appirater appLaunched:YES];
+
+#ifdef USE_IOS9
+    [self startWCSession];
+#endif
 
     return YES;
 }
+
+#ifdef USE_IOS9
+- (void)startWCSession
+{
+    if ([WCSession isSupported])
+    {
+        TLog(@"Activating WCSession");
+
+        WCSession *session = [WCSession defaultSession];
+        session.delegate = self;
+        [session activateSession];
+    }
+}
+
+- (void)sessionWatchStateDidChange:(WCSession *)session
+{
+    LOG
+    if ( ! session.paired)
+    {
+        LOG_S(@"Watch not paired");
+        return;
+    }
+    if ( ! session.watchAppInstalled)
+    {
+        LOG_S(@"Watch app not installed");
+        return;
+    }
+    TLog(@"Watch is paired, and watch app is installed. watchDirectoryURL: %@", session.watchDirectoryURL);
+    
+    // context must contain/be property list types. I think this rules out custom classes even if they are NSCoding-compliant.
+    NSMutableDictionary *context = [NSMutableDictionary dictionary];
+    [context setObject:@"bar" forKey:@"foo"];
+    NSData *encodedBill = [NSKeyedArchiver archivedDataWithRootObject:[MABill sharedInstance]];
+    [context setObject:encodedBill forKey:@"bill"];
+    NSError *error = nil;
+    
+    BOOL success = [session updateApplicationContext:context error:&error];
+    if ( ! success && error)
+    {
+        LOG_S(@"Error: updateApplicationContext: %@", error);
+    }
+    
+    // userInfo must contain/be property list types. I think this rules out custom classes even if they are NSCoding-compliant. (not really because NSData is a property list type)
+    NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+    [userInfo setObject:@"spires" forKey:@"wade"];
+    WCSessionUserInfoTransfer *userInfoTransfer = [session transferUserInfo:userInfo];
+    
+//    [session transferFile:<#(nonnull NSURL *)#> metadata:<#(nullable NSDictionary<NSString *,id> *)#>]
+
+    // Interactive messaging.
+    // On iPhone side, session.reachable is true if devices connected and Watch app is foreground.
+    // On Watch side, session.reachable is true if devices connected and WatchKit extension is foreground.
+    if (session.isReachable)
+    {
+        NSData *encodedBill = [NSKeyedArchiver archivedDataWithRootObject:[MABill sharedInstance]];
+        [session sendMessageData:encodedBill
+                    replyHandler:^(NSData *replyMessageData)
+        {
+            LOG_S(@"Reply: %@", replyMessageData);
+        }
+                    errorHandler:^(NSError *error)
+        {
+            LOG_S(@"Error: %@", error);
+        }];
+    }
+}
+
+- (void)sessionReachabilityDidChange:(WCSession *)session
+{
+    LOG
+}
+
+- (void)session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *, id> *)message
+{
+    LOG
+
+}
+
+- (void)session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *, id> *)message replyHandler:(void(^)(NSDictionary<NSString *, id> *replyMessage))replyHandler
+{
+    LOG
+
+}
+
+- (void)session:(WCSession *)session didReceiveMessageData:(NSData *)messageData
+{
+    LOG
+
+}
+
+- (void)session:(WCSession *)session didReceiveMessageData:(NSData *)messageData replyHandler:(void(^)(NSData *replyMessageData))replyHandler
+{
+    LOG
+
+}
+
+- (void)session:(WCSession *)session didReceiveApplicationContext:(NSDictionary<NSString *, id> *)applicationContext
+{
+    LOG
+
+}
+
+- (void)session:(WCSession *)session didFinishUserInfoTransfer:(WCSessionUserInfoTransfer *)userInfoTransfer error:(NSError *)error
+{
+    LOG
+
+}
+
+- (void)session:(WCSession *)session didReceiveUserInfo:(NSDictionary<NSString *, id> *)userInfo
+{
+    LOG
+
+}
+
+- (void)session:(WCSession *)session didFinishFileTransfer:(WCSessionFileTransfer *)fileTransfer error:(NSError *)error
+{
+    LOG
+
+}
+
+- (void)session:(WCSession *)session didReceiveFile:(WCSessionFile *)file
+{
+    LOG
+
+}
+
+#endif
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

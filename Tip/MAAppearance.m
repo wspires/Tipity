@@ -8,9 +8,14 @@
 
 #import "MAAppearance.h"
 
+#ifndef IS_WATCH_EXTENSION
 #import "MAAppDelegate.h"
+#import "MAUIUtil.h"
+#endif // IS_WATCH_EXTENSION
+
 #import "MAColorUtil.h"
 #import "UIColor+ExtraColors.h"
+#import "MADeviceUtil.h"
 #import "MAFilePaths.h"
 #import "MAImageCache.h"
 #import "MAUtil.h"
@@ -32,6 +37,7 @@ static UIColor *ForegroundColor = nil;
 
 + (void)setAppearance
 {
+#ifndef IS_WATCH_EXTENSION
     [MAAppearance setTabAndNavBarColor];
     
     if (BELOW_IOS7)
@@ -68,105 +74,7 @@ static UIColor *ForegroundColor = nil;
     
     //[MAAppearance setTabBarAppearance];
     //[MAAppearance setNavBarAppearance];
-}
-
-+ (void)setTabBarAppearance
-{
-    UIImage *tabBackground = [[UIImage imageNamed:@"tab_bar_49"]
-                              resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
-    [[UITabBar appearance] setBackgroundImage:tabBackground];
-    
-    UIImage *tabSelected = [[UIImage imageNamed:@"tab_bar_selected"]
-                            resizableImageWithCapInsets:UIEdgeInsetsMake(0, 3, 0, 3)];
-    [[UITabBar appearance] setSelectionIndicatorImage:tabSelected];
-    return;
-
-    /*
-    MAAppDelegate* myDelegate = (((MAAppDelegate*) [UIApplication sharedApplication].delegate));
-    UITabBarController *tabBarController = (UITabBarController *)myDelegate.window.rootViewController;
-    UITabBar *tabBar = tabBarController.tabBar;
-    UITabBarItem *tabBarItem1 = [tabBar.items objectAtIndex:0];
-    UITabBarItem *tabBarItem2 = [tabBar.items objectAtIndex:1];
-    UITabBarItem *tabBarItem3 = [tabBar.items objectAtIndex:2];
-    
-    tabBarItem1.title = @"Routines";
-    tabBarItem2.title = @"History";
-    tabBarItem3.title = @"Settings";
-    
-    [tabBarItem1 setFinishedSelectedImage:[UIImage imageNamed:@"home_selected.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"home.png"]];
-    [tabBarItem2 setFinishedSelectedImage:[UIImage imageNamed:@"maps_selected.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"maps.png"]];
-    [tabBarItem3 setFinishedSelectedImage:[UIImage imageNamed:@"myplan_selected.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"myplan.png"]];
-    
-    // Change the tab bar background
-    UIImage* tabBarBackground = [UIImage imageNamed:@"tabbar.png"];
-    [[UITabBar appearance] setBackgroundImage:tabBarBackground];
-    [[UITabBar appearance] setSelectionIndicatorImage:[UIImage imageNamed:@"tabbar_selected.png"]];
-    
-    // Change the title color of tab bar items
-    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                       [UIColor whiteColor], UITextAttributeTextColor,
-                                                       nil] forState:UIControlStateNormal];
-    UIColor *titleHighlightedColor = UIColorFromRGB(153, 192, 48);
-    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                       titleHighlightedColor, UITextAttributeTextColor,
-                                                       nil] forState:UIControlStateHighlighted];
-    
-    [tabBar setNeedsDisplay];
-    [tabBar setNeedsLayout];
-     */
-}
-
-+ (void)setNavBarAppearance
-{
-//    MAAppDelegate* myDelegate = (((MAAppDelegate *) [UIApplication sharedApplication].delegate));
-//    UITabBarController *tabBarController = (UITabBarController *)myDelegate.window.rootViewController;
-//    tabBarController.navigationController.navigationBar.translucent = YES;
-//    return;
-    
-    /*
-     MAAppDelegate* myDelegate = (((MAAppDelegate*) [UIApplication sharedApplication].delegate));
-     UITabBarController *tabBarController = (UITabBarController *)myDelegate.window.rootViewController;
-     UIView *view = tabBarController.navigationController.navigationBar;
-     [MAUtil addGradientToView:view];
-     return;
-     */
-    
-    /*
-    UIImage *navBackgroundImage = [UIImage imageNamed:@"nav_bar_44"];
-    [[UINavigationBar appearance] setBackgroundImage:navBackgroundImage forBarMetrics:UIBarMetricsDefault];
-    navBackgroundImage = [UIImage imageNamed:@"nav_bar_32"];
-    [[UINavigationBar appearance] setBackgroundImage:navBackgroundImage forBarMetrics:UIBarMetricsLandscapePhone];
-    return;
-    */
-    
-    /*
-     UIImage *navBackgroundImage = [UIImage imageNamed:@"navbar_bg"];
-     [[UINavigationBar appearance] setBackgroundImage:navBackgroundImage forBarMetrics:UIBarMetricsDefault];
-     
-     NSDictionary * attributes = [NSDictionary dictionaryWithObjectsAndKeys:
-     UIColorFromRGB(245.0, 245.0, 245.0), UITextAttributeTextColor,
-     UIColorFromRGBA(0.0, 0.0, 0.0, 0.8), UITextAttributeTextShadowColor,
-     [NSValue valueWithUIOffset:UIOffsetMake(0, 1)],
-     UITextAttributeTextShadowOffset,
-     [UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:21.0], UITextAttributeFont, nil];
-     
-     [[UINavigationBar appearance] setTitleTextAttributes:attributes];
-     
-     // Change the appearance of back button
-     UIImage *backButtonImage = [[UIImage imageNamed:@"button_back"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 13, 0, 6)];
-     [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-     
-     // Change the appearance of other navigation button
-     UIImage *barButtonImage = [[UIImage imageNamed:@"button_normal"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 6, 0, 6)];
-     [[UIBarButtonItem appearance] setBackgroundImage:barButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-     
-     [[UIBarButtonItem appearance] setTitleTextAttributes:attributes forState:UIControlStateNormal];
-     
-     MAAppDelegate* myDelegate = (((MAAppDelegate*) [UIApplication sharedApplication].delegate));
-     UITabBarController *tabBarController = (UITabBarController *)myDelegate.window.rootViewController;
-     [tabBarController.navigationController.view setNeedsDisplay];
-     [tabBarController.navigationController.view setNeedsLayout];
-     */
+#endif // IS_WATCH_EXTENSION
 }
 
 // Reload user-selected colors for background, foreground, etc.
@@ -180,14 +88,16 @@ static UIColor *ForegroundColor = nil;
     BackgroundColor = [MAAppearance loadBackgroundColor];
     ForegroundColor = [MAAppearance loadForegroundColor];
     
+#ifndef IS_WATCH_EXTENSION
     [MAAppearance setTabAndNavBarColor];
+    [MAAppearance setSeparatorColor];
+#endif
     
 #ifdef IS_GYM_LOG_APP
     // Reload the default exercise image with the new color tint.
     [MAExercise defaultExerciseImage:YES];
 #endif
     
-    [MAAppearance setSeparatorColor];
 
     // Clear the cache of gradient images.
     [[MAImageCache sharedInstance] removeAllObjects];
@@ -323,6 +233,204 @@ static UIColor *ForegroundColor = nil;
 + (UIColor *)disabledColor
 {
     return [UIColor dimGrayColor];
+}
+
++ (UIColor *)buttonTextColor
+{
+    NSDictionary *settings = [MAUserUtil loadSettings];
+    NSString *hexString = [settings objectForKey:ButtonTextColor];
+    UIColor *color = [UIColor colorWithHexString:hexString];
+    return color;
+}
+
++ (UIColor *)searchBarColor
+{
+    if (ABOVE_IOS7)
+    {
+        NSDictionary *settings = [MAUserUtil loadSettings];
+        NSString *color = [settings objectForKey:TabBarColor];
+        if ([color isEqualToString:@"dark"])
+        {
+            return [UIColor colorWithHex:0x2e2e28];
+        }
+        else // ([color isEqualToString:@"light"])
+        {
+            //return [UIColor colorWithHex:0xf8f8ff];
+            return [UIColor whiteColor];
+        }
+    }
+    else
+    {
+        return [UIColor blackColor];
+    }
+}
+
+// Tint image with color, ignoring luminosity but preserving alpha channel.
+// http://stackoverflow.com/questions/3514066/how-to-tint-a-transparent-png-image-in-iphone
++ (UIImage *)tintImage:(UIImage *)image tintColor:(UIColor *)tintColor
+{
+    UIGraphicsBeginImageContext(image.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextTranslateCTM(context, 0, image.size.height);
+    CGContextScaleCTM(context, 1.0, -1.0);
+    
+    CGRect rect = CGRectMake(0, 0, image.size.width, image.size.height);
+    
+    // Draw tint color.
+    CGContextSetBlendMode(context, kCGBlendModeNormal);
+    [tintColor setFill];
+    CGContextFillRect(context, rect);
+    
+    // Mask by alpha values of original image.
+    CGContextSetBlendMode(context, kCGBlendModeDestinationIn);
+    CGContextDrawImage(context, rect, image.CGImage);
+    
+    UIImage *tintedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return tintedImage;
+}
+
++ (UIImage *)tintImage:(UIImage *)image
+{
+    return [MAAppearance tintImage:image tintColor:[MAAppearance foregroundColor]];
+}
+
++ (UIImage *)tintedImageNamed:(NSString *)name
+{
+    UIImage *image = [UIImage imageNamed:name];
+    return [MAAppearance tintImage:image];
+}
+
++ (UIColor *)correctColor:(UIColor *)color
+{
+    // Adjust colors because they look different on the simulator versus an actual device.
+    // http://stackoverflow.com/questions/10039641/ios-color-on-xcode-simulator-is-different-from-the-color-on-device
+    CGFloat red, green, blue, alpha;
+    [color getRed:&red green:&green blue:&blue alpha:&alpha];
+    red += 12. / 255.;
+    green += 19. / 255.;
+    blue += 16. / 255.;
+    return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
+}
+
++ (UIImage *)imageWithForegroundGradient:(UIImage *)image
+{
+    UIColor *startColor = [UIColor whiteColor];
+    //UIColor *startColor = [MAAppearance foregroundColor]; // TODO: Trying to match app icon with 2 color stops for the gradient.
+    //startColor = [startColor lighterColor];
+    UIColor *endColor = [MAAppearance foregroundColor];
+    
+    // Starting and ending the gradient outside the bounds of the image so that it's not so dark on on the bottom and white on the top.
+    CGPoint startPoint = CGPointMake(0, -image.size.height / 2);
+    CGFloat const coef = 5; // Larger values make the color richer (saturated); lower values make it lighter (unsaturated).
+    CGPoint endPoint = CGPointMake(0, coef * image.size.height);
+    //CGPoint startPoint = CGPointMake(0, 0);
+    //CGPoint endPoint = CGPointMake(0, img.size.height);
+    
+    return [UIImage imageWithGradient:image startColor:startColor endColor:endColor startPoint:startPoint endPoint:endPoint];
+}
+
+#ifndef IS_WATCH_EXTENSION
+
++ (void)setTabBarAppearance
+{
+    UIImage *tabBackground = [[UIImage imageNamed:@"tab_bar_49"]
+                              resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+    [[UITabBar appearance] setBackgroundImage:tabBackground];
+    
+    UIImage *tabSelected = [[UIImage imageNamed:@"tab_bar_selected"]
+                            resizableImageWithCapInsets:UIEdgeInsetsMake(0, 3, 0, 3)];
+    [[UITabBar appearance] setSelectionIndicatorImage:tabSelected];
+    return;
+    
+    /*
+     MAAppDelegate* myDelegate = (((MAAppDelegate*) [UIApplication sharedApplication].delegate));
+     UITabBarController *tabBarController = (UITabBarController *)myDelegate.window.rootViewController;
+     UITabBar *tabBar = tabBarController.tabBar;
+     UITabBarItem *tabBarItem1 = [tabBar.items objectAtIndex:0];
+     UITabBarItem *tabBarItem2 = [tabBar.items objectAtIndex:1];
+     UITabBarItem *tabBarItem3 = [tabBar.items objectAtIndex:2];
+     
+     tabBarItem1.title = @"Routines";
+     tabBarItem2.title = @"History";
+     tabBarItem3.title = @"Settings";
+     
+     [tabBarItem1 setFinishedSelectedImage:[UIImage imageNamed:@"home_selected.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"home.png"]];
+     [tabBarItem2 setFinishedSelectedImage:[UIImage imageNamed:@"maps_selected.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"maps.png"]];
+     [tabBarItem3 setFinishedSelectedImage:[UIImage imageNamed:@"myplan_selected.png"] withFinishedUnselectedImage:[UIImage imageNamed:@"myplan.png"]];
+     
+     // Change the tab bar background
+     UIImage* tabBarBackground = [UIImage imageNamed:@"tabbar.png"];
+     [[UITabBar appearance] setBackgroundImage:tabBarBackground];
+     [[UITabBar appearance] setSelectionIndicatorImage:[UIImage imageNamed:@"tabbar_selected.png"]];
+     
+     // Change the title color of tab bar items
+     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+     [UIColor whiteColor], UITextAttributeTextColor,
+     nil] forState:UIControlStateNormal];
+     UIColor *titleHighlightedColor = UIColorFromRGB(153, 192, 48);
+     [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+     titleHighlightedColor, UITextAttributeTextColor,
+     nil] forState:UIControlStateHighlighted];
+     
+     [tabBar setNeedsDisplay];
+     [tabBar setNeedsLayout];
+     */
+}
+
++ (void)setNavBarAppearance
+{
+    //    MAAppDelegate* myDelegate = (((MAAppDelegate *) [UIApplication sharedApplication].delegate));
+    //    UITabBarController *tabBarController = (UITabBarController *)myDelegate.window.rootViewController;
+    //    tabBarController.navigationController.navigationBar.translucent = YES;
+    //    return;
+    
+    /*
+     MAAppDelegate* myDelegate = (((MAAppDelegate*) [UIApplication sharedApplication].delegate));
+     UITabBarController *tabBarController = (UITabBarController *)myDelegate.window.rootViewController;
+     UIView *view = tabBarController.navigationController.navigationBar;
+     [MAUtil addGradientToView:view];
+     return;
+     */
+    
+    /*
+     UIImage *navBackgroundImage = [UIImage imageNamed:@"nav_bar_44"];
+     [[UINavigationBar appearance] setBackgroundImage:navBackgroundImage forBarMetrics:UIBarMetricsDefault];
+     navBackgroundImage = [UIImage imageNamed:@"nav_bar_32"];
+     [[UINavigationBar appearance] setBackgroundImage:navBackgroundImage forBarMetrics:UIBarMetricsLandscapePhone];
+     return;
+     */
+    
+    /*
+     UIImage *navBackgroundImage = [UIImage imageNamed:@"navbar_bg"];
+     [[UINavigationBar appearance] setBackgroundImage:navBackgroundImage forBarMetrics:UIBarMetricsDefault];
+     
+     NSDictionary * attributes = [NSDictionary dictionaryWithObjectsAndKeys:
+     UIColorFromRGB(245.0, 245.0, 245.0), UITextAttributeTextColor,
+     UIColorFromRGBA(0.0, 0.0, 0.0, 0.8), UITextAttributeTextShadowColor,
+     [NSValue valueWithUIOffset:UIOffsetMake(0, 1)],
+     UITextAttributeTextShadowOffset,
+     [UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:21.0], UITextAttributeFont, nil];
+     
+     [[UINavigationBar appearance] setTitleTextAttributes:attributes];
+     
+     // Change the appearance of back button
+     UIImage *backButtonImage = [[UIImage imageNamed:@"button_back"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 13, 0, 6)];
+     [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+     
+     // Change the appearance of other navigation button
+     UIImage *barButtonImage = [[UIImage imageNamed:@"button_normal"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 6, 0, 6)];
+     [[UIBarButtonItem appearance] setBackgroundImage:barButtonImage forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+     
+     [[UIBarButtonItem appearance] setTitleTextAttributes:attributes forState:UIControlStateNormal];
+     
+     MAAppDelegate* myDelegate = (((MAAppDelegate*) [UIApplication sharedApplication].delegate));
+     UITabBarController *tabBarController = (UITabBarController *)myDelegate.window.rootViewController;
+     [tabBarController.navigationController.view setNeedsDisplay];
+     [tabBarController.navigationController.view setNeedsLayout];
+     */
 }
 
 + (void)setBackgroundColorForCell:(UITableViewCell *)cell
@@ -675,95 +783,6 @@ viewForHeaderInSection:(NSInteger)section
     }
 }
 
-+ (UIColor *)searchBarColor
-{
-    if (ABOVE_IOS7)
-    {
-        NSDictionary *settings = [MAUserUtil loadSettings];
-        NSString *color = [settings objectForKey:TabBarColor];
-        if ([color isEqualToString:@"dark"])
-        {
-            return [UIColor colorWithHex:0x2e2e28];
-        }
-        else // ([color isEqualToString:@"light"])
-        {
-            //return [UIColor colorWithHex:0xf8f8ff];
-            return [UIColor whiteColor];
-        }
-    }
-    else
-    {
-        return [UIColor blackColor];
-    }
-}
-
-// Tint image with color, ignoring luminosity but preserving alpha channel.
-// http://stackoverflow.com/questions/3514066/how-to-tint-a-transparent-png-image-in-iphone
-+ (UIImage *)tintImage:(UIImage *)image tintColor:(UIColor *)tintColor
-{
-    UIGraphicsBeginImageContext(image.size);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    
-    CGContextTranslateCTM(context, 0, image.size.height);
-    CGContextScaleCTM(context, 1.0, -1.0);
-    
-    CGRect rect = CGRectMake(0, 0, image.size.width, image.size.height);
-    
-    // Draw tint color.
-    CGContextSetBlendMode(context, kCGBlendModeNormal);
-    [tintColor setFill];
-    CGContextFillRect(context, rect);
-    
-    // Mask by alpha values of original image.
-    CGContextSetBlendMode(context, kCGBlendModeDestinationIn);
-    CGContextDrawImage(context, rect, image.CGImage);
-    
-    UIImage *tintedImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return tintedImage;
-}
-
-+ (UIImage *)tintImage:(UIImage *)image
-{
-    return [MAAppearance tintImage:image tintColor:[MAAppearance foregroundColor]];
-}
-
-+ (UIImage *)tintedImageNamed:(NSString *)name
-{
-    UIImage *image = [UIImage imageNamed:name];
-    return [MAAppearance tintImage:image];
-}
-
-+ (UIColor *)correctColor:(UIColor *)color
-{
-    // Adjust colors because they look different on the simulator versus an actual device.
-    // http://stackoverflow.com/questions/10039641/ios-color-on-xcode-simulator-is-different-from-the-color-on-device
-    CGFloat red, green, blue, alpha;
-    [color getRed:&red green:&green blue:&blue alpha:&alpha];
-    red += 12. / 255.;
-    green += 19. / 255.;
-    blue += 16. / 255.;
-    return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
-}
-
-+ (UIImage *)imageWithForegroundGradient:(UIImage *)image
-{
-    UIColor *startColor = [UIColor whiteColor];
-    //UIColor *startColor = [MAAppearance foregroundColor]; // TODO: Trying to match app icon with 2 color stops for the gradient.
-    //startColor = [startColor lighterColor];
-    UIColor *endColor = [MAAppearance foregroundColor];
-    
-    // Starting and ending the gradient outside the bounds of the image so that it's not so dark on on the bottom and white on the top.
-    CGPoint startPoint = CGPointMake(0, -image.size.height / 2);
-    CGFloat const coef = 5; // Larger values make the color richer (saturated); lower values make it lighter (unsaturated).
-    CGPoint endPoint = CGPointMake(0, coef * image.size.height);
-    //CGPoint startPoint = CGPointMake(0, 0);
-    //CGPoint endPoint = CGPointMake(0, img.size.height);
-    
-    return [UIImage imageWithGradient:image startColor:startColor endColor:endColor startPoint:startPoint endPoint:endPoint];
-}
-
 + (void)setTabAndNavBarColor
 {
 #ifndef IS_EXTENSION
@@ -795,12 +814,14 @@ viewForHeaderInSection:(NSInteger)section
 #endif // IS_EXTENSION
 }
 
-+ (UIColor *)buttonTextColor
++ (UIFont *)tableTextFont
 {
     NSDictionary *settings = [MAUserUtil loadSettings];
-    NSString *hexString = [settings objectForKey:ButtonTextColor];
-    UIColor *color = [UIColor colorWithHexString:hexString];
-    return color;
+    NSString *name = [settings objectForKey:TableTextFont];
+    NSString *sizeString = [settings objectForKey:TableTextSize];
+    CGFloat size = [sizeString floatValue];
+    UIFont *font = [UIFont fontWithName:name size:size];
+    return font;
 }
 
 + (NSString *)tableTextFontName
@@ -835,15 +856,8 @@ viewForHeaderInSection:(NSInteger)section
      UIColor *color = [UIColor colorWithHexString:hexString];
      return color;
      */
-}
-+ (UIFont *)tableTextFont
-{
-    NSDictionary *settings = [MAUserUtil loadSettings];
-    NSString *name = [settings objectForKey:TableTextFont];
-    NSString *sizeString = [settings objectForKey:TableTextSize];
-    CGFloat size = [sizeString floatValue];
-    UIFont *font = [UIFont fontWithName:name size:size];
-    return font;
+    
+    return [UIColor clearColor];
 }
 
 + (void)setSeparatorColor
@@ -987,7 +1001,7 @@ viewForHeaderInSection:(NSInteger)section
         }
     }
 
-    CGFloat defaultHeight = [MAUtil rowHeightForTableView:tableView];
+    CGFloat defaultHeight = [MAUIUtil rowHeightForTableView:tableView];
     
     return [MAAppearance heightForString:string textStyle:textStyle frameWidth:cellWidth defaultHeight:defaultHeight];
 }
@@ -1033,5 +1047,7 @@ viewForHeaderInSection:(NSInteger)section
     
     return heightForString;
 }
+
+#endif // IS_WATCH_EXTENSION
 
 @end

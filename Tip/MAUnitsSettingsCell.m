@@ -8,9 +8,10 @@
 
 #import "MAUnitsSettingsCell.h"
 
-#import "MAUtil.h"
 #import "MAAppearance.h"
+#import "MADeviceUtil.h"
 #import "MAFilePaths.h"
+#import "MAUtil.h"
 
 @implementation MAUnitsSettingsCell
 @synthesize label;

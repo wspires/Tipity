@@ -11,6 +11,7 @@
 
 #import "CustomIOS7AlertView.h"
 
+#import "MADeviceUtil.h"
 #import "MAUtil.h"
 
 #import <QuartzCore/QuartzCore.h>

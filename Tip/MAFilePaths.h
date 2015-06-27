@@ -11,7 +11,7 @@
 
 @interface MAFilePaths : NSObject
 
-+ (NSString *)backgroundImageName;
+//+ (NSString *)backgroundImageName;
 + (NSString *)docDir;
 + (NSString *)tmpDir;
 + (BOOL)regularFileExists:(NSString *)path;

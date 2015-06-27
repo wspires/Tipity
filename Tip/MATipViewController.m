@@ -13,13 +13,16 @@
 #import "MAAppGroupNotifier.h"
 #import "MAAppearance.h"
 #import "MABill.h"
+#import "MADeviceUtil.h"
 #import "MAFilePaths.h"
 #import "MARatingTableViewCell.h"
 #import "MARounder.h"
 #import "MATextFieldCell.h"
+#import "MAUIUtil.h"
 #import "MAUserUtil.h"
 #import "MAUtil.h"
 #import "MATipIAPHelper.h"
+#import "MAStringUtil.h"
 
 #import <iAd/iAd.h>
 
@@ -118,7 +121,7 @@ static NSString * const TipPercentKey = @"tipPercent";
     [self registerNibs];
 
     [[self view] setBackgroundColor:[MAAppearance backgroundColor]];
-    [MAUtil setAdjustableNavTitle:self.navigationItem.title withNavigationItem:self.navigationItem];
+    [MAUIUtil setAdjustableNavTitle:self.navigationItem.title withNavigationItem:self.navigationItem];
     
     // Make the table background clear, so that this view's background shows.
     [MAAppearance clearBackgroundForTableView:self.tableView];
@@ -142,7 +145,7 @@ static NSString * const TipPercentKey = @"tipPercent";
 {
     [super viewWillAppear:animated];
     [[self view] setBackgroundColor:[MAAppearance backgroundColor]];
-    [MAUtil setAdjustableNavTitle:self.navigationItem.title withNavigationItem:self.navigationItem];
+    [MAUIUtil setAdjustableNavTitle:self.navigationItem.title withNavigationItem:self.navigationItem];
 
     [self hideAdBannerIfPurchased];
     
@@ -672,7 +675,7 @@ static NSString * const TipPercentKey = @"tipPercent";
 // On iOS 7, get exception with 0 height cell unless force the heigh to 44. I could implement heightForRowAtIndexPath, but then the cell sizes do not auto-update with Dynamic Type.
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat height = [MAUtil rowHeightForTableView:tableView];    
+    CGFloat height = [MAUIUtil rowHeightForTableView:tableView];
     return height;
 }
 
@@ -846,7 +849,7 @@ static NSString * const TipPercentKey = @"tipPercent";
 {
     // if (textField == self.someTextField)
     {
-        BOOL const shouldChangeChars = [MAUtil numTextField:textField shouldChangeCharactersInRange:range replacementString:string];
+        BOOL const shouldChangeChars = [MAUIUtil numTextField:textField shouldChangeCharactersInRange:range replacementString:string];
         return shouldChangeChars;
     }
     
@@ -1012,14 +1015,14 @@ static NSString * const TipPercentKey = @"tipPercent";
     NSString *text = textField.text;
     if (text && text.length != 0)
     {
-        currentValue = [MAUtil parseDouble:text];
+        currentValue = [MAStringUtil parseDouble:text];
     }
     else
     {
         // Use the placeholder text.
         // Note: if textField.placeholder is not set or is a string like "Weight", then 0 will be returned.
         text = textField.placeholder;
-        currentValue = [MAUtil parseDouble:text];
+        currentValue = [MAStringUtil parseDouble:text];
     }
     
     // If rounding is enabled and, say, +1 is pressed, then convert 15.25 to 16, then 17, 18, etc. If -1 is pressed, then convert 15.25 to 15, then 14, 13, etc. So, the button rounds the first time and then adds/subtracts 1 each subsequent time. This keeps the rounding intuitive and work the way the user likely wants when rounding to the nearest $1, while also keeping the UI clean by not having to add an extra button.
@@ -1045,7 +1048,7 @@ static NSString * const TipPercentKey = @"tipPercent";
     {
         newValue = 0;
     }
-    NSString *newValueStr = [MAUtil formatDouble:newValue];
+    NSString *newValueStr = [MAStringUtil formatDouble:newValue];
     textField.text = newValueStr;
 }
 

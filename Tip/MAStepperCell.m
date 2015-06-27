@@ -9,6 +9,7 @@
 #import "MAStepperCell.h"
 
 #import "MAAppearance.h"
+#import "MADeviceUtil.h"
 #import "MAFilePaths.h"
 #import "MAUtil.h"
 

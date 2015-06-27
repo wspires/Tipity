@@ -11,7 +11,9 @@
 #import "MAAccessoryView.h"
 #import "MAAppDelegate.h"
 #import "MAAppearance.h"
+#import "MADeviceUtil.h"
 #import "MAFilePaths.h"
+#import "MAUIUtil.h"
 #import "MAUserUtil.h"
 #import "MAUtil.h"
 
@@ -105,7 +107,7 @@ DECL_TABLE_IDX(IAP_LIST_SECTION, 0);
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [[self view] setBackgroundColor:[MAAppearance backgroundColor]];
-    [MAUtil setAdjustableNavTitle:self.navigationItem.title withNavigationItem:self.navigationItem];
+    [MAUIUtil setAdjustableNavTitle:self.navigationItem.title withNavigationItem:self.navigationItem];
     
     // Make the table background clear, so that this view's background shows.
     self.tableView.backgroundColor = [UIColor clearColor];
@@ -155,7 +157,7 @@ DECL_TABLE_IDX(IAP_LIST_SECTION, 0);
 - (void)viewWillAppear:(BOOL)animated
 {
     [[self view] setBackgroundColor:[MAAppearance backgroundColor]];
-    [MAUtil updateNavItem:self.navigationItem withTitle:self.title];
+    [MAUIUtil updateNavItem:self.navigationItem withTitle:self.title];
     
     self.iapList = [MATipIAPHelper iapList];
     
@@ -259,7 +261,7 @@ DECL_TABLE_IDX(IAP_LIST_SECTION, 0);
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat height = [MAUtil rowHeightForTableView:tableView];
+    CGFloat height = [MAUIUtil rowHeightForTableView:tableView];
     if (indexPath.section == IAP_LIST_SECTION)
     {
         UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];

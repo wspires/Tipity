@@ -7,7 +7,9 @@
 //
 
 #import "MADateUtil.h"
-#import "MAUtil.h"
+
+#import "MADefines.h"
+#import "MALogUtil.h"
 
 @implementation MADateUtil
 

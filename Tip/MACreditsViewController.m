@@ -10,6 +10,7 @@
 
 #import "MAAppearance.h"
 #import "MAFilePaths.h"
+#import "MAUIUtil.h"
 #import "MAUtil.h"
 #import "MAViewUtil.h"
 
@@ -35,7 +36,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [[self view] setBackgroundColor:[MAAppearance backgroundColor]];
-    [MAUtil setAdjustableNavTitle:self.navigationItem.title withNavigationItem:self.navigationItem];
+    [MAUIUtil setAdjustableNavTitle:self.navigationItem.title withNavigationItem:self.navigationItem];
 
     self.webView.backgroundColor = [UIColor clearColor];
     self.webView.opaque = NO;
@@ -67,7 +68,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [[self view] setBackgroundColor:[MAAppearance backgroundColor]];
-    [MAUtil updateNavItem:self.navigationItem withTitle:self.title];
+    [MAUIUtil updateNavItem:self.navigationItem withTitle:self.title];
 
     [super viewWillAppear:animated];
 }

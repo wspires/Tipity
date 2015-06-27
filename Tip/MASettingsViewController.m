@@ -12,12 +12,14 @@
 #import "MAAppearance.h"
 #import "MAAppearanceSelectionViewController.h"
 #import "MACreditsViewController.h"
+#import "MADeviceUtil.h"
 #import "MAFilePaths.h"
 #import "MARounder.h"
 #import "MARoundingSettingsViewController.h"
 #import "MAServiceRatingSettingsViewController.h"
 #import "MASwitchCell.h"
 #import "MATipIAPHelper.h"
+#import "MAUIUtil.h"
 #import "MAUserUtil.h"
 #import "MAUtil.h"
 
@@ -83,7 +85,7 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
     [super viewDidLoad];
     
     [[self view] setBackgroundColor:[MAAppearance backgroundColor]];
-    [MAUtil setAdjustableNavTitle:self.navigationItem.title withNavigationItem:self.navigationItem];
+    [MAUIUtil setAdjustableNavTitle:self.navigationItem.title withNavigationItem:self.navigationItem];
 
     [self registerNibs];
     
@@ -148,7 +150,7 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
 - (void)viewWillAppear:(BOOL)animated
 {
     [[self view] setBackgroundColor:[MAAppearance backgroundColor]];
-    [MAUtil updateNavItem:self.navigationItem withTitle:self.title];
+    [MAUIUtil updateNavItem:self.navigationItem withTitle:self.title];
 
     // Not reloading the table each time it appears to make it snappier since it should not have changed between views changing.
     // BUT: We need to reload the app colors for the icons!
@@ -743,7 +745,7 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
     
     NSString *appName = APP_NAME; //[[[NSBundle mainBundle] localizedInfoDictionary] objectForKey:@"CFBundleDisplayName"];
     
-    NSArray *recipients = [NSArray arrayWithObjects:nil];
+    NSArray *recipients = [NSArray array];
     [controller setToRecipients:recipients];
     
     NSString *subject = [NSString stringWithFormat:@"Have you tried %@?", appName];
