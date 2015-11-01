@@ -258,7 +258,7 @@ static BOOL const hideBillButtonGroup = NO;
     /*
     BOOL const wasSent = [WKInterfaceController openParentApplication:userInfo reply:^(NSDictionary *replyInfo, NSError *error) {
         
-        NSData *encodedBill = [replyInfo objectForKey:@"bill"];
+        NSData *encodedBill = [replyInfo objectForKey:[MABill sharedContainerKey]];
         if (encodedBill)
         {
             MABill *bill = [NSKeyedUnarchiver unarchiveObjectWithData:encodedBill];

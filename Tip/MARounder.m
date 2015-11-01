@@ -8,7 +8,7 @@
 
 #import "MARounder.h"
 
-#import "MARatingTableViewCell.h"
+#import "MATipPercentForRating.h"
 #import "MAUserUtil.h"
 #import "MAUtil.h"
 
@@ -105,7 +105,7 @@
     if (lastSelectedServiceRating && ! [lastSelectedServiceRating isEqualToString:NoLastSelectedServiceRating])
     {
         NSUInteger const rating =lastSelectedServiceRating.integerValue;
-        NSNumber *tipPercent = [MARatingTableViewCell tipPercentForRating:rating];
+        NSNumber *tipPercent = [MATipPercentForRating tipPercentForRating:rating];
         bill.tipPercent = tipPercent;
     }
 

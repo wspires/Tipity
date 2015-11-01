@@ -19,6 +19,9 @@
 // Singleton through which to register and unregister for keys.
 + (MAAppGroupNotifier *)sharedInstance;
 
++ (NSString *)recvNotificationNameForKey:(NSString *)key;
++ (NSString *)sendNotificationNameForKey:(NSString *)key;
+
 // Returns the name to pass to NSNotificationCenter's addObserver.
 + (NSString *)notificationNameForKey:(NSString *)key;
 

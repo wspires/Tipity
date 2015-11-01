@@ -15,9 +15,11 @@
 #import "MABill.h"
 #import "MADeviceUtil.h"
 #import "MAFilePaths.h"
+#import "MANotificationNames.h"
 #import "MARatingTableViewCell.h"
 #import "MARounder.h"
 #import "MATextFieldCell.h"
+#import "MATipPercentForRating.h"
 #import "MAUIUtil.h"
 #import "MAUserUtil.h"
 #import "MAUtil.h"
@@ -522,7 +524,7 @@ static NSString * const TipPercentKey = @"tipPercent";
     cell.textLabel.text = labelText;
     
     cell.threeStars = YES;
-    NSUInteger rating = [cell ratingForTipPercent:self.bill.tipPercent];
+    NSUInteger rating = [MATipPercentForRating ratingForTipPercent:self.bill.tipPercent];
     cell.rating = rating;
     cell.delegate = self;
 
@@ -737,7 +739,7 @@ static NSString * const TipPercentKey = @"tipPercent";
 
 - (void)ratingDidChange:(MARatingTableViewCell *)ratingCell
 {
-    NSNumber *tipPercent = [ratingCell tipPercentForRating:ratingCell.rating];
+    NSNumber *tipPercent = [MATipPercentForRating tipPercentForRating:ratingCell.rating];
     self.bill.tipPercent = tipPercent;
     
     // Save the last selected service rating--required by roundGrandTotalInBill.
@@ -1235,6 +1237,7 @@ static NSString * const TipPercentKey = @"tipPercent";
 - (void)registerForSharedDataChangedNotifications
 {
     [[MAAppGroupNotifier sharedInstance] addObserver:self selector:@selector(billChanged:) key:[MABill sharedContainerKey]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(billChanged:) name:BillChangedNotification object:nil];
 }
 
 - (void)unregisterForSharedDataChangedNotifications

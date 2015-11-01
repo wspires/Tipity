@@ -59,6 +59,10 @@ static NSString *TableTextColor = @"tableTextColor";
 + (BOOL)saveSharedInstance;
 + (BOOL)saveSharedInstanceAndPostNotification:(BOOL)postNotification;
 
+- (BOOL)saveAsSharedInstance;
+- (BOOL)saveAsSharedInstanceAndPostNotification:(BOOL)postNotification;
+- (BOOL)saveAsSharedInstanceAndPostNotification:(BOOL)postNotification updateApplicationContext:(BOOL)updateApplicationContext;
+
 - (id)init;
 - (NSDictionary *)loadSettings;
 - (id)objectForKey:(NSString *)key;

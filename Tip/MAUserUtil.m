@@ -13,6 +13,7 @@
 #import "MADeviceUtil.h"
 #import "MAFilePaths.h"
 #import "MALogUtil.h"
+#import "MASessionDelegate.h"
 #import "MAStringUtil.h"
 
 // TODO: Make thread-safe and add a sharedInstance with instance methods (like MAActivity) instead of static methods.
@@ -107,7 +108,38 @@ static NSString *PerExerciseSettings = @"perExerciseSettings";
     
     if (saved && postNotification)
     {
+        [[MASessionDelegate sharedInstance] updateApplicationContextWithObject:object key:key];
         [MAAppGroupNotifier postNotificationForKey:key];
+    }
+
+    return saved;
+}
+
+- (BOOL)saveAsSharedInstance
+{
+    return [self saveAsSharedInstanceAndPostNotification:YES];
+}
+- (BOOL)saveAsSharedInstanceAndPostNotification:(BOOL)postNotification
+{
+    return [self saveAsSharedInstanceAndPostNotification:YES updateApplicationContext:YES];
+}
+- (BOOL)saveAsSharedInstanceAndPostNotification:(BOOL)postNotification updateApplicationContext:(BOOL)updateApplicationContext
+{
+    MAUserUtil *object = self;
+    NSString *key = [MAUserUtil sharedContainerKey];
+    BOOL const saved = [MAAppGroupNotifier saveObject:object key:key];
+    if (saved)
+    {
+        [MAUserUtil reloadSharedInstance:YES];
+        if (postNotification)
+        {
+//            [[MASessionDelegate sharedInstance] updateApplicationContextWithObject:object key:key];
+            [MAAppGroupNotifier postNotificationForKey:key];
+        }
+        if (updateApplicationContext)
+        {
+            [[MASessionDelegate sharedInstance] updateApplicationContextWithObject:object key:key];
+        }
     }
     
     return saved;

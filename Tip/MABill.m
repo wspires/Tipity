@@ -9,6 +9,7 @@
 #import "MABill.h"
 
 #import "MAAppGroupNotifier.h"
+#import "MASessionDelegate.h"
 
 static double const DefaultBill = 100.;
 static double const DefaultTipPercent = 20.;
@@ -80,7 +81,37 @@ static double const DefaultSplitTotal = 120.;
     
     if (saved && postNotification)
     {
+        [[MASessionDelegate sharedInstance] updateApplicationContextWithObject:object key:key];
         [MAAppGroupNotifier postNotificationForKey:key];
+    }
+    
+    return saved;
+}
+
+- (BOOL)saveAsSharedInstance
+{
+    return [self saveAsSharedInstanceAndPostNotification:YES];
+}
+- (BOOL)saveAsSharedInstanceAndPostNotification:(BOOL)postNotification
+{
+    return [self saveAsSharedInstanceAndPostNotification:YES updateApplicationContext:YES];
+}
+- (BOOL)saveAsSharedInstanceAndPostNotification:(BOOL)postNotification updateApplicationContext:(BOOL)updateApplicationContext
+{
+    MABill *object = self;
+    NSString *key = [MABill sharedContainerKey];
+    BOOL const saved = [MAAppGroupNotifier saveObject:object key:key];
+    if (saved)
+    {
+        [MABill reloadSharedInstance:YES];
+        if (postNotification)
+        {
+            [MAAppGroupNotifier postNotificationForKey:key];
+        }
+        if (updateApplicationContext)
+        {
+            [[MASessionDelegate sharedInstance] updateApplicationContextWithObject:object key:key];
+        }
     }
     
     return saved;

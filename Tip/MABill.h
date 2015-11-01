@@ -51,6 +51,10 @@
 + (BOOL)saveSharedInstance;
 + (NSString *)sharedContainerKey;
 
+- (BOOL)saveAsSharedInstance;
+- (BOOL)saveAsSharedInstanceAndPostNotification:(BOOL)postNotification;
+- (BOOL)saveAsSharedInstanceAndPostNotification:(BOOL)postNotification updateApplicationContext:(BOOL)updateApplicationContext;
+
 - (instancetype)init;
 - (instancetype)initWithBill:(NSNumber *)bill;
 - (instancetype)initWithBill:(NSNumber *)bill tipPercent:(NSNumber *)tipPercent;

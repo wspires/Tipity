@@ -10,6 +10,7 @@
 
 #import "MAAppGroup.h"
 #import "MALogUtil.h"
+#import "MASessionDelegate.h"
 
 #import <CoreFoundation/CoreFoundation.h>
 #import <WatchConnectivity/WatchConnectivity.h>
@@ -34,13 +35,11 @@ static CFStringRef const kExtensionNotificationName = CFSTR("com.mindsaspire.Tip
     #error "Define either IS_HOST_APP or IS_EXTENSION in your build settings for this target (Target -> Build Settings -> Custom Compiler Flags -> Other C Flags: -DIS_HOST_APP=1)"
 #endif
 
-@interface MAAppGroupNotifier () <WCSessionDelegate>
+@interface MAAppGroupNotifier ()
 
 // Set of registered keys for which to send notifications.
 // TODO: Make this a dictionary of observer counts and only unregister when the count is 0.
 @property (strong, nonatomic) NSMutableSet *registeredKeys;
-
-@property (strong, nonatomic) WCSession *session;
 
 - (instancetype)init;
 @end
@@ -54,7 +53,6 @@ static CFStringRef const kExtensionNotificationName = CFSTR("com.mindsaspire.Tip
     static MAAppGroupNotifier * sharedInstance;
     dispatch_once(&once, ^{
         sharedInstance = [[self alloc] init];
-        [sharedInstance startWCSession];
     });
     return sharedInstance;
 }
@@ -80,18 +78,6 @@ static CFStringRef const kExtensionNotificationName = CFSTR("com.mindsaspire.Tip
 {
     NSString *baseName = (__bridge NSString *)kSendNotificationName;
     NSString *name = [baseName stringByAppendingPathExtension:key];
-    
-    
-//    NSMutableDictionary *context = [NSMutableDictionary dictionary];
-//    [context setObject:@"bar" forKey:@"foo"];
-//    NSError *error = nil;
-//    BOOL success = [session updateApplicationContext:context error:&error];
-//    if ( ! success && error)
-//    {
-//        LOG_S(@"Error: updateApplicationContext: %@", error);
-//    }
-
-    
     return name;
 }
 
@@ -197,6 +183,7 @@ void sharedDataChangedCallback(CFNotificationCenterRef center,
     BOOL const saved = [MAAppGroupNotifier saveObject:object key:key];
     if (saved)
     {
+//        [[MASessionDelegate sharedInstance] updateApplicationContextWithObject:object key:key];
         [MAAppGroupNotifier postNotificationForKey:key];
     }    
     return saved;
@@ -230,109 +217,6 @@ void sharedDataChangedCallback(CFNotificationCenterRef center,
         [MAAppGroupNotifier postNotificationForKey:key];
     }
     return saved;
-}
-
-- (void)startWCSession
-{
-    if ([WCSession isSupported])
-    {
-        WCSession *session = [WCSession defaultSession];
-        session.delegate = self;
-        [session activateSession];
-        self.session = session;
-    }
-}
-
-- (void)sessionWatchStateDidChange:(WCSession *)session
-{
-    LOG
-    if ( ! session.paired)
-    {
-        LOG_S(@"Watch not paired");
-        return;
-    }
-    if ( ! session.watchAppInstalled)
-    {
-        LOG_S(@"Watch app not installed");
-        return;
-    }
-    LOG_S(@"Watch is paired, and watch app is installed")
-}
-
-- (void)sessionReachabilityDidChange:(WCSession *)session
-{
-    LOG
-}
-
-- (void)session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *, id> *)message
-{
-    LOG
-    
-}
-
-- (void)session:(WCSession *)session didReceiveMessage:(NSDictionary<NSString *, id> *)message replyHandler:(void(^)(NSDictionary<NSString *, id> *replyMessage))replyHandler
-{
-    LOG
-    
-}
-
-- (void)session:(WCSession *)session didReceiveMessageData:(NSData *)messageData
-{
-    LOG
-    
-}
-
-- (void)session:(WCSession *)session didReceiveMessageData:(NSData *)messageData replyHandler:(void(^)(NSData *replyMessageData))replyHandler
-{
-    LOG
-    
-//    MABill *bill = (MABill *)[NSKeyedUnarchiver unarchiveObjectWithData:messageData];
-//    LOG_S(@"%@", bill);
-    replyHandler(nil);
-}
-
-- (void)session:(WCSession *)session didReceiveApplicationContext:(NSDictionary<NSString *, id> *)applicationContext
-{
-    LOG
-    
-    TLog(@"Context: %@", applicationContext);
-    
-    // Data arrives on a background queue, so must use the main queue if we update the UI.
-    dispatch_async(dispatch_get_main_queue(),
-                   ^{
-                       TLog(@"Context: %@", applicationContext);
-                   });
-}
-
-- (void)session:(WCSession *)session didFinishUserInfoTransfer:(WCSessionUserInfoTransfer *)userInfoTransfer error:(NSError *)error
-{
-    LOG
-    
-}
-
-- (void)session:(WCSession *)session didReceiveUserInfo:(NSDictionary<NSString *, id> *)userInfo
-{
-    LOG
-    
-    TLog(@"User info: %@", userInfo);
-    
-    // Data arrives on a background queue, so must use the main queue if we update the UI.
-    dispatch_async(dispatch_get_main_queue(),
-                   ^{
-                       TLog(@"User info: %@", userInfo);
-                   });
-}
-
-- (void)session:(WCSession *)session didFinishFileTransfer:(WCSessionFileTransfer *)fileTransfer error:(NSError *)error
-{
-    LOG
-    
-}
-
-- (void)session:(WCSession *)session didReceiveFile:(WCSessionFile *)file
-{
-    LOG
-    
 }
 
 @end

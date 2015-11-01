@@ -20,8 +20,6 @@
 // Create "shortcut" for accessing the app delegate. Users must still include MAAppDelegate.h.
 #define AppDelegate ((MAAppDelegate *)[UIApplication sharedApplication].delegate)
 
-#define USE_IOS9
-
 // Courtesy of https://github.com/facebook/three20
 #ifndef MO_RGBCOLOR
 #define MO_RGBCOLOR(r,g,b) [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:1]

@@ -1,5 +1,6 @@
 2.4
-• iOS 9 and watchOS 2 support.
+• iOS 9 and watchOS 2 support
+• Fixed width on Today view
 
 2.3.1
 • Updated bill entry interface on the Apple Watch to make it faster and easier to use. Love or hate the new watch look? Send feedback at support@tipityapp.com!

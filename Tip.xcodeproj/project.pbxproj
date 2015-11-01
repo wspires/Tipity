@@ -112,6 +112,9 @@
 		180976B619BE96910039F654 /* MABill.m in Sources */ = {isa = PBXBuildFile; fileRef = 180976B519BE96910039F654 /* MABill.m */; };
 		180976BA19BF5D8C0039F654 /* MATextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 180976B819BF5D8C0039F654 /* MATextFieldCell.m */; };
 		180976BB19BF5D8C0039F654 /* MATextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180976B919BF5D8C0039F654 /* MATextFieldCell.xib */; };
+		181F58AF1BDC1E6F009445BF /* MASessionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 181F58AE1BDC1E6F009445BF /* MASessionDelegate.m */; };
+		181F58B01BDD6CA9009445BF /* MASessionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 181F58AE1BDC1E6F009445BF /* MASessionDelegate.m */; };
+		181F58B11BDD6CC6009445BF /* MASessionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 181F58AE1BDC1E6F009445BF /* MASessionDelegate.m */; };
 		1831FC4C1A3B64BD00642A10 /* 692-iphone-5.png in Resources */ = {isa = PBXBuildFile; fileRef = 1831FC491A3B64BD00642A10 /* 692-iphone-5.png */; };
 		1831FC4D1A3B64BD00642A10 /* 692-iphone-5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1831FC4A1A3B64BD00642A10 /* 692-iphone-5@2x.png */; };
 		1831FC4E1A3B64BD00642A10 /* 692-iphone-5@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1831FC4B1A3B64BD00642A10 /* 692-iphone-5@3x.png */; };
@@ -130,7 +133,6 @@
 		1864DF4E1B39F005001EB867 /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1864DF4D1B39F005001EB867 /* InterfaceController.m */; };
 		1864DF511B39F005001EB867 /* ExtensionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1864DF501B39F005001EB867 /* ExtensionDelegate.m */; };
 		1864DF531B39F005001EB867 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1864DF521B39F005001EB867 /* Assets.xcassets */; };
-		1864DF571B39F005001EB867 /* Tipity Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 1864DF3B1B39F004001EB867 /* Tipity Watch App.app */; };
 		18698A2F19C29CB2005F2E32 /* 702-share.png in Resources */ = {isa = PBXBuildFile; fileRef = 18698A2719C29CB2005F2E32 /* 702-share.png */; };
 		18698A3019C29CB2005F2E32 /* 702-share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18698A2819C29CB2005F2E32 /* 702-share@2x.png */; };
 		18698A3119C29CB2005F2E32 /* 712-reply.png in Resources */ = {isa = PBXBuildFile; fileRef = 18698A2919C29CB2005F2E32 /* 712-reply.png */; };
@@ -240,6 +242,11 @@
 		18D85F5A1B3E476C003862E4 /* MAAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 1809763E19BE61D20039F654 /* MAAppearance.m */; };
 		18D85F5B1B3E4B12003862E4 /* MAUserUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 1809764419BE61D20039F654 /* MAUserUtil.m */; };
 		18D85F5C1B3E4B22003862E4 /* MAImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 189389531A087286006142DE /* MAImageCache.m */; };
+		18D85F5D1B3E4BB4003862E4 /* MARounder.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D4FDA41AFC6FFA0052A03A /* MARounder.m */; };
+		18D85F611B3E4CB9003862E4 /* MATipPercentForRating.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D85F601B3E4CB9003862E4 /* MATipPercentForRating.m */; };
+		18D85F621B3E4CB9003862E4 /* MATipPercentForRating.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D85F601B3E4CB9003862E4 /* MATipPercentForRating.m */; };
+		18D85F631B3E4CB9003862E4 /* MATipPercentForRating.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D85F601B3E4CB9003862E4 /* MATipPercentForRating.m */; };
+		18D85F681B3E5AFA003862E4 /* Tipity Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 1864DF3B1B39F004001EB867 /* Tipity Watch App.app */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -280,7 +287,7 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				1864DF571B39F005001EB867 /* Tipity Watch App.app in Embed Watch Content */,
+				18D85F681B3E5AFA003862E4 /* Tipity Watch App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -525,6 +532,8 @@
 		180976B719BF5D8C0039F654 /* MATextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MATextFieldCell.h; sourceTree = "<group>"; };
 		180976B819BF5D8C0039F654 /* MATextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MATextFieldCell.m; sourceTree = "<group>"; };
 		180976B919BF5D8C0039F654 /* MATextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MATextFieldCell.xib; sourceTree = "<group>"; };
+		181F58AD1BDC1E6F009445BF /* MASessionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASessionDelegate.h; sourceTree = "<group>"; };
+		181F58AE1BDC1E6F009445BF /* MASessionDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASessionDelegate.m; sourceTree = "<group>"; };
 		1831FC491A3B64BD00642A10 /* 692-iphone-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "692-iphone-5.png"; sourceTree = "<group>"; };
 		1831FC4A1A3B64BD00642A10 /* 692-iphone-5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "692-iphone-5@2x.png"; sourceTree = "<group>"; };
 		1831FC4B1A3B64BD00642A10 /* 692-iphone-5@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "692-iphone-5@3x.png"; sourceTree = "<group>"; };
@@ -1146,6 +1155,11 @@
 		18D85F481B3E11E0003862E4 /* MAUIUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAUIUtil.m; sourceTree = "<group>"; };
 		18D85F4F1B3E198B003862E4 /* MADeviceUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MADeviceUtil.h; sourceTree = "<group>"; };
 		18D85F501B3E198B003862E4 /* MADeviceUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MADeviceUtil.m; sourceTree = "<group>"; };
+		18D85F5F1B3E4CB9003862E4 /* MATipPercentForRating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MATipPercentForRating.h; sourceTree = "<group>"; };
+		18D85F601B3E4CB9003862E4 /* MATipPercentForRating.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MATipPercentForRating.m; sourceTree = "<group>"; };
+		18D85F641B3E55AB003862E4 /* Tipity Watch Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Tipity Watch Extension.entitlements"; sourceTree = SOURCE_ROOT; };
+		18D85F691B3E6761003862E4 /* MANotificationNames.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MANotificationNames.h; sourceTree = "<group>"; };
+		18EA1A911BE3A41000E7859A /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1477,6 +1491,7 @@
 		180975CE19BE60850039F654 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				18EA1A911BE3A41000E7859A /* libsqlite3.tbd */,
 				180975CC19BE60730039F654 /* iAd.framework */,
 				180975CA19BE606B0039F654 /* Foundation.framework */,
 				180975C819BE60630039F654 /* CoreText.framework */,
@@ -1769,6 +1784,8 @@
 				1803AC5819C89C8B006C7EFF /* MARatingTableViewCell.h */,
 				1803AC5919C89C8B006C7EFF /* MARatingTableViewCell.m */,
 				1803AC5A19C89C8B006C7EFF /* MARatingTableViewCell.xib */,
+				18D85F5F1B3E4CB9003862E4 /* MATipPercentForRating.h */,
+				18D85F601B3E4CB9003862E4 /* MATipPercentForRating.m */,
 			);
 			name = "Tip Tab";
 			sourceTree = "<group>";
@@ -2566,10 +2583,14 @@
 		1864DF4B1B39F005001EB867 /* Tipity Watch Extension */ = {
 			isa = PBXGroup;
 			children = (
-				1864DF4C1B39F005001EB867 /* InterfaceController.h */,
-				1864DF4D1B39F005001EB867 /* InterfaceController.m */,
+				18D85F641B3E55AB003862E4 /* Tipity Watch Extension.entitlements */,
 				1864DF4F1B39F005001EB867 /* ExtensionDelegate.h */,
 				1864DF501B39F005001EB867 /* ExtensionDelegate.m */,
+				1864DF4C1B39F005001EB867 /* InterfaceController.h */,
+				1864DF4D1B39F005001EB867 /* InterfaceController.m */,
+				18D85F691B3E6761003862E4 /* MANotificationNames.h */,
+				181F58AD1BDC1E6F009445BF /* MASessionDelegate.h */,
+				181F58AE1BDC1E6F009445BF /* MASessionDelegate.m */,
 				1864DF521B39F005001EB867 /* Assets.xcassets */,
 				1864DF541B39F005001EB867 /* Info.plist */,
 			);
@@ -2827,6 +2848,12 @@
 					};
 					1864DF461B39F004001EB867 = {
 						CreatedOnToolsVersion = 7.0;
+						DevelopmentTeam = 88U9Z8P8D5;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					189389391A069058006142DE = {
 						CreatedOnToolsVersion = 6.1;
@@ -3092,6 +3119,7 @@
 				18D85F3F1B3E0017003862E4 /* MAStringUtil.m in Sources */,
 				1809764B19BE61D20039F654 /* MADateUtil.m in Sources */,
 				180976B619BE96910039F654 /* MABill.m in Sources */,
+				181F58B01BDD6CA9009445BF /* MASessionDelegate.m in Sources */,
 				1809766E19BE6FE70039F654 /* MAUpgradeAlertViewController.m in Sources */,
 				18A686751B3B1A29003F55EC /* MALogUtil.m in Sources */,
 				180976A319BE70F00039F654 /* MAColorSelectionViewController.m in Sources */,
@@ -3104,6 +3132,7 @@
 				189389541A087286006142DE /* MAImageCache.m in Sources */,
 				180976AE19BE70F00039F654 /* MOGlassButton.m in Sources */,
 				1809753E19BE5ED60039F654 /* MAAppDelegate.m in Sources */,
+				18D85F611B3E4CB9003862E4 /* MATipPercentForRating.m in Sources */,
 				1809764F19BE61D20039F654 /* MAViewUtil.m in Sources */,
 				1809763519BE61120039F654 /* FDTakeController.m in Sources */,
 				1883C69E1AFB093C006148BC /* MARoundingSettingsViewController.m in Sources */,
@@ -3137,9 +3166,12 @@
 				18A686771B3B1A29003F55EC /* MALogUtil.m in Sources */,
 				18D85F411B3E0017003862E4 /* MAStringUtil.m in Sources */,
 				1864DF511B39F005001EB867 /* ExtensionDelegate.m in Sources */,
+				18D85F631B3E4CB9003862E4 /* MATipPercentForRating.m in Sources */,
+				181F58AF1BDC1E6F009445BF /* MASessionDelegate.m in Sources */,
 				1864DF4E1B39F005001EB867 /* InterfaceController.m in Sources */,
 				18A686791B3B2915003F55EC /* MAAppGroupNotifier.m in Sources */,
 				18D85F5C1B3E4B22003862E4 /* MAImageCache.m in Sources */,
+				18D85F5D1B3E4BB4003862E4 /* MARounder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3148,6 +3180,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1893896A1A0AC390006142DE /* MABill.m in Sources */,
+				18D85F621B3E4CB9003862E4 /* MATipPercentForRating.m in Sources */,
 				18D4FDA61AFC6FFA0052A03A /* MARounder.m in Sources */,
 				189389671A0ABE8A006142DE /* UIImage+Extensions.m in Sources */,
 				189389681A0ABE8A006142DE /* UIImage+Gradient.m in Sources */,
@@ -3157,6 +3190,7 @@
 				1893895A1A0875CC006142DE /* MADateUtil.m in Sources */,
 				18D85F401B3E0017003862E4 /* MAStringUtil.m in Sources */,
 				18D4FDC71AFE88500052A03A /* MARatingTableViewCell.m in Sources */,
+				181F58B11BDD6CC6009445BF /* MASessionDelegate.m in Sources */,
 				189389591A0875BC006142DE /* MAColorUtil.m in Sources */,
 				189389581A0875AD006142DE /* MAUserUtil.m in Sources */,
 				18D85F521B3E198B003862E4 /* MADeviceUtil.m in Sources */,
@@ -3421,6 +3455,9 @@
 		1864DF591B39F005001EB867 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Tipity Watch Extension.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -3432,6 +3469,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mindsaspire.Tip.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
@@ -3442,6 +3480,9 @@
 		1864DF5A1B39F005001EB867 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Tipity Watch Extension.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -3454,6 +3495,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mindsaspire.Tip.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;

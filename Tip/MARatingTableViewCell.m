@@ -10,6 +10,7 @@
 
 #import "MAAppearance.h"
 #import "MAFilePaths.h"
+#import "MATipPercentForRating.h"
 #import "MAUserUtil.h"
 
 static NSUInteger const BUTTON_START_TAG = 1;
@@ -84,125 +85,6 @@ static NSUInteger const BUTTON_END_TAG = 6;
     UIButton *button = (UIButton *)sender;
     self.rating = button.tag;
     [self delegateWillChangeRating];
-}
-
-- (NSUInteger)ratingForTipPercent:(NSNumber *)tipPercent
-{
-    return [MARatingTableViewCell ratingForTipPercent:tipPercent useThreeStars:self.threeStars];
-}
-+ (NSUInteger)ratingForTipPercent:(NSNumber *)tipPercent
-{
-    return [MARatingTableViewCell ratingForTipPercent:tipPercent useThreeStars:YES];
-}
-+ (NSUInteger)ratingForTipPercent:(NSNumber *)tipPercent useThreeStars:(BOOL)threeStars
-{
-    NSUInteger rating = 1;
-    double tipPercentDouble = tipPercent.doubleValue;
-    
-    if (threeStars)
-    {
-        double serviceRatingFair = [[MAUserUtil sharedInstance] serviceRatingFair].doubleValue;
-        double serviceRatingGood = [[MAUserUtil sharedInstance] serviceRatingGood].doubleValue;
-        double serviceRatingGreat = [[MAUserUtil sharedInstance] serviceRatingGreat].doubleValue;
-        
-        if (tipPercentDouble < serviceRatingFair)
-        {
-            rating = 1;
-        }
-        else if (tipPercentDouble >= serviceRatingFair && tipPercentDouble < serviceRatingGood)
-        {
-            rating = 2;
-        }
-        else if (tipPercentDouble >= serviceRatingGood && tipPercentDouble < serviceRatingGreat)
-        {
-            rating = 3;
-        }
-        else // if (tipPercentDouble >= serviceRatingGreat)
-        {
-            rating = 4;
-        }
-    }
-    else
-    {
-        if (tipPercentDouble < 12)
-        {
-            rating = 1;
-        }
-        else if (tipPercentDouble >= 12 && tipPercentDouble < 15)
-        {
-            rating = 2;
-        }
-        else if (tipPercentDouble >= 15 && tipPercentDouble < 18)
-        {
-            rating = 3;
-        }
-        else if (tipPercentDouble >= 18 && tipPercentDouble < 20)
-        {
-            rating = 4;
-        }
-        else // if (tipPercentDouble >= 20)
-        {
-            rating = 5;
-        }
-    }
-    
-    return rating;
-}
-
-- (NSNumber *)tipPercentForRating:(NSUInteger)rating
-{
-    return [MARatingTableViewCell tipPercentForRating:rating useThreeStars:self.threeStars];
-}
-+ (NSNumber *)tipPercentForRating:(NSUInteger)rating
-{
-    return [MARatingTableViewCell tipPercentForRating:rating useThreeStars:YES];
-}
-+ (NSNumber *)tipPercentForRating:(NSUInteger)rating useThreeStars:(BOOL)threeStars
-{
-    double tipPercentDouble = 0;
-    
-    if (threeStars)
-    {
-        NSNumber *tipPercent = nil;
-        if (rating <= 2)
-        {
-            tipPercent = [[MAUserUtil sharedInstance] serviceRatingFair];
-        }
-        else if (rating <= 3)
-        {
-            tipPercent = [[MAUserUtil sharedInstance] serviceRatingGood];
-        }
-        else // if (rating <= 4)
-        {
-            tipPercent = [[MAUserUtil sharedInstance] serviceRatingGreat];
-        }
-        tipPercentDouble = tipPercent.doubleValue;
-    }
-    else
-    {
-        if (rating == 1)
-        {
-            tipPercentDouble = 10;
-        }
-        else if (rating == 2)
-        {
-            tipPercentDouble = 12;
-        }
-        else if (rating == 3)
-        {
-            tipPercentDouble = 15;
-        }
-        else if (rating == 4)
-        {
-            tipPercentDouble = 18;
-        }
-        else // if (rating == 5)
-        {
-            tipPercentDouble = 20;
-        }
-    }
-    
-    return [NSNumber numberWithDouble:tipPercentDouble];
 }
 
 + (NSString *)cellIdentifier

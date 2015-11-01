@@ -26,13 +26,6 @@
 
 - (IBAction)buttonTapped:(id)sender;
 
-- (NSUInteger)ratingForTipPercent:(NSNumber *)tipPercent;
-+ (NSUInteger)ratingForTipPercent:(NSNumber *)tipPercent;
-+ (NSUInteger)ratingForTipPercent:(NSNumber *)tipPercent useThreeStars:(BOOL)threeStars;
-- (NSNumber *)tipPercentForRating:(NSUInteger)rating;
-+ (NSNumber *)tipPercentForRating:(NSUInteger)rating;
-+ (NSNumber *)tipPercentForRating:(NSUInteger)rating useThreeStars:(BOOL)threeStars;
-
 + (NSString *)cellIdentifier;
 + (NSString *)nibName;
 + (void)registerNibWithTableView:(UITableView *)tableView;
