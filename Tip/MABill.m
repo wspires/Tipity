@@ -94,7 +94,7 @@ static double const DefaultSplitTotal = 120.;
 }
 - (BOOL)saveAsSharedInstanceAndPostNotification:(BOOL)postNotification
 {
-    return [self saveAsSharedInstanceAndPostNotification:YES updateApplicationContext:YES];
+    return [self saveAsSharedInstanceAndPostNotification:postNotification updateApplicationContext:postNotification];
 }
 - (BOOL)saveAsSharedInstanceAndPostNotification:(BOOL)postNotification updateApplicationContext:(BOOL)updateApplicationContext
 {

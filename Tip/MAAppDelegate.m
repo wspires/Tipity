@@ -74,6 +74,7 @@
         self.window.tintColor = [MAAppearance foregroundColor];
     }
 
+    // Creating the shared session automatically starts WCSession.
     [MASessionDelegate sharedInstance];
 
     [Appirater appLaunched:YES];

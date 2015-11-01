@@ -2588,9 +2588,9 @@
 				1864DF501B39F005001EB867 /* ExtensionDelegate.m */,
 				1864DF4C1B39F005001EB867 /* InterfaceController.h */,
 				1864DF4D1B39F005001EB867 /* InterfaceController.m */,
-				18D85F691B3E6761003862E4 /* MANotificationNames.h */,
 				181F58AD1BDC1E6F009445BF /* MASessionDelegate.h */,
 				181F58AE1BDC1E6F009445BF /* MASessionDelegate.m */,
+				18D85F691B3E6761003862E4 /* MANotificationNames.h */,
 				1864DF521B39F005001EB867 /* Assets.xcassets */,
 				1864DF541B39F005001EB867 /* Info.plist */,
 			);

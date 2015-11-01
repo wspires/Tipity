@@ -65,7 +65,7 @@ static NSString * const MsgSource = @"Extension";
         WCSession *session = [WCSession defaultSession];
         session.delegate = self;
         [session activateSession];
-        self.isAvailable = YES;
+        _isAvailable = YES;
     }
 }
 
@@ -134,7 +134,8 @@ static NSString * const MsgSource = @"Extension";
 
     if ( ! self.isAvailable)
     {
-        return NO;
+        LOG_S(@"Not Available");
+//        return NO;
     }
 
     WCSession *session = [WCSession defaultSession];

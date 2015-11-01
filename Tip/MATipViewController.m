@@ -133,8 +133,6 @@ static NSString * const TipPercentKey = @"tipPercent";
     [self setupAdBanner];
 
 //    [self hideUIToMakeLaunchImages];
-
-    [self registerForSharedDataChangedNotifications];
 }
 
 - (void)removeNotifications
@@ -151,6 +149,8 @@ static NSString * const TipPercentKey = @"tipPercent";
 
     [self hideAdBannerIfPurchased];
     
+    [self registerForSharedDataChangedNotifications];
+
     // Need to add insets to the table view when the keyboard appears.
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(keyboardOnScreen:) name:UIKeyboardWillShowNotification object:nil];

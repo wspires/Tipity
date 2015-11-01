@@ -121,7 +121,7 @@ static NSString *PerExerciseSettings = @"perExerciseSettings";
 }
 - (BOOL)saveAsSharedInstanceAndPostNotification:(BOOL)postNotification
 {
-    return [self saveAsSharedInstanceAndPostNotification:YES updateApplicationContext:YES];
+    return [self saveAsSharedInstanceAndPostNotification:postNotification updateApplicationContext:postNotification];
 }
 - (BOOL)saveAsSharedInstanceAndPostNotification:(BOOL)postNotification updateApplicationContext:(BOOL)updateApplicationContext
 {
@@ -133,7 +133,6 @@ static NSString *PerExerciseSettings = @"perExerciseSettings";
         [MAUserUtil reloadSharedInstance:YES];
         if (postNotification)
         {
-//            [[MASessionDelegate sharedInstance] updateApplicationContextWithObject:object key:key];
             [MAAppGroupNotifier postNotificationForKey:key];
         }
         if (updateApplicationContext)
