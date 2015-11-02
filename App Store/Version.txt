@@ -1,6 +1,8 @@
 2.4
-• iOS 9 and watchOS 2 support
-• Fixed width on Today view
+watchOS 2 support!
+• App runs natively on the Apple Watch
+• Loads and runs faster
+• Use the Digital Crown to change the bill amount
 
 2.3.1
 • Updated bill entry interface on the Apple Watch to make it faster and easier to use. Love or hate the new watch look? Send feedback at support@tipityapp.com!
