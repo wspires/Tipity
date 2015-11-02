@@ -1160,6 +1160,11 @@
 		18D85F641B3E55AB003862E4 /* Tipity Watch Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Tipity Watch Extension.entitlements"; sourceTree = SOURCE_ROOT; };
 		18D85F691B3E6761003862E4 /* MANotificationNames.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MANotificationNames.h; sourceTree = "<group>"; };
 		18EA1A911BE3A41000E7859A /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		18EA1A941BE743BF00E7859A /* 1 - Basic - Simulator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1 - Basic - Simulator.png"; sourceTree = "<group>"; };
+		18EA1A951BE743BF00E7859A /* 2 - Advanced - Simulator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2 - Advanced - Simulator.png"; sourceTree = "<group>"; };
+		18EA1A961BE743BF00E7859A /* 3 - Settings - Simulator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3 - Settings - Simulator.png"; sourceTree = "<group>"; };
+		18EA1A971BE743BF00E7859A /* 4 - Color - Simulator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "4 - Color - Simulator.png"; sourceTree = "<group>"; };
+		18EA1A981BE743BF00E7859A /* 5 - Today View - Simulator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "5 - Today View - Simulator.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1415,6 +1420,7 @@
 				18A9C58B19CB925B00789D2E /* 750x1334 */,
 				18A9C59B19CB927500789D2E /* 1242x2208 */,
 				1809758519BE5FF40039F654 /* 1536x2008 */,
+				18EA1A931BE741C000E7859A /* 2732x2048 */,
 			);
 			path = Screenshots;
 			sourceTree = "<group>";
@@ -2722,6 +2728,18 @@
 				18A9C5AA19CB927500789D2E /* 5 - Dynamic Type - Simulator.png */,
 			);
 			path = 1242x2208;
+			sourceTree = "<group>";
+		};
+		18EA1A931BE741C000E7859A /* 2732x2048 */ = {
+			isa = PBXGroup;
+			children = (
+				18EA1A941BE743BF00E7859A /* 1 - Basic - Simulator.png */,
+				18EA1A951BE743BF00E7859A /* 2 - Advanced - Simulator.png */,
+				18EA1A961BE743BF00E7859A /* 3 - Settings - Simulator.png */,
+				18EA1A971BE743BF00E7859A /* 4 - Color - Simulator.png */,
+				18EA1A981BE743BF00E7859A /* 5 - Today View - Simulator.png */,
+			);
+			path = 2732x2048;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
