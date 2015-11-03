@@ -1,9 +1,12 @@
 2.5
-• TODO
+watchOS 2 support!
+• Runs natively on the Apple Watch
+• Loads and runs faster
+• Use the Digital Crown to change the bill amount
 
 2.4
 watchOS 2 support!
-• App runs natively on the Apple Watch
+• Runs natively on the Apple Watch
 • Loads and runs faster
 • Use the Digital Crown to change the bill amount
 
