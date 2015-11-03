@@ -134,7 +134,7 @@ static NSString * const MsgSource = @"Extension";
 
     if ( ! self.isAvailable)
     {
-        LOG_S(@"Not Available");
+//        LOG_S(@"Not Available");
 //        return NO;
     }
 
@@ -143,7 +143,7 @@ static NSString * const MsgSource = @"Extension";
     BOOL success = [session updateApplicationContext:self.context error:&error];
     if ( ! success)
     {
-        LOG_S(@"%@", error);
+//        LOG_S(@"%@", error);
     }
     return success;
 }
