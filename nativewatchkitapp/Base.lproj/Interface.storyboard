@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="9019"/>
+    </dependencies>
+    <scenes>
+        <!--Tipity-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller title="Tipity" id="AgC-eL-Hgc" customClass="InterfaceController">
+                    <items>
+                        <group width="1" alignment="left" verticalAlignment="center" layout="vertical" id="nns-ir-cuq">
+                            <items>
+                                <group width="1" alignment="left" id="l1G-JY-o0x" userLabel="Bill Group">
+                                    <items>
+                                        <label alignment="center" verticalAlignment="center" text="$" id="Ndk-Hf-TT4"/>
+                                        <picker width="55" height="55" alignment="center" verticalAlignment="center" focusStyle="stack" id="O4h-vI-0oj" userLabel="Dollar Picker">
+                                            <connections>
+                                                <action selector="dollarPickerAction:" destination="AgC-eL-Hgc" id="iJe-0k-lAW"/>
+                                            </connections>
+                                        </picker>
+                                        <label alignment="center" verticalAlignment="center" text="." id="voq-om-20b"/>
+                                        <picker width="55" height="55" alignment="center" verticalAlignment="center" focusStyle="stack" id="jTD-Gp-VGg" userLabel="Cent Picker">
+                                            <connections>
+                                                <action selector="centPickerAction:" destination="AgC-eL-Hgc" id="tOb-zH-zq9"/>
+                                            </connections>
+                                        </picker>
+                                    </items>
+                                </group>
+                                <separator alignment="left" id="OdU-Dy-w7a">
+                                    <color key="color" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </separator>
+                                <separator alignment="left" id="fR8-g8-dAG">
+                                    <color key="color" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </separator>
+                                <group width="1" alignment="left" id="HTk-4m-u9O" userLabel="Tip Group">
+                                    <items>
+                                        <imageView alignment="left" verticalAlignment="center" image="TipImage" id="49C-fh-PE6"/>
+                                        <label alignment="left" text="Tip" id="9wH-T0-lWP">
+                                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                        </label>
+                                        <label alignment="right" verticalAlignment="center" text="$9.99" textAlignment="right" id="jaL-QD-rBM"/>
+                                    </items>
+                                    <edgeInsets key="margins" left="5" right="0.0" top="0.0" bottom="0.0"/>
+                                </group>
+                                <separator alignment="left" id="VSg-Hj-bfG">
+                                    <color key="color" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </separator>
+                                <group width="1" alignment="left" id="kWg-Ex-rnD" userLabel="Total Group">
+                                    <items>
+                                        <imageView alignment="left" image="GrandTotalImage" id="tj6-cc-W3g"/>
+                                        <label alignment="left" text="Total" id="zZg-db-hJx">
+                                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                        </label>
+                                        <label alignment="right" verticalAlignment="center" text="$1.99" textAlignment="right" id="L9k-xd-k0o"/>
+                                    </items>
+                                    <edgeInsets key="margins" left="5" right="0.0" top="0.0" bottom="0.0"/>
+                                </group>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" verticalAlignment="center" hidden="YES" id="NrL-zX-wbS">
+                            <items>
+                                <button width="1" height="44" alignment="left" verticalAlignment="bottom" id="JfO-5a-6sI">
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </button>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" verticalAlignment="bottom" hidden="YES" layout="vertical" id="bMK-i7-YqO">
+                            <items>
+                                <group width="1" alignment="left" id="dNZ-rb-v04">
+                                    <items>
+                                        <label width="88" alignment="left" verticalAlignment="center" text="$999.99" textAlignment="center" id="Gfu-UJ-Bs7"/>
+                                        <button width="44" height="30" alignment="right" verticalAlignment="center" title="✓" id="mp9-lP-tg7">
+                                            <color key="backgroundColor" red="0.078431375319999996" green="0.49803924560000001" blue="0.82745105029999999" alpha="1" colorSpace="deviceRGB"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                        </button>
+                                    </items>
+                                </group>
+                                <group width="1" alignment="left" id="pUL-FX-E04">
+                                    <items>
+                                        <button width="44" height="30" alignment="left" title="1" id="pKI-NY-ew7">
+                                            <color key="backgroundColor" red="0.078431375319999996" green="0.49803924560000001" blue="0.82745105029999999" alpha="1" colorSpace="deviceRGB"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                        </button>
+                                        <button width="44" height="30" alignment="center" title="2" id="7da-Sj-S7i">
+                                            <color key="backgroundColor" red="0.078431375319999996" green="0.49803924560000001" blue="0.82745105029999999" alpha="1" colorSpace="deviceRGB"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                        </button>
+                                        <button width="44" height="30" alignment="right" title="3" id="Ide-OR-ofB">
+                                            <color key="backgroundColor" red="0.078431375319999996" green="0.49803924560000001" blue="0.82745105029999999" alpha="1" colorSpace="deviceRGB"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                        </button>
+                                    </items>
+                                </group>
+                                <group width="1" alignment="left" id="4Ki-f5-BBl">
+                                    <items>
+                                        <button width="44" height="30" alignment="left" title="4" id="qsD-GL-ILj">
+                                            <color key="backgroundColor" red="0.078431375319999996" green="0.49803924560000001" blue="0.82745105029999999" alpha="1" colorSpace="deviceRGB"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                        </button>
+                                        <button width="44" height="30" alignment="center" title="5" id="ESF-xt-1CL">
+                                            <color key="backgroundColor" red="0.078431375319999996" green="0.49803924560000001" blue="0.82745105029999999" alpha="1" colorSpace="deviceRGB"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                        </button>
+                                        <button width="44" height="30" alignment="right" title="6" id="7oY-4Q-L1g">
+                                            <color key="backgroundColor" red="0.078431375319999996" green="0.49803924560000001" blue="0.82745105029999999" alpha="1" colorSpace="deviceRGB"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                        </button>
+                                    </items>
+                                </group>
+                                <group width="1" alignment="left" id="bBP-8d-lIN">
+                                    <items>
+                                        <button width="44" height="30" alignment="left" title="7" id="kKy-bh-mGx">
+                                            <color key="backgroundColor" red="0.078431375319999996" green="0.49803924560000001" blue="0.82745105029999999" alpha="1" colorSpace="deviceRGB"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                        </button>
+                                        <button width="44" height="30" alignment="center" title="8" id="hKD-tS-8eR">
+                                            <color key="backgroundColor" red="0.078431375319999996" green="0.49803924560000001" blue="0.82745105029999999" alpha="1" colorSpace="deviceRGB"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                        </button>
+                                        <button width="44" height="30" alignment="right" title="9" id="1ef-O8-5eR">
+                                            <color key="backgroundColor" red="0.078431375319999996" green="0.49803924560000001" blue="0.82745105029999999" alpha="1" colorSpace="deviceRGB"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                        </button>
+                                    </items>
+                                </group>
+                                <group width="1" alignment="left" id="mAf-Jf-NuC">
+                                    <items>
+                                        <button width="44" height="30" alignment="left" title="." id="uZ3-1q-ex7">
+                                            <color key="backgroundColor" red="0.078431375319999996" green="0.49803924560000001" blue="0.82745105029999999" alpha="1" colorSpace="deviceRGB"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                        </button>
+                                        <button width="44" height="30" alignment="center" title="0" id="kl2-VY-lNJ">
+                                            <color key="backgroundColor" red="0.078431375319999996" green="0.49803924560000001" blue="0.82745105029999999" alpha="1" colorSpace="deviceRGB"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                        </button>
+                                        <button width="44" height="30" alignment="right" backgroundImage="DeleteButtonImage" id="eRa-NE-YBz">
+                                            <color key="backgroundColor" red="0.078431375319999996" green="0.49803924560000001" blue="0.82745105029999999" alpha="1" colorSpace="deviceRGB"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                        </button>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="centPicker" destination="jTD-Gp-VGg" id="sQl-As-DIZ"/>
+                        <outlet property="dollarPicker" destination="O4h-vI-0oj" id="4p2-Qr-cMZ"/>
+                        <outlet property="grandTotalLabel" destination="L9k-xd-k0o" id="WTe-S9-e1C"/>
+                        <outlet property="tipLabel" destination="jaL-QD-rBM" id="oiE-Av-Haa"/>
+                    </connections>
+                </controller>
+            </objects>
+        </scene>
+    </scenes>
+    <color key="tintColor" red="0.059651169925928116" green="0.49540671706199646" blue="0.99844944477081299" alpha="1" colorSpace="calibratedRGB"/>
+</document>
