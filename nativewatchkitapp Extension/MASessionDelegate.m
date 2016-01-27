@@ -72,6 +72,7 @@ static NSString * const MsgSource = @"Extension";
 - (void)sessionWatchStateDidChange:(WCSession *)session
 {
     LOG
+#ifndef IS_WATCH_EXTENSION
     if ( ! session.paired)
     {
         LOG_S(@"Watch not paired");
@@ -82,6 +83,7 @@ static NSString * const MsgSource = @"Extension";
         LOG_S(@"Watch app not installed");
         return;
     }
+#endif // IS_HOST_APP
     LOG_S(@"Watch is paired, and watch app is installed")
     self.isAvailable = YES;
 }
