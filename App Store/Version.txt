@@ -1,5 +1,5 @@
 2.6
-• TODO
+• Fix for issue on Notification Center widget where + and - buttons sometimes did not appear
 
 2.5
 watchOS 2 support!

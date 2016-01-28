@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="M4Y-Lb-cyx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="M4Y-Lb-cyx">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -23,7 +23,6 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="otA-W6-DCz" userLabel="MinusButton">
                                         <rect key="frame" x="8" y="8" width="28" height="28"/>
-                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="28" id="CAt-da-b9V"/>
                                             <constraint firstAttribute="width" constant="28" id="lHT-sJ-fNu"/>
@@ -37,7 +36,6 @@
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RrY-eg-GaO">
                                         <rect key="frame" x="44" y="7" width="9" height="30"/>
-                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="2k2-TP-qXX"/>
                                             <constraint firstAttribute="width" constant="9" id="f1x-hX-Ptt"/>
@@ -48,7 +46,6 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3CG-ol-kke">
                                         <rect key="frame" x="61" y="7" width="30" height="30"/>
-                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="3ir-P9-142"/>
                                             <constraint firstAttribute="width" constant="30" id="aYj-xk-ElD"/>
@@ -65,7 +62,6 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H8i-Ti-GRw">
                                         <rect key="frame" x="99" y="7" width="30" height="30"/>
-                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="DFg-9Y-vzN"/>
                                             <constraint firstAttribute="height" constant="30" id="UQD-5d-jHr"/>
@@ -82,7 +78,6 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cIK-iA-cgK">
                                         <rect key="frame" x="137" y="7" width="30" height="30"/>
-                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="3pz-GS-uoS"/>
                                             <constraint firstAttribute="width" constant="30" id="Q3B-1S-dDg"/>
@@ -99,7 +94,6 @@
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mH4-Of-Byr">
                                         <rect key="frame" x="175" y="7" width="5" height="30"/>
-                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="5iM-6M-aNL"/>
                                             <constraint firstAttribute="width" constant="5" id="cJJ-w3-Buv"/>
@@ -110,7 +104,6 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uCV-Df-PS1">
                                         <rect key="frame" x="188" y="7" width="30" height="30"/>
-                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="A6P-tk-Eib"/>
                                             <constraint firstAttribute="width" constant="30" id="UlF-f2-m5i"/>
@@ -127,7 +120,6 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Cg-IC-Hho">
                                         <rect key="frame" x="226" y="7" width="30" height="30"/>
-                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="30" id="41r-fE-VQ0"/>
                                             <constraint firstAttribute="height" constant="30" id="Ydy-HK-r5W"/>
@@ -144,7 +136,6 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y9d-zy-ZMD" userLabel="PlusButton">
                                         <rect key="frame" x="268" y="8" width="28" height="28"/>
-                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="28" id="2Qh-Rf-r5v"/>
                                             <constraint firstAttribute="width" constant="28" id="GeF-yp-EqP"/>
@@ -157,7 +148,6 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="3CG-ol-kke" firstAttribute="centerY" secondItem="H8i-Ti-GRw" secondAttribute="centerY" id="9KZ-5p-Oof"/>
@@ -186,11 +176,10 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qyT-dj-hfb">
                                         <rect key="frame" x="69" y="7" width="28" height="26"/>
-                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="28" id="fgy-rB-a75"/>
                                         </constraints>
-                                        <state key="normal" image="726-star.png">
+                                        <state key="normal" image="StarImage">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -199,11 +188,10 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e8r-F9-QYy">
                                         <rect key="frame" x="146" y="7" width="28" height="26"/>
-                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="28" id="KBk-sJ-Bsf"/>
                                         </constraints>
-                                        <state key="normal" image="726-star.png">
+                                        <state key="normal" image="StarImage">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -212,11 +200,10 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dBS-dL-mor">
                                         <rect key="frame" x="223" y="7" width="28" height="26"/>
-                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="28" id="UvM-e3-bZp"/>
                                         </constraints>
-                                        <state key="normal" image="726-star.png">
+                                        <state key="normal" image="StarImage">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -224,7 +211,6 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="dBS-dL-mor" firstAttribute="leading" secondItem="e8r-F9-QYy" secondAttribute="trailing" constant="49" id="AV7-1f-6Lz"/>
@@ -242,12 +228,11 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3mX-w8-Lut" userLabel="Tip Button">
                                         <rect key="frame" x="8" y="10" width="28" height="23"/>
-                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="23" id="3EF-ej-o6C"/>
                                             <constraint firstAttribute="width" constant="28" id="Z8G-lj-dpb"/>
                                         </constraints>
-                                        <state key="normal" image="826-money-1.png">
+                                        <state key="normal" image="TipImage">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -256,7 +241,6 @@
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tip" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SBE-1E-dXS">
                                         <rect key="frame" x="44" y="11" width="25" height="20.5"/>
-                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20.5" id="G1g-T6-oHX"/>
                                         </constraints>
@@ -266,7 +250,6 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$20.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iME-4h-c0O">
                                         <rect key="frame" x="145" y="11" width="151" height="20.5"/>
-                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="151" id="Rid-tn-t60"/>
                                             <constraint firstAttribute="height" constant="20.5" id="W0Y-Yh-WOE"/>
@@ -276,7 +259,6 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="SBE-1E-dXS" firstAttribute="leading" secondItem="3mX-w8-Lut" secondAttribute="trailing" constant="8" id="6md-wj-9Th"/>
@@ -293,12 +275,11 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bfd-yi-b0X" userLabel="Grand Total Button">
                                         <rect key="frame" x="8" y="8" width="28" height="28"/>
-                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="28" id="BwF-2o-PXF"/>
                                             <constraint firstAttribute="height" constant="28" id="N4Q-lN-W6b"/>
                                         </constraints>
-                                        <state key="normal" image="827-money-2.png">
+                                        <state key="normal" image="GrandTotalImage">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -307,7 +288,6 @@
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Grand Total" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vVh-g0-VkL">
                                         <rect key="frame" x="44" y="11" width="89" height="20.5"/>
-                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20.5" id="YSH-wm-xld"/>
                                         </constraints>
@@ -317,7 +297,6 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$120.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="79O-Rl-ujY">
                                         <rect key="frame" x="145" y="11" width="151" height="20.5"/>
-                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="151" id="Z2N-ly-y5I"/>
                                             <constraint firstAttribute="height" constant="20.5" id="m06-Ji-h9E"/>
@@ -327,7 +306,6 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="vVh-g0-VkL" firstAttribute="centerY" secondItem="bfd-yi-b0X" secondAttribute="centerY" constant="-0.75" id="08F-GD-jXj"/>
@@ -340,7 +318,6 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <animations/>
                         <constraints>
                             <constraint firstItem="CTl-9g-tGV" firstAttribute="top" secondItem="MPD-Bp-Ez4" secondAttribute="bottom" id="4SH-AC-e1c"/>
                             <constraint firstAttribute="centerX" secondItem="MPD-Bp-Ez4" secondAttribute="centerX" id="4yZ-2V-qaH"/>
@@ -386,10 +363,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="726-star.png" width="28" height="26"/>
-        <image name="826-money-1.png" width="28" height="23"/>
-        <image name="827-money-2.png" width="28" height="20"/>
+        <image name="GrandTotalImage" width="28" height="20"/>
         <image name="MinusImage" width="28" height="28"/>
         <image name="PlusImage" width="28" height="28"/>
+        <image name="StarImage" width="28" height="26"/>
+        <image name="TipImage" width="28" height="23"/>
     </resources>
 </document>
