@@ -1,3 +1,6 @@
+2.7
+• TODO
+
 2.6
 • Fix for issue on Notification Center widget where + and - buttons sometimes did not appear
 
