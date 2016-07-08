@@ -18,4 +18,7 @@
 + (NSString *)cellIdentifier;
 + (NSString *)nibName;
 + (void)registerNibWithTableView:(UITableView *)tableView;
+
+- (void)setImage:(UIImage *)image;
+
 @end

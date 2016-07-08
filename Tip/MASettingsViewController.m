@@ -451,8 +451,7 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
     [MAAppearance setColorForSwitch:cell.swtch];
     
     UIImage *image = [MAFilePaths peopleImage];
-    cell.imageView.image = image;
-    cell.leadingSpaceConstraint.constant = 58; // TODO: Figure out the image width programmatically (imageView frame does not work).
+    [cell setImage:image];
 
     return cell;
 }
@@ -503,8 +502,7 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
     [MAAppearance setColorForSwitch:cell.swtch];
     
     UIImage *image = [MAFilePaths taxAmountImage];
-    cell.imageView.image = image;
-    cell.leadingSpaceConstraint.constant = 58; // TODO: Figure out the image width programmatically (imageView frame does not work).
+    [cell setImage:image];
     
     return cell;
 }

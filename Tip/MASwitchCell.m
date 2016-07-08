@@ -11,7 +11,6 @@
 #import "MAAppearance.h"
 #import "MADeviceUtil.h"
 #import "MAFilePaths.h"
-#import "MAUtil.h"
 
 @implementation MASwitchCell
 @synthesize label;
@@ -68,8 +67,20 @@
     {
         self.label.font = [self.label.font fontWithSize:[MAAppearance cellFontSize]];
     }
+    
+    [self configureConstraints];
 }
 
+- (void)configureConstraints
+{
+    double constant = 16.;
+    if (IS_IPHONE_6P)
+    {
+        constant = 20.;
+    }
+    self.leadingSpaceConstraint.constant = constant;
+    [self.superview layoutIfNeeded];
+}
 
 + (NSString *)cellIdentifier
 {
@@ -85,6 +96,17 @@
 {
     UINib *nib = [UINib nibWithNibName:[MASwitchCell nibName] bundle:nil];
     [tableView registerNib:nib forCellReuseIdentifier:[MASwitchCell cellIdentifier]];
+}
+
+- (void)setImage:(UIImage *)image
+{
+    self.imageView.image = image;
+    double constant = 57.;
+    if (IS_IPHONE_6P)
+    {
+        constant = 63.;
+    }
+    self.leadingSpaceConstraint.constant = constant; // Space in front of text to make remove for the image.
 }
 
 @end
