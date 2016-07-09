@@ -57,7 +57,6 @@
 		180975C719BE605A0039F654 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 180975C619BE605A0039F654 /* AssetsLibrary.framework */; };
 		180975C919BE60630039F654 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 180975C819BE60630039F654 /* CoreText.framework */; };
 		180975CB19BE606C0039F654 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 180975CA19BE606B0039F654 /* Foundation.framework */; };
-		180975CD19BE60730039F654 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 180975CC19BE60730039F654 /* iAd.framework */; };
 		180975F319BE60A90039F654 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 180975D919BE60A90039F654 /* Appirater.m */; };
 		180975F419BE60A90039F654 /* AppiraterLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 180975DB19BE60A90039F654 /* AppiraterLocalizable.strings */; };
 		1809761119BE61010039F654 /* 1402390544_icon-arrow-up-a.png in Resources */ = {isa = PBXBuildFile; fileRef = 180975F919BE61010039F654 /* 1402390544_icon-arrow-up-a.png */; };
@@ -1190,7 +1189,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				180975CD19BE60730039F654 /* iAd.framework in Frameworks */,
 				180975CB19BE606C0039F654 /* Foundation.framework in Frameworks */,
 				180975C919BE60630039F654 /* CoreText.framework in Frameworks */,
 				180975C719BE605A0039F654 /* AssetsLibrary.framework in Frameworks */,

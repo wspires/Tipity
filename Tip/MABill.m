@@ -135,14 +135,18 @@ static double const DefaultSplitTotal = 120.;
         // Copy or set each property.
         _bill = [bill copy];
         _tipPercent = [tipPercent copy];
+
         _tip = [NSNumber numberWithDouble:DefaultTip];
         _taxPercent = [NSNumber numberWithDouble:DefaultTaxPercent];
         _tax = [NSNumber numberWithDouble:DefaultTax];
-        _billBeforeTax = [NSNumber numberWithDouble:DefaultBillBeforeTax];
+
         _split = [NSNumber numberWithDouble:DefaultSplit];
         _splitTip = [NSNumber numberWithDouble:DefaultSplitTip];
         _splitTotal = [NSNumber numberWithDouble:DefaultSplitTotal];
-        
+
+        //        _billBeforeTax = [NSNumber numberWithDouble:DefaultBillBeforeTax];
+        _billBeforeTax = [MABill numberFromPercentagePlusNumber:_bill percent:_taxPercent];
+
         // Re-calculates any properties given above as needed.
         [self updateBill];
     }

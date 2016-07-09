@@ -26,8 +26,6 @@
 #import "MATipIAPHelper.h"
 #import "MAStringUtil.h"
 
-#import <iAd/iAd.h>
-
 #import <CoreFoundation/CoreFoundation.h>
 
 DECL_TABLE_IDX(DISABLED_SECTION, 9999);
@@ -65,7 +63,7 @@ DECL_TABLE_IDX(TAX_SECTION_ROWS, 2);
 static NSString * const BillTotalKey = @"bill";
 static NSString * const TipPercentKey = @"tipPercent";
 
-@interface MATipViewController () <MABillDelegate, MARatingDelegate, UITextFieldDelegate, UIActionSheetDelegate, ADBannerViewDelegate>
+@interface MATipViewController () <MABillDelegate, MARatingDelegate, UITextFieldDelegate, UIActionSheetDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) MABill *bill;
 @property (strong, nonatomic) NSArray *textFieldIndexPaths;
@@ -79,11 +77,6 @@ static NSString * const TipPercentKey = @"tipPercent";
 @property (strong, nonatomic) UIBarButtonItem *doneBarButton;
 @property (strong, nonatomic) UIBarButtonItem *update1BarButton;
 @property (strong, nonatomic) UIBarButtonItem *update2BarButton;
-
-@property (strong, nonatomic) ADBannerView *adBanner;
-@property (weak, nonatomic) NSLayoutConstraint *adBannerBottomSizeConstraint;
-@property (weak, nonatomic) NSLayoutConstraint *adBannerHeightConstraint;
-@property (assign, nonatomic) BOOL bannerIsVisible;
 @end
 
 @implementation MATipViewController
@@ -100,11 +93,6 @@ static NSString * const TipPercentKey = @"tipPercent";
 @synthesize doneBarButton = _doneBarButton;
 @synthesize update1BarButton = _update1BarButton;
 @synthesize update2BarButton = _update2BarButton;
-
-@synthesize adBanner = _adBanner;
-@synthesize adBannerBottomSizeConstraint = _adBannerBottomSizeConstraint;
-@synthesize adBannerHeightConstraint = _adBannerHeightConstraint;
-@synthesize bannerIsVisible = _bannerIsVisible;
 
 - (void)viewDidLoad
 {
@@ -129,8 +117,6 @@ static NSString * const TipPercentKey = @"tipPercent";
     [MAAppearance clearBackgroundForTableView:self.tableView];
 
     [self loadBill];
-    
-    [self setupAdBanner];
 
 //    [self hideUIToMakeLaunchImages];
 }
@@ -146,8 +132,6 @@ static NSString * const TipPercentKey = @"tipPercent";
     [super viewWillAppear:animated];
     [[self view] setBackgroundColor:[MAAppearance backgroundColor]];
     [MAUIUtil setAdjustableNavTitle:self.navigationItem.title withNavigationItem:self.navigationItem];
-
-    [self hideAdBannerIfPurchased];
     
     [self registerForSharedDataChangedNotifications];
 
@@ -853,29 +837,126 @@ static NSString * const TipPercentKey = @"tipPercent";
     {
         if ([self isDollarIndexPath:self.activeIndexPath])
         {
-            return [MAUIUtil automaticDecimalTextField:textField shouldChangeCharactersInRange:range replacementString:string];
+            BOOL const shouldChangeChars = [MAUIUtil automaticDecimalTextField:textField shouldChangeCharactersInRange:range replacementString:string];
+            
+            [self updateBillAsYouTypeTextField:textField];
+
+            return shouldChangeChars;
         }
 
         // Use regular numTextField validator for non-dollar text fields, like percentages.
         BOOL const shouldChangeChars = [MAUIUtil numTextField:textField shouldChangeCharactersInRange:range replacementString:string];
+        
+        [self updateBillAsYouTypeTextField:textField];
+
         return shouldChangeChars;
     }
     
     return YES;
 }
 
+- (NSArray<NSIndexPath *> *)priceIndexPaths
+{
+    // Would be more efficient to make this static and do it once, but the index paths can change--could make this a variable that gets updated everytime they change instead.
+    NSMutableArray<NSIndexPath *> *indexPaths = [[NSMutableArray alloc] init];
+    [indexPaths addObject:[NSIndexPath indexPathForRow:BILL_ROW inSection:BILL_SECTION]];
+    [indexPaths addObject:[NSIndexPath indexPathForRow:TIP_ROW inSection:TIP_SECTION]];
+    [indexPaths addObject:[NSIndexPath indexPathForRow:TOTAL_ROW inSection:TOTAL_SECTION]];
+    [indexPaths addObject:[NSIndexPath indexPathForRow:TAX_ROW inSection:TAX_SECTION]];
+    [indexPaths addObject:[NSIndexPath indexPathForRow:BILL_BEFORE_TAX_ROW inSection:TAX_SECTION]];
+    [indexPaths addObject:[NSIndexPath indexPathForRow:SPLIT_TIP_ROW inSection:SPLIT_SECTION]];
+    [indexPaths addObject:[NSIndexPath indexPathForRow:SPLIT_TOTAL_ROW inSection:SPLIT_SECTION]];
+    return indexPaths;
+}
+- (NSArray<NSIndexPath *> *)percentIndexPaths
+{
+    // Would be more efficient to make this static and do it once, but the index paths can change--could make this a variable that gets updated everytime they change instead.
+    NSMutableArray<NSIndexPath *> *indexPaths = [[NSMutableArray alloc] init];
+    [indexPaths addObject:[NSIndexPath indexPathForRow:TIP_PERCENT_ROW inSection:TIP_SECTION]];
+    [indexPaths addObject:[NSIndexPath indexPathForRow:TAX_PERCENT_ROW inSection:TAX_SECTION]];
+    return indexPaths;
+}
 
 // Returns YES if the given index path corresponds to a cell holding a currency/dollar value.
 - (BOOL)isDollarIndexPath:(NSIndexPath *)indexPath
 {
-    return (indexPath.section == BILL_SECTION && indexPath.row == BILL_ROW)
-    || (indexPath.section == TIP_SECTION && indexPath.row == TIP_ROW)
-    || (indexPath.section == TOTAL_SECTION && indexPath.row == TOTAL_ROW)
-    || (indexPath.section == TAX_SECTION && indexPath.row == TAX_ROW)
-    || (indexPath.section == TAX_SECTION && indexPath.row == BILL_BEFORE_TAX_ROW)
-    || (indexPath.section == SPLIT_SECTION && indexPath.row == SPLIT_TIP_ROW)
-    || (indexPath.section == SPLIT_SECTION && indexPath.row == SPLIT_TOTAL_ROW)
-    ;
+    NSArray<NSIndexPath *> *priceIndexPaths = [self priceIndexPaths];
+    for (NSIndexPath *priceIndexPath in priceIndexPaths)
+    {
+        if (indexPath.section == priceIndexPath.section && indexPath.row == priceIndexPath.row)
+        {
+            return YES;
+        }
+    }
+    return NO;
+}
+
+// Automatically update as you type.
+- (void)updateBillAsYouTypeTextField:(UITextField *)textField
+{
+    NSString *editedKey = [self.indexPathToBillKeyDict objectForKey:self.activeIndexPath];
+    if ( ! editedKey)
+    {
+        return;
+    }
+    
+    // Make a new bill (copied so we get the tip/tax percentage).
+    // Cannot use self.bill directly because when it is updated, this is the delegate, which causes the table view to reload and the keyboard to be dismissed.
+    // http://stackoverflow.com/questions/11372589/uitableview-reloaddata-causes-uitextfield-to-resignfirstresponder#11376780
+    // http://stackoverflow.com/questions/6409370/uitableview-reloaddata-automatically-calls-resignfirstresponder
+    MABill *bill = [self.bill copy];
+    if (textField.text.length != 0)
+    {
+        NSNumber *billValue = [NSNumber numberWithDouble:[textField.text doubleValue]];
+        [bill setValue:billValue forKey:editedKey];
+        [MARounder roundGrandTotalInBill:bill];
+    }
+    
+    // Update all text fields that hold prices (except for the edited field itself).
+    NSArray<NSIndexPath *> *indexPaths = [self priceIndexPaths];
+    for (NSIndexPath *indexPath in indexPaths)
+    {
+        UITextField *textField = [self textFieldForIndexPath:indexPath];
+        if ( ! textField)
+        {
+            continue;
+        }
+        NSString *key = [self.indexPathToBillKeyDict objectForKey:indexPath];
+        if ( ! key)
+        {
+            continue;
+        }
+        if ([key isEqualToString:editedKey])
+        {
+            continue;
+        }
+        NSNumber *price = (NSNumber *)[bill valueForKey:key];
+        NSString *formattedPrice = [MABill formatPrice:price];
+        textField.text = formattedPrice;
+    }
+    
+    // Update all text fields that hold percentages (except for the edited field itself).
+    indexPaths = [self percentIndexPaths];
+    for (NSIndexPath *indexPath in indexPaths)
+    {
+        UITextField *textField = [self textFieldForIndexPath:indexPath];
+        if ( ! textField)
+        {
+            continue;
+        }
+        NSString *key = [self.indexPathToBillKeyDict objectForKey:indexPath];
+        if ( ! key)
+        {
+            continue;
+        }
+        if ([key isEqualToString:editedKey])
+        {
+            continue;
+        }
+        NSNumber *percent = (NSNumber *)[bill valueForKey:key];
+        NSString *formattedPercent = [MABill formatPercent:percent];
+        textField.text = formattedPercent;
+    }
 }
 
 - (IBAction)dismissInput
@@ -1072,6 +1153,8 @@ static NSString * const TipPercentKey = @"tipPercent";
     }
     NSString *newValueStr = [MAStringUtil formatDouble:newValue];
     textField.text = newValueStr;
+    
+    [self updateBillAsYouTypeTextField:textField];
 }
 
 - (void)checkAndSetEnabledBarButtons
@@ -1097,159 +1180,6 @@ static NSString * const TipPercentKey = @"tipPercent";
     {
         self.forwardBarButton.enabled = NO;
     }
-}
-
-#pragma mark - iAd
-
-- (void)setupAdBanner
-{
-    if ( ! No_Ads_Iap)
-    {
-        self.adBanner = nil;
-        return;
-    }
-    
-    BOOL const purchased = ! [MATipIAPHelper checkForIAP];
-    if (purchased)
-    {
-        self.adBanner = nil;
-        return;
-    }
-    
-    self.adBanner = [[ADBannerView alloc] initWithFrame:CGRectZero];
-    [self.view addSubview:self.adBanner];
-
-    // Setup constraints for the banner.
-    self.adBanner.translatesAutoresizingMaskIntoConstraints = NO;
-    NSLayoutConstraint *constraint = nil;
-    
-    // Leading.
-    constraint = [NSLayoutConstraint
-                  constraintWithItem:self.adBanner
-                  attribute:NSLayoutAttributeLeading
-                  relatedBy:NSLayoutRelationEqual
-                  toItem:self.view
-                  attribute:NSLayoutAttributeLeading
-                  multiplier:1.0
-                  constant:0.0];
-    [self.view addConstraint:constraint];
-    
-    // Trailing.
-    constraint = [NSLayoutConstraint
-                  constraintWithItem:self.adBanner
-                  attribute:NSLayoutAttributeTrailing
-                  relatedBy:NSLayoutRelationEqual
-                  toItem:self.view
-                  attribute:NSLayoutAttributeTrailing
-                  multiplier:1.0
-                  constant:0.0];
-    [self.view addConstraint:constraint];
-
-    // Bottom.
-    constraint = [NSLayoutConstraint
-                  constraintWithItem:self.adBanner
-                  attribute:NSLayoutAttributeBottom
-                  relatedBy:NSLayoutRelationEqual
-                  toItem:self.view
-                  attribute:NSLayoutAttributeBottom
-                  multiplier:1.0
-                  constant:0.0];
-    self.adBannerBottomSizeConstraint = constraint;
-    [self.view addConstraint:constraint];
-
-    // Height.
-    // Note: Ad banner's height seems pegged to 50 in portrait mode regardless of this constraint.
-    constraint = [NSLayoutConstraint
-                  constraintWithItem:self.adBanner
-                  attribute:NSLayoutAttributeHeight
-                  relatedBy:NSLayoutRelationEqual
-                  toItem:nil
-                  attribute:NSLayoutAttributeNotAnAttribute
-                  multiplier:1.0
-                  constant:50.];
-    self.adBannerHeightConstraint = constraint;
-    [self.view addConstraint:constraint];
-
-    self.adBannerBottomSizeConstraint.constant = self.adBannerHeightConstraint.constant;
-
-    self.adBanner.delegate = self;
-    self.bannerIsVisible = NO;
-}
-
-- (void)hideAdBannerIfPurchased
-{
-    // If purchased, hide and remove the banner.
-    BOOL const purchased = ! [MATipIAPHelper checkForIAP];
-    if (purchased)
-    {
-        [self showAdBanner:NO];
-    }
-}
-
-- (void)bannerViewDidLoadAd:(ADBannerView *)banner
-{
-//    TLog(@"");
-    [self showAdBanner:YES];
-}
-
-- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
-{
-//    TLog(@"%@", error);
-    [self showAdBanner:NO];
-}
-
-- (void)showAdBanner:(BOOL)show
-{
-    // Check if already showing or hiding the banner.
-    if (show && self.bannerIsVisible)
-    {
-        return;
-    }
-    else if ( ! show && ! self.bannerIsVisible)
-    {
-        return;
-    }
-    
-//    TLog(@"%d", show);
-
-    CGFloat constraintConstant = 0;
-    if ( ! show)
-    {
-        constraintConstant = self.adBannerHeightConstraint.constant;
-    }
-    
-    self.adBannerBottomSizeConstraint.constant = constraintConstant;
-    [UIView animateWithDuration:.3
-                          delay:0.0
-                        options:UIViewAnimationOptionBeginFromCurrentState
-                     animations:^{
-                         [self.adBanner.superview layoutIfNeeded];
-                     }
-                     completion:^(BOOL finished){
-                     }];
-    
-    self.bannerIsVisible = show;
-}
-
-- (BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave
-{
-//    TLog(@"Banner view is beginning an ad action: %d", willLeave);
-    BOOL shouldExecuteAction = YES;
-    if ( ! willLeave && shouldExecuteAction)
-    {
-        // Stop all interactive processes.
-        // [video pause];
-        // [audio pause];
-    }
-    return shouldExecuteAction;
-}
-
-- (void)bannerViewActionDidFinish:(ADBannerView *)banner
-{
-//    TLog(@"%@", banner);
-    // Resume stopped processes.
-    // [video resume];
-    // [audio resume];
 }
 
 #pragma mark - Shared Data Changed
