@@ -851,11 +851,31 @@ static NSString * const TipPercentKey = @"tipPercent";
 {
     // if (textField == self.someTextField)
     {
+        if ([self isDollarIndexPath:self.activeIndexPath])
+        {
+            return [MAUIUtil automaticDecimalTextField:textField shouldChangeCharactersInRange:range replacementString:string];
+        }
+
+        // Use regular numTextField validator for non-dollar text fields, like percentages.
         BOOL const shouldChangeChars = [MAUIUtil numTextField:textField shouldChangeCharactersInRange:range replacementString:string];
         return shouldChangeChars;
     }
     
     return YES;
+}
+
+
+// Returns YES if the given index path corresponds to a cell holding a currency/dollar value.
+- (BOOL)isDollarIndexPath:(NSIndexPath *)indexPath
+{
+    return (indexPath.section == BILL_SECTION && indexPath.row == BILL_ROW)
+    || (indexPath.section == TIP_SECTION && indexPath.row == TIP_ROW)
+    || (indexPath.section == TOTAL_SECTION && indexPath.row == TOTAL_ROW)
+    || (indexPath.section == TAX_SECTION && indexPath.row == TAX_ROW)
+    || (indexPath.section == TAX_SECTION && indexPath.row == BILL_BEFORE_TAX_ROW)
+    || (indexPath.section == SPLIT_SECTION && indexPath.row == SPLIT_TIP_ROW)
+    || (indexPath.section == SPLIT_SECTION && indexPath.row == SPLIT_TOTAL_ROW)
+    ;
 }
 
 - (IBAction)dismissInput

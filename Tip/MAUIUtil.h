@@ -35,6 +35,7 @@
 + (NSNumberFormatter *)hhmmssFormatter;
 + (NSNumberFormatter *)millisecondFormatter;
 + (BOOL)hhmmssTextField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
++ (BOOL)automaticDecimalTextField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
 + (NSString *)toHHMMSSFromMinutes:(double)minutes;
 + (double)toMinutesFromHHMMSS:(NSString *)hhmmss;
 + (NSString *)padHHMMSS:(NSString *)hhmmss;

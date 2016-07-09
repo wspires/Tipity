@@ -544,6 +544,73 @@
     return NO;
 }
 
++ (BOOL)automaticDecimalTextField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSString *decimalSep = [[NSLocale autoupdatingCurrentLocale] objectForKey:NSLocaleDecimalSeparator];
+    
+    // Disallow characters other than 0-9 and '.'.
+    NSMutableCharacterSet *digitDecimalCharSet = [NSMutableCharacterSet decimalDigitCharacterSet];
+    [digitDecimalCharSet addCharactersInString:decimalSep];
+    NSString *remainingChars = [string stringByTrimmingCharactersInSet:[digitDecimalCharSet invertedSet]];
+    BOOL numCheckOkay = (remainingChars.length == string.length);
+    if ( ! numCheckOkay)
+    {
+        return NO;
+    }
+    
+    NSString *newText = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (newText.length == 0)
+    {
+        return YES;
+    }
+
+    NSArray *billArray = [newText componentsSeparatedByString:decimalSep];
+    if ( ! billArray || billArray.count > 2)
+    {
+        return NO;
+    }
+    
+    newText = [newText stringByReplacingOccurrencesOfString:decimalSep withString:@""];
+    
+    if ([newText isEqualToString:@"00"] || newText.length == 0)
+    {
+        // "00" means delete the entire string because, for instance, removing "1" from "001" (originally "0.01").
+        textField.text = @"";
+        return NO;
+    }
+    else if (newText.length == 1)
+    {
+        newText = SFmt(@"0%@0%@", decimalSep, newText);
+    }
+    else if (newText.length == 2)
+    {
+        newText = SFmt(@"0%@%@", decimalSep, newText);
+    }
+    else // (dollars.length >= 3)
+    {
+        // Fix the position of the decimal point, which will automatically shift over any digits.
+        NSUInteger decimalIdx = newText.length - 2;
+        NSString *dollars = [newText substringToIndex:decimalIdx];
+        NSString *cents = [newText substringFromIndex:decimalIdx];
+        newText = SFmt(@"%@%@%@", dollars, decimalSep, cents);
+        
+        // Remove possible leading "00", "01", etc., but accept "0.12".
+        NSString *firstChar = [newText substringToIndex:1];
+        if ([firstChar isEqualToString:@"0"])
+        {
+            NSRange range = NSMakeRange(1, 1);
+            NSString *secondChar = [newText substringWithRange:range];
+            if ( ! [secondChar isEqualToString:decimalSep])
+            {
+                newText = [newText substringFromIndex:1];
+            }
+        }
+    }
+    
+    textField.text = newText;
+    return NO;
+}
+
 NSMutableString *filteredPhoneStringFromStringWithFilter(NSString *string, NSString *filter)
 {
     NSUInteger onOriginal = 0, onFilter = 0, onOutput = 0;

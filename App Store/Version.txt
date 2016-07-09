@@ -1,5 +1,5 @@
 2.7
-• TODO
+• Automatic decimal point—decimal point for cents is automatically inserted as you enter the bill, saving you valuable tapping time!
 
 2.6
 • Fix for issue on Notification Center widget where + and - buttons sometimes did not appear
