@@ -112,6 +112,8 @@
 		180976B619BE96910039F654 /* MABill.m in Sources */ = {isa = PBXBuildFile; fileRef = 180976B519BE96910039F654 /* MABill.m */; };
 		180976BA19BF5D8C0039F654 /* MATextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 180976B819BF5D8C0039F654 /* MATextFieldCell.m */; };
 		180976BB19BF5D8C0039F654 /* MATextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 180976B919BF5D8C0039F654 /* MATextFieldCell.xib */; };
+		180A0F5E1D30BC1A0080D36F /* ClockKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 180A0F5D1D30BC1A0080D36F /* ClockKit.framework */; };
+		180A0F611D30BDDD0080D36F /* MAComplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 180A0F601D30BDDD0080D36F /* MAComplication.m */; };
 		181F58AF1BDC1E6F009445BF /* MASessionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 181F58AE1BDC1E6F009445BF /* MASessionDelegate.m */; };
 		181F58B01BDD6CA9009445BF /* MASessionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 181F58AE1BDC1E6F009445BF /* MASessionDelegate.m */; };
 		181F58B11BDD6CC6009445BF /* MASessionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 181F58AE1BDC1E6F009445BF /* MASessionDelegate.m */; };
@@ -531,6 +533,20 @@
 		180976B719BF5D8C0039F654 /* MATextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MATextFieldCell.h; sourceTree = "<group>"; };
 		180976B819BF5D8C0039F654 /* MATextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MATextFieldCell.m; sourceTree = "<group>"; };
 		180976B919BF5D8C0039F654 /* MATextFieldCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MATextFieldCell.xib; sourceTree = "<group>"; };
+		180A0F5D1D30BC1A0080D36F /* ClockKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ClockKit.framework; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS2.2.sdk/System/Library/Frameworks/ClockKit.framework; sourceTree = DEVELOPER_DIR; };
+		180A0F5F1D30BDDD0080D36F /* MAComplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAComplication.h; sourceTree = "<group>"; };
+		180A0F601D30BDDD0080D36F /* MAComplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAComplication.m; sourceTree = "<group>"; };
+		180A0F621D314A5F0080D36F /* Complication_32x32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Complication_32x32.png; sourceTree = "<group>"; };
+		180A0F631D314A5F0080D36F /* Complication_36x36.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Complication_36x36.png; sourceTree = "<group>"; };
+		180A0F641D314A5F0080D36F /* Complication_40x40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Complication_40x40.png; sourceTree = "<group>"; };
+		180A0F651D314A5F0080D36F /* Complication_44x44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Complication_44x44.png; sourceTree = "<group>"; };
+		180A0F661D314A5F0080D36F /* Complication_52x52.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Complication_52x52.png; sourceTree = "<group>"; };
+		180A0F671D314A5F0080D36F /* Complication_58x58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Complication_58x58.png; sourceTree = "<group>"; };
+		180A0F681D314A5F0080D36F /* Complication_156x156.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Complication_156x156.png; sourceTree = "<group>"; };
+		180A0F691D314A5F0080D36F /* Complication_174x174.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Complication_174x174.png; sourceTree = "<group>"; };
+		180A0F6A1D314A5F0080D36F /* make_complication_icons.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = make_complication_icons.sh; sourceTree = "<group>"; };
+		180A0F741D314AA30080D36F /* Complication.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = Complication.pxm; sourceTree = "<group>"; };
+		180A0F761D314AEE0080D36F /* Complication.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Complication.png; sourceTree = "<group>"; };
 		181F58AD1BDC1E6F009445BF /* MASessionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASessionDelegate.h; sourceTree = "<group>"; };
 		181F58AE1BDC1E6F009445BF /* MASessionDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASessionDelegate.m; sourceTree = "<group>"; };
 		1831FC491A3B64BD00642A10 /* 692-iphone-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "692-iphone-5.png"; sourceTree = "<group>"; };
@@ -1198,6 +1214,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				180A0F5E1D30BC1A0080D36F /* ClockKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1300,8 +1317,10 @@
 			children = (
 				1809756019BE5FF40039F654 /* Large App Icon.png */,
 				1809756119BE5FF40039F654 /* Large App Icon.pxm */,
-				189B6BC31AE18F3E00DD5DB8 /* Large App Icon - Apple Watch.pxm */,
 				18AE4EC41A9E367F00A62A08 /* Large App Icon - Apple Watch.png */,
+				189B6BC31AE18F3E00DD5DB8 /* Large App Icon - Apple Watch.pxm */,
+				180A0F761D314AEE0080D36F /* Complication.png */,
+				180A0F741D314AA30080D36F /* Complication.pxm */,
 			);
 			path = "App Icon";
 			sourceTree = "<group>";
@@ -1343,6 +1362,15 @@
 				18AE4ED21A9E36A200A62A08 /* AppIconWatch_88x88.png */,
 				18AE4ED31A9E36A200A62A08 /* AppIconWatch_172x172.png */,
 				18AE4ED41A9E36A200A62A08 /* AppIconWatch_196x196.png */,
+				180A0F6A1D314A5F0080D36F /* make_complication_icons.sh */,
+				180A0F621D314A5F0080D36F /* Complication_32x32.png */,
+				180A0F631D314A5F0080D36F /* Complication_36x36.png */,
+				180A0F641D314A5F0080D36F /* Complication_40x40.png */,
+				180A0F651D314A5F0080D36F /* Complication_44x44.png */,
+				180A0F661D314A5F0080D36F /* Complication_52x52.png */,
+				180A0F671D314A5F0080D36F /* Complication_58x58.png */,
+				180A0F681D314A5F0080D36F /* Complication_156x156.png */,
+				180A0F691D314A5F0080D36F /* Complication_174x174.png */,
 			);
 			path = "App Icons";
 			sourceTree = "<group>";
@@ -1458,6 +1486,7 @@
 		180975CE19BE60850039F654 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				180A0F5D1D30BC1A0080D36F /* ClockKit.framework */,
 				18EA1A911BE3A41000E7859A /* libsqlite3.tbd */,
 				180975CC19BE60730039F654 /* iAd.framework */,
 				180975CA19BE606B0039F654 /* Foundation.framework */,
@@ -2561,6 +2590,8 @@
 				18D85F691B3E6761003862E4 /* MANotificationNames.h */,
 				188838181AE14FC1000C0C33 /* MAKeyboardController.h */,
 				188838191AE14FC1000C0C33 /* MAKeyboardController.m */,
+				180A0F5F1D30BDDD0080D36F /* MAComplication.h */,
+				180A0F601D30BDDD0080D36F /* MAComplication.m */,
 				1864DF521B39F005001EB867 /* Assets.xcassets */,
 				1864DF541B39F005001EB867 /* Info.plist */,
 			);
@@ -3150,6 +3181,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				180A0F611D30BDDD0080D36F /* MAComplication.m in Sources */,
 				18D85F551B3E1CAD003862E4 /* MADeviceUtil.m in Sources */,
 				18D85F4B1B3E172D003862E4 /* MAUtil.m in Sources */,
 				18D85F5A1B3E476C003862E4 /* MAAppearance.m in Sources */,
@@ -3449,6 +3481,7 @@
 		1864DF591B39F005001EB867 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "Tipity Watch Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -3474,6 +3507,7 @@
 		1864DF5A1B39F005001EB867 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
 				CODE_SIGN_ENTITLEMENTS = "Tipity Watch Extension.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
