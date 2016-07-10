@@ -1,3 +1,6 @@
+2.8
+• TODO
+
 2.7
 • Automatic decimal point—decimal point for cents is automatically inserted as you enter the bill, saving you valuable tapping time!
 • Tip as you type—tip and total are automatically updated as you enter the bill without having to tap the Done button.
