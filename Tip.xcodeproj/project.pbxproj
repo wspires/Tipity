@@ -3411,6 +3411,7 @@
 					"$(PROJECT_DIR)/HockeySDK.embeddedframework",
 				);
 				INFOPLIST_FILE = Tip/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_CFLAGS = "-DIS_HOST_APP=1";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mindsaspire.$(PRODUCT_NAME:rfc1034identifier)";
@@ -3432,6 +3433,7 @@
 					"$(PROJECT_DIR)/HockeySDK.embeddedframework",
 				);
 				INFOPLIST_FILE = Tip/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_CFLAGS = "-DIS_HOST_APP=1";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mindsaspire.$(PRODUCT_NAME:rfc1034identifier)";
@@ -3453,6 +3455,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = TipTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mindsaspire.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3469,6 +3472,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = TipTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mindsaspire.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3487,6 +3491,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "nativewatchkitapp Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				OTHER_CFLAGS = (
 					"-DIS_EXTENSION=1",
@@ -3514,6 +3519,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = "nativewatchkitapp Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				OTHER_CFLAGS = (
 					"-DIS_EXTENSION=1",
@@ -3541,13 +3547,14 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				IBSC_MODULE = nativewatchkitapp_Extension;
 				INFOPLIST_FILE = nativewatchkitapp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mindsaspire.Tip.watchapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
 			name = Debug;
 		};
@@ -3564,13 +3571,14 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				IBSC_MODULE = nativewatchkitapp_Extension;
 				INFOPLIST_FILE = nativewatchkitapp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.mindsaspire.Tip.watchapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+				WATCHOS_DEPLOYMENT_TARGET = 2.2;
 			};
 			name = Release;
 		};
@@ -3585,7 +3593,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = TipExt/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				OTHER_CFLAGS = "-DIS_EXTENSION=1";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mindsaspire.Tip.$(TARGET_NAME:rfc1034identifier)";
@@ -3602,7 +3610,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = TipExt/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				OTHER_CFLAGS = "-DIS_EXTENSION=1";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mindsaspire.Tip.$(TARGET_NAME:rfc1034identifier)";
