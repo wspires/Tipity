@@ -25,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet WKInterfacePicker *centPicker;
 @property (strong, nonatomic) NSNumber *centNumber;
 
+@property (weak, nonatomic) IBOutlet WKInterfaceLabel *serviceRatingLabel;
 @property (weak, nonatomic) IBOutlet WKInterfaceLabel *tipLabel;
 @property (weak, nonatomic) IBOutlet WKInterfaceLabel *grandTotalLabel;
 @end
@@ -221,8 +222,32 @@
 
 - (void)updateLabels
 {
+    [self updateServiceRatingLabel];
     self.tipLabel.text = [self.bill formattedTip];
     self.grandTotalLabel.text = [self.bill formattedTotal];
+}
+
+- (void)updateServiceRatingLabel
+{
+    NSString *serviceRatingText = @"★★★";
+    NSUInteger const rating = [MATipPercentForRating ratingForTipPercent:self.bill.tipPercent];
+    if (rating == 1)
+    {
+        serviceRatingText = @"☆";
+    }
+    else if (rating == 2)
+    {
+        serviceRatingText = @"★";
+    }
+    else if (rating == 3)
+    {
+        serviceRatingText = @"★★";
+    }
+    else // if (rating > 3)
+    {
+        serviceRatingText = @"★★★";
+    }
+    self.serviceRatingLabel.text = serviceRatingText;
 }
 
 #pragma mark - Menu items
@@ -270,7 +295,9 @@
     NSString *ratingString = [NSString stringWithFormat:@"%d", (int)rating];
     [[MAUserUtil sharedInstance] saveSetting:ratingString forKey:LastSelectedServiceRating];
     [MARounder roundGrandTotalInBill:self.bill];
-    
+
+    [self updateServiceRatingLabel];
+
     [self saveBill];
 }
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="9019"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="10032"/>
     </dependencies>
     <scenes>
         <!--Tipity-->
@@ -28,12 +28,7 @@
                                         </picker>
                                     </items>
                                 </group>
-                                <separator alignment="left" id="OdU-Dy-w7a">
-                                    <color key="color" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </separator>
-                                <separator alignment="left" id="fR8-g8-dAG">
-                                    <color key="color" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </separator>
+                                <label alignment="center" text="★★★" textAlignment="center" id="E1f-50-Ris"/>
                                 <group width="1" alignment="left" id="HTk-4m-u9O" userLabel="Tip Group">
                                     <items>
                                         <imageView alignment="left" verticalAlignment="center" image="TipImage" id="49C-fh-PE6"/>
@@ -148,6 +143,7 @@
                         <outlet property="centPicker" destination="jTD-Gp-VGg" id="sQl-As-DIZ"/>
                         <outlet property="dollarPicker" destination="O4h-vI-0oj" id="4p2-Qr-cMZ"/>
                         <outlet property="grandTotalLabel" destination="L9k-xd-k0o" id="WTe-S9-e1C"/>
+                        <outlet property="serviceRatingLabel" destination="E1f-50-Ris" id="J6F-xe-LvQ"/>
                         <outlet property="tipLabel" destination="jaL-QD-rBM" id="oiE-Av-Haa"/>
                     </connections>
                 </controller>
