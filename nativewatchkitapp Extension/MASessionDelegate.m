@@ -64,9 +64,34 @@ static NSString * const MsgSource = @"Extension";
     {
         WCSession *session = [WCSession defaultSession];
         session.delegate = self;
+        
         [session activateSession];
-        _isAvailable = YES;
     }
+}
+
+- (void)session:(WCSession *)session activationDidCompleteWithState:(WCSessionActivationState)activationState error:(NSError *)error
+{
+    NSString *activationStateString = @"";
+    if (activationState == WCSessionActivationStateActivated)
+    {
+        activationStateString = @"Activated";
+        _isAvailable = YES;
+//        [self registerForNotifications];
+    }
+    else if (activationState == WCSessionActivationStateNotActivated)
+    {
+        activationStateString = @"NotActivated";
+    }
+    else if (activationState == WCSessionActivationStateInactive)
+    {
+        activationStateString = @"InActivated";
+    }
+    else
+    {
+        activationStateString = @"Unknown";
+    }
+    
+    LOG_S(@"activationState = %@, error = %@", activationStateString, error);
 }
 
 - (void)sessionWatchStateDidChange:(WCSession *)session
@@ -136,8 +161,8 @@ static NSString * const MsgSource = @"Extension";
 
     if ( ! self.isAvailable)
     {
-//        LOG_S(@"Not Available");
-//        return NO;
+        LOG_S(@"Not Available");
+        return NO;
     }
 
     WCSession *session = [WCSession defaultSession];

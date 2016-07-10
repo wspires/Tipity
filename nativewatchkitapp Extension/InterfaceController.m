@@ -13,6 +13,7 @@
 #import "MALogUtil.h"
 #import "MANotificationNames.h"
 #import "MARounder.h"
+#import "MATipPercentForRating.h"
 #import "MAUserUtil.h"
 
 @interface InterfaceController() <MABillDelegate>
@@ -265,11 +266,9 @@
     self.bill.tipPercent = tipPercent;
     
     // ratingInt is the ID of the service rating, like 1, 2, 3, 4, 5, while the other "rating" variable is the actual tip percent. Needed to handle rounding.
-    NSUInteger const rating = 1;
-    //    NSUInteger const rating = [MARatingTableViewCell ratingForTipPercent:tipPercent];
+    NSUInteger const rating = [MATipPercentForRating ratingForTipPercent:tipPercent];
     NSString *ratingString = [NSString stringWithFormat:@"%d", (int)rating];
     [[MAUserUtil sharedInstance] saveSetting:ratingString forKey:LastSelectedServiceRating];
-//
     [MARounder roundGrandTotalInBill:self.bill];
     
     [self saveBill];
