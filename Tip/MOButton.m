@@ -93,6 +93,7 @@
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
 	[self setupStateChangeHandlers];
 }
 

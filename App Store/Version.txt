@@ -1,3 +1,9 @@
+3.0
+• Fixes for the Apple Watch app.
+• Stickers!
+
+Contact me via Settings -> Report a Problem or Suggest a Feature for issues, bugs, or suggestions. If you like using Tipity, please take the time and leave a review! Just select Settings -> Write a Review. Thanks!
+
 2.9
 • Automatic decimal point—decimal point for cents is automatically inserted as you enter the bill, saving you valuable tapping time!
 • Tip as you type—tip and total are automatically updated as you enter the bill without having to tap the Done button.
@@ -5,6 +11,7 @@
 • Haptic feedback on the Apple Watch.
 • Added current service rating on the Apple Watch.
 • Fixed issue where could not change the service rating on the Apple Watch.
+• Minor interface improvements on the Apple Watch.
 
 2.8
 2.7

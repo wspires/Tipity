@@ -596,16 +596,26 @@ static NSString * const ExerciseFilterName = @"ExerciseFilterName";
 
 + (NSString *)tellFriendImageFilename
 {
-    return @"702-share.png";
+    return @"1276-share.png";
 }
 + (UIImage *)tellFriendImage
 {
     return [MAFilePaths applyEffectsToImagePath:[MAFilePaths tellFriendImageFilename]];
 }
 
++ (NSString *)reportProblemImageFilename
+{
+    return @"791-warning.png";
+}
++ (UIImage *)reportProblemImage
+{
+    return [MAFilePaths applyEffectsToImagePath:[MAFilePaths reportProblemImageFilename]];
+}
+    
 + (NSString *)sendFeedbackImageFilename
 {
-    return @"712-reply.png";
+    //    return @"712-reply.png";
+    return @"954-light-bulb.png";
 }
 + (UIImage *)sendFeedbackImage
 {

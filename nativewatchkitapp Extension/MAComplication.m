@@ -32,9 +32,10 @@ NSString *ComplicationShortTextData = @"foo";
 - (void)getSupportedTimeTravelDirectionsForComplication:(CLKComplication *)complication
                                             withHandler:(void (^)(CLKComplicationTimeTravelDirections directions))handler
 {
-//    handler(CLKComplicationTimeTravelDirectionForward);
+    handler(CLKComplicationTimeTravelDirectionNone);
 }
 
+/*
 - (void)getTimelineStartDateForComplication:(CLKComplication *)complication
                                 withHandler:(void (^)(NSDate *date))handler
 {
@@ -51,11 +52,14 @@ NSString *ComplicationShortTextData = @"foo";
 {
     
 }
+*/
 
 // Required.
 - (void)getCurrentTimelineEntryForComplication:(CLKComplication *)complication
                                    withHandler:(void (^)(CLKComplicationTimelineEntry *))handler
 {
+    handler(nil);
+
     // https://developer.apple.com/library/watchos/documentation/General/Conceptual/WatchKitProgrammingGuide/ManagingComplications.html#//apple_ref/doc/uid/TP40014969-CH28-SW1
     
     /*
@@ -93,6 +97,7 @@ NSString *ComplicationShortTextData = @"foo";
      */
 }
 
+/*
 - (void)getTimelineEntriesForComplication:(CLKComplication *)complication
                                beforeDate:(NSDate *)date
                                     limit:(NSUInteger)limit
@@ -125,7 +130,7 @@ NSString *ComplicationShortTextData = @"foo";
     
 }
 
-// Required.
+// Deprecated.
 - (void)getPlaceholderTemplateForComplication:(CLKComplication *)complication
                                   withHandler:(void (^)(CLKComplicationTemplate *complicationTemplate))handler
 {
@@ -137,5 +142,6 @@ NSString *ComplicationShortTextData = @"foo";
 {
     
 }
+*/
 
 @end

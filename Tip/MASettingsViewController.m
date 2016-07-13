@@ -39,13 +39,14 @@ DECL_TABLE_IDX(GEN_SECTION_ROWS, 5);
 
 DECL_TABLE_IDX(APPS_SECTION, 1);
 
-DECL_TABLE_IDX(INFO_SECTION, 2);
-DECL_TABLE_IDX(TELL_FRIEND_ROW, 0);
-DECL_TABLE_IDX(SUPPORT_ROW, 1);
-DECL_TABLE_IDX(REVIEW_ROW, 2);
-DECL_TABLE_IDX(CREDITS_ROW, 3);
-DECL_TABLE_IDX(VERSION_ROW, 4);
-DECL_TABLE_IDX(INFO_SECTION_ROWS, 5);
+DECL_TABLE_IDX(FEEDBACK_SECTION, 2);
+DECL_TABLE_IDX(REPORT_PROBLEM_ROW, 0);
+DECL_TABLE_IDX(SUGGEST_FEATURE_ROW, 1);
+DECL_TABLE_IDX(TELL_FRIEND_ROW, 2);
+DECL_TABLE_IDX(REVIEW_ROW, 3);
+DECL_TABLE_IDX(CREDITS_ROW, 4);
+DECL_TABLE_IDX(VERSION_ROW, 5);
+DECL_TABLE_IDX(FEEDBACK_SECTION_ROWS, 6);
 
 static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
 
@@ -58,7 +59,6 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
 
 - (void)handleReview;
 - (void)openReviewURL;
-- (void)sendFeedbackEmail;
 @end
 
 @implementation MASettingsViewController
@@ -220,7 +220,7 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
 {
     [self openReviewURL];
     
-    NSIndexPath *selection = [NSIndexPath indexPathForRow:REVIEW_ROW inSection:INFO_SECTION];
+    NSIndexPath *selection = [NSIndexPath indexPathForRow:REVIEW_ROW inSection:FEEDBACK_SECTION];
     [self.tableView deselectRowAtIndexPath:selection animated:YES];
 }
 
@@ -257,10 +257,9 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
     {
         return Localize(@"More Apps");
     }
-    else if (section == INFO_SECTION)
+    else if (section == FEEDBACK_SECTION)
     {
-//        return Localize(@"Information");
-        return Localize(@"Share");
+        return Localize(@"Feedback");
     }
     return @"";
 }
@@ -285,9 +284,9 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
     {
         return self.appList.count;
     }
-    else if (section == INFO_SECTION)
+    else if (section == FEEDBACK_SECTION)
     {
-        return INFO_SECTION_ROWS;
+        return FEEDBACK_SECTION_ROWS;
     }
     return 0;
 }
@@ -331,7 +330,7 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
     {
         return [self tableView:tableView appsCellForRowAtIndexPath:indexPath];
     }
-    else if (indexPath.section == INFO_SECTION)
+    else if (indexPath.section == FEEDBACK_SECTION)
     {
         static NSString * const CellIdentifier = @"Information";
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -348,9 +347,14 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
         cell.selectionStyle = UITableViewCellSelectionStyleDefault;
 
         UIImage *image = nil;
-        if (indexPath.row == SUPPORT_ROW)
+        if (indexPath.row == REPORT_PROBLEM_ROW)
         {
-            cell.textLabel.text = Localize(@"Send Feedback");
+            cell.textLabel.text = Localize(@"Report a Problem");
+            image = [MAFilePaths reportProblemImage];
+        }
+        else if (indexPath.row == SUGGEST_FEATURE_ROW)
+        {
+            cell.textLabel.text = Localize(@"Suggest a Feature");
             image = [MAFilePaths sendFeedbackImage];
         }
         else if (indexPath.row == TELL_FRIEND_ROW)
@@ -669,15 +673,19 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
     {
         [self handleApp:indexPath];
     }
-    else if (indexPath.section == INFO_SECTION)
+    else if (indexPath.section == FEEDBACK_SECTION)
     {
         if (indexPath.row == REVIEW_ROW)
         {
             [self handleReview];
         }
-        else if (indexPath.row == SUPPORT_ROW)
+        else if (indexPath.row == REPORT_PROBLEM_ROW)
         {
-            [self sendFeedbackEmail];
+            [self sendFeedbackEmail:Localize(@"Report a Problem with")];
+        }
+        else if (indexPath.row == SUGGEST_FEATURE_ROW)
+        {
+            [self sendFeedbackEmail:Localize(@"Suggest a Feature for")];
         }
         else if (indexPath.row == TELL_FRIEND_ROW)
         {
@@ -692,7 +700,7 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
 
 #pragma mark - Email
 
-- (void)sendFeedbackEmail
+    - (void)sendFeedbackEmail:(NSString *)subject
 {
     MFMailComposeViewController *controller = [[MFMailComposeViewController alloc] init];
     controller.mailComposeDelegate = self;
@@ -707,8 +715,7 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
     NSString *deviceModel = [UIDevice currentDevice].model;
     NSString *systemVersion = [UIDevice currentDevice].systemVersion;
 
-    NSString *subject = [NSString stringWithFormat:@"%@ %@ %@ (%@ %@)", appName, version,
-                         Localize(@"Feedback"), deviceModel, systemVersion];
+    subject = [NSString stringWithFormat:@"%@ %@ %@ (%@ %@)", subject, appName, version, deviceModel, systemVersion];
     [controller setSubject:subject];
     
     NSString *body = @"";
@@ -746,12 +753,14 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
     NSArray *recipients = [NSArray array];
     [controller setToRecipients:recipients];
     
-    NSString *subject = [NSString stringWithFormat:@"Have you tried %@?", appName];
+//    NSString *subject = [NSString stringWithFormat:@"Have you tried %@?", appName];
+    NSString *subject = [[NSString alloc] initWithFormat:@"Checkout this app"];
     [controller setSubject:subject];
     
     NSString *urlString = [self appURL];
     //NSString *body = Localize(@"Download today from the App Store.");
-    NSString *body = SFmt(Localize(@"I've been using %@ and think you'll like it, too. Check it out on the App Store!"), appName);
+//    NSString *body = SFmt(Localize(@"I've been using %@ and think you'll like it, too. Check it out on the App Store!"), appName);
+    NSString *body = SFmt(@"%@ — %@", appName, Localize(@"Tip Calculator"));
     body = SFmt(@"%@\n%@", body, urlString);
     [controller setMessageBody:body isHTML:NO];
     

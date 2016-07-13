@@ -22,6 +22,7 @@ static NSUInteger const BUTTON_END_TAG = 6;
 
 - (void)awakeFromNib {
     // Initialization code
+    [super awakeFromNib];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

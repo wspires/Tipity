@@ -1,0 +1,83 @@
+{
+  "stickers" : [
+    {
+      "filename" : "App Icon.sticker"
+    },
+    {
+      "filename" : "10 Percent.sticker"
+    },
+    {
+      "filename" : "15 Percent.sticker"
+    },
+    {
+      "filename" : "20 Percent.sticker"
+    },
+    {
+      "filename" : "704-compose@3x.sticker"
+    },
+    {
+      "filename" : "887-notepad@3x.sticker"
+    },
+    {
+      "filename" : "826-money-1@3x.sticker"
+    },
+    {
+      "filename" : "827-money-2@3x.sticker"
+    },
+    {
+      "filename" : "pie_chart@3x.sticker"
+    },
+    {
+      "filename" : "govt_bldg@3x.sticker"
+    },
+    {
+      "filename" : "895-user-group@3x.sticker"
+    },
+    {
+      "filename" : "726-star@3x.sticker"
+    },
+    {
+      "filename" : "726-star-selected@3x.sticker"
+    },
+    {
+      "filename" : "740-gear@3x.sticker"
+    },
+    {
+      "filename" : "949-paint-brush@3x.sticker"
+    },
+    {
+      "filename" : "791-warning@3x.sticker"
+    },
+    {
+      "filename" : "954-light-bulb@3x.sticker"
+    },
+    {
+      "filename" : "1276-share@3x.sticker"
+    },
+    {
+      "filename" : "777-thumbs-up@3x.sticker"
+    },
+    {
+      "filename" : "724-info@3x.sticker"
+    },
+    {
+      "filename" : "746-round-none@3x.sticker"
+    },
+    {
+      "filename" : "746-round-up@3x.sticker"
+    },
+    {
+      "filename" : "746-round-down@3x.sticker"
+    },
+    {
+      "filename" : "746-round-nearest@3x.sticker"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  },
+  "properties" : {
+    "grid-size" : "regular"
+  }
+}

@@ -9,6 +9,6 @@
 #ifndef Tip_MAAppGroup_h
 #define Tip_MAAppGroup_h
 
-static NSString * const AppGroup = @"group.com.mindsaspire.Tip";
+static NSString * const AppGroup = @"88U9Z8P8D5.group.com.mindsaspire.Tip";
 
 #endif

@@ -78,7 +78,7 @@ static double const DefaultSplitTotal = 120.;
     MABill *object = [MABill sharedInstance];
     NSString *key = [MABill sharedContainerKey];
     BOOL const saved = [MAAppGroupNotifier saveObject:object key:key];
-    
+
     if (saved && postNotification)
     {
         [[MASessionDelegate sharedInstance] updateApplicationContextWithObject:object key:key];

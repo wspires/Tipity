@@ -94,6 +94,8 @@
 // Feedback icons.
 + (NSString *)tellFriendImageFilename;
 + (UIImage *)tellFriendImage;
++ (NSString *)reportProblemImageFilename;
++ (UIImage *)reportProblemImage;
 + (NSString *)sendFeedbackImageFilename;
 + (UIImage *)sendFeedbackImage;
 + (NSString *)writeReviewImageFilename;

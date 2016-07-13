@@ -119,6 +119,23 @@
 		1831FC4C1A3B64BD00642A10 /* 692-iphone-5.png in Resources */ = {isa = PBXBuildFile; fileRef = 1831FC491A3B64BD00642A10 /* 692-iphone-5.png */; };
 		1831FC4D1A3B64BD00642A10 /* 692-iphone-5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1831FC4A1A3B64BD00642A10 /* 692-iphone-5@2x.png */; };
 		1831FC4E1A3B64BD00642A10 /* 692-iphone-5@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1831FC4B1A3B64BD00642A10 /* 692-iphone-5@3x.png */; };
+		1838126B1DB30BF000A4AF15 /* 954-light-bulb.png in Resources */ = {isa = PBXBuildFile; fileRef = 183812681DB30BF000A4AF15 /* 954-light-bulb.png */; };
+		1838126C1DB30BF000A4AF15 /* 954-light-bulb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 183812691DB30BF000A4AF15 /* 954-light-bulb@2x.png */; };
+		1838126D1DB30BF000A4AF15 /* 954-light-bulb@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1838126A1DB30BF000A4AF15 /* 954-light-bulb@3x.png */; };
+		183812711DB30C0600A4AF15 /* 791-warning.png in Resources */ = {isa = PBXBuildFile; fileRef = 1838126E1DB30C0600A4AF15 /* 791-warning.png */; };
+		183812721DB30C0600A4AF15 /* 791-warning@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1838126F1DB30C0600A4AF15 /* 791-warning@2x.png */; };
+		183812731DB30C0600A4AF15 /* 791-warning@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 183812701DB30C0600A4AF15 /* 791-warning@3x.png */; };
+		183812771DB30C8000A4AF15 /* 1276-share.png in Resources */ = {isa = PBXBuildFile; fileRef = 183812741DB30C8000A4AF15 /* 1276-share.png */; };
+		183812781DB30C8000A4AF15 /* 1276-share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 183812751DB30C8000A4AF15 /* 1276-share@2x.png */; };
+		183812791DB30C8000A4AF15 /* 1276-share@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 183812761DB30C8000A4AF15 /* 1276-share@3x.png */; };
+		183812831DB3230900A4AF15 /* Stickers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 183812821DB3230900A4AF15 /* Stickers.xcassets */; };
+		183812871DB3230900A4AF15 /* Tip Sticker Pack Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 183812801DB3230900A4AF15 /* Tip Sticker Pack Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		183812C91DB4700500A4AF15 /* MAPlistUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 183812C81DB4700500A4AF15 /* MAPlistUtil.m */; };
+		183812CC1DB4707600A4AF15 /* NSData+Compress.m in Sources */ = {isa = PBXBuildFile; fileRef = 183812CB1DB4707600A4AF15 /* NSData+Compress.m */; };
+		183812CD1DB4708400A4AF15 /* MAPlistUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 183812C81DB4700500A4AF15 /* MAPlistUtil.m */; };
+		183812CE1DB4708400A4AF15 /* NSData+Compress.m in Sources */ = {isa = PBXBuildFile; fileRef = 183812CB1DB4707600A4AF15 /* NSData+Compress.m */; };
+		183812D01DB470BB00A4AF15 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 183812CF1DB470BB00A4AF15 /* libz.tbd */; };
+		183812D21DB470DA00A4AF15 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 183812D11DB470DA00A4AF15 /* libz.tbd */; };
 		184CF4B419CCA9E300A12628 /* govt_bldg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 184CF4B319CCA9E300A12628 /* govt_bldg@3x.png */; };
 		184CF4B719CCAC2100A12628 /* people@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 184CF4B619CCAC2100A12628 /* people@3x.png */; };
 		184CF4BB19CCAEC900A12628 /* 973-user-total@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 184CF4BA19CCAEC900A12628 /* 973-user-total@3x.png */; };
@@ -134,6 +151,15 @@
 		1864DF4E1B39F005001EB867 /* InterfaceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1864DF4D1B39F005001EB867 /* InterfaceController.m */; };
 		1864DF511B39F005001EB867 /* ExtensionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1864DF501B39F005001EB867 /* ExtensionDelegate.m */; };
 		1864DF531B39F005001EB867 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1864DF521B39F005001EB867 /* Assets.xcassets */; };
+		1868FC601DB483F900DA7F3C /* NSNotificationCenter+MainQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1868FC5F1DB483F900DA7F3C /* NSNotificationCenter+MainQueue.m */; };
+		1868FC631DB48B4500DA7F3C /* MAMessageKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 1868FC621DB48B4500DA7F3C /* MAMessageKeys.m */; };
+		1868FC641DB48BAE00DA7F3C /* MAMessageKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 1868FC621DB48B4500DA7F3C /* MAMessageKeys.m */; };
+		1868FC651DB48BD100DA7F3C /* NSNotificationCenter+MainQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1868FC5F1DB483F900DA7F3C /* NSNotificationCenter+MainQueue.m */; };
+		1868FC661DB48BE400DA7F3C /* MAPlistUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 183812C81DB4700500A4AF15 /* MAPlistUtil.m */; };
+		1868FC671DB48BE400DA7F3C /* NSData+Compress.m in Sources */ = {isa = PBXBuildFile; fileRef = 183812CB1DB4707600A4AF15 /* NSData+Compress.m */; };
+		1868FC681DB48BE400DA7F3C /* NSNotificationCenter+MainQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1868FC5F1DB483F900DA7F3C /* NSNotificationCenter+MainQueue.m */; };
+		1868FC691DB48BE400DA7F3C /* MAMessageKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 1868FC621DB48B4500DA7F3C /* MAMessageKeys.m */; };
+		1868FC6A1DB48BFF00DA7F3C /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 183812D11DB470DA00A4AF15 /* libz.tbd */; };
 		18698A2F19C29CB2005F2E32 /* 702-share.png in Resources */ = {isa = PBXBuildFile; fileRef = 18698A2719C29CB2005F2E32 /* 702-share.png */; };
 		18698A3019C29CB2005F2E32 /* 702-share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18698A2819C29CB2005F2E32 /* 702-share@2x.png */; };
 		18698A3119C29CB2005F2E32 /* 712-reply.png in Resources */ = {isa = PBXBuildFile; fileRef = 18698A2919C29CB2005F2E32 /* 712-reply.png */; };
@@ -264,6 +290,13 @@
 			remoteGlobalIDString = 1809753419BE5ED60039F654;
 			remoteInfo = Tip;
 		};
+		183812851DB3230900A4AF15 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1809752D19BE5ED60039F654 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1838127F1DB3230900A4AF15;
+			remoteInfo = "Tip Sticker Pack Extension";
+		};
 		1864DF491B39F005001EB867 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1809752D19BE5ED60039F654 /* Project object */;
@@ -316,6 +349,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				183812871DB3230900A4AF15 /* Tip Sticker Pack Extension.appex in Embed App Extensions */,
 				189389471A069058006142DE /* TipExt.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -552,6 +586,48 @@
 		1831FC4A1A3B64BD00642A10 /* 692-iphone-5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "692-iphone-5@2x.png"; sourceTree = "<group>"; };
 		1831FC4B1A3B64BD00642A10 /* 692-iphone-5@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "692-iphone-5@3x.png"; sourceTree = "<group>"; };
 		1836BAC11A1D2EE400A05C0F /* MAAppGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAAppGroup.h; sourceTree = "<group>"; };
+		183812681DB30BF000A4AF15 /* 954-light-bulb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "954-light-bulb.png"; sourceTree = "<group>"; };
+		183812691DB30BF000A4AF15 /* 954-light-bulb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "954-light-bulb@2x.png"; sourceTree = "<group>"; };
+		1838126A1DB30BF000A4AF15 /* 954-light-bulb@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "954-light-bulb@3x.png"; sourceTree = "<group>"; };
+		1838126E1DB30C0600A4AF15 /* 791-warning.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "791-warning.png"; sourceTree = "<group>"; };
+		1838126F1DB30C0600A4AF15 /* 791-warning@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "791-warning@2x.png"; sourceTree = "<group>"; };
+		183812701DB30C0600A4AF15 /* 791-warning@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "791-warning@3x.png"; sourceTree = "<group>"; };
+		183812741DB30C8000A4AF15 /* 1276-share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1276-share.png"; sourceTree = "<group>"; };
+		183812751DB30C8000A4AF15 /* 1276-share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1276-share@2x.png"; sourceTree = "<group>"; };
+		183812761DB30C8000A4AF15 /* 1276-share@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1276-share@3x.png"; sourceTree = "<group>"; };
+		1838127A1DB3225600A4AF15 /* Large App Icon - Sticker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Large App Icon - Sticker.png"; sourceTree = "<group>"; };
+		1838127B1DB3225600A4AF15 /* Large App Icon - Sticker.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Large App Icon - Sticker.pxm"; sourceTree = "<group>"; };
+		183812801DB3230900A4AF15 /* Tip Sticker Pack Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Tip Sticker Pack Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		183812821DB3230900A4AF15 /* Stickers.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Stickers.xcassets; sourceTree = "<group>"; };
+		183812841DB3230900A4AF15 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1838128B1DB323DB00A4AF15 /* make_sticker_icons.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = make_sticker_icons.sh; sourceTree = "<group>"; };
+		1838128D1DB3242700A4AF15 /* Sticker_64x48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sticker_64x48.png; sourceTree = "<group>"; };
+		1838128E1DB3242700A4AF15 /* Sticker_81x60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sticker_81x60.png; sourceTree = "<group>"; };
+		1838128F1DB3242700A4AF15 /* Sticker_96x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sticker_96x72.png; sourceTree = "<group>"; };
+		183812901DB3242700A4AF15 /* Sticker_120x90.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sticker_120x90.png; sourceTree = "<group>"; };
+		183812911DB3242700A4AF15 /* Sticker_134x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sticker_134x100.png; sourceTree = "<group>"; };
+		183812921DB3242700A4AF15 /* Sticker_148x110.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sticker_148x110.png; sourceTree = "<group>"; };
+		183812931DB3242700A4AF15 /* Sticker_180x135.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sticker_180x135.png; sourceTree = "<group>"; };
+		183812941DB3242700A4AF15 /* Sticker_1024x768.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Sticker_1024x768.png; sourceTree = "<group>"; };
+		1838129E1DB32DD300A4AF15 /* App Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "App Icon.png"; sourceTree = "<group>"; };
+		1838129F1DB32DD300A4AF15 /* App Icon.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "App Icon.pxm"; sourceTree = "<group>"; };
+		183812A81DB32DEB00A4AF15 /* Screenshot 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 1.png"; sourceTree = "<group>"; };
+		183812A91DB32DEB00A4AF15 /* Screenshot 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2.png"; sourceTree = "<group>"; };
+		183812AA1DB32DEB00A4AF15 /* Screenshot 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 3.png"; sourceTree = "<group>"; };
+		183812B51DB3342B00A4AF15 /* 10 Percent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "10 Percent.png"; sourceTree = "<group>"; };
+		183812B61DB3342B00A4AF15 /* 10 Percent.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "10 Percent.pxm"; sourceTree = "<group>"; };
+		183812B71DB3342B00A4AF15 /* 15 Percent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "15 Percent.png"; sourceTree = "<group>"; };
+		183812B81DB3342B00A4AF15 /* 15 Percent.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "15 Percent.pxm"; sourceTree = "<group>"; };
+		183812B91DB3342B00A4AF15 /* 20 Percent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "20 Percent.png"; sourceTree = "<group>"; };
+		183812C11DB33B5300A4AF15 /* Screenshot 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 1.png"; sourceTree = "<group>"; };
+		183812C21DB33B5300A4AF15 /* Screenshot 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screenshot 2.png"; sourceTree = "<group>"; };
+		183812C51DB33BD800A4AF15 /* 20 Percent.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "20 Percent.pxm"; sourceTree = "<group>"; };
+		183812C71DB4700500A4AF15 /* MAPlistUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAPlistUtil.h; sourceTree = "<group>"; };
+		183812C81DB4700500A4AF15 /* MAPlistUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAPlistUtil.m; sourceTree = "<group>"; };
+		183812CA1DB4707600A4AF15 /* NSData+Compress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Compress.h"; sourceTree = "<group>"; };
+		183812CB1DB4707600A4AF15 /* NSData+Compress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Compress.m"; sourceTree = "<group>"; };
+		183812CF1DB470BB00A4AF15 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = Platforms/WatchOS.platform/Developer/SDKs/WatchOS3.0.sdk/usr/lib/libz.tbd; sourceTree = DEVELOPER_DIR; };
+		183812D11DB470DA00A4AF15 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		184914AA19BFA507003D9B1F /* AppIcon_180x180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon_180x180.png; sourceTree = "<group>"; };
 		184CF4B319CCA9E300A12628 /* govt_bldg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "govt_bldg@3x.png"; sourceTree = "<group>"; };
 		184CF4B519CCA9EE00A12628 /* govt_bldg.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = govt_bldg.pxm; sourceTree = "<group>"; };
@@ -982,6 +1058,10 @@
 		1864DF501B39F005001EB867 /* ExtensionDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExtensionDelegate.m; sourceTree = "<group>"; };
 		1864DF521B39F005001EB867 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1864DF541B39F005001EB867 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1868FC5E1DB483F900DA7F3C /* NSNotificationCenter+MainQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotificationCenter+MainQueue.h"; sourceTree = "<group>"; };
+		1868FC5F1DB483F900DA7F3C /* NSNotificationCenter+MainQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNotificationCenter+MainQueue.m"; sourceTree = "<group>"; };
+		1868FC611DB48B4500DA7F3C /* MAMessageKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAMessageKeys.h; sourceTree = "<group>"; };
+		1868FC621DB48B4500DA7F3C /* MAMessageKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAMessageKeys.m; sourceTree = "<group>"; };
 		18698A2719C29CB2005F2E32 /* 702-share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "702-share.png"; sourceTree = "<group>"; };
 		18698A2819C29CB2005F2E32 /* 702-share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "702-share@2x.png"; sourceTree = "<group>"; };
 		18698A2919C29CB2005F2E32 /* 712-reply.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "712-reply.png"; sourceTree = "<group>"; };
@@ -1189,6 +1269,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				183812D21DB470DA00A4AF15 /* libz.tbd in Frameworks */,
 				180975CB19BE606C0039F654 /* Foundation.framework in Frameworks */,
 				180975C919BE60630039F654 /* CoreText.framework in Frameworks */,
 				180975C719BE605A0039F654 /* AssetsLibrary.framework in Frameworks */,
@@ -1212,6 +1293,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				183812D01DB470BB00A4AF15 /* libz.tbd in Frameworks */,
 				180A0F5E1D30BC1A0080D36F /* ClockKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1220,6 +1302,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1868FC6A1DB48BFF00DA7F3C /* libz.tbd in Frameworks */,
 				1893893C1A069058006142DE /* NotificationCenter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1245,6 +1328,7 @@
 				1893893D1A069058006142DE /* Tip Extension */,
 				1864DF3C1B39F004001EB867 /* Tipity Watch App */,
 				1864DF4B1B39F005001EB867 /* Tipity Watch Extension */,
+				183812811DB3230900A4AF15 /* Tip Sticker Pack Extension */,
 				180975CE19BE60850039F654 /* Frameworks */,
 				1809753619BE5ED60039F654 /* Products */,
 			);
@@ -1258,6 +1342,7 @@
 				1893893A1A069058006142DE /* TipExt.appex */,
 				1864DF3B1B39F004001EB867 /* Tipity Watch App.app */,
 				1864DF471B39F004001EB867 /* Tipity Watch Extension.appex */,
+				183812801DB3230900A4AF15 /* Tip Sticker Pack Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1319,6 +1404,8 @@
 				189B6BC31AE18F3E00DD5DB8 /* Large App Icon - Apple Watch.pxm */,
 				180A0F761D314AEE0080D36F /* Complication.png */,
 				180A0F741D314AA30080D36F /* Complication.pxm */,
+				1838127A1DB3225600A4AF15 /* Large App Icon - Sticker.png */,
+				1838127B1DB3225600A4AF15 /* Large App Icon - Sticker.pxm */,
 			);
 			path = "App Icon";
 			sourceTree = "<group>";
@@ -1369,6 +1456,15 @@
 				180A0F671D314A5F0080D36F /* Complication_58x58.png */,
 				180A0F681D314A5F0080D36F /* Complication_156x156.png */,
 				180A0F691D314A5F0080D36F /* Complication_174x174.png */,
+				1838128B1DB323DB00A4AF15 /* make_sticker_icons.sh */,
+				1838128D1DB3242700A4AF15 /* Sticker_64x48.png */,
+				1838128E1DB3242700A4AF15 /* Sticker_81x60.png */,
+				1838128F1DB3242700A4AF15 /* Sticker_96x72.png */,
+				183812901DB3242700A4AF15 /* Sticker_120x90.png */,
+				183812911DB3242700A4AF15 /* Sticker_134x100.png */,
+				183812921DB3242700A4AF15 /* Sticker_148x110.png */,
+				183812931DB3242700A4AF15 /* Sticker_180x135.png */,
+				183812941DB3242700A4AF15 /* Sticker_1024x768.png */,
 			);
 			path = "App Icons";
 			sourceTree = "<group>";
@@ -1484,6 +1580,8 @@
 		180975CE19BE60850039F654 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				183812D11DB470DA00A4AF15 /* libz.tbd */,
+				183812CF1DB470BB00A4AF15 /* libz.tbd */,
 				180A0F5D1D30BC1A0080D36F /* ClockKit.framework */,
 				18EA1A911BE3A41000E7859A /* libsqlite3.tbd */,
 				180975CC19BE60730039F654 /* iAd.framework */,
@@ -1517,6 +1615,15 @@
 		180975F619BE61010039F654 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				183812741DB30C8000A4AF15 /* 1276-share.png */,
+				183812751DB30C8000A4AF15 /* 1276-share@2x.png */,
+				183812761DB30C8000A4AF15 /* 1276-share@3x.png */,
+				1838126E1DB30C0600A4AF15 /* 791-warning.png */,
+				1838126F1DB30C0600A4AF15 /* 791-warning@2x.png */,
+				183812701DB30C0600A4AF15 /* 791-warning@3x.png */,
+				183812681DB30BF000A4AF15 /* 954-light-bulb.png */,
+				183812691DB30BF000A4AF15 /* 954-light-bulb@2x.png */,
+				1838126A1DB30BF000A4AF15 /* 954-light-bulb@3x.png */,
 				18D4FDAA1AFD7C0F0052A03A /* 746-round-down.png */,
 				18D4FDAB1AFD7C0F0052A03A /* 746-round-down@2x.png */,
 				18D4FDAC1AFD7C0F0052A03A /* 746-round-down@3x.png */,
@@ -1665,6 +1772,14 @@
 				18D85F421B3E07FD003862E4 /* MADefines.h */,
 				1809764519BE61D20039F654 /* MAUtil.h */,
 				1809764619BE61D20039F654 /* MAUtil.m */,
+				183812C71DB4700500A4AF15 /* MAPlistUtil.h */,
+				183812C81DB4700500A4AF15 /* MAPlistUtil.m */,
+				183812CA1DB4707600A4AF15 /* NSData+Compress.h */,
+				183812CB1DB4707600A4AF15 /* NSData+Compress.m */,
+				1868FC5E1DB483F900DA7F3C /* NSNotificationCenter+MainQueue.h */,
+				1868FC5F1DB483F900DA7F3C /* NSNotificationCenter+MainQueue.m */,
+				1868FC611DB48B4500DA7F3C /* MAMessageKeys.h */,
+				1868FC621DB48B4500DA7F3C /* MAMessageKeys.m */,
 				18A686731B3B1A29003F55EC /* MALogUtil.h */,
 				18A686741B3B1A29003F55EC /* MALogUtil.m */,
 				1809763F19BE61D20039F654 /* MADateUtil.h */,
@@ -1826,6 +1941,60 @@
 				180976A019BE70F00039F654 /* MOGlassButton.m */,
 			);
 			name = Appearance;
+			sourceTree = "<group>";
+		};
+		183812811DB3230900A4AF15 /* Tip Sticker Pack Extension */ = {
+			isa = PBXGroup;
+			children = (
+				183812A21DB32DEB00A4AF15 /* Screenshots */,
+				1838129D1DB32DD300A4AF15 /* Stickers */,
+				183812821DB3230900A4AF15 /* Stickers.xcassets */,
+				183812841DB3230900A4AF15 /* Info.plist */,
+			);
+			path = "Tip Sticker Pack Extension";
+			sourceTree = "<group>";
+		};
+		1838129D1DB32DD300A4AF15 /* Stickers */ = {
+			isa = PBXGroup;
+			children = (
+				183812B51DB3342B00A4AF15 /* 10 Percent.png */,
+				183812B61DB3342B00A4AF15 /* 10 Percent.pxm */,
+				183812B71DB3342B00A4AF15 /* 15 Percent.png */,
+				183812B81DB3342B00A4AF15 /* 15 Percent.pxm */,
+				183812B91DB3342B00A4AF15 /* 20 Percent.png */,
+				183812C51DB33BD800A4AF15 /* 20 Percent.pxm */,
+				1838129E1DB32DD300A4AF15 /* App Icon.png */,
+				1838129F1DB32DD300A4AF15 /* App Icon.pxm */,
+			);
+			path = Stickers;
+			sourceTree = "<group>";
+		};
+		183812A21DB32DEB00A4AF15 /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				183812A31DB32DEB00A4AF15 /* iPad */,
+				183812A71DB32DEB00A4AF15 /* iPhone */,
+			);
+			path = Screenshots;
+			sourceTree = "<group>";
+		};
+		183812A31DB32DEB00A4AF15 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				183812C11DB33B5300A4AF15 /* Screenshot 1.png */,
+				183812C21DB33B5300A4AF15 /* Screenshot 2.png */,
+			);
+			path = iPad;
+			sourceTree = "<group>";
+		};
+		183812A71DB32DEB00A4AF15 /* iPhone */ = {
+			isa = PBXGroup;
+			children = (
+				183812A81DB32DEB00A4AF15 /* Screenshot 1.png */,
+				183812A91DB32DEB00A4AF15 /* Screenshot 2.png */,
+				183812AA1DB32DEB00A4AF15 /* Screenshot 3.png */,
+			);
+			path = iPhone;
 			sourceTree = "<group>";
 		};
 		184CF4CF19CE6E2B00A12628 /* Keywords */ = {
@@ -2754,6 +2923,7 @@
 			dependencies = (
 				189389461A069058006142DE /* PBXTargetDependency */,
 				1864DF561B39F005001EB867 /* PBXTargetDependency */,
+				183812861DB3230900A4AF15 /* PBXTargetDependency */,
 			);
 			name = Tip;
 			productName = Tip;
@@ -2777,6 +2947,21 @@
 			productName = TipTests;
 			productReference = 1809754E19BE5ED60039F654 /* TipTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		1838127F1DB3230900A4AF15 /* Tip Sticker Pack Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 183812881DB3230900A4AF15 /* Build configuration list for PBXNativeTarget "Tip Sticker Pack Extension" */;
+			buildPhases = (
+				1838127E1DB3230900A4AF15 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Tip Sticker Pack Extension";
+			productName = "Tip Sticker Pack Extension";
+			productReference = 183812801DB3230900A4AF15 /* Tip Sticker Pack Extension.appex */;
+			productType = "com.apple.product-type.app-extension.messages-sticker-pack";
 		};
 		1864DF3A1B39F004001EB867 /* Tipity Watch App */ = {
 			isa = PBXNativeTarget;
@@ -2835,7 +3020,7 @@
 		1809752D19BE5ED60039F654 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Minds Aspire LLC";
 				TargetAttributes = {
 					1809753419BE5ED60039F654 = {
@@ -2853,6 +3038,11 @@
 					1809754D19BE5ED60039F654 = {
 						CreatedOnToolsVersion = 6.0;
 						TestTargetID = 1809753419BE5ED60039F654;
+					};
+					1838127F1DB3230900A4AF15 = {
+						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 88U9Z8P8D5;
+						ProvisioningStyle = Automatic;
 					};
 					1864DF3A1B39F004001EB867 = {
 						CreatedOnToolsVersion = 7.0;
@@ -2924,6 +3114,7 @@
 				1809754D19BE5ED60039F654 /* TipTests */,
 				1864DF3A1B39F004001EB867 /* Tipity Watch App */,
 				1864DF461B39F004001EB867 /* Tipity Watch Extension */,
+				1838127F1DB3230900A4AF15 /* Tip Sticker Pack Extension */,
 			);
 		};
 /* End PBXProject section */
@@ -2938,6 +3129,7 @@
 				1809763419BE61120039F654 /* FDTake.strings in Resources */,
 				1808CE4A19C1655900E972E1 /* 973-user-total.png in Resources */,
 				18A9C5F119CC89AC00789D2E /* 952-shopping-cart@3x.png in Resources */,
+				183812771DB30C8000A4AF15 /* 1276-share.png in Resources */,
 				18A9C5E119CC89AC00789D2E /* 702-share@3x.png in Resources */,
 				184CF4B419CCA9E300A12628 /* govt_bldg@3x.png in Resources */,
 				1808CE4F19C1D8F700E972E1 /* people.png in Resources */,
@@ -2945,6 +3137,7 @@
 				1809763919BE61600039F654 /* BackgroundColors.plist in Resources */,
 				184CF4B719CCAC2100A12628 /* people@3x.png in Resources */,
 				18A9C5EA19CC89AC00789D2E /* 777-thumbs-up@3x.png in Resources */,
+				183812711DB30C0600A4AF15 /* 791-warning.png in Resources */,
 				184CF4C619CD212D00A12628 /* pie_chart.png in Resources */,
 				18A9C62919CC97BF00789D2E /* Launch Screen.xib in Resources */,
 				1808CDF019C1412800E972E1 /* 826-money-1.png in Resources */,
@@ -2979,6 +3172,8 @@
 				1831FC4E1A3B64BD00642A10 /* 692-iphone-5@3x.png in Resources */,
 				1883C69F1AFB093C006148BC /* MARoundingSettingsViewController.xib in Resources */,
 				1809767B19BE70700039F654 /* MASettingsViewController.xib in Resources */,
+				1838126D1DB30BF000A4AF15 /* 954-light-bulb@3x.png in Resources */,
+				1838126B1DB30BF000A4AF15 /* 954-light-bulb.png in Resources */,
 				18698A2F19C29CB2005F2E32 /* 702-share.png in Resources */,
 				1808CE1F19C14D4800E972E1 /* 952-shopping-cart@2x.png in Resources */,
 				1808CDF619C142EE00E972E1 /* 887-notepad.png in Resources */,
@@ -2999,6 +3194,7 @@
 				18A9C5E719CC89AC00789D2E /* 726-star@3x.png in Resources */,
 				1809761E19BE61010039F654 /* blank_square.png in Resources */,
 				18D4FDC51AFD7D530052A03A /* 746-round-up@3x.png in Resources */,
+				183812731DB30C0600A4AF15 /* 791-warning@3x.png in Resources */,
 				1808CE4919C1655900E972E1 /* 973-user-tip@2x.png in Resources */,
 				18D4FDBD1AFD7D530052A03A /* 746-round-nearest.png in Resources */,
 				18A9C5EB19CC89AC00789D2E /* 826-money-1@3x.png in Resources */,
@@ -3019,6 +3215,7 @@
 				18698A3219C29CB2005F2E32 /* 712-reply@2x.png in Resources */,
 				1809761F19BE61010039F654 /* Gym Log+ - Icon.png in Resources */,
 				180976A619BE70F00039F654 /* MACreditsViewController.xib in Resources */,
+				183812781DB30C8000A4AF15 /* 1276-share@2x.png in Resources */,
 				1809766F19BE6FE70039F654 /* MAUpgradeAlertViewController.xib in Resources */,
 				184CF4C819CD212D00A12628 /* pie_chart@3x.png in Resources */,
 				1803AC6019C8A2F2006C7EFF /* 726-star-selected@2x.png in Resources */,
@@ -3027,6 +3224,7 @@
 				18D4FDA01AFB1BDC0052A03A /* 746-plus-circle.png in Resources */,
 				18D4FDBB1AFD7D530052A03A /* 746-round-down@2x.png in Resources */,
 				180975F419BE60A90039F654 /* AppiraterLocalizable.strings in Resources */,
+				1838126C1DB30BF000A4AF15 /* 954-light-bulb@2x.png in Resources */,
 				1808CE0E19C14C0E00E972E1 /* 704-compose.png in Resources */,
 				1808CE0F19C14C0E00E972E1 /* 704-compose@2x.png in Resources */,
 				18D4FDC11AFD7D530052A03A /* 746-round-none@2x.png in Resources */,
@@ -3044,6 +3242,7 @@
 				1808CE0319C14A1C00E972E1 /* 949-paint-brush@2x.png in Resources */,
 				1893F07819C2B4BB00F1485A /* govt_bldg@2x.png in Resources */,
 				1808CE1719C14CF900E972E1 /* 740-gear@2x.png in Resources */,
+				183812721DB30C0600A4AF15 /* 791-warning@2x.png in Resources */,
 				1808CE0D19C14C0E00E972E1 /* 704-compose-selected@2x.png in Resources */,
 				18A9C5EF19CC89AC00789D2E /* 949-paint-brush@3x.png in Resources */,
 				18D4FDBE1AFD7D530052A03A /* 746-round-nearest@2x.png in Resources */,
@@ -3052,6 +3251,7 @@
 				18A9C5ED19CC89AC00789D2E /* 887-notepad@3x.png in Resources */,
 				1808CE0C19C14C0E00E972E1 /* 704-compose-selected.png in Resources */,
 				180976A219BE70F00039F654 /* MAAppearanceSelectionViewController.xib in Resources */,
+				183812791DB30C8000A4AF15 /* 1276-share@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3059,6 +3259,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1838127E1DB3230900A4AF15 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				183812831DB3230900A4AF15 /* Stickers.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3126,6 +3334,7 @@
 				1809765E19BE61FA0039F654 /* UIImage+Gradient.m in Sources */,
 				1809765B19BE61FA0039F654 /* MAColorUtil.m in Sources */,
 				1809764A19BE61D20039F654 /* MAAppearance.m in Sources */,
+				183812C91DB4700500A4AF15 /* MAPlistUtil.m in Sources */,
 				180976A919BE70F00039F654 /* MASwitchCell.m in Sources */,
 				18D4FDA51AFC6FFA0052A03A /* MARounder.m in Sources */,
 				18D85F511B3E198B003862E4 /* MADeviceUtil.m in Sources */,
@@ -3137,6 +3346,7 @@
 				180976A119BE70F00039F654 /* MAAppearanceSelectionViewController.m in Sources */,
 				180976AD19BE70F00039F654 /* MOButton.m in Sources */,
 				1809764919BE61D20039F654 /* MAAccessoryView.m in Sources */,
+				1868FC601DB483F900DA7F3C /* NSNotificationCenter+MainQueue.m in Sources */,
 				1809767519BE70150039F654 /* MATipIAPHelper.m in Sources */,
 				18D85F491B3E11E0003862E4 /* MAUIUtil.m in Sources */,
 				18D85F3F1B3E0017003862E4 /* MAStringUtil.m in Sources */,
@@ -3147,6 +3357,7 @@
 				18A686751B3B1A29003F55EC /* MALogUtil.m in Sources */,
 				180976A319BE70F00039F654 /* MAColorSelectionViewController.m in Sources */,
 				1809766C19BE6FE70039F654 /* CustomIOS7AlertView.m in Sources */,
+				183812CC1DB4707600A4AF15 /* NSData+Compress.m in Sources */,
 				180976A719BE70F00039F654 /* MAStepperCell.m in Sources */,
 				1809764D19BE61D20039F654 /* MAUserUtil.m in Sources */,
 				1809765D19BE61FA0039F654 /* UIImage+Extensions.m in Sources */,
@@ -3155,6 +3366,7 @@
 				189389541A087286006142DE /* MAImageCache.m in Sources */,
 				180976AE19BE70F00039F654 /* MOGlassButton.m in Sources */,
 				1809753E19BE5ED60039F654 /* MAAppDelegate.m in Sources */,
+				1868FC631DB48B4500DA7F3C /* MAMessageKeys.m in Sources */,
 				18D85F611B3E4CB9003862E4 /* MATipPercentForRating.m in Sources */,
 				1809764F19BE61D20039F654 /* MAViewUtil.m in Sources */,
 				1809763519BE61120039F654 /* FDTakeController.m in Sources */,
@@ -3183,11 +3395,15 @@
 				18D85F551B3E1CAD003862E4 /* MADeviceUtil.m in Sources */,
 				18D85F4B1B3E172D003862E4 /* MAUtil.m in Sources */,
 				18D85F5A1B3E476C003862E4 /* MAAppearance.m in Sources */,
+				183812CE1DB4708400A4AF15 /* NSData+Compress.m in Sources */,
 				18D85F531B3E1AD0003862E4 /* MADateUtil.m in Sources */,
 				18A686781B3B2894003F55EC /* MABill.m in Sources */,
+				183812CD1DB4708400A4AF15 /* MAPlistUtil.m in Sources */,
 				18D85F591B3E472C003862E4 /* MAFilePaths.m in Sources */,
+				1868FC641DB48BAE00DA7F3C /* MAMessageKeys.m in Sources */,
 				18D85F5B1B3E4B12003862E4 /* MAUserUtil.m in Sources */,
 				18A686771B3B1A29003F55EC /* MALogUtil.m in Sources */,
+				1868FC651DB48BD100DA7F3C /* NSNotificationCenter+MainQueue.m in Sources */,
 				18D85F411B3E0017003862E4 /* MAStringUtil.m in Sources */,
 				1864DF511B39F005001EB867 /* ExtensionDelegate.m in Sources */,
 				18D85F631B3E4CB9003862E4 /* MATipPercentForRating.m in Sources */,
@@ -3204,11 +3420,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				1893896A1A0AC390006142DE /* MABill.m in Sources */,
+				1868FC691DB48BE400DA7F3C /* MAMessageKeys.m in Sources */,
 				18D85F621B3E4CB9003862E4 /* MATipPercentForRating.m in Sources */,
 				18D4FDA61AFC6FFA0052A03A /* MARounder.m in Sources */,
 				189389671A0ABE8A006142DE /* UIImage+Extensions.m in Sources */,
 				189389681A0ABE8A006142DE /* UIImage+Gradient.m in Sources */,
 				189389691A0ABE8A006142DE /* UIImage+ImageWithColor.m in Sources */,
+				1868FC661DB48BE400DA7F3C /* MAPlistUtil.m in Sources */,
 				185EA62D1ACE49EF0030D5F6 /* MAAppGroupNotifier.m in Sources */,
 				189389661A0ABE59006142DE /* UIColor+ExtraColors.m in Sources */,
 				1893895A1A0875CC006142DE /* MADateUtil.m in Sources */,
@@ -3224,6 +3442,8 @@
 				18D85F4A1B3E11E0003862E4 /* MAUIUtil.m in Sources */,
 				18A686761B3B1A29003F55EC /* MALogUtil.m in Sources */,
 				189389421A069058006142DE /* TodayViewController.m in Sources */,
+				1868FC671DB48BE400DA7F3C /* NSData+Compress.m in Sources */,
+				1868FC681DB48BE400DA7F3C /* NSNotificationCenter+MainQueue.m in Sources */,
 				189389551A087286006142DE /* MAImageCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3235,6 +3455,11 @@
 			isa = PBXTargetDependency;
 			target = 1809753419BE5ED60039F654 /* Tip */;
 			targetProxy = 1809754F19BE5ED60039F654 /* PBXContainerItemProxy */;
+		};
+		183812861DB3230900A4AF15 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1838127F1DB3230900A4AF15 /* Tip Sticker Pack Extension */;
+			targetProxy = 183812851DB3230900A4AF15 /* PBXContainerItemProxy */;
 		};
 		1864DF4A1B39F005001EB867 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -3323,6 +3548,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -3332,8 +3558,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -3342,6 +3570,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -3354,7 +3583,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -3366,6 +3595,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -3375,8 +3605,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -3384,13 +3616,14 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -3477,6 +3710,45 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.mindsaspire.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tip.app/Tip";
+			};
+			name = Release;
+		};
+		183812891DB3230900A4AF15 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 88U9Z8P8D5;
+				INFOPLIST_FILE = "Tip Sticker Pack Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mindsaspire.Tip.Tip-Sticker-Pack-Extension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		1838128A1DB3230900A4AF15 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 88U9Z8P8D5;
+				INFOPLIST_FILE = "Tip Sticker Pack Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mindsaspire.Tip.Tip-Sticker-Pack-Extension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -3646,6 +3918,15 @@
 			buildConfigurations = (
 				1809755C19BE5ED60039F654 /* Debug */,
 				1809755D19BE5ED60039F654 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		183812881DB3230900A4AF15 /* Build configuration list for PBXNativeTarget "Tip Sticker Pack Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				183812891DB3230900A4AF15 /* Debug */,
+				1838128A1DB3230900A4AF15 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
