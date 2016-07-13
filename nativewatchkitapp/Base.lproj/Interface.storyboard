@@ -12,9 +12,9 @@
                     <items>
                         <group width="1" alignment="left" verticalAlignment="center" layout="vertical" id="nns-ir-cuq">
                             <items>
-                                <group width="1" alignment="left" id="l1G-JY-o0x" userLabel="Bill Group">
+                                <group width="1" alignment="center" id="l1G-JY-o0x" userLabel="Bill Group">
                                     <items>
-                                        <label alignment="center" verticalAlignment="center" text="$" id="Ndk-Hf-TT4"/>
+                                        <label alignment="left" verticalAlignment="center" text="$" id="Ndk-Hf-TT4"/>
                                         <picker width="55" height="55" alignment="center" verticalAlignment="center" focusStyle="stack" id="O4h-vI-0oj" userLabel="Dollar Picker">
                                             <connections>
                                                 <action selector="dollarPickerAction:" destination="AgC-eL-Hgc" id="iJe-0k-lAW"/>

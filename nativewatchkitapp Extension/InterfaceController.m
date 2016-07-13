@@ -288,6 +288,19 @@
 
 - (void)setTipPercent:(NSNumber *)tipPercent
 {
+    if (tipPercent.doubleValue == self.bill.tipPercent.doubleValue)
+    {
+        return;
+    }
+    else if (tipPercent.doubleValue < self.bill.tipPercent.doubleValue)
+    {
+        [[WKInterfaceDevice currentDevice] playHaptic:WKHapticTypeDirectionDown];
+    }
+    else // if (tipPercent.doubleValue > self.bill.tipPercent.doubleValue)
+    {
+        [[WKInterfaceDevice currentDevice] playHaptic:WKHapticTypeDirectionUp];
+    }
+
     self.bill.tipPercent = tipPercent;
     
     // ratingInt is the ID of the service rating, like 1, 2, 3, 4, 5, while the other "rating" variable is the actual tip percent. Needed to handle rounding.
