@@ -1,3 +1,8 @@
+3.2
+• TODO
+
+Contact me via Settings -> Report a Problem or Suggest a Feature for issues, bugs, or suggestions. If you like using Tipity, please take the time and leave a review! Just select Settings -> Write a Review. Thanks!
+
 3.1
 • Fixes for the Apple Watch app.
 • Stickers!
