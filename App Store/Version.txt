@@ -1,5 +1,5 @@
 3.2
-• Fix widget size on iOS 10.
+• Fix widget appearance on iOS 10.
 
 Contact me via Settings -> Report a Problem or Suggest a Feature for issues, bugs, or suggestions. If you like using Tipity, please take the time and leave a review! Just select Settings -> Write a Review. Thanks!
 

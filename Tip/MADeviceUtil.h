@@ -19,6 +19,9 @@ NSUInteger DeviceSystemMajorVersion();
 #define BELOW_IOS9 (DeviceSystemMajorVersion() < 9)
 #define ABOVE_IOS9 ( ! BELOW_IOS9)
 
+#define BELOW_IOS10 (DeviceSystemMajorVersion() < 10)
+#define ABOVE_IOS10 ( ! BELOW_IOS10)
+
 #define IS_IPAD ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
 #define IS_IPHONE ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
 #define IS_RETINA ([[UIScreen mainScreen] scale] >= 2.0)

@@ -11,6 +11,7 @@
 #import "MAAppearance.h"
 #import "MAAppGroup.h"
 #import "MABill.h"
+#import "MADeviceUtil.h"
 #import "MAFilePaths.h"
 #import "MARatingTableViewCell.h"
 #import "MARounder.h"
@@ -48,6 +49,9 @@ static CGFloat const Height = 110.;
 @property (weak, nonatomic) IBOutlet UIButton *plusButton;
 @property (weak, nonatomic) IBOutlet UIButton *minusButton;
 
+@property (strong, nonatomic) IBOutlet UILabel *dollarTextLabel;
+@property (strong, nonatomic) IBOutlet UILabel *dotTextLabel;
+
 @property (strong, nonatomic) IBOutlet UIButton *billButton;
 @property (strong, nonatomic) IBOutlet UIButton *tipButton;
 @property (strong, nonatomic) IBOutlet UIButton *grandTotalButton;
@@ -57,7 +61,9 @@ static CGFloat const Height = 110.;
 @property (strong, nonatomic) IBOutlet UIButton *ratingButton2;
 @property (strong, nonatomic) IBOutlet UIButton *ratingButton3;
 
+@property (strong, nonatomic) IBOutlet UILabel *tipTextLabel;
 @property (strong, nonatomic) IBOutlet UILabel *tipLabel;
+@property (strong, nonatomic) IBOutlet UILabel *grandTotalTextLabel;
 @property (strong, nonatomic) IBOutlet UILabel *grandTotalLabel;
 @end
 
@@ -78,6 +84,9 @@ static CGFloat const Height = 110.;
 @synthesize billView = _billView;
 @synthesize selectedButton = _selectedButton;
 @synthesize selectedNumber = _selectedNumber;
+
+@synthesize dollarTextLabel = _dollarTextLabel;
+@synthesize dotTextLabel = _dotTextLabel;
 
 @synthesize billButton = _billButton;
 @synthesize tipButton = _tipButton;
@@ -111,7 +120,20 @@ static CGFloat const Height = 110.;
     // Increase the today widget view's height.
     // Use 0 for the width; otherwise, the view resizes strangely when a button is first tapped.
     self.preferredContentSize = CGSizeMake(0., Height);
-    
+
+    // Set text color because depending on the iOS version the background may be transparent or have a background, so the color should differ.
+    UIColor *textColor = [UIColor darkTextColor];
+    if (BELOW_IOS10)
+    {
+        textColor = [UIColor lightTextColor];
+    }
+    self.dollarTextLabel.textColor = textColor;
+    self.dotTextLabel.textColor = textColor;
+    self.tipTextLabel.textColor = textColor;
+    self.tipLabel.textColor = textColor;
+    self.grandTotalTextLabel.textColor = textColor;
+    self.grandTotalLabel.textColor = textColor;
+
     // Can modify height by playing around with this on iOS 10 and also implementing widgetActiveDisplayModeDidChange
 //    self.extensionContext.widgetLargestAvailableDisplayMode = NCWidgetDisplayModeExpanded;
 //    CGSize maxExpandedSize = [self.extensionContext widgetMaximumSizeForDisplayMode:NCWidgetDisplayModeExpanded];

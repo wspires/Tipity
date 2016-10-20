@@ -38,7 +38,7 @@
                                             <constraint firstAttribute="height" constant="30" id="2k2-TP-qXX"/>
                                             <constraint firstAttribute="width" constant="10" id="f1x-hX-Ptt"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -47,7 +47,7 @@
                                             <constraint firstAttribute="height" constant="30" id="3ir-P9-142"/>
                                             <constraint firstAttribute="width" constant="30" id="aYj-xk-ElD"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="1">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -62,7 +62,7 @@
                                             <constraint firstAttribute="width" constant="30" id="DFg-9Y-vzN"/>
                                             <constraint firstAttribute="height" constant="30" id="UQD-5d-jHr"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="2">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -77,7 +77,7 @@
                                             <constraint firstAttribute="height" constant="30" id="3pz-GS-uoS"/>
                                             <constraint firstAttribute="width" constant="30" id="Q3B-1S-dDg"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="3">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -92,7 +92,7 @@
                                             <constraint firstAttribute="height" constant="30" id="5iM-6M-aNL"/>
                                             <constraint firstAttribute="width" constant="5" id="cJJ-w3-Buv"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -101,7 +101,7 @@
                                             <constraint firstAttribute="height" constant="30" id="A6P-tk-Eib"/>
                                             <constraint firstAttribute="width" constant="30" id="UlF-f2-m5i"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="4">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -116,7 +116,7 @@
                                             <constraint firstAttribute="width" constant="30" id="41r-fE-VQ0"/>
                                             <constraint firstAttribute="height" constant="30" id="Ydy-HK-r5W"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="5">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -228,7 +228,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20.5" id="G1g-T6-oHX"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -237,7 +237,7 @@
                                             <constraint firstAttribute="width" constant="151" id="Rid-tn-t60"/>
                                             <constraint firstAttribute="height" constant="20.5" id="W0Y-Yh-WOE"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -271,7 +271,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20.5" id="YSH-wm-xld"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -280,7 +280,7 @@
                                             <constraint firstAttribute="width" constant="151" id="Z2N-ly-y5I"/>
                                             <constraint firstAttribute="height" constant="20.5" id="m06-Ji-h9E"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -321,8 +321,11 @@
                     <size key="freeformSize" width="320" height="110"/>
                     <connections>
                         <outlet property="billView" destination="Fug-Jw-AT7" id="YWA-LH-8gX"/>
+                        <outlet property="dollarTextLabel" destination="RrY-eg-GaO" id="UUX-2S-mhr"/>
+                        <outlet property="dotTextLabel" destination="mH4-Of-Byr" id="9mL-Gy-Bv0"/>
                         <outlet property="grandTotalButton" destination="bfd-yi-b0X" id="het-dh-lGY"/>
                         <outlet property="grandTotalLabel" destination="79O-Rl-ujY" id="vYR-mi-YB7"/>
+                        <outlet property="grandTotalTextLabel" destination="vVh-g0-VkL" id="Oys-aR-5Yo"/>
                         <outlet property="hundredsButton" destination="3CG-ol-kke" id="xYL-A9-teF"/>
                         <outlet property="hundredthsButton" destination="3Cg-IC-Hho" id="3NM-Dk-FCw"/>
                         <outlet property="minusButton" destination="otA-W6-DCz" id="ACy-Sh-cKJ"/>
@@ -336,6 +339,7 @@
                         <outlet property="tenthsButton" destination="uCV-Df-PS1" id="A9I-ya-fyH"/>
                         <outlet property="tipButton" destination="3mX-w8-Lut" id="9xg-h0-WCx"/>
                         <outlet property="tipLabel" destination="iME-4h-c0O" id="jBM-iA-gYd"/>
+                        <outlet property="tipTextLabel" destination="SBE-1E-dXS" id="yAH-7i-SSD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>

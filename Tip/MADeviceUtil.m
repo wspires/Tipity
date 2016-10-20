@@ -15,12 +15,7 @@ NSUInteger DeviceSystemMajorVersion()
     static NSUInteger _deviceSystemMajorVersion = -1;
     static dispatch_once_t once;
     dispatch_once(&once, ^{
-#ifdef IS_EXTENSION
-        _deviceSystemMajorVersion = 1; // TODO: how to get this on the Apple Watch?
-#else
-        _deviceSystemMajorVersion = [[[[[UIDevice currentDevice] systemVersion] componentsSeparatedByString:@"."] objectAtIndex:0] integerValue];
-#endif // IS_EXTENSION
-
+        _deviceSystemMajorVersion = [[NSProcessInfo processInfo] operatingSystemVersion].majorVersion;
     });
     return _deviceSystemMajorVersion;
 }
