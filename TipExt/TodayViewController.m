@@ -22,6 +22,11 @@
 #import <NotificationCenter/NotificationCenter.h>
 #import <QuartzCore/QuartzCore.h>
 
+// Height of widget.
+// Ideally, 2.5 table rows (2.5 * 44)
+// https://developer.apple.com/ios/human-interface-guidelines/extensions/widgets/
+static CGFloat const Height = 110.;
+
 @interface TodayViewController () <NCWidgetProviding, MABillDelegate>
 @property (strong, nonatomic) MABill *bill;
 
@@ -39,6 +44,7 @@
 @property (weak, nonatomic) UIButton *selectedButton;
 @property (weak, nonatomic) NSNumber *selectedNumber;
 
+@property (strong, nonatomic) IBOutlet UIView *billView;
 @property (weak, nonatomic) IBOutlet UIButton *plusButton;
 @property (weak, nonatomic) IBOutlet UIButton *minusButton;
 
@@ -46,6 +52,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *tipButton;
 @property (strong, nonatomic) IBOutlet UIButton *grandTotalButton;
 
+@property (strong, nonatomic) IBOutlet UIView *ratingView;
 @property (strong, nonatomic) IBOutlet UIButton *ratingButton1;
 @property (strong, nonatomic) IBOutlet UIButton *ratingButton2;
 @property (strong, nonatomic) IBOutlet UIButton *ratingButton3;
@@ -68,6 +75,7 @@
 @synthesize hundredthsButton = _hundredthsButton;
 @synthesize hundredthsNumber = _hundredthsNumber;
 
+@synthesize billView = _billView;
 @synthesize selectedButton = _selectedButton;
 @synthesize selectedNumber = _selectedNumber;
 
@@ -75,6 +83,7 @@
 @synthesize tipButton = _tipButton;
 @synthesize grandTotalButton = _grandTotalButton;
 
+@synthesize ratingView = _ratingView;
 @synthesize ratingButton1 = _ratingButton1;
 @synthesize ratingButton2 = _ratingButton2;
 @synthesize ratingButton3 = _ratingButton3;
@@ -101,7 +110,15 @@
     
     // Increase the today widget view's height.
     // Use 0 for the width; otherwise, the view resizes strangely when a button is first tapped.
-    self.preferredContentSize = CGSizeMake(0., 176.);
+    self.preferredContentSize = CGSizeMake(0., Height);
+    
+    // Can modify height by playing around with this on iOS 10 and also implementing widgetActiveDisplayModeDidChange
+//    self.extensionContext.widgetLargestAvailableDisplayMode = NCWidgetDisplayModeExpanded;
+//    CGSize maxExpandedSize = [self.extensionContext widgetMaximumSizeForDisplayMode:NCWidgetDisplayModeExpanded];
+//    CGSize maxCompactSize = [self.extensionContext widgetMaximumSizeForDisplayMode:NCWidgetDisplayModeCompact];
+//    LOG_S(@"maxExpandedSize: %f x %f", maxExpandedSize.width, maxExpandedSize.height);
+//    LOG_S(@"maxCompactSize: %f x %f", maxCompactSize.width, maxCompactSize.height);
+//    self.ratingView.hidden = YES;
 }
 
 - (void)loadSettings
@@ -556,5 +573,19 @@
         DLog(@"openHostApp: %@", text);
     }];
 }
+
+/*
+- (void)widgetActiveDisplayModeDidChange:(NCWidgetDisplayMode)activeDisplayMode withMaximumSize:(CGSize)maxSize
+{
+    if (activeDisplayMode == NCWidgetDisplayModeExpanded)
+    {
+        self.preferredContentSize = CGSizeMake(0.0, Height);
+    }
+    else if (activeDisplayMode == NCWidgetDisplayModeCompact)
+    {
+        self.preferredContentSize = maxSize;
+    }
+}
+*/
 
 @end
