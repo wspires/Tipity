@@ -1255,6 +1255,7 @@
 		18D85F601B3E4CB9003862E4 /* MATipPercentForRating.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MATipPercentForRating.m; sourceTree = "<group>"; };
 		18D85F641B3E55AB003862E4 /* Tipity Watch Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Tipity Watch Extension.entitlements"; sourceTree = SOURCE_ROOT; };
 		18D85F691B3E6761003862E4 /* MANotificationNames.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MANotificationNames.h; sourceTree = "<group>"; };
+		18E09DD11DB9231A002EAF55 /* info_plist.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = info_plist.sh; sourceTree = SOURCE_ROOT; };
 		18EA1A911BE3A41000E7859A /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		18EA1A941BE743BF00E7859A /* 1 - Basic - Simulator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1 - Basic - Simulator.png"; sourceTree = "<group>"; };
 		18EA1A951BE743BF00E7859A /* 2 - Advanced - Simulator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2 - Advanced - Simulator.png"; sourceTree = "<group>"; };
@@ -1367,6 +1368,7 @@
 			children = (
 				180975F619BE61010039F654 /* Icons */,
 				1809760D19BE61010039F654 /* Images */,
+				18E09DD01DB92302002EAF55 /* Tools */,
 				1809763619BE61600039F654 /* BackgroundColors.plist */,
 				1809763719BE61600039F654 /* ForegroundColors.plist */,
 				1803AC5019C6967A006C7EFF /* Localizable.strings */,
@@ -2891,6 +2893,14 @@
 				18A9C5AA19CB927500789D2E /* 5 - Dynamic Type - Simulator.png */,
 			);
 			path = 1242x2208;
+			sourceTree = "<group>";
+		};
+		18E09DD01DB92302002EAF55 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				18E09DD11DB9231A002EAF55 /* info_plist.sh */,
+			);
+			name = Tools;
 			sourceTree = "<group>";
 		};
 		18EA1A931BE741C000E7859A /* 2732x2048 */ = {

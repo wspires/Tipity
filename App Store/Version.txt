@@ -1,3 +1,8 @@
+3.3
+• Apple Watch app fixes.
+
+Contact me via Settings -> Report a Problem or Suggest a Feature for issues, bugs, or suggestions. If you like using Tipity, please take the time and leave a review! Just select Settings -> Write a Review. Thanks!
+
 3.2
 • Fix widget appearance on iOS 10.
 

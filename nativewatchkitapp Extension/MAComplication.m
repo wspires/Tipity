@@ -129,14 +129,15 @@ NSString *ComplicationShortTextData = @"foo";
 {
     
 }
+ */
 
-// Deprecated.
 - (void)getPlaceholderTemplateForComplication:(CLKComplication *)complication
                                   withHandler:(void (^)(CLKComplicationTemplate *complicationTemplate))handler
 {
-    
+    handler(nil);
 }
 
+/*
 - (void)getPrivacyBehaviorForComplication:(CLKComplication *)complication
                               withHandler:(void (^)(CLKComplicationPrivacyBehavior behavior))handler
 {
