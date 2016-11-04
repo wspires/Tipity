@@ -59,20 +59,17 @@
 
     // Accessing the shared instance will cause the settings to be loaded, which is needed for the Watch app in case the host app has not been loaded yet since this still gets called.
     [[MAUserUtil sharedInstance] loadSettings];
-    
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+
+    CGRect frame = [UIScreen mainScreen].bounds;
+    self.window = [[UIWindow alloc] initWithFrame:frame];
     self.rootController = [self setupTabBarController];
     [self.window setRootViewController:self.rootController];
-    
     self.window.backgroundColor = [UIColor clearColor];
     [self.window makeKeyAndVisible];
 
     // Change the tint color to change default color across the UI, like selected tab color, info color, etc.
     [MAAppearance setAppearance];
-    if (ABOVE_IOS7)
-    {
-        self.window.tintColor = [MAAppearance foregroundColor];
-    }
+    self.window.tintColor = [MAAppearance foregroundColor];
 
     // Creating the shared session automatically starts WCSession.
     [MASessionDelegate sharedInstance];
@@ -82,7 +79,8 @@
     return YES;
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application {
+- (void)applicationWillResignActive:(UIApplication *)application
+{
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }

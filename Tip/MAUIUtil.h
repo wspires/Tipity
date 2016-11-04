@@ -16,7 +16,6 @@
 + (UILabel *)adjustableNavTitle:(NSString *)title forNavigationItem:(UINavigationItem *)navItem;
 
 + (NSError *)makeError:(NSString *)msg;
-+ (UIAlertView *)showAlertWithError:(NSError *)error;
 
 + (void)findMisbehavingScrollViewsIn:(UIView *)view;
 

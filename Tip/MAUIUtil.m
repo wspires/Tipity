@@ -143,23 +143,6 @@
     return error;
 }
 
-+ (UIAlertView *)showAlertWithError:(NSError *)error
-{
-#ifndef IS_EXTENSION
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:[error localizedDescription]
-                          message:[error localizedRecoverySuggestion]
-                          delegate:nil
-                          cancelButtonTitle:NSLocalizedString(@"Dismiss", @"")
-                          otherButtonTitles:nil];
-    
-    [alert show];
-    return alert;
-#else
-    return nil;
-#endif // IS_EXTENSION
-}
-
 + (void)findMisbehavingScrollViewsIn:(UIView *)view
 {
     if ([view isKindOfClass:[UIScrollView class]])

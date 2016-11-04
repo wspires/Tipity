@@ -58,6 +58,9 @@ resize_img 180
 # iOS 9 iPad Pro
 resize_img 167
 
+resize_img 20
+resize_img 60
+
 
 # Apple Watch
 #resize_img 29

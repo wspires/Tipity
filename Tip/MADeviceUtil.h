@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-NSUInteger DeviceSystemMajorVersion();
+NSUInteger DeviceSystemMajorVersion(void);
 
 #define BELOW_IOS7 (DeviceSystemMajorVersion() < 7)
 #define ABOVE_IOS7 ( ! BELOW_IOS7)
@@ -21,6 +21,9 @@ NSUInteger DeviceSystemMajorVersion();
 
 #define BELOW_IOS10 (DeviceSystemMajorVersion() < 10)
 #define ABOVE_IOS10 ( ! BELOW_IOS10)
+
+#define BELOW_IOS11 (DeviceSystemMajorVersion() < 11)
+#define ABOVE_IOS11 ( ! BELOW_IOS11)
 
 #define IS_IPAD ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
 #define IS_IPHONE ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
@@ -35,6 +38,7 @@ NSUInteger DeviceSystemMajorVersion();
 #define IS_IPHONE_5 (IS_IPHONE && SCREEN_MAX_LENGTH == 568.0)
 #define IS_IPHONE_6 (IS_IPHONE && SCREEN_MAX_LENGTH == 667.0)
 #define IS_IPHONE_6P (IS_IPHONE && SCREEN_MAX_LENGTH == 736.0)
+#define IS_IPHONE_X (IS_IPHONE && SCREEN_MAX_LENGTH == 812)
 
 @interface MADeviceUtil : NSObject
 

@@ -10,7 +10,7 @@
 
 #import <UIKit/UIKit.h>
 
-NSUInteger DeviceSystemMajorVersion()
+NSUInteger DeviceSystemMajorVersion(void)
 {
     static NSUInteger _deviceSystemMajorVersion = -1;
     static dispatch_once_t once;

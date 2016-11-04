@@ -34,17 +34,6 @@
     // Use this method to pause ongoing tasks, disable timers, etc.
 }
 
-- (void)didReceiveLocalNotification:(UILocalNotification *)notification
-{
-    
-}
-
-- (void)handleActionWithIdentifier:(NSString *)identifier
-              forLocalNotification:(UILocalNotification *)localNotification
-{
-    
-}
-
 - (void)handleUserActivity:(NSDictionary *)userInfo
 {
     
