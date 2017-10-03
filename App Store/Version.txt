@@ -1,3 +1,8 @@
+3.5
+• iPhone X support.
+
+Contact me via Settings > Report a Problem or Suggest a Feature for issues, bugs, or suggestions. If you like using Tipity, please take the time and leave a review! Just select Settings > Write a Review. Thanks for using Tipity!
+
 3.4
 • Support for iOS 11, watchOS 4, and iPhone X.
 

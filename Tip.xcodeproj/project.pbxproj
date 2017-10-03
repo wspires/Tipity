@@ -1001,6 +1001,9 @@
 		184CF65E19D0D4C500A12628 /* style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
 		184CF65F19D0D55300A12628 /* deploy_website.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = deploy_website.sh; sourceTree = "<group>"; };
 		184F5CFB1F83D1AE003A9993 /* AppIcon_20x20.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppIcon_20x20.png; sourceTree = "<group>"; };
+		184F5CFD1F847DE4003A9993 /* Default-Portrait_iphoneX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait_iphoneX.png"; sourceTree = "<group>"; };
+		184F5CFE1F847DE5003A9993 /* Default-Landscape_iphoneX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape_iphoneX.png"; sourceTree = "<group>"; };
+		184F5CFF1F847DE6003A9993 /* Default-Portrait_iphoneX.pxm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Default-Portrait_iphoneX.pxm"; sourceTree = "<group>"; };
 		1856CB671A1564ED00A1CF84 /* 5 - Today View - Screentaker.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "5 - Today View - Screentaker.png"; sourceTree = "<group>"; };
 		1856CB681A1564ED00A1CF84 /* 5 - Today View - Simulator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "5 - Today View - Simulator.png"; sourceTree = "<group>"; };
 		1856CB691A1564ED00A1CF84 /* 5 - Today View.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "5 - Today View.png"; sourceTree = "<group>"; };
@@ -1464,6 +1467,9 @@
 		1809757419BE5FF40039F654 /* Launch Images */ = {
 			isa = PBXGroup;
 			children = (
+				184F5CFE1F847DE5003A9993 /* Default-Landscape_iphoneX.png */,
+				184F5CFD1F847DE4003A9993 /* Default-Portrait_iphoneX.png */,
+				184F5CFF1F847DE6003A9993 /* Default-Portrait_iphoneX.pxm */,
 				184CF4CA19CDDF1600A12628 /* Default-Landscape_ios8@3x~iphone6.png */,
 				184CF4CB19CDDF1600A12628 /* Default-Portrait_ios8@2x~iphone6.png */,
 				184CF4CC19CDDF1600A12628 /* Default-Portrait_ios8@2x~iphone6.pxm */,
