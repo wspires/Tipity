@@ -14,6 +14,8 @@
 #import "MACreditsViewController.h"
 #import "MADeviceUtil.h"
 #import "MAFilePaths.h"
+#import "MAFraudSettingsViewController.h"
+#import "MAFraudDetector.h"
 #import "MARounder.h"
 #import "MARoundingSettingsViewController.h"
 #import "MAServiceRatingSettingsViewController.h"
@@ -34,8 +36,9 @@ DECL_TABLE_IDX(ENABLE_TAX_ROW, 0);
 DECL_TABLE_IDX(ENABLE_SPLIT_TIP_ROW, 1);
 DECL_TABLE_IDX(SERVICE_RATING_ROW, 2);
 DECL_TABLE_IDX(ROUND_ROW, 3);
-DECL_TABLE_IDX(APPEARANCE_ROW, 4);
-DECL_TABLE_IDX(GEN_SECTION_ROWS, 5);
+DECL_TABLE_IDX(FRAUD_ROW, 4);
+DECL_TABLE_IDX(APPEARANCE_ROW, 5);
+DECL_TABLE_IDX(GEN_SECTION_ROWS, 6);
 
 DECL_TABLE_IDX(APPS_SECTION, 1);
 
@@ -53,6 +56,7 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
 @interface MASettingsViewController ()
 @property (strong, nonatomic) MAServiceRatingSettingsViewController *serviceRatingController;
 @property (strong, nonatomic) MARoundingSettingsViewController *roundingController;
+@property (strong, nonatomic) MAFraudSettingsViewController *fraudController;
 @property (strong, nonatomic) MAAppearanceSelectionViewController *customizeColorController;
 @property (strong, nonatomic) MACreditsViewController *creditsController;
 @property (strong, nonatomic) NSArray *appList;
@@ -65,6 +69,7 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
 @synthesize tableView = _tableView;
 @synthesize serviceRatingController = _serviceRatingController;
 @synthesize roundingController = _roundingController;
+@synthesize fraudController = _fraudController;
 @synthesize customizeColorController = _customizeColorController;
 @synthesize creditsController = _creditsController;
 @synthesize appList = _appList;
@@ -203,6 +208,20 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+- (void)loadFraudController:(NSIndexPath *)indexPath
+{
+    if (self.fraudController == nil)
+    {
+        self.fraudController = [[MAFraudSettingsViewController alloc] initWithNibName:@"MAFraudSettingsViewController" bundle:nil];
+    }
+
+//    self.fraudController.title = Localize(@"Detect Fraud");
+    self.fraudController.title = Localize(@"Fraud Detection");
+    [self.navigationController pushViewController:self.fraudController animated:YES];
+
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
 - (void)handleApp:(NSIndexPath *)indexPath
 {
     NSDictionary *appInfo = [self.appList objectAtIndex:indexPath.row];
@@ -324,6 +343,10 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
         else if (indexPath.row == ROUND_ROW)
         {
             return [self tableView:tableView roundingCellForRowAtIndexPath:indexPath];
+        }
+        else if (indexPath.row == FRAUD_ROW)
+        {
+            return [self tableView:tableView fraudCellForRowAtIndexPath:indexPath];
         }
     }
     else if (indexPath.section == APPS_SECTION)
@@ -593,7 +616,7 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
 
     cell.textLabel.text = text;
 
-    if (Service_Rating_Iap)
+    if (Rounding_Iap)
     {
         [MATipIAPHelper disableLabelIfNotPurchased:cell.textLabel];
     }
@@ -606,6 +629,40 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.accessoryView = [MAAccessoryView grayAccessoryViewForCell:cell];
     
+    return cell;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView fraudCellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString * const CellIdentifier = @"fraudCellForRowAtIndexPath";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+    }
+    [MAAppearance setAppearanceForCell:cell tableStyle:tableView.style];
+
+    NSString *text = Localize(@"Fraud Detection");
+    //    text = Localize(@"Anti-Fraud");
+    //    text = Localize(@"Detect Fraud");
+
+    NSString *mode = [[MAUserUtil sharedInstance] objectForKey:FraudMode];
+    NSString *detailText = [MAFraudDetector printableNameForMode:mode];
+    cell.textLabel.text = text;
+
+    if (Fraud_Iap)
+    {
+        [MATipIAPHelper disableLabelIfNotPurchased:cell.textLabel];
+    }
+
+    UIImage *image = [MAFilePaths fraudImage];
+    cell.imageView.image = image;
+
+    cell.detailTextLabel.text = detailText;
+
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.accessoryView = [MAAccessoryView grayAccessoryViewForCell:cell];
+
     return cell;
 }
 
@@ -668,6 +725,14 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
             }
             [self loadRoundingController:indexPath];
         }
+        else if (indexPath.row == FRAUD_ROW)
+        {
+            if (Fraud_Iap && [MATipIAPHelper checkAndAlertForIAP])
+            {
+                return;
+            }
+            [self loadFraudController:indexPath];
+        }
     }
     else if (indexPath.section == APPS_SECTION)
     {
@@ -697,6 +762,18 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
         }
     }
 }
+
+/*
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat height = 44.;
+    if (indexPath.section == APPS_SECTION)
+    {
+        height *= 1.5;
+    }
+    return height;
+}
+*/
 
 #pragma mark - Email
 

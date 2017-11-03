@@ -24,6 +24,13 @@ static NSString *RoundingMode = @"RoundingMode";
 static NSString *RoundingModeUp = @"RoundingModeUp";
 static NSString *RoundingModeDown = @"RoundingModeDown";
 static NSString *RoundingModeNear = @"RoundingModeNear";
+
+static NSString *FraudMode = @"FraudMode";
+static NSString *FraudModeNone = @"FraudModeNone";
+static NSString *FraudModeChecksum = @"FraudModeChecksum";
+static NSString *FraudModeMirror = @"FraudModeMirror";
+static NSString *FraudModePairs = @"FraudModePairs";
+
 static NSString *LastSelectedServiceRating = @"LastSelectedServiceRating";
 static NSString *NoLastSelectedServiceRating = @"";
 
@@ -82,6 +89,11 @@ static NSString *TableTextColor = @"tableTextColor";
 - (BOOL)roundOn;
 - (BOOL)roundTip;
 - (BOOL)roundTotal;
+- (BOOL)fraudDetectionOn;
+- (BOOL)fraudDetectionOff;
+- (BOOL)fraudDetectionChecksum;
+- (BOOL)fraudDetectionMirror;
+- (BOOL)fraudDetectionPairs;
 
 #pragma mark Current user
 + (NSString *)defaultUserName;

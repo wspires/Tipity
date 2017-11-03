@@ -1,3 +1,11 @@
+3.6
+Fraud Detection — Select a fraud detection method to verify that restaurant charges on your credit statement also follow the method:
+• Add — Adjusts cents in the grand total by adding the digits in the dollars (for example, $123.00 to $123.06).
+• Mirror — Adjusts cents in the grand total by mirroring the dollars (for example, $123.00 to $123.21).
+• Repeat — Adjusts cents in the grand total by repeating the dollars (for example, $123.00 to $123.12).
+
+Contact me via Settings > Report a Problem or Suggest a Feature for issues, bugs, or suggestions. If you like using Tipity, please take the time and leave a review! Just select Settings > Write a Review. Thanks for using Tipity!
+
 3.5
 • iPhone X support.
 

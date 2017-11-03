@@ -592,6 +592,48 @@ static NSString * const ExerciseFilterName = @"ExerciseFilterName";
     return [MAFilePaths applyEffectsToImagePath:[MAFilePaths roundNearestImageFilename]];
 }
 
++ (NSString *)fraudImageFilename
+{
+    return @"751-eye.png";
+}
++ (UIImage *)fraudImage
+{
+    return [MAFilePaths applyEffectsToImagePath:[MAFilePaths fraudImageFilename]];
+}
++ (NSString *)fraudNoneImageFilename
+{
+    return @"746-round-none.png";
+}
++ (UIImage *)fraudNoneImage
+{
+    return [MAFilePaths applyEffectsToImagePath:[MAFilePaths fraudNoneImageFilename]];
+}
++ (NSString *)fraudChecksumImageFilename
+{
+//    return @"888-checkmark.png";
+    return @"746-plus-circle.png";
+}
++ (UIImage *)fraudChecksumImage
+{
+    return [MAFilePaths applyEffectsToImagePath:[MAFilePaths fraudChecksumImageFilename]];
+}
++ (NSString *)fraudMirrorImageFilename
+{
+    return @"746-fraud-mode-mirror.png";
+}
++ (UIImage *)fraudMirrorImage
+{
+    return [MAFilePaths applyEffectsToImagePath:[MAFilePaths fraudMirrorImageFilename]];
+}
++ (NSString *)fraudPairsImageFilename
+{
+    return @"746-fraud-mode-pairs.png";
+}
++ (UIImage *)fraudPairsImage
+{
+    return [MAFilePaths applyEffectsToImagePath:[MAFilePaths fraudPairsImageFilename]];
+}
+
 #pragma mark - Feedback icons
 
 + (NSString *)tellFriendImageFilename

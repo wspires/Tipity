@@ -731,9 +731,10 @@ static double const DefaultSplitTotal = 120.;
 //        [nf setCurrencyCode:@"EUR"];
 //        [nf setCurrencyCode:nil];
 
+        // Rounding half-up to fix issue with fraud detector (2017-12-08).
+        [nf setRoundingMode:NSNumberFormatterRoundHalfUp];
         // Rounding up to ensure that split checks always add up to at least the total.
-//        [nf setRoundingMode:NSNumberFormatterRoundHalfUp];
-        [nf setRoundingMode:NSNumberFormatterRoundUp];
+//        [nf setRoundingMode:NSNumberFormatterRoundUp];
 
         [nf setMaximumFractionDigits:2];
         [nf setMinimumFractionDigits:2];

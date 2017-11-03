@@ -13,6 +13,7 @@
 #import "MABill.h"
 #import "MADeviceUtil.h"
 #import "MAFilePaths.h"
+#import "MAFraudDetector.h"
 #import "MARatingTableViewCell.h"
 #import "MARounder.h"
 #import "MATipPercentForRating.h"
@@ -398,6 +399,7 @@ static CGFloat const Height = 110.;
     NSNumber *bill = [self digitButtonsToNumber];
     self.bill.bill = bill;
     [MARounder roundGrandTotalInBill:self.bill];
+    [MAFraudDetector adjustGrandTotalInBill:self.bill];
     [self saveBill];
 }
 
@@ -508,6 +510,7 @@ static CGFloat const Height = 110.;
     [[MAUserUtil sharedInstance] saveSetting:ratingString forKey:LastSelectedServiceRating];
 
     [MARounder roundGrandTotalInBill:self.bill];
+    [MAFraudDetector adjustGrandTotalInBill:self.bill];
 }
 
 #pragma mark - MABillDelegate

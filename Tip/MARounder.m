@@ -104,7 +104,7 @@
     NSString *lastSelectedServiceRating = [[MAUserUtil sharedInstance] objectForKey:LastSelectedServiceRating];
     if (lastSelectedServiceRating && ! [lastSelectedServiceRating isEqualToString:NoLastSelectedServiceRating])
     {
-        NSUInteger const rating =lastSelectedServiceRating.integerValue;
+        NSUInteger const rating = lastSelectedServiceRating.integerValue;
         NSNumber *tipPercent = [MATipPercentForRating tipPercentForRating:rating];
         bill.tipPercent = tipPercent;
     }

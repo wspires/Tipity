@@ -37,6 +37,7 @@ static NSString * const DefaultServiceRatingGreat = @"20";
 
 static NSString * const DefaultRoundItem = @"RoundItemNone";
 static NSString * const DefaultRoundingMode = @"RoundingModeUp";
+static NSString * const DefaultFraudMode = @"FraudModeNone";
 static NSString * const DefaultLastSelectedServiceRating = @"5";
 
 static NSString * const DefaultBackgroundColorId = @"cloth";
@@ -327,6 +328,35 @@ static NSString *PerExerciseSettings = @"perExerciseSettings";
         return NO;
     }
     return YES;
+}
+
+- (BOOL)fraudDetectionOn
+{
+    NSString *roundingMode = [self objectForKey:FraudMode];
+    if ([roundingMode isEqualToString:FraudModeNone])
+    {
+        return NO;
+    }
+    return YES;
+}
+- (BOOL)fraudDetectionOff
+{
+    return ! [self fraudDetectionOn];
+}
+- (BOOL)fraudDetectionChecksum
+{
+    NSString *roundingMode = [self objectForKey:FraudMode];
+    return [roundingMode isEqualToString:FraudModeChecksum];
+}
+- (BOOL)fraudDetectionMirror
+{
+    NSString *roundingMode = [self objectForKey:FraudMode];
+    return [roundingMode isEqualToString:FraudModeMirror];
+}
+- (BOOL)fraudDetectionPairs
+{
+    NSString *roundingMode = [self objectForKey:FraudMode];
+    return [roundingMode isEqualToString:FraudModePairs];
 }
 
 - (NSDictionary *)saveSetting:(id)setting forKey:(NSString *)key perDictSettingsKey:(NSString *)perDictSettingsKey nameKey:(NSString *)nameKey
@@ -815,6 +845,7 @@ static NSString *PerExerciseSettings = @"perExerciseSettings";
 
     CHECK_SETTING(RoundItem, DefaultRoundItem)
     CHECK_SETTING(RoundingMode, DefaultRoundingMode)
+    CHECK_SETTING(FraudMode, DefaultFraudMode)
     CHECK_SETTING(LastSelectedServiceRating, DefaultLastSelectedServiceRating)
 
     // Appearance settings.

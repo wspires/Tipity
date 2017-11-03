@@ -187,7 +187,7 @@ DECL_TABLE_IDX(EXAMPLES_SECTION, 2);
     if (indexPath.row == ROUND_NONE_ROW)
     {
         image = [MAFilePaths roundNoneImage];
-        text = Localize(@"Rounding Off");
+        text = Localize(@"Off");
         settingValue = RoundItemNone;
     }
     else if (indexPath.row == ROUND_TIP_ROW)
@@ -426,15 +426,15 @@ static CGFloat const Footer_Height = 50.;
         NSString *text = nil;
         if ([self isRoundingModeTip])
         {
-            text = Localize(@"Automatically round the tip amount to a whole dollar amount after entering the check total or selecting a service rating.");
+            text = Localize(@"Rounds the tip amount to a whole dollar amount after entering the check total or selecting a service rating.");
         }
         else if ([self isRoundingModeTotal])
         {
-            text = Localize(@"Automatically round the grand total to a whole dollar amount after entering the check total or selecting a service rating.");
+            text = Localize(@"Rounds the grand total to a whole dollar amount after entering the check total or selecting a service rating.");
         }
         else
         {
-            text = Localize(@"Turn off automatic rounding.");
+            text = Localize(@"Turns off automatic rounding.");
         }
 
         tableFooter.text = text;

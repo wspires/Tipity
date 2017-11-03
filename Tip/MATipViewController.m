@@ -15,6 +15,7 @@
 #import "MABill.h"
 #import "MADeviceUtil.h"
 #import "MAFilePaths.h"
+#import "MAFraudDetector.h"
 #import "MANotificationNames.h"
 #import "MARatingTableViewCell.h"
 #import "MARounder.h"
@@ -732,6 +733,7 @@ static NSString * const TipPercentKey = @"tipPercent";
     [[MAUserUtil sharedInstance] saveSetting:ratingString forKey:LastSelectedServiceRating];
 
     [MARounder roundGrandTotalInBill:self.bill];
+    [MAFraudDetector adjustGrandTotalInBill:self.bill];
 }
 
 #pragma mark - Text field
@@ -820,6 +822,7 @@ static NSString * const TipPercentKey = @"tipPercent";
     if (billKey && [billKey isEqualToString:BillTotalKey])
     {
         [MARounder roundGrandTotalInBill:self.bill];
+        [MAFraudDetector adjustGrandTotalInBill:self.bill];
     }
 
     [textField resignFirstResponder];
@@ -910,6 +913,7 @@ static NSString * const TipPercentKey = @"tipPercent";
         NSNumber *billValue = [NSNumber numberWithDouble:[textField.text doubleValue]];
         [bill setValue:billValue forKey:editedKey];
         [MARounder roundGrandTotalInBill:bill];
+        [MAFraudDetector adjustGrandTotalInBill:bill];
     }
     
     // Update all text fields that hold prices (except for the edited field itself).

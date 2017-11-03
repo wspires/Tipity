@@ -18,6 +18,7 @@ static BOOL const Split_Tip_Iap = NO;
 static BOOL const Tax_Iap = NO;
 static BOOL const Service_Rating_Iap = YES;
 static BOOL const Rounding_Iap = YES;
+static BOOL const Fraud_Iap = YES;
 static BOOL const Customize_Color_Iap = YES;
 
 DECL_TABLE_IDX(PRO_PRODUCT_IDX, (NSUInteger)0);

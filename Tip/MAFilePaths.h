@@ -90,6 +90,16 @@
 + (UIImage *)roundDownImage;
 + (NSString *)roundNearestImageFilename;
 + (UIImage *)roundNearestImage;
++ (NSString *)fraudImageFilename;
++ (UIImage *)fraudImage;
++ (NSString *)fraudNoneImageFilename;
++ (UIImage *)fraudNoneImage;
++ (NSString *)fraudChecksumImageFilename;
++ (UIImage *)fraudChecksumImage;
++ (NSString *)fraudMirrorImageFilename;
++ (UIImage *)fraudMirrorImage;
++ (NSString *)fraudPairsImageFilename;
++ (UIImage *)fraudPairsImage;
 
 // Feedback icons.
 + (NSString *)tellFriendImageFilename;

@@ -7,6 +7,7 @@ Tipity makes tipping simple! Built from the ground up to look and feel like a mo
 • Tax deduction and check splitting can be hidden completely to keep the interface clean if you like
 • Rounding supported—intuitive +1 and -1 buttons on the keyboard making rounding to the nearest dollar easy (or adding an extra dollar to the tip) without cluttering up the screen with lots of extra buttons everywhere
 • Rounding settings can automatically round the tip amount or grand total to a whole dollar amount
+• Fraud detection lets you verify restaurant charges on your credit statement
 • 3 star or 1 star service? Preset service rating stars make it quick to change the tip and can even be assigned custom values
 • Apple Watch support for quickly tipping using your watch
 • Today extension widget for quick tip calculation from the Today view on Notification Center (iOS 8 only)

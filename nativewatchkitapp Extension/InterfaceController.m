@@ -10,6 +10,7 @@
 
 #import "MAAppGroupNotifier.h"
 #import "MABill.h"
+#import "MAFraudDetector.h"
 #import "MALogUtil.h"
 #import "MANotificationNames.h"
 #import "MARounder.h"
@@ -147,6 +148,7 @@
     NSNumber *bill = [self billComponentsToNumber];
     self.bill.bill = bill;
     [MARounder roundGrandTotalInBill:self.bill];
+    [MAFraudDetector adjustGrandTotalInBill:self.bill];
     [self saveBill];
 }
 
@@ -308,6 +310,7 @@
     NSString *ratingString = [NSString stringWithFormat:@"%d", (int)rating];
     [[MAUserUtil sharedInstance] saveSetting:ratingString forKey:LastSelectedServiceRating];
     [MARounder roundGrandTotalInBill:self.bill];
+    [MAFraudDetector adjustGrandTotalInBill:self.bill];
 
     [self updateServiceRatingLabel];
 
