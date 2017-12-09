@@ -24,7 +24,6 @@
 #import "MAUIUtil.h"
 #import "MAUserUtil.h"
 #import "MAUtil.h"
-#import "MATipIAPHelper.h"
 #import "MAStringUtil.h"
 
 #import <CoreFoundation/CoreFoundation.h>

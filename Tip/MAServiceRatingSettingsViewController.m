@@ -14,7 +14,6 @@
 #import "MAFilePaths.h"
 #import "MASwitchCell.h"
 #import "MATextFieldCell.h"
-#import "MATipIAPHelper.h"
 #import "MAUserUtil.h"
 #import "MAUIUtil.h"
 #import "MAUtil.h"
@@ -188,12 +187,6 @@ DECL_TABLE_IDX(RATING_VALUES_SECTION_ROWS, 3);
 - (IBAction)enableServiceRatingChanged:(id)sender
 {
     UISwitch *swtch = (UISwitch *)sender;
-    
-    if (Service_Rating_Iap && [MATipIAPHelper checkAndAlertForIAP])
-    {
-        swtch.on = NO;
-        return;
-    }
     
     [[MAUserUtil sharedInstance] setEnableServiceRating:swtch.isOn];
     

@@ -25,11 +25,11 @@ static NSString * const kCancelKey = @"cancel";
 static NSString * const kNoSourcesKey = @"noSources";
 static NSString * const kStringsTableName = @"FDTake";
 
-@interface FDTakeController() <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface FDTakeController() <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate>
 @property (strong, nonatomic) NSMutableArray *sources;
 @property (strong, nonatomic) NSMutableArray *buttonTitles;
 @property (assign, nonatomic) NSInteger actionSheetTag;
-@property (strong, nonatomic) UIPopoverController *popover;
+@property (strong, nonatomic) UIPopoverPresentationController *popover;
 
 // Returns either optional view control for presenting or main window
 - (UIViewController*)presentingViewController;
@@ -50,35 +50,30 @@ static NSString * const kStringsTableName = @"FDTake";
 
 - (NSMutableArray *)sources
 {
-    if (!_sources) _sources = [[NSMutableArray alloc] init];
+    if ( ! _sources)
+    {
+        _sources = [[NSMutableArray alloc] init];
+    }
     return _sources;
 }
 
 - (NSMutableArray *)buttonTitles
 {
-    if (!_buttonTitles) _buttonTitles = [[NSMutableArray alloc] init];
+    if ( ! _buttonTitles)
+    {
+        _buttonTitles = [[NSMutableArray alloc] init];
+    }
     return _buttonTitles;
-}
-
-- (CGRect)popOverPresentRect
-{
-    if (_popOverPresentRect.size.height == 0 || _popOverPresentRect.size.width == 0)
-        // See https://github.com/hborders/MGSplitViewController/commit/9247c81d6b8c9ad183f67ad01384a76302ed7f0b
-        // on iOS 5.1, passing a CGRectZero here produces this following ominous message:
-        // -[UIPopoverController presentPopoverFromRect:inView:permittedArrowDirections:animated:]: the rect passed in to this method must have non-zero width and height. This will be an exception in a future release.
-        // this workaround was tested thusly:
-        // On iOS 4.3, CGRectZero leaves a popover afterimage before rotation, so does the code below
-        // On iOS 5.0, CGRectZero leaves a popover afterimage before rotation, the code below does not
-        // On iOS 5.1, CGRectZero leaves a popover afterimage before rotation, so does the code below
-        // Basically, this hack performs slightly better than the CGRectZero hack, and does not cause an ominous warning.
-        _popOverPresentRect = CGRectMake(0, 0, 1, 1);
-    return _popOverPresentRect;
 }
 
 - (UIImagePickerController *)imagePicker
 {
-    if (!_imagePicker) {
+    if ( ! _imagePicker)
+    {
+        // Create image picker.
+        // Present as popover, which will be an actual popover on the iPad and an action sheet on iPhone.
         _imagePicker = [[UIImagePickerController alloc] init];
+        _imagePicker.modalPresentationStyle = UIModalPresentationPopover;
         _imagePicker.delegate = self;
         
         // when using iPad, didFinishPickingMediaWithInfo doesn't returns the image (UIImagePickerControllerOriginalImage).
@@ -89,25 +84,50 @@ static NSString * const kStringsTableName = @"FDTake";
     return _imagePicker;
 }
 
-- (UIPopoverController *)popover
+- (UIPopoverPresentationController *)popover
 {
-    if (!_popover) _popover = [[UIPopoverController alloc] initWithContentViewController:self.imagePicker];
+    if ( ! _popover)
+    {
+        _popover = [self.imagePicker popoverPresentationController];
+        _popover.permittedArrowDirections = UIPopoverArrowDirectionAny;
+        _popover.delegate = self;
+    }
     return _popover;
+}
+
+- (CGRect)popOverPresentRect
+{
+    if (_popOverPresentRect.size.height == 0 || _popOverPresentRect.size.width == 0)
+    {
+        // See https://github.com/hborders/MGSplitViewController/commit/9247c81d6b8c9ad183f67ad01384a76302ed7f0b
+        // on iOS 5.1, passing a CGRectZero here produces this following ominous message:
+        // -[UIPopoverController presentPopoverFromRect:inView:permittedArrowDirections:animated:]: the rect passed in to this method must have non-zero width and height. This will be an exception in a future release.
+        // this workaround was tested thusly:
+        // On iOS 4.3, CGRectZero leaves a popover afterimage before rotation, so does the code below
+        // On iOS 5.0, CGRectZero leaves a popover afterimage before rotation, the code below does not
+        // On iOS 5.1, CGRectZero leaves a popover afterimage before rotation, so does the code below
+        // Basically, this hack performs slightly better than the CGRectZero hack, and does not cause an ominous warning.
+        _popOverPresentRect = CGRectMake(0, 0, 1, 1);
+    }
+    return _popOverPresentRect;
 }
 
 - (void)takePhotoOrChooseFromLibrary
 {
     self.sources = nil;
     self.buttonTitles = nil;
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
         [self.sources addObject:[NSNumber numberWithInteger:UIImagePickerControllerSourceTypeCamera]];
         [self.buttonTitles addObject:[self textForButtonWithTitle:kTakePhotoKey]];
     }
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+    {
         [self.sources addObject:[NSNumber numberWithInteger:UIImagePickerControllerSourceTypePhotoLibrary]];
         [self.buttonTitles addObject:[self textForButtonWithTitle:kChooseFromLibraryKey]];
     }
-    else if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum]) {
+    else if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum])
+    {
         [self.sources addObject:[NSNumber numberWithInteger:UIImagePickerControllerSourceTypeSavedPhotosAlbum]];
         [self.buttonTitles addObject:[self textForButtonWithTitle:kChooseFromPhotoRollKey]];
     }
@@ -119,15 +139,18 @@ static NSString * const kStringsTableName = @"FDTake";
 {
     self.sources = nil;
     self.buttonTitles = nil;
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
         [self.sources addObject:[NSNumber numberWithInteger:UIImagePickerControllerSourceTypeCamera]];
         [self.buttonTitles addObject:[self textForButtonWithTitle:kTakeVideoKey]];
     }
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+    {
         [self.sources addObject:[NSNumber numberWithInteger:UIImagePickerControllerSourceTypePhotoLibrary]];
         [self.buttonTitles addObject:[self textForButtonWithTitle:kChooseFromLibraryKey]];
     }
-    else if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum]) {
+    else if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum])
+    {
         [self.sources addObject:[NSNumber numberWithInteger:UIImagePickerControllerSourceTypeSavedPhotosAlbum]];
         [self.buttonTitles addObject:[self textForButtonWithTitle:kChooseFromPhotoRollKey]];
     }
@@ -139,16 +162,20 @@ static NSString * const kStringsTableName = @"FDTake";
 {
     self.sources = nil;
     self.buttonTitles = nil;
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    {
         [self.sources addObject:[NSNumber numberWithInteger:UIImagePickerControllerSourceTypeCamera]];
         [self.buttonTitles addObject:[self textForButtonWithTitle:kTakePhotoKey]];
         [self.sources addObject:[NSNumber numberWithInteger:UIImagePickerControllerSourceTypeCamera]];
         [self.buttonTitles addObject:[self textForButtonWithTitle:kTakeVideoKey]];
     }
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary])
+    {
         [self.sources addObject:[NSNumber numberWithInteger:UIImagePickerControllerSourceTypePhotoLibrary]];
         [self.buttonTitles addObject:[self textForButtonWithTitle:kChooseFromLibraryKey]];
-    } else if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum]) {
+    }
+    else if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum])
+    {
         [self.sources addObject:[NSNumber numberWithInteger:UIImagePickerControllerSourceTypeSavedPhotosAlbum]];
         [self.buttonTitles addObject:[self textForButtonWithTitle:kChooseFromPhotoRollKey]];
     }
@@ -165,56 +192,69 @@ static NSString * const kStringsTableName = @"FDTake";
     
     // Handle a still image capture
     if (CFStringCompare ((CFStringRef) mediaType, kUTTypeImage, 0)
-        == kCFCompareEqualTo) {
-        
-        editedImage = (UIImage *) [info objectForKey:
-                                   UIImagePickerControllerEditedImage];
-        originalImage = (UIImage *) [info objectForKey:
-                                     UIImagePickerControllerOriginalImage];
-        
-        if (editedImage) {
+        == kCFCompareEqualTo)
+    {
+        editedImage = (UIImage *)[info objectForKey:UIImagePickerControllerEditedImage];
+        originalImage = (UIImage *)[info objectForKey:UIImagePickerControllerOriginalImage];
+        if (editedImage)
+        {
             imageToSave = editedImage;
-        } else if (originalImage) {
+        }
+        else if (originalImage)
+        {
             imageToSave = originalImage;
-        } else {
+        }
+        else
+        {
             if ([self.delegate respondsToSelector:@selector(takeController:didFailAfterAttempting:)])
+            {
                 [self.delegate takeController:self didFailAfterAttempting:YES];
+            }
             return;
         }
         
         if ([self.delegate respondsToSelector:@selector(takeController:gotPhoto:withInfo:)])
+        {
             [self.delegate takeController:self gotPhoto:imageToSave withInfo:info];
-        
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-            [self.popover dismissPopoverAnimated:YES];
+        }
     }
     // Handle a movie capture
     else if (CFStringCompare ((CFStringRef) mediaType, kUTTypeMovie, 0)
-        == kCFCompareEqualTo) {
+        == kCFCompareEqualTo)
+    {
         if ([self.delegate respondsToSelector:@selector(takeController:gotVideo:withInfo:)])
+        {
             [self.delegate takeController:self gotVideo:[info objectForKey:UIImagePickerControllerMediaURL] withInfo:info];
+        }
     }
 
     // Workaround for iOS 4 compatibility http://stackoverflow.com/questions/12445190/dismissmodalviewcontrolleranimated-deprecated
     if ([self respondsToSelector:@selector(dismissViewControllerAnimated:completion:)])
+    {
         [picker dismissViewControllerAnimated:YES completion:nil];
+    }
     else
+    {
         [picker performSelector:@selector(dismissModalViewControllerAnimated:) withObject:@(YES)];
+    }
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     // Workaround for iOS 4 compatibility http://stackoverflow.com/questions/12445190/dismissmodalviewcontrolleranimated-deprecated
     if ([self respondsToSelector:@selector(dismissViewControllerAnimated:completion:)])
+    {
         [picker dismissViewControllerAnimated:YES completion:nil];
+    }
     else
     {
         [picker performSelector:@selector(dismissModalViewControllerAnimated:) withObject:@(YES)];
     }
-        
 
     if ([self.delegate respondsToSelector:@selector(takeController:didCancelAfterAttempting:)])
+    {
         [self.delegate takeController:self didCancelAfterAttempting:YES];
+    }
 }
 
 #pragma mark - Private methods
@@ -223,10 +263,12 @@ static NSString * const kStringsTableName = @"FDTake";
 {
     // Use optional view controller for presenting the image picker if set
     UIViewController *presentingViewController = nil;
-    if (self.viewControllerForPresentingImagePickerController != nil) {
+    if (self.viewControllerForPresentingImagePickerController != nil)
+    {
         presentingViewController = self.viewControllerForPresentingImagePickerController;
     }
-    else {
+    else
+    {
         // Otherwise do this stuff (like in original source code)
         presentingViewController = [[[UIApplication sharedApplication] keyWindow] rootViewController];
     }
@@ -251,16 +293,20 @@ static NSString * const kStringsTableName = @"FDTake";
 
 - (UIAlertController *)alertForSources
 {
+    // Reset view controllers so they are recreated on next access below.
+    // Otherwise, will crash due to nil sourceView when presenting image picker/popover.
+    _popover = nil;
+    _imagePicker = nil;
+
     NSString *title = nil;
     NSString *message = nil;
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleActionSheet];
-    
-    UIViewController *aViewController = [self _topViewController:[[[UIApplication sharedApplication] keyWindow] rootViewController] ];
+
     for (NSUInteger buttonIndex = 0; buttonIndex != self.buttonTitles.count; ++buttonIndex)
     {
         NSString *title = [self.buttonTitles objectAtIndex:buttonIndex];
-        
+
         UIAlertAction *action = [UIAlertAction actionWithTitle:title style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
         {
             NSNumber *source = [self.sources objectAtIndex:buttonIndex];
@@ -304,20 +350,15 @@ static NSString * const kStringsTableName = @"FDTake";
                     }
                 }
             }
-            
-            // On iPad use pop-overs.
-            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+
+            if ([MADeviceUtil iPad])
             {
-                [self.popover presentPopoverFromRect:self.popOverPresentRect
-                                              inView:aViewController.view
-                            permittedArrowDirections:UIPopoverArrowDirectionAny
-                                            animated:YES];
+                UIView *sourceView = [self presentingViewController].view;
+                self.popover.sourceView = sourceView;
+                self.popover.sourceRect = self.popOverPresentRect;
             }
-            else
-            {
-                // On iPhone use full screen presentation.
-                [[self presentingViewController] presentViewController:self.imagePicker animated:YES completion:nil];
-            }
+
+            [[self presentingViewController] presentViewController:self.imagePicker animated:YES completion:nil];
         }];
         [alert addAction:action];
     }
@@ -360,41 +401,56 @@ static NSString * const kStringsTableName = @"FDTake";
     return alert;
 }
 
-// This is a hack required on iPad if you want to select a photo and you already have a popup on the screen
-// see: http://stackoverflow.com/questions/11748845/present-more-than-one-modalview-in-appdelegate
-- (UIViewController *)_topViewController:(UIViewController *)rootViewController
-{
-    if (rootViewController.presentedViewController == nil)
-        return rootViewController;
-    
-    if ([rootViewController.presentedViewController isMemberOfClass:[UINavigationController class]]) {
-        UINavigationController *navigationController = (UINavigationController *)rootViewController.presentedViewController;
-        UIViewController *lastViewController = [[navigationController viewControllers] lastObject];
-        return [self _topViewController:lastViewController];
-    }
-    
-    UIViewController *presentedViewController = (UIViewController *)rootViewController.presentedViewController;
-    return [self _topViewController:presentedViewController];
-}
-
-- (NSString*)textForButtonWithTitle:(NSString*)title
+- (NSString *)textForButtonWithTitle:(NSString *)title
 {
 	if ([title isEqualToString:kTakePhotoKey])
+    {
 		return self.takePhotoText ?: NSLocalizedStringFromTable(kTakePhotoKey, kStringsTableName, @"Option to take photo using camera");
+    }
 	else if ([title isEqualToString:kTakeVideoKey])
+    {
 		return self.takeVideoText ?: NSLocalizedStringFromTable(kTakeVideoKey, kStringsTableName, @"Option to take video using camera");
+    }
 	else if ([title isEqualToString:kChooseFromLibraryKey])
+    {
 		return self.chooseFromLibraryText ?: NSLocalizedStringFromTable(kChooseFromLibraryKey, kStringsTableName, @"Option to select photo/video from library");
+    }
 	else if ([title isEqualToString:kChooseFromPhotoRollKey])
+    {
 		return self.chooseFromPhotoRollText ?: NSLocalizedStringFromTable(kChooseFromPhotoRollKey, kStringsTableName, @"Option to select photo from photo roll");
+    }
 	else if ([title isEqualToString:kCancelKey])
+    {
 		return self.cancelText ?: NSLocalizedStringFromTable(kCancelKey, kStringsTableName, @"Decline to proceed with operation");
+    }
 	else if ([title isEqualToString:kNoSourcesKey])
+    {
 		return self.noSourcesText ?: NSLocalizedStringFromTable(kNoSourcesKey, kStringsTableName, @"There are no sources available to select a photo");
+    }
 	
 	NSAssert(NO, @"Invalid title passed to textForButtonWithTitle:");
 	
 	return nil;
+}
+
+# pragma mark - UIPopoverPresentationControllerDelegate
+
+// Called on the delegate when the popover controller will dismiss the popover. Return NO to prevent the
+// dismissal of the view.
+- (BOOL)popoverPresentationControllerShouldDismissPopover:(UIPopoverPresentationController *)popoverPresentationController;
+{
+    return YES;
+}
+
+// Called on the delegate when the user has taken action to dismiss the popover. This is not called when the popover is dimissed programatically.
+- (void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController
+{
+}
+
+// -popoverPresentationController:willRepositionPopoverToRect:inView: is called on your delegate when the
+// popover may require a different view or rectangle.
+- (void)popoverPresentationController:(UIPopoverPresentationController *)popoverPresentationController willRepositionPopoverToRect:(inout CGRect *)rect inView:(inout UIView  * __nonnull * __nonnull)view
+{
 }
 
 @end

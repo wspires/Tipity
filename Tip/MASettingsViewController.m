@@ -20,7 +20,6 @@
 #import "MARoundingSettingsViewController.h"
 #import "MAServiceRatingSettingsViewController.h"
 #import "MASwitchCell.h"
-#import "MATipIAPHelper.h"
 #import "MAUIUtil.h"
 #import "MAUserUtil.h"
 #import "MAUtil.h"
@@ -430,11 +429,6 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
     [MAAppearance setAppearanceForCell:cell tableStyle:tableView.style];
     
     cell.textLabel.text = Localize(@"Color");
-    
-    if (Customize_Color_Iap)
-    {
-        [MATipIAPHelper disableLabelIfNotPurchased:cell.textLabel];
-    }
 
     UIImage *image = [MAFilePaths appearanceImage];
     cell.imageView.image = image;
@@ -461,12 +455,7 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
     [cell.label setText:text];
     //[MAAppearance setFontForCellLabel:cell.label];
     [MAAppearance setFontForCell:cell tableStyle:tableView.style];
-    
-    if (Split_Tip_Iap)
-    {
-        [MATipIAPHelper disableLabelIfNotPurchased:cell.label];
-    }
-    
+
     cell.label.adjustsFontSizeToFitWidth = YES;
     
     BOOL enable = [[MAUserUtil sharedInstance] enableSplit];
@@ -486,13 +475,6 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
 - (IBAction)splitSwitchChanged:(id)sender
 {
     UISwitch *swtch = (UISwitch *)sender;
-    
-    if (Split_Tip_Iap && [MATipIAPHelper checkAndAlertForIAP])
-    {
-        swtch.on = NO;
-        return;
-    }
-    
     [[MAUserUtil sharedInstance] setEnableSplit:swtch.isOn];
 }
 
@@ -512,12 +494,7 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
     [cell.label setText:text];
     //[MAAppearance setFontForCellLabel:cell.label];
     [MAAppearance setFontForCell:cell tableStyle:tableView.style];
-    
-    if (Tax_Iap)
-    {
-        [MATipIAPHelper disableLabelIfNotPurchased:cell.label];
-    }
-    
+
     cell.label.adjustsFontSizeToFitWidth = YES;
     
     BOOL enable = [[MAUserUtil sharedInstance] enableTax];
@@ -537,13 +514,6 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
 - (IBAction)deductTaxChanged:(id)sender
 {
     UISwitch *swtch = (UISwitch *)sender;
-    
-    if (Tax_Iap && [MATipIAPHelper checkAndAlertForIAP])
-    {
-        swtch.on = NO;
-        return;
-    }
-    
     [[MAUserUtil sharedInstance] setEnableTax:swtch.isOn];
 }
 
@@ -558,12 +528,7 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
     [MAAppearance setAppearanceForCell:cell tableStyle:tableView.style];
     
     cell.textLabel.text = Localize(@"Service Rating");
-    
-    if (Service_Rating_Iap)
-    {
-        [MATipIAPHelper disableLabelIfNotPurchased:cell.textLabel];
-    }
-    
+
     UIImage *image = nil;
     if ([[MAUserUtil sharedInstance] enableServiceRating])
     {
@@ -616,11 +581,6 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
 
     cell.textLabel.text = text;
 
-    if (Rounding_Iap)
-    {
-        [MATipIAPHelper disableLabelIfNotPurchased:cell.textLabel];
-    }
-    
     UIImage *image = [MAFilePaths roundingImage];
     cell.imageView.image = image;
 
@@ -649,11 +609,6 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
     NSString *mode = [[MAUserUtil sharedInstance] objectForKey:FraudMode];
     NSString *detailText = [MAFraudDetector printableNameForMode:mode];
     cell.textLabel.text = text;
-
-    if (Fraud_Iap)
-    {
-        [MATipIAPHelper disableLabelIfNotPurchased:cell.textLabel];
-    }
 
     UIImage *image = [MAFilePaths fraudImage];
     cell.imageView.image = image;
@@ -702,35 +657,18 @@ static NSString *MASwitchCellIdentifier = @"MASwitchCellIdentifier";
     {
         if (indexPath.row == APPEARANCE_ROW)
         {
-            if (Customize_Color_Iap && [MATipIAPHelper checkAndAlertForIAP])
-            {
-                return;
-            }
             [self loadCustomizeColorController:indexPath];
         }
         else if (indexPath.row == SERVICE_RATING_ROW)
         {
-            if (Service_Rating_Iap && [MATipIAPHelper checkAndAlertForIAP])
-            {
-                return;
-            }
-         
             [self loadServiceRatingController:indexPath];
         }
         else if (indexPath.row == ROUND_ROW)
         {
-            if (Rounding_Iap && [MATipIAPHelper checkAndAlertForIAP])
-            {
-                return;
-            }
             [self loadRoundingController:indexPath];
         }
         else if (indexPath.row == FRAUD_ROW)
         {
-            if (Fraud_Iap && [MATipIAPHelper checkAndAlertForIAP])
-            {
-                return;
-            }
             [self loadFraudController:indexPath];
         }
     }

@@ -10,18 +10,14 @@
 
 #import "MAAppearance.h"
 #import "MAAppGroup.h"
+#import "MADefines.h"
 #import "MADeviceUtil.h"
 #import "MAImageCache.h"
 #import "MATipViewController.h"
 #import "MASessionDelegate.h"
 #import "MASettingsViewController.h"
-#import "MATipIAPHelper.h"
-#import "MAUpgradeViewController.h"
 #import "MAUserUtil.h"
 #import "MAUtil.h"
-
-//#import <HockeySDK/HockeySDK.h>
-#import "Appirater.h"
 
 @interface MAAppDelegate ()
 
@@ -40,14 +36,6 @@
 {
     // Override point for customization after application launch.
     [MAImageCache sharedInstance];
-
-    // As soon as your app launches it will create the singleton MAWeightLogIAPHelper. This means the initWithProducts: method you just modified will be called, which registers itself as the transaction observer. So you will be notified about any transactions that were never quite finished.
-    // http://www.raywenderlich.com/21081/introduction-to-in-app-purchases-in-ios-6-tutorial
-    BOOL const productPurchased = [MATipIAPHelper ProProductPurchased];
-    if ( ! productPurchased)
-    {
-        [MATipIAPHelper sharedInstance]; // Instantiates the IAP helper, which will also initiate loading the products.
-    }
 
     // Enable HockeyApp for crash reporting.
 //    [self enableHockeyApp];
@@ -73,8 +61,6 @@
 
     // Creating the shared session automatically starts WCSession.
     [MASessionDelegate sharedInstance];
-
-    [Appirater appLaunched:YES];
 
     return YES;
 }
@@ -138,38 +124,26 @@
 {
     MATipViewController *tipViewController;
     MASettingsViewController *settingsViewController;
-    MAUpgradeViewController *upgradeViewController;
-    
+
     tipViewController = [[MATipViewController alloc] initWithNibName:@"MATipViewController" bundle:nil];
     settingsViewController = [[MASettingsViewController alloc] initWithNibName:@"MASettingsViewController" bundle:nil];
-    upgradeViewController = [[MAUpgradeViewController alloc] initWithNibName:@"MAUpgradeViewController" bundle:nil];
-    
+
     tipViewController.title = Localize(@"Check");
     settingsViewController.title = Localize(@"Settings");
-    upgradeViewController.title = Localize(@"Upgrade");
-    
+
     tipViewController.tabBarItem.image = [UIImage imageNamed:@"704-compose.png"];
     tipViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"704-compose-selected.png"];
     settingsViewController.tabBarItem.image = [UIImage imageNamed:@"740-gear.png"];
     settingsViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"740-gear-selected.png"];
-    upgradeViewController.tabBarItem.image = [UIImage imageNamed:@"952-shopping-cart.png"];
-    upgradeViewController.tabBarItem.selectedImage = [UIImage imageNamed:@"952-shopping-cart-selected.png"];
 
     // Create the tab bar with the each view controller inside of a nav controller.
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     self.tipNavController = [[UINavigationController alloc] initWithRootViewController:tipViewController];
     self.settingsNavController = [[UINavigationController alloc] initWithRootViewController:settingsViewController];
-    self.upgradeNavController = [[UINavigationController alloc] initWithRootViewController:upgradeViewController];
     
     NSMutableArray *viewControllers = [[NSMutableArray alloc] initWithObjects:self.tipNavController, self.settingsNavController, nil];
 //    NSMutableArray *viewControllers = [[NSMutableArray alloc] initWithObjects:tipViewController, self.settingsNavController, nil];
 
-    BOOL const productPurchased = [MATipIAPHelper ProProductPurchased];
-    if ( ! productPurchased)
-    {
-        [viewControllers addObject:self.upgradeNavController];
-    }
-    
     tabBarController.viewControllers = viewControllers;
     
     // Note: tab and nav bar styles are set in MAAppearance.
@@ -189,19 +163,7 @@
     self.settingsNavController.navigationBar.translucent = translucent;
 }
 
-/*
-- (void)enableHockeyApp
-{
-    // TODO: Changed identifier (copied from another app).
-    NSString *identifier = @"7a7c13d7615c53c2d6dba3432b822656";
-    
-    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:identifier];
-    [[BITHockeyManager sharedHockeyManager] startManager];
-    [[BITHockeyManager sharedHockeyManager].authenticator authenticateInstallation];
-}
- */
-
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options
 {
     DLog(@"application openURL");
     

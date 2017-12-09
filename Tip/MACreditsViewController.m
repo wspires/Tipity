@@ -78,11 +78,6 @@
     [super viewDidAppear:animated];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return [MAViewUtil shouldAutorotateToInterfaceOrientation:interfaceOrientation];
-}
-
 - (void)webViewDidStartLoad:(UIWebView *)webView
 {
     [self.activityIndicator startAnimating];

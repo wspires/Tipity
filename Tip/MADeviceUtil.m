@@ -1,9 +1,9 @@
 //
 //  MADeviceUtil.m
-//  Tip
+//  Gym Log
 //
-//  Created by Wade Spires on 6/26/15.
-//  Copyright © 2015 Minds Aspire LLC. All rights reserved.
+//  Created by Wade Spires on 12/26/15.
+//
 //
 
 #import "MADeviceUtil.h"
@@ -20,6 +20,16 @@ NSUInteger DeviceSystemMajorVersion(void)
     return _deviceSystemMajorVersion;
 }
 
+NSUInteger DeviceSystemMinorVersion(void)
+{
+    static NSUInteger version = -1;
+    static dispatch_once_t once;
+    dispatch_once(&once, ^{
+        version = [[NSProcessInfo processInfo] operatingSystemVersion].minorVersion;
+    });
+    return version;
+}
+
 @implementation MADeviceUtil
 
 + (BOOL)iPad
@@ -27,8 +37,33 @@ NSUInteger DeviceSystemMajorVersion(void)
 #ifdef IS_EXTENSION
     return NO;
 #else
-    return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
+    return [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad;
 #endif // IS_EXTENSION
+}
+
++ (NSString *)iOS
+{
+    return @"iOS";
+}
++ (NSString *)watchOS
+{
+    return @"watchOS";
+}
++ (NSString *)currentOS
+{
+#ifdef IS_WATCH_EXTENSION
+    return [MADeviceUtil watchOS];
+#else
+    return [MADeviceUtil iOS];
+#endif // IS_WATCH_EXTENSION
+}
++ (BOOL)isCurrentOS:(NSString *)osString
+{
+    if (osString && [osString isEqualToString:[MADeviceUtil currentOS]])
+    {
+        return YES;
+    }
+    return NO;
 }
 
 @end

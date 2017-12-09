@@ -15,7 +15,6 @@
 #import "MAFraudDetector.h"
 #import "MASwitchCell.h"
 #import "MATextFieldCell.h"
-#import "MATipIAPHelper.h"
 #import "MAUIUtil.h"
 #import "MAUserUtil.h"
 #import "MAUtil.h"

@@ -1,7 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -12,14 +17,14 @@
             <subviews>
                 <tabBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1aa-EX-uad">
                     <rect key="frame" x="0.0" y="431" width="480" height="49"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <items>
                         <tabBarItem image="704-compose-selected.png" selectedImage="704-compose-selected.png" id="k3I-ga-LIK"/>
                         <tabBarItem image="740-gear.png" selectedImage="740-gear.png" id="PSB-na-3Hd"/>
                     </items>
                 </tabBar>
             </subviews>
-            <color key="backgroundColor" red="0.92186075448989868" green="0.93619346618652344" blue="0.94092428684234619" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.92186075448989868" green="0.93619346618652344" blue="0.94092428684234619" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="1aa-EX-uad" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Fv0-Cr-tQs"/>
                 <constraint firstAttribute="bottom" secondItem="1aa-EX-uad" secondAttribute="bottom" id="MDt-Fm-Bu6"/>

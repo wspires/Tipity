@@ -131,8 +131,8 @@ NSString *ComplicationShortTextData = @"foo";
 }
  */
 
-- (void)getPlaceholderTemplateForComplication:(CLKComplication *)complication
-                                  withHandler:(void (^)(CLKComplicationTemplate *complicationTemplate))handler
+- (void)getLocalizableSampleTemplateForComplication:(CLKComplication *)complication
+                                        withHandler:(void(^)(CLKComplicationTemplate * __nullable complicationTemplate))handler
 {
     handler(nil);
 }

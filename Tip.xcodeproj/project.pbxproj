@@ -66,8 +66,6 @@
 		180975C719BE605A0039F654 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 180975C619BE605A0039F654 /* AssetsLibrary.framework */; };
 		180975C919BE60630039F654 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 180975C819BE60630039F654 /* CoreText.framework */; };
 		180975CB19BE606C0039F654 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 180975CA19BE606B0039F654 /* Foundation.framework */; };
-		180975F319BE60A90039F654 /* Appirater.m in Sources */ = {isa = PBXBuildFile; fileRef = 180975D919BE60A90039F654 /* Appirater.m */; };
-		180975F419BE60A90039F654 /* AppiraterLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 180975DB19BE60A90039F654 /* AppiraterLocalizable.strings */; };
 		1809761119BE61010039F654 /* 1402390544_icon-arrow-up-a.png in Resources */ = {isa = PBXBuildFile; fileRef = 180975F919BE61010039F654 /* 1402390544_icon-arrow-up-a.png */; };
 		1809761D19BE61010039F654 /* blank.png in Resources */ = {isa = PBXBuildFile; fileRef = 1809760519BE61010039F654 /* blank.png */; };
 		1809761E19BE61010039F654 /* blank_square.png in Resources */ = {isa = PBXBuildFile; fileRef = 1809760619BE61010039F654 /* blank_square.png */; };
@@ -91,13 +89,6 @@
 		1809765D19BE61FA0039F654 /* UIImage+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1809765619BE61FA0039F654 /* UIImage+Extensions.m */; };
 		1809765E19BE61FA0039F654 /* UIImage+Gradient.m in Sources */ = {isa = PBXBuildFile; fileRef = 1809765819BE61FA0039F654 /* UIImage+Gradient.m */; };
 		1809765F19BE61FA0039F654 /* UIImage+ImageWithColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 1809765A19BE61FA0039F654 /* UIImage+ImageWithColor.m */; };
-		1809766C19BE6FE70039F654 /* CustomIOS7AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1809766319BE6FE70039F654 /* CustomIOS7AlertView.m */; };
-		1809766D19BE6FE70039F654 /* MAIAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1809766519BE6FE70039F654 /* MAIAPHelper.m */; };
-		1809766E19BE6FE70039F654 /* MAUpgradeAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1809766719BE6FE70039F654 /* MAUpgradeAlertViewController.m */; };
-		1809766F19BE6FE70039F654 /* MAUpgradeAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1809766819BE6FE70039F654 /* MAUpgradeAlertViewController.xib */; };
-		1809767019BE6FE70039F654 /* MAUpgradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1809766A19BE6FE70039F654 /* MAUpgradeViewController.m */; };
-		1809767119BE6FE70039F654 /* MAUpgradeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1809766B19BE6FE70039F654 /* MAUpgradeViewController.xib */; };
-		1809767519BE70150039F654 /* MATipIAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 1809767419BE70150039F654 /* MATipIAPHelper.m */; };
 		1809767A19BE70700039F654 /* MASettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1809767819BE70700039F654 /* MASettingsViewController.m */; };
 		1809767B19BE70700039F654 /* MASettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1809767919BE70700039F654 /* MASettingsViewController.xib */; };
 		1809768819BE70A70039F654 /* MATipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1809768319BE70A70039F654 /* MATipViewController.m */; };
@@ -474,32 +465,6 @@
 		180975C819BE60630039F654 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		180975CA19BE606B0039F654 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		180975CC19BE60730039F654 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
-		180975D819BE60A90039F654 /* Appirater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Appirater.h; sourceTree = "<group>"; };
-		180975D919BE60A90039F654 /* Appirater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Appirater.m; sourceTree = "<group>"; };
-		180975DA19BE60A90039F654 /* AppiraterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppiraterDelegate.h; sourceTree = "<group>"; };
-		180975DC19BE60A90039F654 /* ca */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ca; path = ca.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
-		180975DD19BE60A90039F654 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
-		180975DE19BE60A90039F654 /* da */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = da; path = da.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
-		180975DF19BE60A90039F654 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
-		180975E019BE60A90039F654 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
-		180975E119BE60A90039F654 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
-		180975E219BE60A90039F654 /* fi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fi; path = fi.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
-		180975E319BE60A90039F654 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
-		180975E419BE60A90039F654 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
-		180975E519BE60A90039F654 /* hu */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hu; path = hu.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
-		180975E619BE60A90039F654 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
-		180975E719BE60A90039F654 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
-		180975E819BE60A90039F654 /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
-		180975E919BE60A90039F654 /* nb */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nb; path = nb.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
-		180975EA19BE60A90039F654 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
-		180975EB19BE60A90039F654 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
-		180975EC19BE60A90039F654 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
-		180975ED19BE60A90039F654 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		180975EE19BE60A90039F654 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
-		180975EF19BE60A90039F654 /* sk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sk; path = sk.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
-		180975F019BE60A90039F654 /* sv */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = sv; path = sv.lproj/AppiraterLocalizable.strings; sourceTree = "<group>"; };
-		180975F119BE60A90039F654 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/AppiraterLocalizable.strings"; sourceTree = "<group>"; };
-		180975F219BE60A90039F654 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/AppiraterLocalizable.strings"; sourceTree = "<group>"; };
 		180975F919BE61010039F654 /* 1402390544_icon-arrow-up-a.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1402390544_icon-arrow-up-a.png"; sourceTree = "<group>"; };
 		1809760519BE61010039F654 /* blank.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blank.png; sourceTree = "<group>"; };
 		1809760619BE61010039F654 /* blank_square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blank_square.png; sourceTree = "<group>"; };
@@ -546,18 +511,6 @@
 		1809765819BE61FA0039F654 /* UIImage+Gradient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Gradient.m"; sourceTree = "<group>"; };
 		1809765919BE61FA0039F654 /* UIImage+ImageWithColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageWithColor.h"; sourceTree = "<group>"; };
 		1809765A19BE61FA0039F654 /* UIImage+ImageWithColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageWithColor.m"; sourceTree = "<group>"; };
-		1809766219BE6FE70039F654 /* CustomIOS7AlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomIOS7AlertView.h; sourceTree = "<group>"; };
-		1809766319BE6FE70039F654 /* CustomIOS7AlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomIOS7AlertView.m; sourceTree = "<group>"; };
-		1809766419BE6FE70039F654 /* MAIAPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAIAPHelper.h; sourceTree = "<group>"; };
-		1809766519BE6FE70039F654 /* MAIAPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAIAPHelper.m; sourceTree = "<group>"; };
-		1809766619BE6FE70039F654 /* MAUpgradeAlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAUpgradeAlertViewController.h; sourceTree = "<group>"; };
-		1809766719BE6FE70039F654 /* MAUpgradeAlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAUpgradeAlertViewController.m; sourceTree = "<group>"; };
-		1809766819BE6FE70039F654 /* MAUpgradeAlertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MAUpgradeAlertViewController.xib; sourceTree = "<group>"; };
-		1809766919BE6FE70039F654 /* MAUpgradeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAUpgradeViewController.h; sourceTree = "<group>"; };
-		1809766A19BE6FE70039F654 /* MAUpgradeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAUpgradeViewController.m; sourceTree = "<group>"; };
-		1809766B19BE6FE70039F654 /* MAUpgradeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MAUpgradeViewController.xib; sourceTree = "<group>"; };
-		1809767319BE70150039F654 /* MATipIAPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MATipIAPHelper.h; sourceTree = "<group>"; };
-		1809767419BE70150039F654 /* MATipIAPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MATipIAPHelper.m; sourceTree = "<group>"; };
 		1809767719BE70700039F654 /* MASettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASettingsViewController.h; sourceTree = "<group>"; };
 		1809767819BE70700039F654 /* MASettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASettingsViewController.m; sourceTree = "<group>"; };
 		1809767919BE70700039F654 /* MASettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MASettingsViewController.xib; sourceTree = "<group>"; };
@@ -1386,9 +1339,7 @@
 				1809767619BE705E0039F654 /* Tab Bar */,
 				1809768A19BE70AC0039F654 /* Tip Tab */,
 				1809767C19BE70760039F654 /* Settings Tab */,
-				1809767219BE6FEC0039F654 /* Upgrade Tab */,
 				1809765019BE61D80039F654 /* Utilities */,
-				180975D719BE60A90039F654 /* Appirater */,
 				1809754819BE5ED60039F654 /* Images.xcassets */,
 				1809753819BE5ED60039F654 /* Supporting Files */,
 			);
@@ -1632,18 +1583,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		180975D719BE60A90039F654 /* Appirater */ = {
-			isa = PBXGroup;
-			children = (
-				180975D819BE60A90039F654 /* Appirater.h */,
-				180975D919BE60A90039F654 /* Appirater.m */,
-				180975DA19BE60A90039F654 /* AppiraterDelegate.h */,
-				180975DB19BE60A90039F654 /* AppiraterLocalizable.strings */,
-				180975ED19BE60A90039F654 /* README.md */,
-			);
-			path = Appirater;
-			sourceTree = "<group>";
-		};
 		180975F619BE61010039F654 /* Icons */ = {
 			isa = PBXGroup;
 			children = (
@@ -1877,25 +1816,6 @@
 				1809765A19BE61FA0039F654 /* UIImage+ImageWithColor.m */,
 			);
 			name = Image;
-			sourceTree = "<group>";
-		};
-		1809767219BE6FEC0039F654 /* Upgrade Tab */ = {
-			isa = PBXGroup;
-			children = (
-				1809766919BE6FE70039F654 /* MAUpgradeViewController.h */,
-				1809766A19BE6FE70039F654 /* MAUpgradeViewController.m */,
-				1809766B19BE6FE70039F654 /* MAUpgradeViewController.xib */,
-				1809767319BE70150039F654 /* MATipIAPHelper.h */,
-				1809767419BE70150039F654 /* MATipIAPHelper.m */,
-				1809766619BE6FE70039F654 /* MAUpgradeAlertViewController.h */,
-				1809766719BE6FE70039F654 /* MAUpgradeAlertViewController.m */,
-				1809766819BE6FE70039F654 /* MAUpgradeAlertViewController.xib */,
-				1809766219BE6FE70039F654 /* CustomIOS7AlertView.h */,
-				1809766319BE6FE70039F654 /* CustomIOS7AlertView.m */,
-				1809766419BE6FE70039F654 /* MAIAPHelper.h */,
-				1809766519BE6FE70039F654 /* MAIAPHelper.m */,
-			);
-			name = "Upgrade Tab";
 			sourceTree = "<group>";
 		};
 		1809767619BE705E0039F654 /* Tab Bar */ = {
@@ -3085,7 +3005,7 @@
 		1809752D19BE5ED60039F654 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Minds Aspire LLC";
 				TargetAttributes = {
 					1809753419BE5ED60039F654 = {
@@ -3216,7 +3136,6 @@
 				1808CE1419C14CF900E972E1 /* 740-gear-selected.png in Resources */,
 				1803AC6519C945C1006C7EFF /* MAServiceRatingSettingsViewController.xib in Resources */,
 				1808CE1D19C14D4800E972E1 /* 952-shopping-cart-selected@2x.png in Resources */,
-				1809767119BE6FE70039F654 /* MAUpgradeViewController.xib in Resources */,
 				1809762019BE61010039F654 /* Mat Calc - Icon.png in Resources */,
 				18A9C5E419CC89AC00789D2E /* 712-reply@3x.png in Resources */,
 				1808CE5019C1D8F700E972E1 /* people@2x.png in Resources */,
@@ -3290,7 +3209,6 @@
 				1809761F19BE61010039F654 /* Gym Log+ - Icon.png in Resources */,
 				180976A619BE70F00039F654 /* MACreditsViewController.xib in Resources */,
 				183812781DB30C8000A4AF15 /* 1276-share@2x.png in Resources */,
-				1809766F19BE6FE70039F654 /* MAUpgradeAlertViewController.xib in Resources */,
 				184CF4C819CD212D00A12628 /* pie_chart@3x.png in Resources */,
 				1803AC6019C8A2F2006C7EFF /* 726-star-selected@2x.png in Resources */,
 				1893F07B19C339BF00F1485A /* 724-no-ad.png in Resources */,
@@ -3298,7 +3216,6 @@
 				18D4FDA01AFB1BDC0052A03A /* 746-plus-circle.png in Resources */,
 				184DDB751FDA3CF70027F072 /* 751-eye.png in Resources */,
 				18D4FDBB1AFD7D530052A03A /* 746-round-down@2x.png in Resources */,
-				180975F419BE60A90039F654 /* AppiraterLocalizable.strings in Resources */,
 				180089A01FDA775100A8BE0C /* 888-checkmark@2x.png in Resources */,
 				1838126C1DB30BF000A4AF15 /* 954-light-bulb@2x.png in Resources */,
 				1808CE0E19C14C0E00E972E1 /* 704-compose.png in Resources */,
@@ -3420,29 +3337,23 @@
 				1803AC5B19C89C8B006C7EFF /* MARatingTableViewCell.m in Sources */,
 				1809767A19BE70700039F654 /* MASettingsViewController.m in Sources */,
 				1809764C19BE61D20039F654 /* MAFilePaths.m in Sources */,
-				1809767019BE6FE70039F654 /* MAUpgradeViewController.m in Sources */,
 				1809765F19BE61FA0039F654 /* UIImage+ImageWithColor.m in Sources */,
 				180976A119BE70F00039F654 /* MAAppearanceSelectionViewController.m in Sources */,
 				180976AD19BE70F00039F654 /* MOButton.m in Sources */,
 				1809764919BE61D20039F654 /* MAAccessoryView.m in Sources */,
 				184DDB7F1FDA42D50027F072 /* MAFraudDetector.m in Sources */,
 				1868FC601DB483F900DA7F3C /* NSNotificationCenter+MainQueue.m in Sources */,
-				1809767519BE70150039F654 /* MATipIAPHelper.m in Sources */,
 				18D85F491B3E11E0003862E4 /* MAUIUtil.m in Sources */,
 				18D85F3F1B3E0017003862E4 /* MAStringUtil.m in Sources */,
 				1809764B19BE61D20039F654 /* MADateUtil.m in Sources */,
 				180976B619BE96910039F654 /* MABill.m in Sources */,
 				181F58B01BDD6CA9009445BF /* MASessionDelegate.m in Sources */,
-				1809766E19BE6FE70039F654 /* MAUpgradeAlertViewController.m in Sources */,
 				18A686751B3B1A29003F55EC /* MALogUtil.m in Sources */,
 				180976A319BE70F00039F654 /* MAColorSelectionViewController.m in Sources */,
-				1809766C19BE6FE70039F654 /* CustomIOS7AlertView.m in Sources */,
 				183812CC1DB4707600A4AF15 /* NSData+Compress.m in Sources */,
 				180976A719BE70F00039F654 /* MAStepperCell.m in Sources */,
 				1809764D19BE61D20039F654 /* MAUserUtil.m in Sources */,
 				1809765D19BE61FA0039F654 /* UIImage+Extensions.m in Sources */,
-				1809766D19BE6FE70039F654 /* MAIAPHelper.m in Sources */,
-				180975F319BE60A90039F654 /* Appirater.m in Sources */,
 				189389541A087286006142DE /* MAImageCache.m in Sources */,
 				180976AE19BE70F00039F654 /* MOGlassButton.m in Sources */,
 				1809753E19BE5ED60039F654 /* MAAppDelegate.m in Sources */,
@@ -3569,35 +3480,6 @@
 			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
-		180975DB19BE60A90039F654 /* AppiraterLocalizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				180975DC19BE60A90039F654 /* ca */,
-				180975DD19BE60A90039F654 /* cs */,
-				180975DE19BE60A90039F654 /* da */,
-				180975DF19BE60A90039F654 /* de */,
-				180975E019BE60A90039F654 /* en */,
-				180975E119BE60A90039F654 /* es */,
-				180975E219BE60A90039F654 /* fi */,
-				180975E319BE60A90039F654 /* fr */,
-				180975E419BE60A90039F654 /* he */,
-				180975E519BE60A90039F654 /* hu */,
-				180975E619BE60A90039F654 /* it */,
-				180975E719BE60A90039F654 /* ja */,
-				180975E819BE60A90039F654 /* ko */,
-				180975E919BE60A90039F654 /* nb */,
-				180975EA19BE60A90039F654 /* nl */,
-				180975EB19BE60A90039F654 /* pl */,
-				180975EC19BE60A90039F654 /* pt */,
-				180975EE19BE60A90039F654 /* ru */,
-				180975EF19BE60A90039F654 /* sk */,
-				180975F019BE60A90039F654 /* sv */,
-				180975F119BE60A90039F654 /* zh-Hans */,
-				180975F219BE60A90039F654 /* zh-Hant */,
-			);
-			name = AppiraterLocalizable.strings;
-			sourceTree = "<group>";
-		};
 		1809762719BE61120039F654 /* FDTake.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -3639,12 +3521,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -3692,12 +3576,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;

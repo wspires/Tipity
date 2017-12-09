@@ -126,6 +126,7 @@ static NSString * const OriginalSendTimeKey = @"originalSendTime";
     LOG_S(@"activationState = %@, error = %@", activationStateString, error);
 }
 
+#ifndef IS_WATCH_EXTENSION
 - (void)sessionDidBecomeInactive:(WCSession *)session
 {
     LOG
@@ -141,7 +142,6 @@ static NSString * const OriginalSendTimeKey = @"originalSendTime";
 - (void)sessionWatchStateDidChange:(WCSession *)session
 {
     LOG
-#ifdef IS_HOST_APP
     if ( ! session.paired)
     {
         LOG_S(@"Watch not paired");
@@ -152,9 +152,9 @@ static NSString * const OriginalSendTimeKey = @"originalSendTime";
         LOG_S(@"Watch app not installed");
         return;
     }
-#endif // IS_HOST_APP
     LOG_S(@"Watch is paired, and watch app is installed")
 }
+#endif // IS_WATCH_EXTENSION
 
 - (void)sessionReachabilityDidChange:(WCSession *)session
 {
